@@ -75,3 +75,54 @@ d3.tsv("/data/animals.tsv", function(data) {
 // ## Parsing JSON Files
 //
 // For nested data, or for passing around data where you don't want to mess with data typing, its hard to beat [JSON](http://json.org/).
+//
+// JSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with [d3.json]() - you too can harness its power.
+//
+//
+// ```
+// words.json:
+//
+//
+// ```
+//
+d3.json("/data/words.json", function(data) {
+  console.log(data[0]);
+});
+// ```
+//=> {city: "seattle", state: "WA", population: 652405, land area: 83.9}
+// ```
+//
+// We can see that, unlike our flat file parsing, numeric types stay numeric. Indeed, a JSON value can be a string, a number, a boolean value, an array, or another object. This allows nested data to be dealt with easily.  
+//
+// ## Loading Multiple Files
+//
+// D3's basic loading mechanism is fine for one file, but starts to get messy as we nest multiple callbacks. 
+//
+// For loading multiple files, we can use [Queue.js](https://github.com/mbostock/queue) (also written by Mike Bostock) to wait for multiple data sources to be loaded.
+
+queue()
+  .defer(d3.csv, "/data/cities.csv")
+  .defer(d3.tsv, "/data/animals.tsv")
+  .await(analyze);
+
+function analyze(error, cities, animals) {
+  if(error) { console.log(error); }
+
+  console.log(cities[0]);
+  console.log(animals[0]);
+}
+
+// Note that we `defer` the loading of two types of files - using two different loading functions - so this is an easy way to mix and match file types. 
+//
+// The callback function passed into `await` gets each dataset as a parameter, with the first parameter being populated if an error has occurred in loading the data. 
+//
+// It can be useful to output the error, if it is defined, so you catch data loading problems quickly. 
+//
+// To add another data file, simply add another defer and extend the input parameters for your callback!
+//
+// ## See Also
+//
+// - [D3 documentation](https://github.com/mbostock/d3/wiki/Requests)
+// - [Loading XML with D3](https://github.com/mbostock/d3/wiki/Requests#d3_xml)
+// - [Loading External SVG with D3](http://bl.ocks.org/mbostock/1014829) - SVG is just XML!
+//

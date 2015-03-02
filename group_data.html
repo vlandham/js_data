@@ -2,10 +2,10 @@
 
 <html>
 <head>
-  <title><%= title %></title>
+  <title>Grouping and Nesting Data</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-  <link rel="stylesheet" media="all" href="<%= css %>" />
+  <link rel="stylesheet" media="all" href="custom.css" />
   <script src='lib/d3/d3.min.js'></script>
   <script src='lib/queue-async/queue.min.js'></script>
   <script src='lib/lodash/lodash.min.js'></script>
@@ -17,46 +17,58 @@
         <p>Data processing and munging in JavaScript.</p>
     </div>
     <div id="background"></div>
-    <% if (sources.length > 1) { %>
+    
       <ul id="jump_to">
         <li>
           <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
           <a class="small" href="javascript:void(0);">+</a>
           <div id="jump_wrapper">
           <div id="jump_page">
-            <% for (var i=0, l=sources.length; i<l; i++) { %>
-              <% var source = sources[i]; %>
-              <a class="source" href="<%= path.basename(destination(source)) %>">
-                <%= path.basename(source) %>
+            
+              
+              <a class="source" href="group_data.html">
+                group_data.js
               </a>
-            <% } %>
+            
+              
+              <a class="source" href="index.html">
+                index.js
+              </a>
+            
+              
+              <a class="source" href="read_data.html">
+                read_data.js
+              </a>
+            
+              
+              <a class="source" href="summarize_data.html">
+                summarize_data.js
+              </a>
+            
           </div>
         </li>
       </ul>
-    <% } %>
+    
     <ul class="sections">
-        <% if (!hasTitle) { %>
-          <li id="title">
-              <div class="annotation">
-                  <h1><%= title %></h1>
-              </div>
-          </li>
-        <% } %>
-        <% for (var i=0, l=sections.length; i<l; i++) { %>
-        <% var section = sections[i]; %>
-        <li id="section-<%= i + 1 %>">
+        
+        
+        
+        <li id="section-1">
             <div class="annotation">
-              <% heading = section.docsHtml.match(/^\s*<(h\d)>/) %>
-              <div class="pilwrap <%= heading ? 'for-' + heading[1] : '' %>">
-                <a class="pilcrow" href="#section-<%= i + 1 %>">&#182;</a>
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <%= section.docsHtml %>
+              <h1 id="grouping-and-nesting-data">Grouping and Nesting Data</h1>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="http://bl.ocks.org/shancarter/raw/4748131/">Mister Nester</a> - a <code>d3.nest</code> power tool!</li>
+</ul>
+
             </div>
-            <% if (section.codeText.replace(/\s/gm, '') != '') { %>
-            <div class="content"><%= section.codeHtml %></div>
-            <% } %>
+            
         </li>
-        <% } %>
+        
     </ul>
   </div>
   <br/><br/>

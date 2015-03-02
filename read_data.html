@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="custom.css" />
   <script src='lib/d3/d3.min.js'></script>
+  <script src='lib/queue-async/queue.min.js'></script>
+  <script src='lib/lodash/lodash.min.js'></script>
 </head>
 <body>
   <div id="container">
@@ -24,6 +26,11 @@
           <div id="jump_page">
             
               
+              <a class="source" href="group_data.html">
+                group_data.js
+              </a>
+            
+              
               <a class="source" href="index.html">
                 index.js
               </a>
@@ -31,6 +38,11 @@
               
               <a class="source" href="read_data.html">
                 read_data.js
+              </a>
+            
+              
+              <a class="source" href="summarize_data.html">
+                summarize_data.js
               </a>
             
           </div>
@@ -225,6 +237,64 @@ I often like to use TSV (tab separated files) - to get around the issues of numb
               <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-number">652405</span>, land area: <span class="hljs-number">83.9</span>}
 </code></pre><h2 id="parsing-json-files">Parsing JSON Files</h2>
 <p>For nested data, or for passing around data where you don’t want to mess with data typing, its hard to beat <a href="http://json.org/">JSON</a>.</p>
+<p>JSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with <a href="">d3.json</a> - you too can harness its power.</p>
+<pre><code>words.json:
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>d3.json(<span class="hljs-string">"/data/words.json"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+  <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-number">652405</span>, land area: <span class="hljs-number">83.9</span>}
+</code></pre><p>We can see that, unlike our flat file parsing, numeric types stay numeric. Indeed, a JSON value can be a string, a number, a boolean value, an array, or another object. This allows nested data to be dealt with easily.  </p>
+<h2 id="loading-multiple-files">Loading Multiple Files</h2>
+<p>D3’s basic loading mechanism is fine for one file, but starts to get messy as we nest multiple callbacks. </p>
+<p>For loading multiple files, we can use <a href="https://github.com/mbostock/queue">Queue.js</a> (also written by Mike Bostock) to wait for multiple data sources to be loaded.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+queue()
+  .defer(d3.csv, <span class="hljs-string">"/data/cities.csv"</span>)
+  .defer(d3.tsv, <span class="hljs-string">"/data/animals.tsv"</span>)
+  .await(analyze);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">analyze</span><span class="hljs-params">(error, cities, animals)</span> </span>{
+  <span class="hljs-keyword">if</span>(error) { <span class="hljs-built_in">console</span>.log(error); }
+
+  <span class="hljs-built_in">console</span>.log(cities[<span class="hljs-number">0</span>]);
+  <span class="hljs-built_in">console</span>.log(animals[<span class="hljs-number">0</span>]);
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Note that we <code>defer</code> the loading of two types of files - using two different loading functions - so this is an easy way to mix and match file types. </p>
+<p>The callback function passed into <code>await</code> gets each dataset as a parameter, with the first parameter being populated if an error has occurred in loading the data. </p>
+<p>It can be useful to output the error, if it is defined, so you catch data loading problems quickly. </p>
+<p>To add another data file, simply add another defer and extend the input parameters for your callback!</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://github.com/mbostock/d3/wiki/Requests">D3 documentation</a></li>
+<li><a href="https://github.com/mbostock/d3/wiki/Requests#d3_xml">Loading XML with D3</a></li>
+<li><a href="http://bl.ocks.org/mbostock/1014829">Loading External SVG with D3</a> - SVG is just XML!</li>
+</ul>
 
             </div>
             
