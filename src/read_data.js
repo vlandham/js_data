@@ -10,7 +10,6 @@
 
 // Let's say you had a csv file with some city data in it:
 
-
 // ```
 // cities.csv:
 //
@@ -21,6 +20,11 @@
 
 // Use `d3.csv` to convert it into an array of objects
 
-d3.csv("cities.csv", function(data) {
+d3.csv("/data/cities.csv", function(data) {
   console.log(data[0]);
 });
+// ```
+//   => {city: "seattle", state: "WA", population: "900000", square miles: "12.3"}
+// ```
+//
+// You can see that the headers of the original CSV have been used as the property names for the data objects. 
