@@ -34,7 +34,7 @@ d3.csv("/data/cities.csv", function(data) {
 //
 // If you look closely, you can also see that the values associated with these properties are all strings. This is probably _not what you want_ in the case of numbers. When loading CSVs and other flat files, you have to do the type conversion.
 //
-// We will see more of this in other tasks, but a simple way to do this is to use the (+)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus] operator (unary plus). `forEach` can be used to iterate over the data array.
+// We will see more of this in other tasks, but a simple way to do this is to use the [+](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus) operator (unary plus). `forEach` can be used to iterate over the data array.
 //
 
 d3.csv("/data/cities.csv", function(data) {
@@ -48,7 +48,7 @@ d3.csv("/data/cities.csv", function(data) {
 //=> {city: "seattle", state: "WA", population: 652405, land area: 83.9}
 // ```
 //
-// (Dot notation)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors] is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use (bracket notation)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors].
+// [Dot notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors) is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use bracket notation as shown.
 
 
 //
@@ -57,6 +57,19 @@ d3.csv("/data/cities.csv", function(data) {
 // CSV is probably the most common flat file format, but in no way the only one. 
 // I often like to use TSV (tab separated files) - to get around the issues of numbers and strings often having commas in them.
 //
-// D3 can TSV's with [d3.tsv]()
+// D3 can parse TSV's with [d3.tsv](https://github.com/mbostock/d3/wiki/CSV#tsv):
+//
+//
+// ```
+// animals.tsv:
+//
+//
+// ```
+d3.tsv("/data/animals.tsv", function(data) {
+  console.log(data[0]);
+});
+// ```
+//=> {city: "seattle", state: "WA", population: 652405, land area: 83.9}
+// ```
 //
 // ## Parsing JSON Files
