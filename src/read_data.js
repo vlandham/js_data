@@ -24,7 +24,7 @@ d3.csv("/data/cities.csv", function(data) {
   console.log(data[0]);
 });
 // ```
-//   => {city: "seattle", state: "WA", population: "900000", square miles: "12.3"}
+//=> {city: "seattle", state: "WA", population: "900000", square miles: "12.3"}
 // ```
 //
 // You can see that the headers of the original CSV have been used as the property names for the data objects. 
