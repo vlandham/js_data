@@ -126,9 +126,11 @@
               </div>
               <pre><code>cities.csv:
 
-city,state,population,square miles
-seattle,WA,<span class="hljs-number">900000</span>,<span class="hljs-number">12.3</span>
-<span class="hljs-keyword">new</span> york,NY,<span class="hljs-number">1200000</span>,<span class="hljs-number">6</span>
+city,state,population,land area
+seattle,WA,<span class="hljs-number">652405</span>,<span class="hljs-number">83.9</span>
+<span class="hljs-keyword">new</span> york,NY,<span class="hljs-number">8405837</span>,<span class="hljs-number">302.6</span>
+boston,MA,<span class="hljs-number">645966</span>,<span class="hljs-number">48.3</span>
+kansas city,MO,<span class="hljs-number">467007</span>,<span class="hljs-number">315.0</span>
 </code></pre>
             </div>
             
@@ -159,9 +161,50 @@ d3.csv(<span class="hljs-string">"/data/cities.csv"</span>, <span class="hljs-fu
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-string">"900000"</span>, square miles: <span class="hljs-string">"12.3"</span>}
-</code></pre><p>You can see that the headers of the original CSV have been used as the property names for the data objects. 
-Thus, using <code>d3.csv</code> in this manner requires that your CSV file has a header row.</p>
+              <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-string">"652405"</span>, land area: <span class="hljs-string">"83.9"</span>}
+</code></pre><p>You can see that the headers of the original CSV have been used as the property names for the data objects. Using <code>d3.csv</code> in this manner requires that your CSV file has a header row.</p>
+<p>If you look closely, you can also see that the values associated with these properties are all strings. This is probably <em>not what you want</em> in the case of numbers. When loading CSVs and other flat files, you have to do the type conversion.</p>
+<p>We will see more of this in other tasks, but a simple way to do this is to use the (+)[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus</a>] operator (unary plus). <code>forEach</code> can be used to iterate over the data array.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+d3.csv(<span class="hljs-string">"/data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+  data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+    d.population = +d.population;
+    d[<span class="hljs-string">"land area"</span>] = +d[<span class="hljs-string">"land area"</span>];
+  });
+  <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-number">652405</span>, land area: <span class="hljs-number">83.9</span>}
+</code></pre><p>(Dot notation)[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors</a>] is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use (bracket notation)[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors</a>].</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <h2 id="parsing-other-flat-files">Parsing Other Flat Files</h2>
+<p>CSV is probably the most common flat file format, but in no way the only one. 
+I often like to use TSV (tab separated files) - to get around the issues of numbers and strings often having commas in them.</p>
+<p>D3 can TSV’s with <a href="">d3.tsv</a></p>
+<h2 id="parsing-json-files">Parsing JSON Files</h2>
 
             </div>
             

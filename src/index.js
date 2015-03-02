@@ -10,8 +10,8 @@
 // 
 // As such, we will focus on using [d3.js](http://d3js.org/) and [lodash](http://lodash.com/) for many of these task.
 //
-// ## Modules
+// ## Tasks
 //
 // ### Basic
 //
-// [Read in Data](read_data.html)
+// [Reading in Data](read_data.html)

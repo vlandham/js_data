@@ -14,9 +14,10 @@ gists.each do |filename, gist_url|
     basename = File.basename(filename)
     puts basename
     file = File.open(filename,'r').read
-    file.gsub!(/\/data\/(.*\.[json|csv|tsv|xml]+)/) {|s| "http://vallandingham.me/js_data/data/" + $1}
+    # file.gsub!(/\/data\/(.*\.[json|csv|tsv|xml]+)/) {|s| "http://vallandingham.me/js_data/data/" + $1}
 
-    gist_text = requires + "\n\n" + file
+    # gist_text = requires + "\n\n" + file
+    gist_text = file
 
     Gist.gist(gist_text, {:filename => basename,:update => gist_url})
 
