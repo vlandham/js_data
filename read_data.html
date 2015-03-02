@@ -11,6 +11,7 @@
   <div id="container">
     <div class='cred'>
         <a href='https://github.com/vlandahm/js_data'>JS Data</a>
+        <p>Data processing and munging in JavaScript</p>
     </div>
     <div id="background"></div>
     
@@ -97,7 +98,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>D3 has a bunch of filetypes it can support when loading data, one of the most common is probably plain old comma separated vales (CSV).</p>
+              <p><a href="https://github.com/mbostock/d3/wiki/Requests">D3 has a bunch</a> of filetypes it can support when loading data, and one of the most common is probably plain old CSV (comma separated values).</p>
 
             </div>
             
@@ -140,7 +141,7 @@ seattle,WA,<span class="hljs-number">900000</span>,<span class="hljs-number">12.
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>Use <code>d3.csv</code> to convert it into an array of objects</p>
+              <p>Use <a href="https://github.com/mbostock/d3/wiki/CSV">d3.csv</a> to convert it into an array of objects</p>
 
             </div>
             
@@ -159,7 +160,8 @@ d3.csv(<span class="hljs-string">"/data/cities.csv"</span>, <span class="hljs-fu
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-string">"900000"</span>, square miles: <span class="hljs-string">"12.3"</span>}
-</code></pre><p>You can see that the headers of the original CSV have been used as the property names for the data objects. </p>
+</code></pre><p>You can see that the headers of the original CSV have been used as the property names for the data objects. 
+Thus, using <code>d3.csv</code> in this manner requires that your CSV file has a header row.</p>
 
             </div>
             

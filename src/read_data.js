@@ -6,19 +6,22 @@
 
 // ## Parsing CSV Files
 
-// D3 has a bunch of filetypes it can support when loading data, one of the most common is probably plain old comma separated vales (CSV).
+// [D3 has a bunch](https://github.com/mbostock/d3/wiki/Requests) of filetypes it can support when loading data, and one of the most common is probably plain old CSV (comma separated values).
 
 // Let's say you had a csv file with some city data in it:
+//
 
 // ```
 // cities.csv:
 //
-// city,state,population,square miles
-// seattle,WA,900000,12.3
-// new york,NY,1200000,6
+//city,state,population,land area
+//seattle,WA,652405,83.9
+//new york,NY,8405837,302.6
+//boston,MA,645966,48.3
+//kansas city,MO,467007,315.0
 // ```
 
-// Use `d3.csv` to convert it into an array of objects
+// Use [d3.csv](https://github.com/mbostock/d3/wiki/CSV) to convert it into an array of objects
 
 d3.csv("/data/cities.csv", function(data) {
   console.log(data[0]);
@@ -28,3 +31,4 @@ d3.csv("/data/cities.csv", function(data) {
 // ```
 //
 // You can see that the headers of the original CSV have been used as the property names for the data objects. 
+// Thus, using `d3.csv` in this manner requires that your CSV file has a header row.
