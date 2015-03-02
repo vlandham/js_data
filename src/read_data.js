@@ -23,7 +23,7 @@
 
 // Use [d3.csv](https://github.com/mbostock/d3/wiki/CSV) to convert it into an array of objects
 
-d3.csv("/data/cities.csv", function(data) {
+d3.csv("data/cities.csv", function(data) {
   console.log(data[0]);
 });
 // ```
@@ -37,7 +37,7 @@ d3.csv("/data/cities.csv", function(data) {
 // We will see more of this in other tasks, but a simple way to do this is to use the [+](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus) operator (unary plus). `forEach` can be used to iterate over the data array.
 //
 
-d3.csv("/data/cities.csv", function(data) {
+d3.csv("data/cities.csv", function(data) {
   data.forEach(function(d) {
     d.population = +d.population;
     d["land area"] = +d["land area"];
