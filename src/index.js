@@ -2,6 +2,17 @@
 // 
 // Data manipulation, data munging, and data processing in JavaScript. 
 // 
+//
+// ## Tasks
+//
+// - ### [Reading in Data](read_data.html)
+// - ### [Iterating and Summarizing Data](summarize_data.html)
+// - ### [Nesting and Grouping Data](group_data.html)
+//
+// - ### [Working with Strings](strings.html)
+// - ### [Working with Time](time.html)
+//
+//
 // ## About
 // 
 // A repo of commonly used tools and tips for dealing with data.
@@ -18,10 +29,3 @@
 console.log("This is the index!");
 
 // Check out the [full source on github](https://github.com/vlandham/js_data).
-
-//
-// ## Tasks
-//
-// - [Reading in Data](read_data.html)
-// - [Iterating and Summarizing Data](summarize_data.html)
-// - [Nesting and Grouping Data](group_data.html)
