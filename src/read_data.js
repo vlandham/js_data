@@ -73,3 +73,5 @@ d3.tsv("/data/animals.tsv", function(data) {
 // ```
 //
 // ## Parsing JSON Files
+//
+// For nested data, or for passing around data where you don't want to mess with data typing, its hard to beat [JSON](http://json.org/).
