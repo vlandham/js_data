@@ -6,12 +6,13 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="custom.css" />
+  <script src='lib/d3/d3.min.js'></script>
 </head>
 <body>
   <div id="container">
     <div class='cred'>
         <a href='https://github.com/vlandahm/js_data'>JS Data</a>
-        <p>Data processing and munging in JavaScript</p>
+        <p>Data processing and munging in JavaScript.</p>
     </div>
     <div id="background"></div>
     
@@ -164,7 +165,7 @@ d3.csv(<span class="hljs-string">"/data/cities.csv"</span>, <span class="hljs-fu
               <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-string">"652405"</span>, land area: <span class="hljs-string">"83.9"</span>}
 </code></pre><p>You can see that the headers of the original CSV have been used as the property names for the data objects. Using <code>d3.csv</code> in this manner requires that your CSV file has a header row.</p>
 <p>If you look closely, you can also see that the values associated with these properties are all strings. This is probably <em>not what you want</em> in the case of numbers. When loading CSVs and other flat files, you have to do the type conversion.</p>
-<p>We will see more of this in other tasks, but a simple way to do this is to use the (+)[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus</a>] operator (unary plus). <code>forEach</code> can be used to iterate over the data array.</p>
+<p>We will see more of this in other tasks, but a simple way to do this is to use the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus">+</a> operator (unary plus). <code>forEach</code> can be used to iterate over the data array.</p>
 
             </div>
             
@@ -187,7 +188,7 @@ d3.csv(<span class="hljs-string">"/data/cities.csv"</span>, <span class="hljs-fu
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-number">652405</span>, land area: <span class="hljs-number">83.9</span>}
-</code></pre><p>(Dot notation)[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors</a>] is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use (bracket notation)[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors</a>].</p>
+</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">Dot notation</a> is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use bracket notation as shown.</p>
 
             </div>
             
@@ -203,8 +204,26 @@ d3.csv(<span class="hljs-string">"/data/cities.csv"</span>, <span class="hljs-fu
               <h2 id="parsing-other-flat-files">Parsing Other Flat Files</h2>
 <p>CSV is probably the most common flat file format, but in no way the only one. 
 I often like to use TSV (tab separated files) - to get around the issues of numbers and strings often having commas in them.</p>
-<p>D3 can TSV’s with <a href="">d3.tsv</a></p>
-<h2 id="parsing-json-files">Parsing JSON Files</h2>
+<p>D3 can parse TSV’s with <a href="https://github.com/mbostock/d3/wiki/CSV#tsv">d3.tsv</a>:</p>
+<pre><code>animals.tsv:
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>d3.tsv(<span class="hljs-string">"/data/animals.tsv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+  <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-number">652405</span>, land area: <span class="hljs-number">83.9</span>}
+</code></pre><h2 id="parsing-json-files">Parsing JSON Files</h2>
 
             </div>
             
