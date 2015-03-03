@@ -1,11 +1,9 @@
 // # Reading in Data
 
-// The first step in any data processing is getting the data!
-
-// Here is how to parse in and prepare common input formats using D3.js
-
+// The first step in any data processing is getting the data! Here is how to parse in and prepare common input formats using D3.js
+//
 // ## Parsing CSV Files
-
+//
 // [D3 has a bunch](https://github.com/mbostock/d3/wiki/Requests) of filetypes it can support when loading data, and one of the most common is probably plain old CSV (comma separated values).
 
 // Let's say you had a csv file with some city data in it:
@@ -49,7 +47,27 @@ d3.csv("data/cities.csv", function(data) {
 // ```
 //
 // [Dot notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors) is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use bracket notation as shown.
+//
+//
+// This can also be done during the loading of the data, by `d3.csv` directly. This is done by providing an accessor function to `d3.csv`, who's return value will be the individual data objects in our data array. 
 
+d3.csv("data/cities.csv", function(d) {
+  return {
+    city : d.city,
+    state : d.state,
+    population : +d.population,
+    land_area : +d["land area"]
+  };
+}, function(data) {
+  console.log(data[0]);
+});
+// ```
+//=> {city: "seattle", state: "WA", population: 652405, land_area: 83.9}
+// ```
+//
+// In this form, you have complete control over the data objects and can rename properties (like `land_area`) and convert values (like `population`) willy-nilly.  On the other hand, you have to be quite explicit about which properties to return. This may or may not be what you are into. 
+//
+// I typically allow D3 to load all the data, and then make modifications in a post-processing step, but you might like this more hands-on approach.
 
 //
 // ## Parsing Other Flat Files
@@ -69,7 +87,7 @@ d3.tsv("/data/animals.tsv", function(data) {
   console.log(data[0]);
 });
 // ```
-//=> {city: "seattle", state: "WA", population: 652405, land area: 83.9}
+//=> {name: "tiger", type: "mammal", avg_weight: "260"}
 // ```
 //
 // ## Parsing JSON Files
@@ -80,16 +98,16 @@ d3.tsv("/data/animals.tsv", function(data) {
 //
 //
 // ```
-// words.json:
+// employees.json:
 //
 //
 // ```
 //
-d3.json("/data/words.json", function(data) {
+d3.json("/data/employees.json", function(data) {
   console.log(data[0]);
 });
 // ```
-//=> {city: "seattle", state: "WA", population: 652405, land area: 83.9}
+//=> {name: "Andy Hunt", title: "Big Boss", age: 68, bonus: true}
 // ```
 //
 // We can see that, unlike our flat file parsing, numeric types stay numeric. Indeed, a JSON value can be a string, a number, a boolean value, an array, or another object. This allows nested data to be dealt with easily.  
@@ -111,6 +129,10 @@ function analyze(error, cities, animals) {
   console.log(cities[0]);
   console.log(animals[0]);
 }
+// ```
+//=> {city: "seattle", state: "WA", population: "652405", land area: "83.9"}
+//=> {name: "tiger", type: "mammal", avg_weight: "260"}
+// ```
 
 // Note that we `defer` the loading of two types of files - using two different loading functions - so this is an easy way to mix and match file types. 
 //
