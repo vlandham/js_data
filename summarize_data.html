@@ -156,14 +156,25 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-number">4</span>
-</code></pre><h2 id="filtering">Filtering</h2>
-<p>Select a subset of the data using the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter</a> method. This creates a new array of data with only the values that the callback function returns <code>true</code> for.</p>
+</code></pre><h2 id="mapping">Mapping</h2>
+<p><code>forEach</code> provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually. </p>
+<p>This works, but can get clunky and confusing fast. Keeping straight what form the data is in at any given time can be confusing, as can side effects of modifying your data that you might not be aware of.</p>
+<p>To combat this confusion, it can be useful to think of the data as <em>immutable</em> (a data structure that cannot be modified once created. Then to make modifications to your data, you <strong>transform</strong> your original dataset into a new data set. This transformation process creates a new immutable data structure that then can be used downstream.</p>
+<p>All this to say that JavaScript’s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a> can be a very useful tool to keep things functional and keep your data pipeline free of side effects. </p>
+<p><code>map</code> takes an array and produces another array which is the result of the callback function being executed on each element in the array. </p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> large_land = data.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area &gt; <span class="hljs-number">200</span>; });
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(large_land));</pre></div></div>
+<span class="hljs-keyword">var</span> smallData = data.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d,i)</span> </span>{ 
+  <span class="hljs-keyword">return</span> {
+    name: d.city.toUpperCase(),
+    index: i + <span class="hljs-number">1</span>,
+    rounded_area: <span class="hljs-built_in">Math</span>.round(d.land_area)
+  };
+});
+<span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
+<span class="hljs-built_in">console</span>.log(smallData[<span class="hljs-number">0</span>]);</pre></div></div>
             
         </li>
         
@@ -174,10 +185,18 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <pre><code>=&gt; [{<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
-   {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}]
-</code></pre>
+              <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-number">652405</span>, land_area: <span class="hljs-number">83.9</span>}
+  {name: <span class="hljs-string">"SEATTLE"</span>, index: <span class="hljs-number">1</span>, rounded_area: <span class="hljs-number">84</span>}
+</code></pre><p>The callback function gets called for each element in the array, and also has access to the index of that element in the array. The result is an array of returned values from the callback.</p>
+<p>With plain JavaScript, the immutability of an array is just in the mind of the developer. While <code>map</code> does not modify the array, it is easy for your callback method to do so. That is why we return a new object in the callback. lodash’s <a href="https://lodash.com/docs#clone">clone</a> would be another approach to getting a copy of each data element as a starting point for the transformation.</p>
+<h2 id="filtering">Filtering</h2>
+<p>Select a subset of the data using the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter</a> method. This creates a new array of data (again see transformation talk above) with only the values that the callback function returns <code>true</code> for.</p>
+
             </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> large_land = data.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area &gt; <span class="hljs-number">200</span>; });
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(large_land));</pre></div></div>
             
         </li>
         
@@ -188,7 +207,10 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <h2 id="min-max">Min &amp; Max</h2>
+              <pre><code>=&gt; [{<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
+   {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}]
+</code></pre><h2 id="chaining-functions">Chaining Functions</h2>
+<h2 id="min-max">Min &amp; Max</h2>
 <p>With <code>forEach</code> it would be possible to laboriously calculate metrics such as min, and max. But, its typically better to work smart, not hard.</p>
 <p>As it turns out, D3 comes to the rescue again, with <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_min">d3.min</a> and <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_max">d3.max</a>. Use the callback function to indicate which property (or computed value based on the properties) to access.</p>
 
@@ -396,6 +418,7 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
               </div>
               <h2 id="see-also">See Also</h2>
 <ul>
+<li><a href="https://github.com/facebook/immutable-js">Immutable JS</a> - if you want to get serious about immutable data structures in JavaScript </li>
 <li><a href="http://www.macwright.org/2015/01/03/reduce-juice.html">Making Juice with Reduce</a> - Tom MacWright’s intro to the ill-used reduce</li>
 </ul>
 

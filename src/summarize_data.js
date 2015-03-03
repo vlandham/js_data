@@ -33,9 +33,40 @@ console.log(data.length);
 //=> 4
 // ```
 //
+// ## Mapping
+//
+// `forEach` provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually. 
+//
+// This works, but can get clunky and confusing fast. Keeping straight what form the data is in at any given time can be confusing, as can side effects of modifying your data that you might not be aware of.
+//
+// To combat this confusion, it can be useful to think of the data as _immutable_ (a data structure that cannot be modified once created. Then to make modifications to your data, you **transform** your original dataset into a new data set. This transformation process creates a new immutable data structure that then can be used downstream.
+//
+// All this to say that JavaScript's [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) can be a very useful tool to keep things functional and keep your data pipeline free of side effects. 
+//
+// `map` takes an array and produces another array which is the result of the callback function being executed on each element in the array. 
+
+var smallData = data.map(function(d,i) { 
+  return {
+    name: d.city.toUpperCase(),
+    index: i + 1,
+    rounded_area: Math.round(d.land_area)
+  };
+});
+console.log(data[0]);
+console.log(smallData[0]);
+// ```
+//=> {city: "seattle", state: "WA", population: 652405, land_area: 83.9}
+//   {name: "SEATTLE", index: 1, rounded_area: 84}
+// ```
+//
+// The callback function gets called for each element in the array, and also has access to the index of that element in the array. The result is an array of returned values from the callback.
+//
+// With plain JavaScript, the immutability of an array is just in the mind of the developer. While `map` does not modify the array, it is easy for your callback method to do so. That is why we return a new object in the callback. lodash's [clone](https://lodash.com/docs#clone) would be another approach to getting a copy of each data element as a starting point for the transformation.
+//
+//
 // ## Filtering
 //
-// Select a subset of the data using the built in [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method. This creates a new array of data with only the values that the callback function returns `true` for.
+// Select a subset of the data using the built in [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method. This creates a new array of data (again see transformation talk above) with only the values that the callback function returns `true` for.
 
 var large_land = data.filter(function(d) { return d.land_area > 200; });
 console.log(JSON.stringify(large_land));
@@ -43,7 +74,9 @@ console.log(JSON.stringify(large_land));
 //=> [{"city":"new york","state":"NY","population":8405837,"land_area":302.6},
 //    {"city":"kansas city","state":"MO","population":467007,"land_area":315}]
 // ```
-
+//
+// ## Chaining Functions
+//
 //
 // ## Min & Max
 //
@@ -132,5 +165,6 @@ console.log(weirdString);
 //
 // ## See Also
 //
+// - [Immutable JS](https://github.com/facebook/immutable-js) - if you want to get serious about immutable data structures in JavaScript 
 // - [Making Juice with Reduce](http://www.macwright.org/2015/01/03/reduce-juice.html) - Tom MacWright's intro to the ill-used reduce
 //
