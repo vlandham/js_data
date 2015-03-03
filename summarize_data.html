@@ -3,7 +3,7 @@
 <html>
 <head>
   <title>Iterating Over, Filtering, and Summarizing Data</title>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta http-equiv="content-type" content="text/html, charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="custom.css" />
   <script src='lib/d3/d3.min.js'></script>
@@ -70,11 +70,124 @@
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
               <h1 id="iterating-over-filtering-and-summarizing-data">Iterating Over, Filtering, and Summarizing Data</h1>
-<p>Now that we have <a href="">loaded some data</a>, let’s look at it! This task will focus on basic explorations of the data. </p>
-<p>Let’s pretend we have loaded up a csv file - and have a dataset that looks something like:</p>
-<h2 id="iterating">Iterating</h2>
-<h2 id="filtering">Filtering</h2>
-<h2 id="max-min">Max/Min</h2>
+<p>Now that we have <a href="read_data.html">loaded some data</a>, let’s look at it! This task will focus on basic explorations of the data. </p>
+<p>To start, let’s pretend we have loaded up a csv file - and have a dataset that looks something like:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> data = [
+  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"seattle"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"WA"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">652405</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">83.9</span>},
+  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
+  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"boston"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"MA"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">645966</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">48.3</span>},
+  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}
+];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2 id="iterating">Iterating</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>First some basic iteration. We already saw this in the data loading task, but a common way to process each data object is by using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">forEach</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
+
+data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+  count += <span class="hljs-number">1</span>;
+});
+
+<span class="hljs-built_in">console</span>.log(count);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">4</span>
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p><em>Of course, data also has the property <code>length</code> which would be the actual way to get the number of data elements in <code>data</code> - but this is just an example.</em></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(data.length);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">4</span>
+</code></pre><h2 id="filtering">Filtering</h2>
+<p>Select a subset of the data using the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter</a> method. This creates a new array of data with only the values that the callback function returns <code>true</code> for.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> large_land = data.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area &gt; <span class="hljs-number">200</span>; });
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(large_land));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <pre><code>=&gt; [{<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
+   {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}]
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h2 id="max-min">Max/Min</h2>
 <h2 id="average">Average</h2>
 <h2 id="reducing">Reducing</h2>
 <h2 id="see-also">See Also</h2>

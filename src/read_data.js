@@ -1,4 +1,4 @@
-// # Reading in Data
+//# Reading in Data
 
 // The first step in any data processing is getting the data! Here is how to parse in and prepare common input formats using D3.js
 //
@@ -88,7 +88,7 @@ d3.csv("data/cities.csv", function(d) {
 // ```
 // Loading animals.tsv with `d3.tsv`:
 //
-d3.tsv("/data/animals.tsv", function(data) {
+d3.tsv("data/animals.tsv", function(data) {
   console.log(data[0]);
 });
 // ```
@@ -113,6 +113,16 @@ d3.tsv("/data/animals.tsv", function(data) {
 // We could create a pipe separated values (PSV) parser using `d3.dsv`:
 
 var psv = d3.dsv("|", "text/plain");
+
+// And then use this to parse the strangely formated file.
+
+psv("data/animals_piped.txt", function(data) {
+  console.log(data[1]);
+});
+// ```
+//=> {name: "hippo", type: "mammal", avg_weight: "3400"}
+// ```
+
 
 // 
 //
@@ -140,7 +150,7 @@ var psv = d3.dsv("|", "text/plain");
 // ```
 // Loading employees.json with `d3.json`:
 //
-d3.json("/data/employees.json", function(data) {
+d3.json("data/employees.json", function(data) {
   console.log(data[0]);
 });
 // ```
@@ -156,8 +166,8 @@ d3.json("/data/employees.json", function(data) {
 // For loading multiple files, we can use [Queue.js](https://github.com/mbostock/queue) (also written by Mike Bostock) to wait for multiple data sources to be loaded.
 
 queue()
-  .defer(d3.csv, "/data/cities.csv")
-  .defer(d3.tsv, "/data/animals.tsv")
+  .defer(d3.csv, "data/cities.csv")
+  .defer(d3.tsv, "data/animals.tsv")
   .await(analyze);
 
 function analyze(error, cities, animals) {

@@ -11,7 +11,7 @@ body {
 #container {
     min-height: 100%;
     margin:0 auto;
-    width:640px;
+    width:740px;
 }
 
 img {
@@ -53,18 +53,20 @@ pre, tt, code {
   font-family: 'M+ 1mn', Menlo, Monaco, Consolas, "Lucida Console", monospace;
   margin: 0; padding: 0;
 }
-  .annotation pre {
-    display: block;
-    margin: 0;
-    padding: 7px 10px;
-    background: #fcfdfc;
-    overflow-x: auto;
-  }
-    .annotation pre code {
-      border: 0;
-      padding: 0;
-      background: transparent;
-    }
+
+.annotation pre {
+  display: block;
+  margin: 0;
+  padding: 7px 10px;
+  background: #fcfdfc;
+  overflow-x: auto;
+}
+
+.annotation pre code {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
 
 
 blockquote {
@@ -191,6 +193,31 @@ ul.sections > li > div {
     font-size: 12px;
     padding: 0 0.2em;
   }
+
+  /* .pilwrap { */
+  /*   position: relative; */
+  /*   display: inline; */
+  /* } */
+  /*  */
+  /* .pilcrow { */
+  /*   font: 12px Arial; */
+  /*   text-decoration: none; */
+  /*   color: #454545; */
+  /*   position: absolute; */
+  /*   top: 3px; left: -20px; */
+  /*   padding: 1px 2px; */
+  /*   opacity: 0; */
+  /*   -webkit-transition: opacity 0.2s linear; */
+  /* } */
+  /* .for-h1 .pilcrow { */
+  /*     top: 47px; */
+  /*   } */
+  /*   .for-h2 .pilcrow, .for-h3 .pilcrow, .for-h4 .pilcrow { */
+  /*     top: 35px; */
+  /*   } */
+  /* ul.sections > li > div.annotation:hover .pilcrow { */
+  /*   opacity: 1; */
+  /* } */
 
 /*---------------------- Syntax Highlighting -----------------------------*/
 
