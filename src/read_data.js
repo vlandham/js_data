@@ -70,7 +70,7 @@ d3.csv("data/cities.csv", function(d) {
 // I typically allow D3 to load all the data, and then make modifications in a post-processing step, but you might like this more hands-on approach.
 
 //
-// ## Parsing Other Flat Files
+// ## Parsing TSV Files
 //
 // CSV is probably the most common flat file format, but in no way the only one. 
 // I often like to use TSV (tab separated files) - to get around the issues of numbers and strings often having commas in them.
@@ -81,14 +81,40 @@ d3.csv("data/cities.csv", function(d) {
 // ```
 // animals.tsv:
 //
-//
+//name	type	avg_weight
+//tiger	mammal	260
+//hippo	mammal	3400
+//komodo dragon	reptile	150
 // ```
+// Loading animals.tsv with `d3.tsv`:
+//
 d3.tsv("/data/animals.tsv", function(data) {
   console.log(data[0]);
 });
 // ```
 //=> {name: "tiger", type: "mammal", avg_weight: "260"}
 // ```
+//
+// ## Parsing Other Flat Files
+//
+// In fact, `d3.tsv` and `d3.csv` are only the tip of the iceberg. If you have a non-standard delimited file, you can create your own parser easily, using [d3.dsv](https://github.com/mbostock/d3/wiki/CSV#arbitrary-delimiters)
+//
+// Using `d3.dsv` takes one more step. You first create a new parser by passing in the type of delimiter and [mimeType](http://en.wikipedia.org/wiki/Internet_media_type) to use. 
+//
+// For example, if we had a file that looked like this:
+// ```
+// animals_piped.txt:
+//
+//name|type|avg_weight
+//tiger|mammal|260
+//hippo|mammal|3400
+//komodo dragon|reptile|150
+// ```
+// We could create a pipe separated values (PSV) parser using `d3.dsv`:
+
+var psv = d3.dsv("|", "text/plain");
+
+// 
 //
 // ## Parsing JSON Files
 //
@@ -99,9 +125,20 @@ d3.tsv("/data/animals.tsv", function(data) {
 //
 // ```
 // employees.json:
-//
-//
+// [
+//  {"name":"Andy Hunt,
+//   "title":"Big Boss",
+//    "age": 68,
+//    "bonus": true
+//  },
+// {"name":"Charles Mack",
+//  "title":"Jr Dev",
+//  "age":24,
+//  "bonus": false
+// }
+// ]
 // ```
+// Loading employees.json with `d3.json`:
 //
 d3.json("/data/employees.json", function(data) {
   console.log(data[0]);
