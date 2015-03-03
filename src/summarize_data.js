@@ -102,6 +102,32 @@ console.log(landSD);
 //
 // These functions all take an array and reduce it down to a single number. But what if that number isn't the one you want? Well, you can take this reduction into your own hands with `reduce`!
 //
+// The syntax for [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) is always hard for me to remember, so let's go over it with the classic example: summing up a value.
+
+var landSum = data.reduce(function(sum, d) { 
+  return sum + d.land_area; 
+}, 0);
+console.log(landSum);
+// ```
+//=> 749.8
+// ```
+
+// The first parameter to `reduce` is the callback function that will return the running "total" of the reduction. This function is passed in the previous value returned from the last time the callback was called. Here, that parameter - `sum` provides the running total as we move through the array. The second parameter to the callback `d` is the current value of the array we are working on. 
+//
+// `reduce` can take an initial value, which is the second parameter to the `reduce` call. For this example, we start the sum at 0. If there is no starting value provided, then for the first execution of the callback (when there is no previous value) the first parameter to the callback will be the value of the first element of the array, and the reduction starts with the second element.
+//
+// It always makes more sense to me to provide a starting value - unless you know what you are doing. You can also get the current index into the array (and the whole array itself) if that is useful to you
+
+var weirdString = data.reduce(function(str, d, i) { 
+  var ending = (i % 2 === 0) ? " is cool." : " sucks." ;
+  return str + " " + d.city + ending;
+}, "");
+console.log(weirdString);
+// ```
+//=> seattle is cool. new york sucks. boston is cool. kansas city sucks.
+// ```
+
+//
 // ## See Also
 //
 // - [Making Juice with Reduce](http://www.macwright.org/2015/01/03/reduce-juice.html) - Tom MacWright's intro to the ill-used reduce

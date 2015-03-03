@@ -314,7 +314,74 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
               <pre><code>=&gt; <span class="hljs-number">140.96553952414519</span>
 </code></pre><h2 id="reducing">Reducing</h2>
 <p>These functions all take an array and reduce it down to a single number. But what if that number isn’t the one you want? Well, you can take this reduction into your own hands with <code>reduce</code>!</p>
-<h2 id="see-also">See Also</h2>
+<p>The syntax for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce">reduce</a> is always hard for me to remember, so let’s go over it with the classic example: summing up a value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> landSum = data.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, d)</span> </span>{ 
+  <span class="hljs-keyword">return</span> sum + d.land_area; 
+}, <span class="hljs-number">0</span>);
+<span class="hljs-built_in">console</span>.log(landSum);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">749.8</span>
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>The first parameter to <code>reduce</code> is the callback function that will return the running “total” of the reduction. This function is passed in the previous value returned from the last time the callback was called. Here, that parameter - <code>sum</code> provides the running total as we move through the array. The second parameter to the callback <code>d</code> is the current value of the array we are working on. </p>
+<p><code>reduce</code> can take an initial value, which is the second parameter to the <code>reduce</code> call. For this example, we start the sum at 0. If there is no starting value provided, then for the first execution of the callback (when there is no previous value) the first parameter to the callback will be the value of the first element of the array, and the reduction starts with the second element.</p>
+<p>It always makes more sense to me to provide a starting value - unless you know what you are doing. You can also get the current index into the array (and the whole array itself) if that is useful to you</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> weirdString = data.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str, d, i)</span> </span>{ 
+  <span class="hljs-keyword">var</span> ending = (i % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>) ? <span class="hljs-string">" is cool."</span> : <span class="hljs-string">" sucks."</span> ;
+  <span class="hljs-keyword">return</span> str + <span class="hljs-string">" "</span> + d.city + ending;
+}, <span class="hljs-string">""</span>);
+<span class="hljs-built_in">console</span>.log(weirdString);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <pre><code>=&gt; seattle is cool. <span class="hljs-keyword">new</span> york sucks. boston is cool. kansas city sucks.
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="http://www.macwright.org/2015/01/03/reduce-juice.html">Making Juice with Reduce</a> - Tom MacWright’s intro to the ill-used reduce</li>
 </ul>
