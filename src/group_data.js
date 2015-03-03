@@ -6,8 +6,11 @@
 //
 // ## Nest Basics
 //
+// ## Sorting Keys and Values
+//
 // ## Summarizing Groups 
 //
 // ## See Also
 //
 // - [Mister Nester](http://bl.ocks.org/shancarter/raw/4748131/) - a `d3.nest` power tool!
+// - [Phoebe Bright Nest Tutorial](http://bl.ocks.org/phoebebright/raw/3176159/) - lots more nest examples

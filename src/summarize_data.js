@@ -127,6 +127,8 @@ console.log(weirdString);
 //=> seattle is cool. new york sucks. boston is cool. kansas city sucks.
 // ```
 
+// _And summing over a variable is only used for example. You can always just use [d3.sum](https://github.com/mbostock/d3/wiki/Arrays#d3_sum) for this instead._
+
 //
 // ## See Also
 //
