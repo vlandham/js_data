@@ -2,6 +2,7 @@
 // 
 // Data manipulation, data munging, and data processing in JavaScript. 
 // 
+// [Get source](https://github.com/vlandham/js_data)
 //
 // ## Tasks
 //
