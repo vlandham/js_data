@@ -1,0 +1,32 @@
+{
+  "name": "js_data",
+  "version": "1.0.0",
+  "description": "Data wrangling in JavaScript",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vlandham/js_data.git"
+  },
+  "keywords": [
+    "data",
+    "analysis",
+    "visualization"
+  ],
+  "author": "Jim Vallandingham",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vlandham/js_data/issues"
+  },
+  "homepage": "https://github.com/vlandham/js_data",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-exec": "^0.4.6"
+  }
+}

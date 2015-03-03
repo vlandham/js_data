@@ -1,0 +1,20 @@
+module.exports = function(grunt) {
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    watch: {
+      files: ['src/*.js'],
+      tasks: ['exec']
+    },
+    exec: {
+      command: "docco -t assets/custom.jst --css=assets/custom.css ./src/*.js --output=./"
+    }
+  });
+
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.registerMultiTask('docco', 'run docco', function() {
+    
+  });
+  grunt.registerTask('default', ['exec']);
+  grunt.loadNpmTasks('grunt-exec');
+};
