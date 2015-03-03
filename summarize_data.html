@@ -42,6 +42,11 @@
               </a>
             
               
+              <a class="source" href="regex.html">
+                regex.js
+              </a>
+            
+              
               <a class="source" href="strings.html">
                 strings.js
               </a>
@@ -209,8 +214,7 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
               </div>
               <pre><code>=&gt; [{<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
    {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}]
-</code></pre><h2 id="chaining-functions">Chaining Functions</h2>
-<h2 id="min-max">Min &amp; Max</h2>
+</code></pre><h2 id="min-max">Min &amp; Max</h2>
 <p>With <code>forEach</code> it would be possible to laboriously calculate metrics such as min, and max. But, its typically better to work smart, not hard.</p>
 <p>As it turns out, D3 comes to the rescue again, with <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_min">d3.min</a> and <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_max">d3.max</a>. Use the callback function to indicate which property (or computed value based on the properties) to access.</p>
 
@@ -404,19 +408,8 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
                 <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p><em>And summing over a variable is only used for example. You can always just use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_sum">d3.sum</a> for this instead.</em></p>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-20">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
-              </div>
-              <h2 id="see-also">See Also</h2>
+<h2 id="chaining-functions">Chaining Functions</h2>
+<h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="https://github.com/facebook/immutable-js">Immutable JS</a> - if you want to get serious about immutable data structures in JavaScript </li>
 <li><a href="http://www.macwright.org/2015/01/03/reduce-juice.html">Making Juice with Reduce</a> - Tom MacWright’s intro to the ill-used reduce</li>

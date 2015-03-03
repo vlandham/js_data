@@ -12,6 +12,7 @@
 //
 // - ### [Working with Strings](strings.html)
 // - ### [Working with Time](time.html)
+// - ### [Regular Expressions](regex.html)
 //
 //
 // ## About

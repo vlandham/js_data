@@ -75,9 +75,6 @@ console.log(JSON.stringify(large_land));
 //    {"city":"kansas city","state":"MO","population":467007,"land_area":315}]
 // ```
 //
-// ## Chaining Functions
-//
-//
 // ## Min & Max
 //
 // With `forEach` it would be possible to laboriously calculate metrics such as min, and max. But, its typically better to work smart, not hard.
@@ -161,7 +158,10 @@ console.log(weirdString);
 // ```
 
 // _And summing over a variable is only used for example. You can always just use [d3.sum](https://github.com/mbostock/d3/wiki/Arrays#d3_sum) for this instead._
-
+//
+// ## Chaining Functions
+//
+//
 //
 // ## See Also
 //
