@@ -188,9 +188,132 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <h2 id="max-min">Max/Min</h2>
-<h2 id="average">Average</h2>
-<h2 id="reducing">Reducing</h2>
+              <h2 id="min-max">Min &amp; Max</h2>
+<p>With <code>forEach</code> it would be possible to laboriously calculate metrics such as min, and max. But, its typically better to work smart, not hard.</p>
+<p>As it turns out, D3 comes to the rescue again, with <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_min">d3.min</a> and <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_max">d3.max</a>. Use the callback function to indicate which property (or computed value based on the properties) to access.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> minLand = d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
+<span class="hljs-built_in">console</span>.log(minLand);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">48.3</span>
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> maxLand = d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
+<span class="hljs-built_in">console</span>.log(maxLand);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">315</span>
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>If you want both of them at the same time, you can use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_extent">d3.extent</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> landExtent = d3.extent(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
+<span class="hljs-built_in">console</span>.log(landExtent);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <pre><code>=&gt; [<span class="hljs-number">48.3</span>, <span class="hljs-number">315</span>]
+</code></pre><p>This returns an array with the first element the minimum value and the second element the maximum.</p>
+<h2 id="summary-statistics">Summary Statistics</h2>
+<p>D3 provides a few basic tools to analyze your data, all using the same format as the min and max functions. Simply provide the property you would like to analyze, and you are good to go.</p>
+<p><a href="https://github.com/mbostock/d3/wiki/Arrays#d3_mean">d3.mean</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> landAvg = d3.mean(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
+<span class="hljs-built_in">console</span>.log(landAvg);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">187.45</span>
+</code></pre><p><a href="https://github.com/mbostock/d3/wiki/Arrays#d3_median">d3.median</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> landMed = d3.median(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
+<span class="hljs-built_in">console</span>.log(landMed);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">193.25</span>
+</code></pre><p><a href="https://github.com/mbostock/d3/wiki/Arrays#d3_deviation">d3.deviation</a> - for standard deviation</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> landSD = d3.deviation(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
+<span class="hljs-built_in">console</span>.log(landSD);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">140.96553952414519</span>
+</code></pre><h2 id="reducing">Reducing</h2>
+<p>These functions all take an array and reduce it down to a single number. But what if that number isn’t the one you want? Well, you can take this reduction into your own hands with <code>reduce</code>!</p>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="http://www.macwright.org/2015/01/03/reduce-juice.html">Making Juice with Reduce</a> - Tom MacWright’s intro to the ill-used reduce</li>
