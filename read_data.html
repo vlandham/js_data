@@ -220,7 +220,7 @@ d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-fun
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <h2 id="parsing-tsv-files">Parsing TSV Files</h2>
+              <h2 id="reading-tsv-files">Reading TSV Files</h2>
 <p>CSV is probably the most common flat file format, but in no way the only one. 
 I often like to use TSV (tab separated files) - to get around the issues of numbers and strings often having commas in them.</p>
 <p>D3 can parse TSV’s with <a href="https://github.com/mbostock/d3/wiki/CSV#tsv">d3.tsv</a>:</p>
@@ -248,7 +248,7 @@ komodo dragon    reptile    <span class="hljs-number">150</span>
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <pre><code>=&gt; {name: <span class="hljs-string">"tiger"</span>, type: <span class="hljs-string">"mammal"</span>, avg_weight: <span class="hljs-string">"260"</span>}
-</code></pre><h2 id="parsing-other-flat-files">Parsing Other Flat Files</h2>
+</code></pre><h2 id="reading-other-flat-files">Reading Other Flat Files</h2>
 <p>In fact, <code>d3.tsv</code> and <code>d3.csv</code> are only the tip of the iceberg. If you have a non-standard delimited file, you can create your own parser easily, using <a href="https://github.com/mbostock/d3/wiki/CSV#arbitrary-delimiters">d3.dsv</a></p>
 <p>Using <code>d3.dsv</code> takes one more step. You first create a new parser by passing in the type of delimiter and <a href="http://en.wikipedia.org/wiki/Internet_media_type">mimeType</a> to use. </p>
 <p>For example, if we had a file that looked like this:</p>
@@ -305,7 +305,7 @@ psv(<span class="hljs-string">"data/animals_piped.txt"</span>, <span class="hljs
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <h2 id="parsing-json-files">Parsing JSON Files</h2>
+              <h2 id="reading-json-files">Reading JSON Files</h2>
 <p>For nested data, or for passing around data where you don’t want to mess with data typing, its hard to beat <a href="http://json.org/">JSON</a>.</p>
 <p>JSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with <a href="">d3.json</a> - you too can harness its power.</p>
 <pre><code>employees.json:
@@ -386,6 +386,7 @@ queue()
 <p>The callback function passed into <code>await</code> gets each dataset as a parameter, with the first parameter being populated if an error has occurred in loading the data. </p>
 <p>It can be useful to output the error, if it is defined, so you catch data loading problems quickly. </p>
 <p>To add another data file, simply add another defer and extend the input parameters for your callback!</p>
+<h2 id="reading-invalid-data-files">Reading Invalid Data Files</h2>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="https://github.com/mbostock/d3/wiki/Requests">D3 documentation</a></li>

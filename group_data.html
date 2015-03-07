@@ -79,7 +79,100 @@
 <p>Grouping data is an important capability to have when doing data analysis. Often times, you will want to break apart the data by a categorical variable and look at statistics or details for each group. </p>
 <p>D3 includes the powerful <a href="https://github.com/mbostock/d3/wiki/Arrays#-nest">d3.nest</a> functionality to produce these groupings with a minimal amount of code.</p>
 <h2 id="nest-basics">Nest Basics</h2>
-<h2 id="sorting-keys-and-values">Sorting Keys and Values</h2>
+<p>Fundamentally, <code>d3.nest</code> is about taking a flat data structure and turning it into a nested one. The user gets to decide how the nesting should occur, and how deep to nest. This is a bit different then many group_by concepts, where only a single level of nesting is allowed.</p>
+<p>Let’s say we have the following CSV file of “expenses”:</p>
+<pre><code>name,amount,date
+jim,<span class="hljs-number">34.0</span>,<span class="hljs-number">11</span>/<span class="hljs-number">12</span>/<span class="hljs-number">2015</span>
+carl,<span class="hljs-number">120.11</span>,<span class="hljs-number">11</span>/<span class="hljs-number">12</span>/<span class="hljs-number">2015</span>
+jim,<span class="hljs-number">45.0</span>,<span class="hljs-number">12</span>/<span class="hljs-number">01</span>/<span class="hljs-number">2015</span>
+stacy,<span class="hljs-number">12.01</span>,<span class="hljs-number">01</span>/<span class="hljs-number">04</span>/<span class="hljs-number">2016</span>
+stacy,<span class="hljs-number">34.05</span>,<span class="hljs-number">01</span>/<span class="hljs-number">04</span>/<span class="hljs-number">2016</span>
+stacy,<span class="hljs-number">44.99</span>,<span class="hljs-number">01</span>/<span class="hljs-number">05</span>/<span class="hljs-number">2016</span>
+</code></pre><p>And that has been converted to a nice array of objects via our <a href="read_data.html">data reading powers</a> into something like this:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> expenses = [{<span class="hljs-string">"name"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>},
+  {<span class="hljs-string">"name"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">120.11</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>},
+  {<span class="hljs-string">"name"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">45</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"12/01/2015"</span>},
+  {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">12.01</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/04/2016"</span>},
+  {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34.05</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/04/2016"</span>},
+  {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">44.99</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/05/2016"</span>}
+];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>And now we want to slice up this data in different ways.</p>
+<p>First, let’s use nest to group by <code>name</code>:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> expensesByName = d3.nest()
+  .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.name; })
+  .entries(expenses);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Which results in a nested data structure:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+expensesByName = [
+  {<span class="hljs-string">"key"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"values"</span>:[
+    {<span class="hljs-string">"name"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>},
+    {<span class="hljs-string">"name"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">45</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"12/01/2015"</span>}
+  ]},
+    {<span class="hljs-string">"key"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"values"</span>:[
+      {<span class="hljs-string">"name"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">120.11</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>}
+    ]},
+    {<span class="hljs-string">"key"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"values"</span>:[
+      {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">12.01</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/04/2016"</span>},
+      {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34.05</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/04/2016"</span>},
+      {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">44.99</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/05/2016"</span>}
+    ]}
+];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p><code>expensesByName</code> is an array of objects. Each object has a <code>key</code> property - which is what we used as the grouping value using the <code>key</code> function. Here, we used the values associated with the <code>name</code> property as the key.</p>
+<p>The <code>values</code> property of these </p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <h2 id="sorting-keys-and-values">Sorting Keys and Values</h2>
 <h2 id="summarizing-groups">Summarizing Groups</h2>
 <h2 id="see-also">See Also</h2>
 <ul>

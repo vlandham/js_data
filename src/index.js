@@ -27,6 +27,12 @@
 //
 // Each document in this repo is executed when loaded into a browser. Check it out by opening the Developer Tools Console. You should see the output of the following code block:
 //
+// ### Why?
+//
+// Is this something you would actually want to do? _Maybe_.
+//
+// There are other tools out there obviously for 
+//
 
 console.log("This is the index!");
 

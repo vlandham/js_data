@@ -70,7 +70,7 @@ d3.csv("data/cities.csv", function(d) {
 // I typically allow D3 to load all the data, and then make modifications in a post-processing step, but you might like this more hands-on approach.
 
 //
-// ## Parsing TSV Files
+// ## Reading TSV Files
 //
 // CSV is probably the most common flat file format, but in no way the only one. 
 // I often like to use TSV (tab separated files) - to get around the issues of numbers and strings often having commas in them.
@@ -95,7 +95,7 @@ d3.tsv("data/animals.tsv", function(data) {
 //=> {name: "tiger", type: "mammal", avg_weight: "260"}
 // ```
 //
-// ## Parsing Other Flat Files
+// ## Reading Other Flat Files
 //
 // In fact, `d3.tsv` and `d3.csv` are only the tip of the iceberg. If you have a non-standard delimited file, you can create your own parser easily, using [d3.dsv](https://github.com/mbostock/d3/wiki/CSV#arbitrary-delimiters)
 //
@@ -126,7 +126,7 @@ psv("data/animals_piped.txt", function(data) {
 
 // 
 //
-// ## Parsing JSON Files
+// ## Reading JSON Files
 //
 // For nested data, or for passing around data where you don't want to mess with data typing, its hard to beat [JSON](http://json.org/).
 //
@@ -188,6 +188,9 @@ function analyze(error, cities, animals) {
 // It can be useful to output the error, if it is defined, so you catch data loading problems quickly. 
 //
 // To add another data file, simply add another defer and extend the input parameters for your callback!
+//
+// ## Reading Invalid Data Files
+//
 //
 // ## See Also
 //

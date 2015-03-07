@@ -75,6 +75,50 @@ console.log(JSON.stringify(large_land));
 //    {"city":"kansas city","state":"MO","population":467007,"land_area":315}]
 // ```
 //
+// ## Sorting
+//
+// Similar to filtering, sorting data based on some attribute is someting you'll probably want to do frequently. 
+//
+// The built in [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) for arrays can do this. A caveat to this function is that, unlike filter, map, and other functions, this _modifies the array you are sorting in place_, instead of returning a new array with the objects sorted. 
+//
+// To sort an array, you need a comparator function. This is a function that takes two pieces of data and indicates which one you want higher in the list. The _comparator function way_ to do this is to return a negative value if the first value should go higher then the second value, and a positive value if the second value should go higher. If they are equal, and you don't care, then return a 0.
+//
+// Let's see it in action. Here is a way to sort by population in a descending order (larger populations come first).
+//
+//
+
+data.sort(function(a,b) {
+  return b.population - a.population;
+});
+console.log(JSON.stringify(data));
+// ```
+// => [{"city":"new york","state":"NY","population":8405837,"land_area":302.6},
+//     {"city":"seattle","state":"WA","population":652405,"land_area":83.9},
+//     {"city":"boston","state":"MA","population":645966,"land_area":48.3},
+//     {"city":"kansas city","state":"MO","population":467007,"land_area":315}]
+// ```
+//
+// This `b - a` thing is a pretty common way to generate this kind of sort. But you could also do it more explicitly. Thinking through it, if b's population is larger then a's, then the value returned by `b.population - a.population` will be positive - so b will be sorted toward the top of the array. If the reverse is true, then the result will be negative, and a will be sorted first.
+//
+// Note again, that the sort happened _on the original data_, which I'm not a big fan of. 
+//
+// D3 also has a few helper functions to implement ascending and descending comparator functions - but (as far as I can tell) they only accept arrays of raw numbers instead of objects. So to use [d3.ascending](https://github.com/mbostock/d3/wiki/Arrays#d3_ascending) or [d3.descending](https://github.com/mbostock/d3/wiki/Arrays#d3_descending) you would have to do something like this:
+//
+
+var populations = data.map(function(d) { return d.population; });
+console.log(populations);
+// ```
+// => [652405, 8405837, 645966, 467007]
+// ```
+populations.sort(d3.descending);
+console.log(populations);
+// ```
+// => [8405837, 652405, 645966, 467007]
+// ```
+//
+// I'm usually looking to keep my data objects together, so I shy away from using these methods, but they might be great for what you are trying to do.
+//
+//
 // ## Min & Max
 //
 // With `forEach` it would be possible to laboriously calculate metrics such as min, and max. But, its typically better to work smart, not hard.
@@ -161,7 +205,17 @@ console.log(weirdString);
 //
 // ## Chaining Functions
 //
+// One of the great things about these more _functional_ functions is that it is possible to chain them together into one big data wrangling pipeline!
 //
+var bigCities = data.filter(function(d) { return d.population > 500000; })
+  .sort(function(a,b) { return a.population - b.population; })
+  .map(function(d) { return d.city; });
+console.log(bigCities);
+// ```
+//=> ["boston", "seattle", "new york"]
+// ```
+//
+// Since we are using `sort` after `filter`, sort is working on the returned array from `filter`. The sort function at least is nice enough to also return the array, so chaining is still possible.
 //
 // ## See Also
 //
