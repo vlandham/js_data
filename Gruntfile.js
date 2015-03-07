@@ -7,7 +7,12 @@ module.exports = function(grunt) {
       tasks: ['exec']
     },
     exec: {
-      command: "docco -t assets/custom.jst --css=assets/custom.css ./src/*.js --output=./"
+      docco: {
+        command: "docco -t assets/custom.jst --css=assets/custom.css ./src/*.js --output=./"
+      },
+      inject: {
+        command: "tools/inject_source.rb ./ src/"
+      }
     },
     'http-server': {
       'dev': {
