@@ -59,7 +59,7 @@ expensesByName = [
 // `expensesByName` is an array of objects. Each object has a `key` property - which is what we used as the grouping value using the `key` function. Here, we used the values associated with the `name` property as the key.
 //
 // The `values` property of these 
-
+//
 //
 // ## Sorting Keys and Values
 //

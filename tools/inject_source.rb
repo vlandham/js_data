@@ -8,7 +8,6 @@ def get_base file
 end
 
 html_files = Dir.glob(File.join(input_dir, "*.html"))
-html_hash = html_files.map {|hf| get_base(hf) }.zip(html_files).to_h
 js_files = Dir.glob(File.join(src_dir, "*.js"))
 js_hash = js_files.map {|jf| get_base(jf) }.zip(js_files).to_h
 
