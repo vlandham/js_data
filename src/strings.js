@@ -24,6 +24,4 @@
 //
 // ## See Also
 //
-// TODO
-// 
 // - strings!
