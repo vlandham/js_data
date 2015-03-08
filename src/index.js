@@ -8,12 +8,13 @@
 //
 // - ### [Getting Started](getting_started.html)
 // - ### [Reading in Data](read_data.html)
-// - ### [Iterating and Summarizing Data](summarize_data.html)
+// - ### [Summarizing Data](summarize_data.html)
+// - ### [Iterating and Reducing](iterate_data.html)
 // - ### [Nesting and Grouping Data](group_data.html)
 //
-// - ### [Working with Strings](strings.html)
-// - ### [Regular Expressions](regex.html)
+// - ### [Strings and Regular Expressions](strings.html)
 // - ### [Working with Time](time.html)
+// - ### [Exploratory Visualizations](visualizations.html)
 //
 //
 // ## About

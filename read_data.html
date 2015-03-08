@@ -247,19 +247,7 @@ psv(<span class="hljs-string">"data/animals_piped.txt"</span>, <span class="hljs
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <pre><code>=&gt; {name: <span class="hljs-string">"hippo"</span>, type: <span class="hljs-string">"mammal"</span>, avg_weight: <span class="hljs-string">"3400"</span>}
-</code></pre>
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-13">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
-              </div>
-              <h2 id="reading-json-files">Reading JSON Files</h2>
+</code></pre><h2 id="reading-json-files">Reading JSON Files</h2>
 <p>For nested data, or for passing around data where you don’t want to mess with data typing, its hard to beat <a href="http://json.org/">JSON</a>.</p>
 <p>JSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with <a href="">d3.json</a> - you too can harness its power.</p>
 <pre><code>employees.json:
@@ -269,11 +257,11 @@ psv(<span class="hljs-string">"data/animals_piped.txt"</span>, <span class="hljs
    &quot;age&quot;: 68,
    &quot;bonus&quot;: true
  },
-{&quot;name&quot;:&quot;Charles Mack&quot;,
- &quot;title&quot;:&quot;Jr Dev&quot;,
- &quot;age&quot;:24,
- &quot;bonus&quot;: false
-}
+ {&quot;name&quot;:&quot;Charles Mack&quot;,
+  &quot;title&quot;:&quot;Jr Dev&quot;,
+  &quot;age&quot;:24,
+  &quot;bonus&quot;: false
+ }
 ]
 </code></pre><p>Loading employees.json with <code>d3.json</code>:</p>
 
@@ -286,11 +274,11 @@ psv(<span class="hljs-string">"data/animals_piped.txt"</span>, <span class="hljs
         </li>
         
         
-        <li id="section-14">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <pre><code>=&gt; {name: <span class="hljs-string">"Andy Hunt"</span>, title: <span class="hljs-string">"Big Boss"</span>, age: <span class="hljs-number">68</span>, bonus: <span class="hljs-literal">true</span>}
 </code></pre><p>We can see that, unlike our flat file parsing, numeric types stay numeric. Indeed, a JSON value can be a string, a number, a boolean value, an array, or another object. This allows nested data to be dealt with easily.  </p>
@@ -316,11 +304,11 @@ queue()
         </li>
         
         
-        <li id="section-15">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-string">"652405"</span>, land area: <span class="hljs-string">"83.9"</span>}
 =&gt; {name: <span class="hljs-string">"tiger"</span>, type: <span class="hljs-string">"mammal"</span>, avg_weight: <span class="hljs-string">"260"</span>}
@@ -330,11 +318,11 @@ queue()
         </li>
         
         
-        <li id="section-16">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>Note that we <code>defer</code> the loading of two types of files - using two different loading functions - so this is an easy way to mix and match file types. </p>
 <p>The callback function passed into <code>await</code> gets each dataset as a parameter, with the first parameter being populated if an error has occurred in loading the data. </p>
@@ -343,7 +331,7 @@ queue()
 <h2 id="reading-invalid-data-files">Reading Invalid Data Files</h2>
 <p> <strong>TODO</strong></p>
 <h2 id="next-task">Next Task</h2>
-<p><a href="summarize_data.html">Iterating Over, Filtering, and Summarizing Data</a></p>
+<p><a href="summarize_data.html">Summarizing Data</a></p>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="https://github.com/mbostock/d3/wiki/Requests">D3 documentation</a></li>

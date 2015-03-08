@@ -122,8 +122,6 @@ psv("data/animals_piped.txt", function(data) {
 // ```
 //=> {name: "hippo", type: "mammal", avg_weight: "3400"}
 // ```
-
-
 // 
 //
 // ## Reading JSON Files
@@ -141,11 +139,11 @@ psv("data/animals_piped.txt", function(data) {
 //    "age": 68,
 //    "bonus": true
 //  },
-// {"name":"Charles Mack",
-//  "title":"Jr Dev",
-//  "age":24,
-//  "bonus": false
-// }
+//  {"name":"Charles Mack",
+//   "title":"Jr Dev",
+//   "age":24,
+//   "bonus": false
+//  }
 // ]
 // ```
 // Loading employees.json with `d3.json`:
@@ -195,7 +193,7 @@ function analyze(error, cities, animals) {
 //
 // ## Next Task
 //
-// [Iterating Over, Filtering, and Summarizing Data](summarize_data.html)
+// [Summarizing Data](summarize_data.html)
 //
 // ## See Also
 //
