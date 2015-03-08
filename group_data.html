@@ -159,9 +159,11 @@ expensesByName = [
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <p><code>expensesByName</code> is an array of objects. Each object has a <code>key</code> property - which is what we used as the grouping value using the <code>key</code> function. Here, we used the values associated with the <code>name</code> property as the key.</p>
-<p>The <code>values</code> property of these </p>
-<h2 id="sorting-keys-and-values">Sorting Keys and Values</h2>
+<p>The <code>values</code> property of these entries is an array containing all the original data objects that had that key. </p>
 <h2 id="summarizing-groups">Summarizing Groups</h2>
+<p>The nested structure can be great for visualizing your data, but might be a little underwhelming for analytical applications. Never fear! <a href="https://github.com/mbostock/d3/wiki/Arrays#nest_rollup">d3.rollup</a> is here!</p>
+<h2 id="sorting-keys-and-values">Sorting Keys and Values</h2>
+<p>If you want to sort the keys or values produced</p>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="http://bl.ocks.org/shancarter/raw/4748131/">Mister Nester</a> - a <code>d3.nest</code> power tool!</li>

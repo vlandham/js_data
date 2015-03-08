@@ -58,12 +58,15 @@ expensesByName = [
 
 // `expensesByName` is an array of objects. Each object has a `key` property - which is what we used as the grouping value using the `key` function. Here, we used the values associated with the `name` property as the key.
 //
-// The `values` property of these 
+// The `values` property of these entries is an array containing all the original data objects that had that key. 
 //
+// ## Summarizing Groups 
+//
+// The nested structure can be great for visualizing your data, but might be a little underwhelming for analytical applications. Never fear! [d3.rollup](https://github.com/mbostock/d3/wiki/Arrays#nest_rollup) is here!
 //
 // ## Sorting Keys and Values
 //
-// ## Summarizing Groups 
+// If you want to sort the keys or values produced
 //
 // ## See Also
 //
