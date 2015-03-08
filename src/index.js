@@ -6,13 +6,14 @@
 //
 // ## Tasks
 //
+// - ### [Getting Started](getting_started.html)
 // - ### [Reading in Data](read_data.html)
 // - ### [Iterating and Summarizing Data](summarize_data.html)
 // - ### [Nesting and Grouping Data](group_data.html)
 //
 // - ### [Working with Strings](strings.html)
-// - ### [Working with Time](time.html)
 // - ### [Regular Expressions](regex.html)
+// - ### [Working with Time](time.html)
 //
 //
 // ## About

@@ -217,6 +217,11 @@ console.log(bigCities);
 //
 // Since we are using `sort` after `filter`, sort is working on the returned array from `filter`. The sort function at least is nice enough to also return the array, so chaining is still possible.
 //
+//
+// ## Next Task
+//
+// [Grouping Data](group_data.html)
+//
 // ## See Also
 //
 // - [Immutable JS](https://github.com/facebook/immutable-js) - if you want to get serious about immutable data structures in JavaScript 

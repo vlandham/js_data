@@ -4,12 +4,26 @@
 //
 // ## Stripping Whitespace
 //
+// TODO
+//
 // ## Converting to Other Types
+//
+// TODO
 //
 // ## Find and Replace
 //
+// TODO
+//
 // ## Templating
 //
+// TODO
+//
+// ## Next Task
+//
+// [Regular Expressions](regex.html)
+//
 // ## See Also
+//
+// TODO
 // 
 // - strings!

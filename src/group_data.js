@@ -1,4 +1,4 @@
-// # Grouping and Nesting Data
+// # Grouping Data
 //
 // Grouping data is an important capability to have when doing data analysis. Often times, you will want to break apart the data by a categorical variable and look at statistics or details for each group. 
 //
@@ -172,6 +172,9 @@ console.log(JSON.stringify(expensesByYear));
 //```
 // All this flexibility provides for a powerful toolkit for exploring your data.
 //
+// ## Next Task
+//
+// [Working with Strings](strings.html)
 //
 // ## See Also
 //
