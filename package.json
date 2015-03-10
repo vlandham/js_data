@@ -27,7 +27,9 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-docco-multi": "~0.0.2",
     "grunt-exec": "^0.4.6",
+    "grunt-gh-pages": "^0.10.0",
     "grunt-http-server": "^1.2.0"
   }
 }

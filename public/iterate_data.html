@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Iterating Over and Reducing Data</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" media="all" href="custom.css" />
+  <script src='lib/d3/d3.min.js'></script>
+  <script src='lib/queue-async/queue.min.js'></script>
+  <script src='lib/lodash/lodash.min.js'></script>
+</head>
+<body>
+  <div id="container">
+    <div class='cred'>
+        <a href='http://vallandingham.me/js_data'>JS Data</a>
+        <p>Data processing and munging in JavaScript.</p>
+    </div>
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h1 id="iterating-over-and-reducing-data">Iterating Over and Reducing Data</h1>
+<p>Most of the functions we used to <a href="summarize_data.html">summarize</a> our data had to iterate over the entire dataset to generate their results - but the details were hidden behind the function. Now let’s look at how we might perform this iteration ourselves for other metrics and manipulations!</p>
+<p>Again, we start with a basic data set already loaded:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> data = [
+  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"seattle"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"WA"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">652405</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">83.9</span>},
+  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
+  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"boston"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"MA"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">645966</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">48.3</span>},
+  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}
+];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2 id="iterating">Iterating</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>First some basic iteration. We already saw this in the data loading task, but a common way to process each data object is by using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">forEach</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
+
+data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+  count += <span class="hljs-number">1</span>;
+});
+
+<span class="hljs-built_in">console</span>.log(count);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">4</span>
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p><em>Of course, data also has the property <code>length</code> which would be the actual way to get the number of data elements in <code>data</code> - but this is just an example.</em></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(data.length);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">4</span>
+</code></pre><h2 id="mapping">Mapping</h2>
+<p><code>forEach</code> provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually. </p>
+<p>This works, but can get clunky and confusing fast. Keeping straight what form the data is in at any given time can be confusing, as can side effects of modifying your data that you might not be aware of.</p>
+<p>To combat this confusion, it can be useful to think of the data as <em>immutable</em> (a data structure that cannot be modified once created. Then to make modifications to your data, you <strong>transform</strong> your original dataset into a new data set. This transformation process creates a new immutable data structure that then can be used downstream.</p>
+<p>All this to say that JavaScript’s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a> can be a very useful tool to keep things functional and keep your data pipeline free of side effects. </p>
+<p><code>map</code> takes an array and produces another array which is the result of the callback function being executed on each element in the array. </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> smallData = data.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d,i)</span> </span>{ 
+  <span class="hljs-keyword">return</span> {
+    name: d.city.toUpperCase(),
+    index: i + <span class="hljs-number">1</span>,
+    rounded_area: <span class="hljs-built_in">Math</span>.round(d.land_area)
+  };
+});
+<span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
+<span class="hljs-built_in">console</span>.log(smallData[<span class="hljs-number">0</span>]);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-number">652405</span>, land_area: <span class="hljs-number">83.9</span>}
+  {name: <span class="hljs-string">"SEATTLE"</span>, index: <span class="hljs-number">1</span>, rounded_area: <span class="hljs-number">84</span>}
+</code></pre><p>The callback function gets called for each element in the array, and also has access to the index of that element in the array. The result is an array of returned values from the callback.</p>
+<p>With plain JavaScript, the immutability of an array is just in the mind of the developer. While <code>map</code> does not modify the array, it is easy for your callback method to do so. That is why we return a new object in the callback. lodash’s <a href="https://lodash.com/docs#clone">clone</a> would be another approach to getting a copy of each data element as a starting point for the transformation.</p>
+<h2 id="filtering">Filtering</h2>
+<p>Select a subset of the data using the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter</a> method. This creates a new array of data (again see transformation talk above) with only the values that the callback function returns <code>true</code> for.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> large_land = data.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area &gt; <span class="hljs-number">200</span>; });
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(large_land));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <pre><code>=&gt; [{<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
+   {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}]
+</code></pre><h2 id="sorting">Sorting</h2>
+<p>Similar to filtering, sorting data based on some attribute is someting you’ll probably want to do frequently. </p>
+<p>The built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">sort</a> for arrays can do this. A caveat to this function is that, unlike filter, map, and other functions, this <em>modifies the array you are sorting in place</em>, instead of returning a new array with the objects sorted. </p>
+<p>To sort an array, you need a comparator function. This is a function that takes two pieces of data and indicates which one you want higher in the list. The <em>comparator function way</em> to do this is to return a negative value if the first value should go higher then the second value, and a positive value if the second value should go higher. If they are equal, and you don’t care, then return a 0.</p>
+<p>Let’s see it in action. Here is a way to sort by population in a descending order (larger populations come first).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a,b)</span> </span>{
+  <span class="hljs-keyword">return</span> b.population - a.population;
+});
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(data));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <pre><code>=&gt; [{<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
+    {<span class="hljs-string">"city"</span>:<span class="hljs-string">"seattle"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"WA"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">652405</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">83.9</span>},
+    {<span class="hljs-string">"city"</span>:<span class="hljs-string">"boston"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"MA"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">645966</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">48.3</span>},
+    {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}]
+</code></pre><p>This <code>b - a</code> thing is a pretty common way to generate this kind of sort. But you could also do it more explicitly. Thinking through it, if b’s population is larger then a’s, then the value returned by <code>b.population - a.population</code> will be positive - so b will be sorted toward the top of the array. If the reverse is true, then the result will be negative, and a will be sorted first.</p>
+<p>Note again, that the sort happened <em>on the original data</em>, which I’m not a big fan of. </p>
+<p>D3 also has a few helper functions to implement ascending and descending comparator functions - but (as far as I can tell) they only accept arrays of raw numbers instead of objects. So to use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_ascending">d3.ascending</a> or <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_descending">d3.descending</a> you would have to do something like this:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> populations = data.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.population; });
+<span class="hljs-built_in">console</span>.log(populations);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <pre><code>=&gt; [<span class="hljs-number">652405</span>, <span class="hljs-number">8405837</span>, <span class="hljs-number">645966</span>, <span class="hljs-number">467007</span>]
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>populations.sort(d3.descending);
+<span class="hljs-built_in">console</span>.log(populations);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <pre><code>=&gt; [<span class="hljs-number">8405837</span>, <span class="hljs-number">652405</span>, <span class="hljs-number">645966</span>, <span class="hljs-number">467007</span>]
+</code></pre><p>I’m usually looking to keep my data objects together, so I shy away from using these methods, but they might be great for what you are trying to do.</p>
+<h2 id="reducing">Reducing</h2>
+<p>These functions all take an array and reduce it down to a single number. But what if that number isn’t the one you want? Well, you can take this reduction into your own hands with <code>reduce</code>!</p>
+<p>The syntax for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce">reduce</a> is always hard for me to remember, so let’s go over it with the classic example: summing up a value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> landSum = data.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, d)</span> </span>{ 
+  <span class="hljs-keyword">return</span> sum + d.land_area; 
+}, <span class="hljs-number">0</span>);
+<span class="hljs-built_in">console</span>.log(landSum);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">749.8</span>
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>The first parameter to <code>reduce</code> is the callback function that will return the running “total” of the reduction. This function is passed in the previous value returned from the last time the callback was called. Here, that parameter - <code>sum</code> provides the running total as we move through the array. The second parameter to the callback <code>d</code> is the current value of the array we are working on. </p>
+<p><code>reduce</code> can take an initial value, which is the second parameter to the <code>reduce</code> call. For this example, we start the sum at 0. If there is no starting value provided, then for the first execution of the callback (when there is no previous value) the first parameter to the callback will be the value of the first element of the array, and the reduction starts with the second element.</p>
+<p>It always makes more sense to me to provide a starting value - unless you know what you are doing. You can also get the current index into the array (and the whole array itself) if that is useful to you</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> weirdString = data.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str, d, i)</span> </span>{ 
+  <span class="hljs-keyword">var</span> ending = (i % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>) ? <span class="hljs-string">" is cool."</span> : <span class="hljs-string">" sucks."</span> ;
+  <span class="hljs-keyword">return</span> str + <span class="hljs-string">" "</span> + d.city + ending;
+}, <span class="hljs-string">""</span>);
+<span class="hljs-built_in">console</span>.log(weirdString);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <pre><code>=&gt; seattle is cool. <span class="hljs-keyword">new</span> york sucks. boston is cool. kansas city sucks.
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p><em>And summing over a variable is only used for example. You can always just use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_sum">d3.sum</a> for this instead.</em></p>
+<h2 id="chaining-functions">Chaining Functions</h2>
+<p>One of the great things about these more <em>functional</em> functions is that it is possible to chain them together into one big data wrangling pipeline!</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> bigCities = data.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.population &gt; <span class="hljs-number">500000</span>; })
+  .sort(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a,b)</span> </span>{ <span class="hljs-keyword">return</span> a.population - b.population; })
+  .map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.city; });
+<span class="hljs-built_in">console</span>.log(bigCities);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <pre><code>=&gt; [<span class="hljs-string">"boston"</span>, <span class="hljs-string">"seattle"</span>, <span class="hljs-string">"new york"</span>]
+</code></pre><p>Since we are using <code>sort</code> after <code>filter</code>, sort is working on the returned array from <code>filter</code>. The sort function at least is nice enough to also return the array, so chaining is still possible.</p>
+<h2 id="next-task">Next Task</h2>
+<p><a href="group_data.html">Grouping Data</a></p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><p><a href="http://www.macwright.org/2015/01/03/reduce-juice.html">Making Juice with Reduce</a> - Tom MacWright’s intro to the ill-used reduce</p>
+</li>
+<li><p><a href="https://github.com/facebook/immutable-js">Immutable JS</a> - if you want to get serious about immutable data structures in JavaScript </p>
+</li>
+</ul>
+
+            </div>
+            
+        </li>
+        
+    </ul>
+  </div>
+  <br/><br/>
+</body>
+</html>

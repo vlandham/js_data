@@ -1,19 +1,20 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
+
     pkg: grunt.file.readJSON('package.json'),
+
     watch: {
       files: ['src/*.js', 'assets/*'],
-      tasks: ['exec']
+      tasks: ['docco', 'exec']
     },
+
     exec: {
-      docco: {
-        command: "docco -t assets/custom.jst --css=assets/custom.css ./src/*.js --output=./"
-      },
       inject: {
         command: "tools/inject_source.rb ./ src/"
       }
     },
+
     'http-server': {
       'dev': {
         root: "./",
@@ -23,14 +24,36 @@ module.exports = function(grunt) {
         ext: "html",
         runInBackground: true
       }
+    },
+
+    docco: {
+      debug : {
+        files: {
+          src: ['src/*.js'],
+        },
+        options: {
+          output: 'public/',
+          template: 'assets/custom.jst',
+          css: 'assets/custom.css'
+        }
+      }
+    },
+
+    'gh-pages': {
+      options: {
+        base: 'public'
+      },
+      src: ['**']
     }
   });
 
+
+  grunt.loadNpmTasks('grunt-gh-pages');
+  grunt.loadNpmTasks('grunt-docco-multi');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-http-server');
-  grunt.registerMultiTask('docco', 'run docco', function() {
-    
-  });
+
   grunt.registerTask('default', ['http-server:dev', 'watch']);
+
   grunt.loadNpmTasks('grunt-exec');
 };
