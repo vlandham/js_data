@@ -194,8 +194,36 @@ d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="h
               </div>
               <pre><code>=&gt; <span class="hljs-string">"A man, a plan, a"</span>
 </code></pre><h2 id="templating">Templating</h2>
-<p>TODO</p>
-<h2 id="regular-expressions">Regular Expressions</h2>
+<p>When you need to create a more complicated string, such as an html snippet, it may
+become too tedious to just combine strings by concatenating them with your variables. Consider
+the following example:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"person"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"name"</span>&gt;</span>Birdman<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"occupation"</span>&gt;</span>Imaginary Super Hero<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</code></pre>
+<p>If we wanted to build it using string concatenation, it might look like this:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> person = { name : <span class="hljs-string">"Birdman"</span>, occupation: <span class="hljs-string">"Imaginary Super Hero"</span> };
+<span class="hljs-keyword">var</span> html_snippet = <span class="hljs-string">"&lt;div class=\"person\"&gt;"</span> +
+  <span class="hljs-string">"&lt;span class=\"name\"&gt;"</span> + person.name + <span class="hljs-string">"&lt;/span&gt;"</span> +
+  <span class="hljs-string">"&lt;span class=\"occupation\"&gt;"</span> + person.occupation + <span class="hljs-string">"&lt;/span&gt;"</span> +
+<span class="hljs-string">"&lt;/div&gt;"</span>;
+<span class="hljs-built_in">console</span>.log(html_snippet);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-string">'&lt;div class="person"&gt;&lt;span class="name"&gt;Birdman&lt;/span&gt;&lt;span class="occupation"&gt;Imaginary Super Hero&lt;/span&gt;&lt;/div&gt;'</span>
+</code></pre><h2 id="regular-expressions">Regular Expressions</h2>
 <p>TODO</p>
 <h2 id="next-task">Next Task</h2>
 <p><a href="time.html">Working With Time</a></p>
@@ -212,5 +240,5 @@ d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="h
     </ul>
   </div>
   <br/><br/>
-</body>
+<script type="text/javascript" src="src/strings.js"></script></body>
 </html>

@@ -1,0 +1,12 @@
+[
+  {"name":"Andy Hunt",
+    "title":"Big Boss",
+    "age": 68,
+    "bonus": true
+  },
+  {"name":"Charles Mack",
+    "title":"Jr Dev",
+    "age":24,
+    "bonus": false
+  }
+]
