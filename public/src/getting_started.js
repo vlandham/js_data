@@ -1,0 +1,73 @@
+// # Getting Started
+//
+// ## About Tasks
+//
+// Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. 
+//
+// Focus is on client side data processing, but could easily be used in a server side (Node) application with a bit of tweaking (specifically, [data loading](read_data.html) should use Node's built in methods to get the raw data loaded).
+//
+// ## Why D3?
+//
+// [D3.js](http://d3js.org/) is largely known for its data visualization capabilities - and for good reason. It is quickly becoming the de facto standard for interactive visualization on the web.
+//
+// Its core feature of binding data to visual representations happens to require a lot of manipulation of said data. So, while this toolkit is based around visualization, it also seems to me to be well suited for data munging as well!
+//
+// And, a typical output for data manipulation is at least some sort of visualization of that data, in which case you are all ready to go.
+//
+// ## Why lodash?
+//
+// [Lodash](https://lodash.com) is fast, popular, and fills in some holes in D3's processing features. Plus, it's functional style and chaining capabilities make it work well alongside D3.
+//
+// ## Preparing Site for Analysis
+//
+// To get started using these tools for your data processing, you are going to want to include them in your html file along with a JavaScript file to perform the analysis. 
+//
+// I typically download these scripts and include local copies in my page. To do this, you would want to have your HTML look something like this: 
+//
+// ```
+// <!doctype html>
+// <html>
+// <head>
+// </head>
+// <body>
+// 
+// <script src='js/d3.js'></script>
+// <script src='js/lodash.js'></script>
+// <script src='js/analysis.js'></script>
+// </body>
+// </html>
+// ```
+//
+// `analysis.js` would be where your analysis code goes. I put them at the end of the `body` - just so that if there is other content on the page, it won't be delayed in loading. Typically, I name this file `index.html` - so that its loaded automatically as the root page.
+//
+// ## Running a Local Server
+//
+// D3's functions for [reading data](read_data.html) require you be running the page from a server. You can do this on your own machine by running a local server out of the root directory of your site.
+//
+// There are many options for easy-to-spin-up web servers:
+//
+// - SimpleHTTPServer for Python
+// - thin for Ruby
+// - http-server for Node
+//
+// Lately, I have been using that last option - `http-server`. If you have Node and npm installed, you can grab the required package by installing it from the command line:
+//
+// ```
+// npm install -g http-server
+// ```
+//
+// (The `-g` flag stands for _global_ - which allows you to access `http-server` from any directory on your machine.
+//
+// Then `cd` to your analysis directory and start it up!
+//
+// ```
+// cd /path/to/dir
+// http-server
+// ```
+//
+// In your web browser, open up [http://0.0.0.0:8080](http://0.0.0.0:8080) and you should be ready to go!
+//
+// ## Next Task
+//
+// [Reading in Data](read_data.html)
+//

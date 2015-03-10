@@ -1,36 +1,12 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    watch: {
-      files: ['src/*.js', 'assets/*'],
-      tasks: ['exec']
-    },
-    exec: {
-      docco: {
-        command: "docco -t assets/custom.jst --css=assets/custom.css ./src/*.js --output=./"
-      },
-      inject: {
-        command: "tools/inject_source.rb ./ src/"
-      }
-    },
-    'http-server': {
-      'dev': {
-        root: "./",
-        port: 8081,
-        host: "127.0.0.1",
-        showDir : true,
-        ext: "html",
-        runInBackground: true
-      }
-    }
+    pkg: grunt.file.readJSON('package.json')
   });
 
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-http-server');
-  grunt.registerMultiTask('docco', 'run docco', function() {
-    
-  });
+  grunt.loadTasks('tasks');
+
   grunt.registerTask('default', ['http-server:dev', 'watch']);
-  grunt.loadNpmTasks('grunt-exec');
+  grunt.registerTask('build', ['docco', 'inject-script-tag', 'copy']);
+  grunt.registerTask('deploy', ['build', 'gh-pages']);
 };
