@@ -150,8 +150,6 @@ console.log(templateFunction(anotherPerson));
 // => '<div class="person"><span class="name">James. James Bond</span><span class="occupation">Spy</span></div>'
 // ```
 
-
-
 // ## Regular Expressions
 //
 // TODO
@@ -164,3 +162,4 @@ console.log(templateFunction(anotherPerson));
 //
 // - [Working With Strings](http://www.quirksmode.org/js/strings.html) - a great guide to more string basics
 // - [underscore.string](https://github.com/epeli/underscore.string) - for all the other string functions you might want
+// - [underscore.template](http://underscorejs.org/#template) - for a deeper dive into underscore's template function
