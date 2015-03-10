@@ -117,10 +117,41 @@ var html_snippet = "<div class=\"person\">" +
   "<span class=\"occupation\">" + person.occupation + "</span>" +
 "</div>";
 console.log(html_snippet);
+// ```
+// => '<div class="person"><span class="name">Birdman</span><span class="occupation">Imaginary Super Hero</span></div>'
+// ```
+//
+// That's a lot of string escaping! You can imagine this gets pretty hard to manage
+// after a while.
+//
+// In order to simplify this process, you can use lodash templates to define a "template"
+// that you can reuse with different data. Using our example above, we might define it
+// like so:
+//
+var templateString = "<div class='person'>" +
+  "  <span class='name'><%= name %></span>" +
+  "  <span class='occupation'><%= occupation %></span>" +
+  "</div>";
+var templateFunction = _.template(templateString);
+
+// Now you can use this template function with lots of data to generate the
+// same snippet of html:
+
+console.log(templateFunction(person));
 //
 // ```
 // => '<div class="person"><span class="name">Birdman</span><span class="occupation">Imaginary Super Hero</span></div>'
 // ```
+
+var anotherPerson = { name : "James. James Bond", occupation: "Spy" };
+console.log(templateFunction(anotherPerson));
+//
+// ```
+// => '<div class="person"><span class="name">James. James Bond</span><span class="occupation">Spy</span></div>'
+// ```
+
+
+
 // ## Regular Expressions
 //
 // TODO
