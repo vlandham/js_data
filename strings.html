@@ -67,7 +67,7 @@
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
               <pre><code>=&gt; There
-</code></pre><p>The sliced string goes up to - but not including - the last index. </p>
+</code></pre><p>The sliced string goes up to - but not including - the last index.</p>
 <p>And, of course, string concatenation is done in JavaScript using the <code>+</code> operator. Use parenthesis if you want to do actual arithmetic inside your concatenation.</p>
 
             </div>
@@ -93,7 +93,7 @@
 <pre><code>cities_spaced.csv:
 
 city  ,state ,population,land area
-  seattle  ,WA , <span class="hljs-number">652405</span> ,<span class="hljs-number">83.9</span>   
+  seattle  ,WA , <span class="hljs-number">652405</span> ,<span class="hljs-number">83.9</span>
 <span class="hljs-keyword">new</span> york,NY,<span class="hljs-number">8405837</span>,  <span class="hljs-number">302.6</span>
 </code></pre><p>When <a href="read_data.html">read in</a> can produce quite the messy dataset:</p>
 
@@ -115,8 +115,8 @@ d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="h
               </div>
               <pre><code>=&gt; [{<span class="hljs-string">"city  "</span>:<span class="hljs-string">"  seattle  "</span>,<span class="hljs-string">"state "</span>:<span class="hljs-string">"WA "</span>,<span class="hljs-string">"population"</span>:<span class="hljs-string">" 652405 "</span>,<span class="hljs-string">"land area"</span>:<span class="hljs-string">"83.9   "</span>},
      {<span class="hljs-string">"city  "</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state "</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-string">"8405837"</span>,<span class="hljs-string">"land area"</span>:<span class="hljs-string">"  302.6"</span>}]
-</code></pre><p>Note the spaces in the property names as well as the values. In cases like this, it might be best to <a href="iterate_data.html">map</a> the data back to a clean version. Lodash’s <a href="https://lodash.com/docs#trim">trim</a> can help. It removes that unsightly whitespace from the front and back of your strings. </p>
-<p>Here is a version of the data loading function that removes whitespace. It uses </p>
+</code></pre><p>Note the spaces in the property names as well as the values. In cases like this, it might be best to <a href="iterate_data.html">map</a> the data back to a clean version. Lodash’s <a href="https://lodash.com/docs#trim">trim</a> can help. It removes that unsightly whitespace from the front and back of your strings.</p>
+<p>Here is a version of the data loading function that removes whitespace. It uses</p>
 
             </div>
             
@@ -192,9 +192,38 @@ d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="h
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <h2 id="templating">Templating</h2>
-<p>TODO</p>
-<h2 id="regular-expressions">Regular Expressions</h2>
+              <pre><code>=&gt; <span class="hljs-string">"A man, a plan, a"</span>
+</code></pre><h2 id="templating">Templating</h2>
+<p>When you need to create a more complicated string, such as an html snippet, it may
+become too tedious to just combine strings by concatenating them with your variables. Consider
+the following example:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"person"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"name"</span>&gt;</span>Birdman<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"occupation"</span>&gt;</span>Imaginary Super Hero<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</code></pre>
+<p>If we wanted to build it using string concatenation, it might look like this:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> person = { name : <span class="hljs-string">"Birdman"</span>, occupation: <span class="hljs-string">"Imaginary Super Hero"</span> };
+<span class="hljs-keyword">var</span> html_snippet = <span class="hljs-string">"&lt;div class=\"person\"&gt;"</span> +
+  <span class="hljs-string">"&lt;span class=\"name\"&gt;"</span> + person.name + <span class="hljs-string">"&lt;/span&gt;"</span> +
+  <span class="hljs-string">"&lt;span class=\"occupation\"&gt;"</span> + person.occupation + <span class="hljs-string">"&lt;/span&gt;"</span> +
+<span class="hljs-string">"&lt;/div&gt;"</span>;
+<span class="hljs-built_in">console</span>.log(html_snippet);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-string">'&lt;div class="person"&gt;&lt;span class="name"&gt;Birdman&lt;/span&gt;&lt;span class="occupation"&gt;Imaginary Super Hero&lt;/span&gt;&lt;/div&gt;'</span>
+</code></pre><h2 id="regular-expressions">Regular Expressions</h2>
 <p>TODO</p>
 <h2 id="next-task">Next Task</h2>
 <p><a href="time.html">Working With Time</a></p>
@@ -211,6 +240,5 @@ d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="h
     </ul>
   </div>
   <br/><br/>
-<script src='src/strings.js'></script>
-</body>
+<script type="text/javascript" src="src/strings.js"></script></body>
 </html>

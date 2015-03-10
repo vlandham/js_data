@@ -20,7 +20,7 @@ console.log(aSlice);
 // ```
 //=> There
 //```
-// The sliced string goes up to - but not including - the last index. 
+// The sliced string goes up to - but not including - the last index.
 //
 // And, of course, string concatenation is done in JavaScript using the `+` operator. Use parenthesis if you want to do actual arithmetic inside your concatenation.
 
@@ -41,7 +41,7 @@ console.log("You are number " + (orderNum + 1) + " in line.");
 // cities_spaced.csv:
 //
 // city  ,state ,population,land area
-//   seattle  ,WA , 652405 ,83.9   
+//   seattle  ,WA , 652405 ,83.9
 // new york,NY,8405837,  302.6
 // ```
 // When [read in](read_data.html) can produce quite the messy dataset:
@@ -55,9 +55,9 @@ d3.csv("data/cities_spaced.csv", function(data) {
 //      {"city  ":"new york","state ":"NY","population":"8405837","land area":"  302.6"}]
 //```
 //
-// Note the spaces in the property names as well as the values. In cases like this, it might be best to [map](iterate_data.html) the data back to a clean version. Lodash's [trim](https://lodash.com/docs#trim) can help. It removes that unsightly whitespace from the front and back of your strings. 
+// Note the spaces in the property names as well as the values. In cases like this, it might be best to [map](iterate_data.html) the data back to a clean version. Lodash's [trim](https://lodash.com/docs#trim) can help. It removes that unsightly whitespace from the front and back of your strings.
 //
-// Here is a version of the data loading function that removes whitespace. It uses 
+// Here is a version of the data loading function that removes whitespace. It uses
 
 d3.csv("data/cities_spaced.csv", function(data) {
   var clean = data.map(function(d) {
@@ -93,12 +93,34 @@ console.log("A man, a plan, a canal".indexOf("panama") !== -1);
 // Replace is the butter to find's bread. We will see more replacing when we get to regular expressions, but replacing sections of a string can be done with the [replace]() method.
 //
 console.log("A man, a plan, a canal".replace("canal", ""));
-//
+// ```
+// => "A man, a plan, a"
+// ```
 //
 // ## Templating
 //
-// TODO
+// When you need to create a more complicated string, such as an html snippet, it may
+// become too tedious to just combine strings by concatenating them with your variables. Consider
+// the following example:
 //
+// ```html
+// <div class="person">
+//   <span class="name">Birdman</span>
+//   <span class="occupation">Imaginary Super Hero</span>
+// </div>
+// ```
+// If we wanted to build it using string concatenation, it might look like this:
+//
+var person = { name : "Birdman", occupation: "Imaginary Super Hero" };
+var html_snippet = "<div class=\"person\">" +
+  "<span class=\"name\">" + person.name + "</span>" +
+  "<span class=\"occupation\">" + person.occupation + "</span>" +
+"</div>";
+console.log(html_snippet);
+//
+// ```
+// => '<div class="person"><span class="name">Birdman</span><span class="occupation">Imaginary Super Hero</span></div>'
+// ```
 // ## Regular Expressions
 //
 // TODO

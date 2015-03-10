@@ -30,9 +30,43 @@
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
               <h1 id="working-with-time">Working with Time</h1>
-<p>Time is one of those tricky programming things that seems like it should be easy, but usually turns out not to be. </p>
+<p>Time is one of those tricky programming things that seems like it should be easy, but usually turns out not to be. We will use D3’s built in <a href="https://github.com/mbostock/d3/wiki/Time-Formatting">time formating</a> and <a href="https://github.com/mbostock/d3/wiki/Time-Intervals">interval</a> functions. We will also take a look at the powerful <a href="http://momentjs.com/">Moment.js</a> library, for when you just need more time power.</p>
 <h2 id="string-to-date">String to Date</h2>
+<p>The first task when dealing with dates is usually getting a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Data object</a> out of a string. Most of the time, your data will have dates or times in an (mostly) arbitrary format, and you need to force that mess into an actual date. </p>
+<p>D3 has <a href="https://github.com/mbostock/d3/wiki/Time-Formatting#format">d3.time.format</a> which provides a way to do this parsing. It was a little confusing for me the first time I tried it. You use this function to create a string parser, and then use the parser to actually convert the string. </p>
+<p>In our <a href="group_data.html">nesting example</a>, we saw data that had dates as strings:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> expense = {<span class="hljs-string">"name"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>To convert this date string to a Date object, we would need a parser that looks like:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> parser = d3.time.format(<span class="hljs-string">"%m/%d/%Y"</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>The input string to <code>d3.time.format</code> indicates what the date string should look like. You have a <a href="https://github.com/mbostock/d3/wiki/Time-Formatting#format">lot of options</a> for the special, percent-sign-prefixed variables. You can see in the string I’m using month, day, and four-digit year. The </p>
 <h2 id="time-arithmetic">Time Arithmetic</h2>
+<h2 id="moment-js">Moment.js</h2>
 <h2 id="next-task">Next Task</h2>
 <p><a href="visualizations.html">Exploratory Visualization</a></p>
 <h2 id="see-also">See Also</h2>
@@ -44,6 +78,5 @@
     </ul>
   </div>
   <br/><br/>
-<script src='src/time.js'></script>
-</body>
+<script type="text/javascript" src="src/time.js"></script></body>
 </html>
