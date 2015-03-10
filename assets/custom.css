@@ -8,15 +8,16 @@ body {
   margin: 0; padding: 0;
   height:100%;
 }
+
 #container {
-    min-height: 100%;
-    margin:0 auto;
-    width:740px;
-    max-width: 90%;
+  min-height: 100%;
+  margin:0 auto;
+  width:740px;
+  max-width: 90%;
 }
 
 img {
-    max-width:100%;
+  max-width:100%;
 }
 
 a {
@@ -75,13 +76,14 @@ blockquote {
   margin: 0;
   padding: 1px 0 1px 1em;
 }
-  .sections blockquote p {
-    font-family: Menlo, Consolas, Monaco, monospace;
-    font-size: 12px; line-height: 16px;
-    color: #999;
-    margin: 10px 0 0;
-    white-space: pre-wrap;
-  }
+
+.sections blockquote p {
+  font-family: Menlo, Consolas, Monaco, monospace;
+  font-size: 12px; line-height: 16px;
+  color: #999;
+  margin: 10px 0 0;
+  white-space: pre-wrap;
+}
 
 ul.sections {
   list-style: none;
@@ -224,11 +226,7 @@ ul.sections > li > div {
 
 td.linenos { background-color: #f0f0f0; padding-right: 10px; }
 span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
-/*
 
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
-
-*/
 /*
 
 github.com style (c) Vasily Polovnyov <vast@whiteants.net>

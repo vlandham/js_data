@@ -6,11 +6,9 @@
 //
 // ## Time Arithmetic
 //
-// ## Time Arithmetic
-//
 // ## Next Task
 //
-// [Exploratory Visualization](visualization.html)
+// [Exploratory Visualization](visualizations.html)
 //
 // ## See Also
 //

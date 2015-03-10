@@ -78,7 +78,22 @@ d3.csv("data/cities_spaced.csv", function(data) {
 //
 // ## Find and Replace
 //
-// TODO
+// Extracting data from strings can sometimes mean extracting pieces of strings. Finding out if a string contains a keyword or sub-string of interest is a first step in quantifying the content of a body of text.
+//
+// [indexOf]() can be used to perform this searching. You pass it a sub-string, and it'll tell you the location in string you are calling it where that sub-string starts. `-1` is returned if the sub-string can't be found. You can use this to build a little string finder, by comparing the return value to `-1`.
+//
+console.log("A man, a plan, a canal".indexOf("man") !== -1);
+// ```
+// => true
+// ```
+console.log("A man, a plan, a canal".indexOf("panama") !== -1);
+// ```
+// => false
+// ```
+// Replace is the butter to find's bread. We will see more replacing when we get to regular expressions, but replacing sections of a string can be done with the [replace]() method.
+//
+console.log("A man, a plan, a canal".replace("canal", ""));
+//
 //
 // ## Templating
 //

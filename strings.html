@@ -145,8 +145,54 @@ d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="h
       {<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-string">"8405837"</span>,<span class="hljs-string">"land area"</span>:<span class="hljs-string">"302.6"</span>}]
 </code></pre><p>The strings are now clear of those pesky spaces.</p>
 <h2 id="find-and-replace">Find and Replace</h2>
-<p>TODO</p>
-<h2 id="templating">Templating</h2>
+<p>Extracting data from strings can sometimes mean extracting pieces of strings. Finding out if a string contains a keyword or sub-string of interest is a first step in quantifying the content of a body of text.</p>
+<p><a href="">indexOf</a> can be used to perform this searching. You pass it a sub-string, and it’ll tell you the location in string you are calling it where that sub-string starts. <code>-1</code> is returned if the sub-string can’t be found. You can use this to build a little string finder, by comparing the return value to <code>-1</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"A man, a plan, a canal"</span>.indexOf(<span class="hljs-string">"man"</span>) !== -<span class="hljs-number">1</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-literal">true</span>
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"A man, a plan, a canal"</span>.indexOf(<span class="hljs-string">"panama"</span>) !== -<span class="hljs-number">1</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-literal">false</span>
+</code></pre><p>Replace is the butter to find’s bread. We will see more replacing when we get to regular expressions, but replacing sections of a string can be done with the <a href="">replace</a> method.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"A man, a plan, a canal"</span>.replace(<span class="hljs-string">"canal"</span>, <span class="hljs-string">""</span>));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <h2 id="templating">Templating</h2>
 <p>TODO</p>
 <h2 id="regular-expressions">Regular Expressions</h2>
 <p>TODO</p>

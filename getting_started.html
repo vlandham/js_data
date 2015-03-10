@@ -38,10 +38,37 @@
 <p>Its core feature of binding data to visual representations happens to require a lot of manipulation of said data. So, while this toolkit is based around visualization, it also seems to me to be well suited for data munging as well!</p>
 <p>And, a typical output for data manipulation is at least some sort of visualization of that data, in which case you are all ready to go.</p>
 <h2 id="why-lodash-">Why lodash?</h2>
-<p>Lodash is fast, popular, and fills in some holes in D3’s processing features. Plus, it’s functional style and chaining capabilities make it work well alongside D3.</p>
+<p><a href="https://lodash.com">Lodash</a> is fast, popular, and fills in some holes in D3’s processing features. Plus, it’s functional style and chaining capabilities make it work well alongside D3.</p>
 <h2 id="preparing-site-for-analysis">Preparing Site for Analysis</h2>
 <p>To get started using these tools for your data processing, you are going to want to include them in your html file along with a JavaScript file to perform the analysis. </p>
-<p>You can </p>
+<p>I typically download these scripts and include local copies in my page. To do this, you would want to have your HTML look something like this: </p>
+<pre><code>&lt;!doctype html&gt;
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'js/d3.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'js/lodash.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'js/analysis.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span></span>
+</code></pre><p><code>analysis.js</code> would be where your analysis code goes. I put them at the end of the <code>body</code> - just so that if there is other content on the page, it won’t be delayed in loading. Typically, I name this file <code>index.html</code> - so that its loaded automatically as the root page.</p>
+<h2 id="running-a-local-server">Running a Local Server</h2>
+<p>D3’s functions for <a href="read_data.html">reading data</a> require you be running the page from a server. You can do this on your own machine by running a local server out of the root directory of your site.</p>
+<p>There are many options for easy-to-spin-up web servers:</p>
+<ul>
+<li>SimpleHTTPServer for Python</li>
+<li>thin for Ruby</li>
+<li>http-server for Node</li>
+</ul>
+<p>Lately, I have been using that last option - <code>http-server</code>. If you have Node and npm installed, you can grab the required package by installing it from the command line:</p>
+<pre><code>npm install -g http-server
+</code></pre><p>(The <code>-g</code> flag stands for <em>global</em> - which allows you to access <code>http-server</code> from any directory on your machine.</p>
+<p>Then <code>cd</code> to your analysis directory and start it up!</p>
+<pre><code>cd /path/to/dir
+http-server
+</code></pre><p>In your web browser, open up <a href="http://0.0.0.0:8080">http://0.0.0.0:8080</a> and you should be ready to go!</p>
 <h2 id="next-task">Next Task</h2>
 <p><a href="read_data.html">Reading in Data</a></p>
 
