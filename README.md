@@ -19,6 +19,7 @@ As such, we will focus on using [d3.js](http://d3js.org/) and [lodash](http://lo
 Current Contributers 
 
 - [Jim Vallandingham](https://twitter.com/vlandham)
+- [Irene Ros](https://twitter.com/ireneros)
 - [Lynn Cherny](https://twitter.com/arnicas)
 
 Want to add your own tips and tricks that you use to apply the power of JS to data processing?
@@ -26,6 +27,32 @@ Want to add your own tips and tricks that you use to apply the power of JS to da
 Fork this project, modify and send me your pull requests!
 
 _(Or you could probably just yell at me on Twitter - and I can add more interesting tasks)_
+
+## Building
+
+If you want to hack on this - or just download and run locally, here is how you would do that.
+
+Requirements:
+
+* node
+* npm
+* grunt (to rebuild)
+* ruby (sorry - its hacky)
+
+First clone the repo:
+
+```
+git clone git@github.com:vlandham/js_data.git
+```
+
+Then run npm install to gather development dependencies:
+
+```
+cd js_data
+npm install
+```
+
+Grunt should now work. If you make modifications to the source files, they will be reflected in the output.
 
 ## Previous Work
 

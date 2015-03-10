@@ -43,5 +43,10 @@ console.log("This is the index!");
 // - [python with pandas](http://nbviewer.ipython.org/gist/fonnesbeck/5850413)
 // - [java (just kidding)]()
 //
-// These tools are great and you should use them. 
+// These tools are great and you should use them. Often times, however, you are already familiar with a particular language (like JavaScript) and would like to get started with data, but want to take it one step at a time. 
 //
+// Additionally, sometimes you are already in a particular environment (like JavaScript) and don't have the luxury of switching to one of these other options. 
+//
+// In these cases, JavaScript could be considered a viable option for your data analysis. And if you find yourself in one of these situations, or just want to try out JavaScript for data analysis for fun, then _this guide is for you_! 
+//
+// Check out some of the tasks, and see if JavaScript Data something you want to try yourself.
