@@ -67,12 +67,40 @@ console.log(time);
 // ```
 // You can see that `d3.time.format` gives you a lot of flexibility about what your time string will look like.
 //
-// ## Time Arithmetic
+// ## Modifying Time
+//
+// In many cases, you might want to modify a date object. Perhaps you only want to display the hour from a date, or maybe you want to figure out what a week from now would be. 
+//
+// The [d3.time.interval](https://github.com/mbostock/d3/wiki/Time-Intervals) set of functions provides a starting point for these kinds of manipulations. 
+// 
+// Intervals allow for modifying dates around specific time slices like minutes, hours, days, months, or years. We are given a number of functions to work with each interval, depending on what we might want to do.
+//
+// So, to get the nearest hour from a date, we can use [d3.time.hour.round](https://github.com/mbostock/d3/wiki/Time-Intervals#interval_round)
+var hourParser = d3.time.format("%I:%M%p");
+var time = hourParser.parse("10:34pm");
+var hour = d3.time.hour.round(time);
+console.log(hour);
+// ```
+//=> Mon Jan 01 1900 23:00:00 GMT-0500
+// ```
+// It returns a date object that just contains the nearest hour (11:00pm). We can display this by using the `d3.time.format` parser to format the date object into a string (these formaters can work both ways).
+console.log(hourParser(hour));
+// ```
+//=> 11:00PM
+// ```
+// TODO
 //
 // ## Moment.js
 //
+// [Moment.js](http://momentjs.com/) is another JavaScript library that could be better suited to your needs, if you happen to be doing a lot of time manipulations. Its syntax and capabilities seem a bit more intuitive for certain [time manipulations](http://momentjs.com/docs/#/manipulating/).
+//
+// Check it out if you need more time control power!
+//
 // ## Next Task
+//
+// That's it for now!
 //
 // ## See Also
 //
+// - [moment.js](http://momentjs.com/)
 //

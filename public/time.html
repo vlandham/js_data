@@ -183,10 +183,55 @@
               </div>
               <pre><code>=&gt; Thu Jan <span class="hljs-number">02</span> <span class="hljs-number">2014</span> <span class="hljs-number">08</span>:<span class="hljs-number">22</span>:<span class="hljs-number">05</span> GMT-<span class="hljs-number">0500</span> (EST)
 </code></pre><p>You can see that <code>d3.time.format</code> gives you a lot of flexibility about what your time string will look like.</p>
-<h2 id="time-arithmetic">Time Arithmetic</h2>
+<h2 id="modifying-time">Modifying Time</h2>
+<p>In many cases, you might want to modify a date object. Perhaps you only want to display the hour from a date, or maybe you want to figure out what a week from now would be. </p>
+<p>The <a href="https://github.com/mbostock/d3/wiki/Time-Intervals">d3.time.interval</a> set of functions provides a starting point for these kinds of manipulations. </p>
+<p>Intervals allow for modifying dates around specific time slices like minutes, hours, days, months, or years. We are given a number of functions to work with each interval, depending on what we might want to do.</p>
+<p>So, to get the nearest hour from a date, we can use <a href="https://github.com/mbostock/d3/wiki/Time-Intervals#interval_round">d3.time.hour.round</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> hourParser = d3.time.format(<span class="hljs-string">"%I:%M%p"</span>);
+<span class="hljs-keyword">var</span> time = hourParser.parse(<span class="hljs-string">"10:34pm"</span>);
+<span class="hljs-keyword">var</span> hour = d3.time.hour.round(time);
+<span class="hljs-built_in">console</span>.log(hour);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <pre><code>=&gt; Mon Jan <span class="hljs-number">01</span> <span class="hljs-number">1900</span> <span class="hljs-number">23</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT-<span class="hljs-number">0500</span>
+</code></pre><p>It returns a date object that just contains the nearest hour (11:00pm). We can display this by using the <code>d3.time.format</code> parser to format the date object into a string (these formaters can work both ways).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(hourParser(hour));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">11</span>:<span class="hljs-number">00</span>PM
+</code></pre><p>TODO</p>
 <h2 id="moment-js">Moment.js</h2>
+<p><a href="http://momentjs.com/">Moment.js</a> is another JavaScript library that could be better suited to your needs, if you happen to be doing a lot of time manipulations. Its syntax and capabilities seem a bit more intuitive for certain <a href="http://momentjs.com/docs/#/manipulating/">time manipulations</a>.</p>
+<p>Check it out if you need more time control power!</p>
 <h2 id="next-task">Next Task</h2>
+<p>That’s it for now!</p>
 <h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="http://momentjs.com/">moment.js</a></li>
+</ul>
 
             </div>
             
