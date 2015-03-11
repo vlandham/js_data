@@ -33,16 +33,29 @@ console.log(data.length);
 //=> 4
 // ```
 //
-// ## Mapping
+// ## Immutability
 //
 // `forEach` provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually. 
 //
 // This works, but can get clunky and confusing fast. Keeping straight what form the data is in at any given time can be confusing, as can side effects of modifying your data that you might not be aware of.
 //
-// To combat this confusion, it can be useful to think of the data as _immutable_ (a data structure that cannot be modified once created. Then to make modifications to your data, you **transform** your original dataset into a new data set. This transformation process creates a new immutable data structure that then can be used downstream.
+// To combat this confusion, it can be useful to think of the data as _immutable_. Immutable data cannot be modified once created. Immutability seems a bit counterintuitive for a task where we want to coerce our data into the form we want - but it comes together with the concept of **transformations**.
 //
-// All this to say that JavaScript's [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) can be a very useful tool to keep things functional and keep your data pipeline free of side effects. 
+// The idea is simple: each immutable dataset can be _transformed_ into another immutable dataset through the use of a transformation function that works on each component of the data.
 //
+// This process helps simplify the data flow, but if you have to make a copy of your data object each time, it can make code a bit brittle as you have to keep track of every attribute of your dataset.
+//
+// ## Cloning
+//
+// To help with this issue of brittle transformations, lodash provides the [clone](https://lodash.com/docs#clone) and [cloneDeep](https://lodash.com/docs#cloneDeep) functions.
+//
+// These functions take an object and return a copy of that object. That copy is now a separate data object that you can edit without effecting the original object.
+// 
+//
+// ## Mapping
+//
+// JavaScript's [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) can be a very useful tool to implement this concept of a transformation on immutable data.
+// 
 // `map` takes an array and produces another array which is the result of the callback function being executed on each element in the array. 
 
 var smallData = data.map(function(d,i) { 
@@ -170,5 +183,5 @@ console.log(bigCities);
 // ## See Also
 //
 // - [Making Juice with Reduce](http://www.macwright.org/2015/01/03/reduce-juice.html) - Tom MacWright's intro to the ill-used reduce
-//
 // - [Immutable JS](https://github.com/facebook/immutable-js) - if you want to get serious about immutable data structures in JavaScript 
+// - [Ramda](http://fr.umio.us/why-ramda/) - a more functional approach to data processing in JS

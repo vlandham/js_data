@@ -123,11 +123,17 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-number">4</span>
-</code></pre><h2 id="mapping">Mapping</h2>
+</code></pre><h2 id="immutability">Immutability</h2>
 <p><code>forEach</code> provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually. </p>
 <p>This works, but can get clunky and confusing fast. Keeping straight what form the data is in at any given time can be confusing, as can side effects of modifying your data that you might not be aware of.</p>
-<p>To combat this confusion, it can be useful to think of the data as <em>immutable</em> (a data structure that cannot be modified once created. Then to make modifications to your data, you <strong>transform</strong> your original dataset into a new data set. This transformation process creates a new immutable data structure that then can be used downstream.</p>
-<p>All this to say that JavaScript’s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a> can be a very useful tool to keep things functional and keep your data pipeline free of side effects. </p>
+<p>To combat this confusion, it can be useful to think of the data as <em>immutable</em>. Immutable data cannot be modified once created. Immutability seems a bit counterintuitive for a task where we want to coerce our data into the form we want - but it comes together with the concept of <strong>transformations</strong>.</p>
+<p>The idea is simple: each immutable dataset can be <em>transformed</em> into another immutable dataset through the use of a transformation function that works on each component of the data.</p>
+<p>This process helps simplify the data flow, but if you have to make a copy of your data object each time, it can make code a bit brittle as you have to keep track of every attribute of your dataset.</p>
+<h2 id="cloning">Cloning</h2>
+<p>To help with this issue of brittle transformations, lodash provides the <a href="https://lodash.com/docs#clone">clone</a> and <a href="https://lodash.com/docs#cloneDeep">cloneDeep</a> functions.</p>
+<p>These functions take an object and return a copy of that object. That copy is now a separate data object that you can edit without effecting the original object.</p>
+<h2 id="mapping">Mapping</h2>
+<p>JavaScript’s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a> can be a very useful tool to implement this concept of a transformation on immutable data.</p>
 <p><code>map</code> takes an array and produces another array which is the result of the callback function being executed on each element in the array. </p>
 
             </div>
@@ -335,10 +341,9 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
 <p><a href="group_data.html">Grouping Data</a></p>
 <h2 id="see-also">See Also</h2>
 <ul>
-<li><p><a href="http://www.macwright.org/2015/01/03/reduce-juice.html">Making Juice with Reduce</a> - Tom MacWright’s intro to the ill-used reduce</p>
-</li>
-<li><p><a href="https://github.com/facebook/immutable-js">Immutable JS</a> - if you want to get serious about immutable data structures in JavaScript </p>
-</li>
+<li><a href="http://www.macwright.org/2015/01/03/reduce-juice.html">Making Juice with Reduce</a> - Tom MacWright’s intro to the ill-used reduce</li>
+<li><a href="https://github.com/facebook/immutable-js">Immutable JS</a> - if you want to get serious about immutable data structures in JavaScript </li>
+<li><a href="http://fr.umio.us/why-ramda/">Ramda</a> - a more functional approach to data processing in JS</li>
 </ul>
 
             </div>

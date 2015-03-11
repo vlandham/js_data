@@ -170,5 +170,5 @@ console.log(bigCities);
 // ## See Also
 //
 // - [Making Juice with Reduce](http://www.macwright.org/2015/01/03/reduce-juice.html) - Tom MacWright's intro to the ill-used reduce
-//
 // - [Immutable JS](https://github.com/facebook/immutable-js) - if you want to get serious about immutable data structures in JavaScript 
+// - [Ramda](http://fr.umio.us/why-ramda/) - a more functional approach to data processing in JS

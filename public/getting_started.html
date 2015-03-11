@@ -39,8 +39,10 @@
               </div>
               <h1 id="getting-started">Getting Started</h1>
 <h2 id="about-tasks">About Tasks</h2>
-<p>Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. </p>
-<p>Focus is on client side data processing, but could easily be used in a server side (Node) application with a bit of tweaking (specifically, <a href="read_data.html">data loading</a> should use Node’s built in methods to get the raw data loaded).</p>
+<p>This guide is broken up into a number of tasks, which we can think of as little modules or <em>recipes</em>.</p>
+<p>Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. Tasks attempt to be self-contained and stay focused on the, well, <em>task on hand</em>. </p>
+<p>This guide was built with for client side data processing (in the browser), but could easily be used in a server side (Node) application with a bit of tweaking.</p>
+<p><em>(specifically, <a href="read_data.html">data loading</a> should use Node’s built in methods to get the raw data loaded)</em></p>
 <h2 id="why-d3-">Why D3?</h2>
 <p><a href="http://d3js.org/">D3.js</a> is largely known for its data visualization capabilities - and for good reason. It is quickly becoming the de facto standard for interactive visualization on the web.</p>
 <p>Its core feature of binding data to visual representations happens to require a lot of manipulation of said data. So, while this toolkit is based around visualization, it also seems to me to be well suited for data munging as well!</p>
@@ -66,9 +68,9 @@
 <p>D3’s functions for <a href="read_data.html">reading data</a> require you be running the page from a server. You can do this on your own machine by running a local server out of the root directory of your site.</p>
 <p>There are many options for easy-to-spin-up web servers:</p>
 <ul>
-<li>SimpleHTTPServer for Python</li>
-<li>thin for Ruby</li>
-<li>http-server for Node</li>
+<li><a href="http://www.pythonforbeginners.com/modules-in-python/how-to-use-simplehttpserver/">SimpleHTTPServer</a> for Python</li>
+<li><a href="http://www.benjaminoakes.com/2013/09/13/ruby-simple-http-server-minimalist-rake/">httpd</a> for Ruby</li>
+<li><a href="https://github.com/nodeapps/http-server">http-server</a> for Node</li>
 </ul>
 <p>Lately, I have been using that last option - <code>http-server</code>. If you have Node and npm installed, you can grab the required package by installing it from the command line:</p>
 <pre><code>npm install -g http-server
@@ -79,6 +81,10 @@ http-server
 </code></pre><p>In your web browser, open up <a href="http://0.0.0.0:8080">http://0.0.0.0:8080</a> and you should be ready to go!</p>
 <h2 id="next-task">Next Task</h2>
 <p><a href="read_data.html">Reading in Data</a></p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="http://howtonode.org/how-to-install-nodejs">Installing Node</a> - if you need some help getting <code>http-server</code> on your machine.</li>
+</ul>
 
             </div>
             
