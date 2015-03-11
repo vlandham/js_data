@@ -8,6 +8,10 @@ module.exports = function(grunt) {
     data : {
       files : ['data/*'],
       tasks: ['copy:data']
+    },
+    css : {
+      files: ['assets/*.css'],
+      tasks: ['docco']
     }
   });
 

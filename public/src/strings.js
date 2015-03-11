@@ -149,11 +149,25 @@ console.log(templateFunction(anotherPerson));
 // ```
 // => '<div class="person"><span class="name">James. James Bond</span><span class="occupation">Spy</span></div>'
 // ```
-
+//
 // ## Regular Expressions
 //
-// TODO
+// Regular expressions are patterns that we can use to match character combinations in our strings.
+// When the search for a match requires something more than a direct match, such as finding one or
+// more of the letters b's, or finding white space, the pattern can include special characters.
+// For example, the pattern `/ab*c/` matches any character combination in which a single 'a' is
+// followed by zero or more 'b's (* means 0 or more occurrences of the preceding item) and then
+// immediately followed by 'c'. In the string "cbbabbbbcdebc," the pattern would match the substring 'abbbbc'.
 //
+// ### Useful special characters
+// You can find a full reference to all the special characters and how they work [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions), but here are a few useful characters you might
+// use in your scripts:
+//
+// * `\` - The Backslash is a special 'escape' character. When it preceeds another character it indicates
+// that that character should be treated as a special characther. For example the character `s` will normally
+// be matched as just the `s` character. If we were to use `\s` instead, that will actuall look for a white space
+// character.
+
 // ## Next Task
 //
 // [Working With Time](time.html)
