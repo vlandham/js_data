@@ -35,6 +35,8 @@ console.log(data.length);
 //
 // ## Immutability
 //
+// Let me sidetrack this task just a bit to talk about 
+//
 // `forEach` provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually. 
 //
 // This works, but can get clunky and confusing fast. Keeping straight what form the data is in at any given time can be confusing, as can side effects of modifying your data that you might not be aware of.
@@ -172,6 +174,15 @@ console.log(populations);
 // ```
 //
 // I'm usually looking to keep my data objects together, so I shy away from using these methods, but they might be great for what you are trying to do.
+//
+// A **big gotcha** with sorting that you should watch out for is that if you do not pass a comparator function, the default function sorts _alphabetically_. So, the array:
+var nums = [3,1,10,20];
+// Would be sorted to:
+console.log(nums.sort());
+// ```
+//=> [1, 10, 20, 3]
+// ```
+// This is never what you want for data sorting. For this reason, you should never use sort without a comparator function.
 //
 // ## Reducing
 //
