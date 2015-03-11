@@ -64,7 +64,115 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>The input string to <code>d3.time.format</code> indicates what the date string should look like. You have a <a href="https://github.com/mbostock/d3/wiki/Time-Formatting#format">lot of options</a> for the special, percent-sign-prefixed variables. You can see in the string I’m using month, day, and four-digit year. The </p>
+              <p>The input string to <code>d3.time.format</code> indicates what the date string should look like. You have a <a href="https://github.com/mbostock/d3/wiki/Time-Formatting#format">lot of options</a> for the special, percent-sign-prefixed variables. You can see in the string I’m using month, day, and four-digit year. The slashes in the format string are not special variables - but just what we expect to find separating the fields in the date string. </p>
+<p>Next we use the parser to parse our string.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>expense.date = parser.parse(expense.date);
+<span class="hljs-built_in">console</span>.log(expense);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <pre><code>=&gt; {name: <span class="hljs-string">"jim"</span>, amount: <span class="hljs-number">34</span>, date: Thu Nov <span class="hljs-number">12</span> <span class="hljs-number">2015</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT-<span class="hljs-number">0500</span> (EST)}
+</code></pre><p>Cool! Now our date is actually a Date object.</p>
+<p>Here are a few more time parsers to show the capabilities of D3’s parsing.  </p>
+<p>Just the date:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> date = d3.time.format(<span class="hljs-string">"%A, %B %-d, %Y"</span>).parse(<span class="hljs-string">"Wednesday, November 12, 2014"</span>);
+<span class="hljs-built_in">console</span>.log(date);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <pre><code>=&gt; Wed Nov <span class="hljs-number">12</span> <span class="hljs-number">2014</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT-<span class="hljs-number">0500</span> (EST)
+</code></pre><p>(The little dash in front of the <code>d</code> is to remove the 0-padding)
+```</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>date = d3.time.format(<span class="hljs-string">"%m/%y"</span>).parse(<span class="hljs-string">"12/14"</span>);
+<span class="hljs-built_in">console</span>.log(date);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <pre><code>=&gt; Mon Dec <span class="hljs-number">01</span> <span class="hljs-number">2014</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT-<span class="hljs-number">0500</span> (EST)
+</code></pre><p>You can see it defaults to the first day of the month.</p>
+<p>Just the time:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> time = d3.time.format(<span class="hljs-string">"%I:%M%p"</span>).parse(<span class="hljs-string">"12:34pm"</span>);
+<span class="hljs-built_in">console</span>.log(time);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <pre><code>=&gt; Mon Jan <span class="hljs-number">01</span> <span class="hljs-number">1900</span> <span class="hljs-number">12</span>:<span class="hljs-number">34</span>:<span class="hljs-number">00</span> GMT-<span class="hljs-number">0500</span> (EST)
+</code></pre><p>Gives you a somewhat strange default date.</p>
+<p>Date and time:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>time = d3.time.format(<span class="hljs-string">"%m/%d/%Y %H:%M:%S"</span>).parse(<span class="hljs-string">"01/02/2014 08:22:05"</span>);
+<span class="hljs-built_in">console</span>.log(time);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <pre><code>=&gt; Thu Jan <span class="hljs-number">02</span> <span class="hljs-number">2014</span> <span class="hljs-number">08</span>:<span class="hljs-number">22</span>:<span class="hljs-number">05</span> GMT-<span class="hljs-number">0500</span> (EST)
+</code></pre><p>This could also be done using some built in short-hands:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>time = d3.time.format(<span class="hljs-string">"%x %X"</span>).parse(<span class="hljs-string">"01/02/2014 08:22:05"</span>);
+<span class="hljs-built_in">console</span>.log(time);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <pre><code>=&gt; Thu Jan <span class="hljs-number">02</span> <span class="hljs-number">2014</span> <span class="hljs-number">08</span>:<span class="hljs-number">22</span>:<span class="hljs-number">05</span> GMT-<span class="hljs-number">0500</span> (EST)
+</code></pre><p>You can see that <code>d3.time.format</code> gives you a lot of flexibility about what your time string will look like.</p>
 <h2 id="time-arithmetic">Time Arithmetic</h2>
 <h2 id="moment-js">Moment.js</h2>
 <h2 id="next-task">Next Task</h2>
