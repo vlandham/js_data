@@ -25,17 +25,17 @@ header {
   color: #1C1C1C;
   background-color: #eaeaea;
   padding-top: 25px;
-  padding: 10px;
+  padding-bottom: 10px;
 }
 header .contents {
   margin:0 auto;
   width:740px;
-  max-width: 90%;
+  max-width: 100%;
 }
 header a {
   text-decoration: none;
 }
-header img {
+header img.logo {
   float: left;
   margin-right: 20px;
 }
