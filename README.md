@@ -1,22 +1,25 @@
-# Javascript Data
+# Learn JS Data
 
 _WORK IN PROGRESS_
 
 [Live version](http://vallandingham.me/js_data/)
 
-Data manipulation, data munging, and data processing in JavaScript. 
+Data manipulation, data munging, and data processing in JavaScript.
 
 ## About
 
-A repo of commonly used tools and tips for dealing with data.
+This guide teaches the basics of manipulating data using JavaScript in the
+browser, or in node.js. Specifically, these tasks are geared around preparing
+data for further analysis and visualization.
 
-Specifically geared around preparing data for further analysis and visualization.
+This guide will demonstrate some basic techniques and how to implement them
+using core JavaScript API, the [d3.js](http://d3js.org/) library and [lodash](http://lodash.com/).
 
-As such, we will focus on using [d3.js](http://d3js.org/) and [lodash](http://lodash.com/) for many of these task.
+It assumes you already have some basic knowledge of JavaScript.
 
 ## Contribute
 
-Current Contributers 
+Current contributors:
 
 - [Jim Vallandingham](https://twitter.com/vlandham)
 - [Irene Ros](https://twitter.com/ireneros)
@@ -38,7 +41,6 @@ Requirements:
 * node
 * npm
 * grunt (to rebuild)
-* ruby (sorry - its hacky)
 
 First clone the repo:
 
@@ -46,23 +48,26 @@ First clone the repo:
 git clone git@github.com:vlandham/js_data.git
 ```
 
-Then run npm install to gather development dependencies:
+Then run `npm install` to gather development dependencies:
 
 ```
 cd js_data
 npm install
 ```
 
-Grunt should now work. If you make modifications to the source files, they will be reflected in the output.
+You can now use grunt to do the following:
+
+* Run `grunt` to start a watch task that will recompile things as needed, and kick off a local server on port 8081.
+* Run `grunt build` just to build the `public/` directory containing all the output.
 
 ## Previous Work
 
-This might have been done better before. Certainly this takes inspiration from a number of similar projects around data manipulation geared towards users of other languages. Here are just some other resources to checkout:
+This takes inspiration from a number of similar projects around data manipulation geared towards users of other languages. Here are just some other resources to checkout:
 
 - [Python Code Notebooks](http://nbviewer.ipython.org/github/chrisalbon/code_py/tree/master/) - by Chris Albon
 - [R Code Notebooks](https://github.com/chrisalbon/code_r) - also by Chris Albon
 
-The presentation format of this repo borrows heavily from Tom MacWright's [Literate Raytracer](https://github.com/tmcw/literate-raytracer) repo. 
+The presentation format of this repo borrows heavily from Tom MacWright's [Literate Raytracer](https://github.com/tmcw/literate-raytracer) repo.
 
 ## License
 
