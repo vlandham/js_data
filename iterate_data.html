@@ -125,17 +125,128 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-number">4</span>
-</code></pre><h2 id="mapping">Mapping</h2>
+</code></pre><h2 id="immutability">Immutability</h2>
 <p><code>forEach</code> provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually. </p>
 <p>This works, but can get clunky and confusing fast. Keeping straight what form the data is in at any given time can be confusing, as can side effects of modifying your data that you might not be aware of.</p>
-<p>To combat this confusion, it can be useful to think of the data as <em>immutable</em> (a data structure that cannot be modified once created. Then to make modifications to your data, you <strong>transform</strong> your original dataset into a new data set. This transformation process creates a new immutable data structure that then can be used downstream.</p>
-<p>All this to say that JavaScript’s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a> can be a very useful tool to keep things functional and keep your data pipeline free of side effects. </p>
+<p>To combat this confusion, it can be useful to think of the data as <em>immutable</em>. Immutable data cannot be modified once created. Immutability seems a bit counterintuitive for a task where we want to coerce our data into the form we want - but it comes together with the concept of <strong>transformations</strong>.</p>
+<p>The idea is simple: each immutable dataset can be <em>transformed</em> into another immutable dataset through the use of a transformation function that works on each component of the data.</p>
+<p>This process helps simplify the data flow, but if you have to make a copy of your data object each time, it can make code a bit brittle as you have to keep track of every attribute of your dataset.</p>
+<h2 id="cloning">Cloning</h2>
+<p>To help with this issue of brittle transformations, lodash provides the <a href="https://lodash.com/docs#clone">clone</a> function.</p>
+<p>This function takes an object and returns a copy of that object. That copy is now a separate data object that you can edit without effecting the original object.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> dataObject = {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Carl"</span>, <span class="hljs-string">"age"</span>:<span class="hljs-string">"48"</span>, <span class="hljs-string">"salary"</span>:<span class="hljs-string">"12300"</span>};
+<span class="hljs-keyword">var</span> copyOfData = _.clone(dataObject);
+copyOfData.age = +copyOfData.age;
+copyOfData.salary = +copyOfData.salary;
+<span class="hljs-built_in">console</span>.log(dataObject);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <pre><code>=&gt; {name: <span class="hljs-string">"Carl"</span>, age: <span class="hljs-string">"48"</span>, salary: <span class="hljs-string">"12300"</span>}
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(copyOfData);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <pre><code>=&gt; {name: <span class="hljs-string">"Carl"</span>, age: <span class="hljs-number">48</span>, salary: <span class="hljs-number">12300</span>}
+</code></pre><p>By default, the <code>clone</code> function will not copy over nested objects. Instead These nested objects are simply passed by referenced - meaning the original and the copy will still share them. </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> dataObject = {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Saul"</span>, <span class="hljs-string">"stats"</span>:{<span class="hljs-string">"age"</span>:<span class="hljs-string">"55"</span>}};
+<span class="hljs-keyword">var</span> shallowCopy = _.clone(dataObject);
+shallowCopy.stats.age = +shallowCopy.stats.age;
+<span class="hljs-built_in">console</span>.log(dataObject);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <pre><code>=&gt; {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Saul"</span>,<span class="hljs-string">"stats"</span>:{<span class="hljs-string">"age"</span>:<span class="hljs-number">55</span>}}
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(shallowCopy);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <pre><code>=&gt; {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Saul"</span>,<span class="hljs-string">"stats"</span>:{<span class="hljs-string">"age"</span>:<span class="hljs-number">55</span>}}
+</code></pre><p>Note that because <code>stats</code> is a nested object the modification happened in both spots!</p>
+<p>To prevent this “feature”, we can pass <code>true</code> as the second parameter to <code>clone</code> to indicate that the copy should be deep and copy nested objects as well.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> dataObject = {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Saul"</span>, <span class="hljs-string">"stats"</span>:{<span class="hljs-string">"age"</span>:<span class="hljs-string">"55"</span>}};
+<span class="hljs-keyword">var</span> deepCopy = _.clone(dataObject, <span class="hljs-literal">true</span>);
+deepCopy.stats.age = +deepCopy.stats.age;
+<span class="hljs-built_in">console</span>.log(dataObject);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <pre><code>=&gt; {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Saul"</span>,<span class="hljs-string">"stats"</span>:{<span class="hljs-string">"age"</span>:<span class="hljs-string">"55"</span>}}
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(deepCopy);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <pre><code>=&gt; {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Saul"</span>,<span class="hljs-string">"stats"</span>:{<span class="hljs-string">"age"</span>:<span class="hljs-number">55</span>}}
+</code></pre><p>lodash also has a <a href="https://lodash.com/docs#cloneDeep">cloneDeep</a> that can be used to make the deep-ness more explicit.</p>
+<h2 id="mapping">Mapping</h2>
+<p>JavaScript’s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a> can be a very useful tool to implement this concept of a transformation on immutable data.</p>
 <p><code>map</code> takes an array and produces another array which is the result of the callback function being executed on each element in the array. </p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>
 <span class="hljs-keyword">var</span> smallData = data.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d,i)</span> </span>{ 
+
   <span class="hljs-keyword">return</span> {
     name: d.city.toUpperCase(),
     index: i + <span class="hljs-number">1</span>,
@@ -148,16 +259,16 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
         </li>
         
         
-        <li id="section-7">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-number">652405</span>, land_area: <span class="hljs-number">83.9</span>}
   {name: <span class="hljs-string">"SEATTLE"</span>, index: <span class="hljs-number">1</span>, rounded_area: <span class="hljs-number">84</span>}
 </code></pre><p>The callback function gets called for each element in the array, and also has access to the index of that element in the array. The result is an array of returned values from the callback.</p>
-<p>With plain JavaScript, the immutability of an array is just in the mind of the developer. While <code>map</code> does not modify the array, it is easy for your callback method to do so. That is why we return a new object in the callback. lodash’s <a href="https://lodash.com/docs#clone">clone</a> would be another approach to getting a copy of each data element as a starting point for the transformation.</p>
+<p>With plain JavaScript, the immutability of an array is just <em>in the mind of the developer</em>. While <code>map</code> does not modify the array, it is easy for your callback method to do so. That is why we return a new object in the callback. lodash’s <a href="https://lodash.com/docs#clone">clone</a> would be another approach to getting a copy of each data element as a starting point for the transformation.</p>
 <h2 id="filtering">Filtering</h2>
 <p>Select a subset of the data using the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter</a> method. This creates a new array of data (again see transformation talk above) with only the values that the callback function returns <code>true</code> for.</p>
 
@@ -170,11 +281,11 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
         </li>
         
         
-        <li id="section-8">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <pre><code>=&gt; [{<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
    {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}]
@@ -195,11 +306,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-9">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <pre><code>=&gt; [{<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
     {<span class="hljs-string">"city"</span>:<span class="hljs-string">"seattle"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"WA"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">652405</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">83.9</span>},
@@ -218,11 +329,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-10">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <pre><code>=&gt; [<span class="hljs-number">652405</span>, <span class="hljs-number">8405837</span>, <span class="hljs-number">645966</span>, <span class="hljs-number">467007</span>]
 </code></pre>
@@ -234,11 +345,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <pre><code>=&gt; [<span class="hljs-number">8405837</span>, <span class="hljs-number">652405</span>, <span class="hljs-number">645966</span>, <span class="hljs-number">467007</span>]
 </code></pre><p>I’m usually looking to keep my data objects together, so I shy away from using these methods, but they might be great for what you are trying to do.</p>
@@ -257,11 +368,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-12">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-number">749.8</span>
 </code></pre>
@@ -270,11 +381,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>The first parameter to <code>reduce</code> is the callback function that will return the running “total” of the reduction. This function is passed in the previous value returned from the last time the callback was called. Here, that parameter - <code>sum</code> provides the running total as we move through the array. The second parameter to the callback <code>d</code> is the current value of the array we are working on. </p>
 <p><code>reduce</code> can take an initial value, which is the second parameter to the <code>reduce</code> call. For this example, we start the sum at 0. If there is no starting value provided, then for the first execution of the callback (when there is no previous value) the first parameter to the callback will be the value of the first element of the array, and the reduction starts with the second element.</p>
@@ -292,11 +403,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-14">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <pre><code>=&gt; seattle is cool. <span class="hljs-keyword">new</span> york sucks. boston is cool. kansas city sucks.
 </code></pre>
@@ -305,11 +416,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-15">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p><em>And summing over a variable is only used for example. You can always just use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_sum">d3.sum</a> for this instead.</em></p>
 <h2 id="chaining-functions">Chaining Functions</h2>
@@ -325,11 +436,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-16">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <pre><code>=&gt; [<span class="hljs-string">"boston"</span>, <span class="hljs-string">"seattle"</span>, <span class="hljs-string">"new york"</span>]
 </code></pre><p>Since we are using <code>sort</code> after <code>filter</code>, sort is working on the returned array from <code>filter</code>. The sort function at least is nice enough to also return the array, so chaining is still possible.</p>
@@ -337,10 +448,9 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
 <p><a href="group_data.html">Grouping Data</a></p>
 <h2 id="see-also">See Also</h2>
 <ul>
-<li><p><a href="http://www.macwright.org/2015/01/03/reduce-juice.html">Making Juice with Reduce</a> - Tom MacWright’s intro to the ill-used reduce</p>
-</li>
-<li><p><a href="https://github.com/facebook/immutable-js">Immutable JS</a> - if you want to get serious about immutable data structures in JavaScript </p>
-</li>
+<li><a href="http://www.macwright.org/2015/01/03/reduce-juice.html">Making Juice with Reduce</a> - Tom MacWright’s intro to the ill-used reduce</li>
+<li><a href="https://github.com/facebook/immutable-js">Immutable JS</a> - if you want to get serious about immutable data structures in JavaScript </li>
+<li><a href="http://fr.umio.us/why-ramda/">Ramda</a> - a more functional approach to data processing in JS</li>
 </ul>
 
             </div>
