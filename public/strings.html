@@ -291,8 +291,18 @@ same snippet of html:</p>
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-string">'&lt;div class="person"&gt;&lt;span class="name"&gt;James. James Bond&lt;/span&gt;&lt;span class="occupation"&gt;Spy&lt;/span&gt;&lt;/div&gt;'</span>
-</code></pre>
+</code></pre><h2 id="regular-expressions">Regular Expressions</h2>
+<p>Regular expressions are used to match certain patterns of strings within other strings.</p>
+<p>They can be a useful tool for extracting <em>patterns</em> rather than exact strings, for example:
+telephone numbers (sequences of numbers of a specific length,) street numbers or email
+addresses.</p>
+<h3 id="finding-strings">Finding Strings</h3>
+
             </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">"how much wood would a woodchuck chuck if a woodchuck could chuck wood"</span>;
+<span class="hljs-keyword">var</span> regex = <span class="hljs-regexp">/wood/</span>;</pre></div></div>
             
         </li>
         
@@ -303,15 +313,268 @@ same snippet of html:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <h2 id="regular-expressions">Regular Expressions</h2>
-<p>TODO</p>
-<h2 id="next-task">Next Task</h2>
+              <p>If we want to know whether the string “wood” appears in our larger string <code>str</code> we
+could do the following</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span> (regex.test(str)) {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"we found 'wood' in the string!"</span>);
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-string">"we found 'wood' in the string!"</span>
+</code></pre><p>To see the actual matches we found in the string, we can use the <code>match</code> method
+to find all matches available:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> matches = str.match(regex);
+<span class="hljs-built_in">console</span>.log(matches);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <pre><code>=&gt; [<span class="hljs-string">"wood"</span>]
+</code></pre><p>Note that this only returned one match, even though the word “wood” appears several
+times in our original string. In order to find all individual instances of wood, we need
+to add the global flag, which we can do by adding a <code>g</code> to the end of our expression:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+regex = <span class="hljs-regexp">/wood/g</span>;
+<span class="hljs-built_in">console</span>.log(str.match(regex));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <pre><code>=&gt; [<span class="hljs-string">"wood"</span>, <span class="hljs-string">"wood"</span>, <span class="hljs-string">"wood"</span>, <span class="hljs-string">"wood"</span>]
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Now, note that two of those matches actually belonged to the word “woodchuck”, which
+was not a part of our results. If we wanted to extend our regular expression to match both
+we could do so in a few ways:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+regex = <span class="hljs-regexp">/wood.*?\b/g</span>;
+<span class="hljs-built_in">console</span>.log(str.match(regex));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <pre><code>=&gt; [<span class="hljs-string">"wood"</span>, <span class="hljs-string">"woodchuck"</span>, <span class="hljs-string">"woodchuck"</span>, <span class="hljs-string">"wood"</span>]
+</code></pre><p>In this regular expression we are matching everything that starts with the string “wood”
+followed by 0 or more characters (<code>.*?</code>) until a word break (<code>\b</code>) occures.
+Alternatively, we could also just search for both words:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>regex = <span class="hljs-regexp">/woodchuck|wood/g</span>;
+<span class="hljs-built_in">console</span>.log(str.match(regex));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <pre><code>=&gt; [<span class="hljs-string">"wood"</span>, <span class="hljs-string">"woodchuck"</span>, <span class="hljs-string">"woodchuck"</span>, <span class="hljs-string">"wood"</span>]
+</code></pre><p>Note the order in which we did the last search. We used the word “woodchuch” before
+the word “wood”. If we were to run our expression like so: <code>/wood|woodchuck/g</code>, we would
+end up with <code>[&quot;wood&quot;, &quot;wood&quot;, &quot;wood&quot;, &quot;wood&quot;]</code> again because that search would be
+“greedy”.</p>
+<h3 id="replacing-with-regular-expressions">Replacing with regular expressions</h3>
+<p>If we wanted to replace the word “wood” in our original string, with the word
+“nun”, we could do it like so:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+regex = <span class="hljs-regexp">/wood/g</span>;
+<span class="hljs-keyword">var</span> newstr = str.replace(regex, <span class="hljs-string">"nun"</span>);
+<span class="hljs-built_in">console</span>.log(newstr);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-string">"how much nun would a nunchuck chuck if a nunchuck could chuck nun"</span>
+</code></pre><p>Probablay not what you’d be going for, but you get our drift.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <h3 id="finding-numbers">Finding Numbers</h3>
+<p>Extracting numbers from strings is a common task when looking for things like
+dollar amounts or any other numerical measurements that might be scattered about
+in the text.
+For example, if we wanted to extract the total amount of money spent
+on groceries from this message:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> message = <span class="hljs-string">"I bought a loaf of bread for $3.99, some milk for $2.49 and"</span> +
+  <span class="hljs-string">"a box of chocolate cookies for $6.95"</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>we could define a regular expression that looks for dollar amounts by defining a
+pattern like so.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+regex = <span class="hljs-regexp">/\$([0-9\.]+)\b/g</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>this pattern looks for:</p>
+<ul>
+<li>A dollar sign (<code>\$</code>) to indicate the beginning of a price</li>
+<li>A set of repeating characters that can be a number (<code>0-9</code>) or the period character <code>.</code>. These can appear
+repeatedly (<code>+</code>). Note that we’re not being particularly careful in making sure we only have one period in
+our string, for example.</li>
+<li>A word break that would indicate the end of the price string (<code>\b</code>).</li>
+</ul>
+<p>If we wanted to find all the matches, we could use our string <code>match</code> function like so:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>matches = message.match(regex);
+<span class="hljs-built_in">console</span>.log(matches);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <pre><code>=&gt; [<span class="hljs-string">"$3.99"</span>, <span class="hljs-string">"$2.49"</span>, <span class="hljs-string">"$6.95"</span>]
+</code></pre><p>This is great! We have all our dollar amounts. While this gets us 90% there, we
+can’t really add them with those <code>$</code> signs. To remove them, we can use our trusty
+<code>reduce</code> function like so:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+matches.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, value)</span> </span>{
+  <span class="hljs-keyword">return</span> sum + <span class="hljs-built_in">Number</span>(value.slice(<span class="hljs-number">1</span>));
+}, <span class="hljs-number">0</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">13.43</span>
+</code></pre><h3 id="useful-special-characters">Useful special characters</h3>
+<p>We’ve used a few special characters so far, like <code>\b</code> to indicate a word break. There
+are a few others that might be useful to you:</p>
+<ul>
+<li><code>\d</code> - any number character.  Equivalent to [0-9].</li>
+<li><code>\D</code> - any non number character. Equivalent to [^0-9].</li>
+<li><code>\s</code> - any single space character. This includes a single space, tab, line feed or
+form feed.</li>
+</ul>
+<p>You can see a full list of all special characters here:
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">MDN - Regular Expressions</a></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <h2 id="next-task">Next Task</h2>
 <p><a href="time.html">Working With Time</a></p>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="http://www.quirksmode.org/js/strings.html">Working With Strings</a> - a great guide to more string basics</li>
 <li><a href="https://github.com/epeli/underscore.string">underscore.string</a> - for all the other string functions you might want</li>
 <li><a href="http://underscorejs.org/#template">underscore.template</a> - for a deeper dive into underscore’s template function</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">MDN - Regular Expressions</a> - for more information about regular expressions</li>
 </ul>
 
             </div>
