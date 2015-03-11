@@ -1,7 +1,14 @@
-// # Javascript Data
-// 
-// Data manipulation, data munging, and data processing in JavaScript. 
-// 
+// # About this guide
+//
+// This guide teaches the basics of manipulating data using JavaScript in the
+// browser, or in node.js. Specifically, these tasks are geared around preparing
+// data for further analysis and visualization.
+//
+// This guide will demonstrate some basic techniques and how to implement them
+// using core JavaScript API, the [d3.js](http://d3js.org/) library and [lodash](http://lodash.com/).
+//
+// It assumes you already have some basic knowledge of JavaScript.
+//
 // [Get source](https://github.com/vlandham/js_data)
 //
 // ## Tasks
@@ -15,15 +22,6 @@
 // - ### [Strings and Regular Expressions](strings.html)
 // - ### [Working with Time](time.html)
 // - ### [Exploratory Visualizations](visualizations.html)
-//
-//
-// ## About
-// 
-// A repo of commonly used tools and tips for dealing with data.
-// 
-// Specifically geared around preparing data for further analysis and visualization.
-// 
-// We will focus on using [d3.js](http://d3js.org/) and [lodash](http://lodash.com/) for many of these tasks.
 //
 // ### Code
 //
@@ -43,10 +41,10 @@ console.log("This is the index!");
 // - [python with pandas](http://nbviewer.ipython.org/gist/fonnesbeck/5850413)
 // - [java (just kidding)]()
 //
-// These tools are great and you should use them. Often times, however, you are already familiar with a particular language (like JavaScript) and would like to get started with data, but want to take it one step at a time. 
+// These tools are great and you should use them. Often times, however, you are already familiar with a particular language (like JavaScript) and would like to get started with data, but want to take it one step at a time.
 //
-// Additionally, sometimes you are already in a particular environment (like JavaScript) and don't have the luxury of switching to one of these other options. 
+// Additionally, sometimes you are already in a particular environment (like JavaScript) and don't have the luxury of switching to one of these other options.
 //
-// In these cases, JavaScript could be considered a viable option for your data analysis. And if you find yourself in one of these situations, or just want to try out JavaScript for data analysis for fun, then _this guide is for you_! 
+// In these cases, JavaScript could be considered a viable option for your data analysis. And if you find yourself in one of these situations, or just want to try out JavaScript for data analysis for fun, then _this guide is for you_!
 //
 // Check out some of the tasks, and see if JavaScript Data something you want to try yourself.

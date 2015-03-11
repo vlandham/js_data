@@ -117,14 +117,57 @@ var html_snippet = "<div class=\"person\">" +
   "<span class=\"occupation\">" + person.occupation + "</span>" +
 "</div>";
 console.log(html_snippet);
+// ```
+// => '<div class="person"><span class="name">Birdman</span><span class="occupation">Imaginary Super Hero</span></div>'
+// ```
+//
+// That's a lot of string escaping! You can imagine this gets pretty hard to manage
+// after a while.
+//
+// In order to simplify this process, you can use lodash templates to define a "template"
+// that you can reuse with different data. Using our example above, we might define it
+// like so:
+//
+var templateString = "<div class='person'>" +
+  "  <span class='name'><%= name %></span>" +
+  "  <span class='occupation'><%= occupation %></span>" +
+  "</div>";
+var templateFunction = _.template(templateString);
+
+// Now you can use this template function with lots of data to generate the
+// same snippet of html:
+
+console.log(templateFunction(person));
 //
 // ```
 // => '<div class="person"><span class="name">Birdman</span><span class="occupation">Imaginary Super Hero</span></div>'
 // ```
+
+var anotherPerson = { name : "James. James Bond", occupation: "Spy" };
+console.log(templateFunction(anotherPerson));
+//
+// ```
+// => '<div class="person"><span class="name">James. James Bond</span><span class="occupation">Spy</span></div>'
+// ```
+//
 // ## Regular Expressions
 //
-// TODO
+// Regular expressions are patterns that we can use to match character combinations in our strings.
+// When the search for a match requires something more than a direct match, such as finding one or
+// more of the letters b's, or finding white space, the pattern can include special characters.
+// For example, the pattern `/ab*c/` matches any character combination in which a single 'a' is
+// followed by zero or more 'b's (* means 0 or more occurrences of the preceding item) and then
+// immediately followed by 'c'. In the string "cbbabbbbcdebc," the pattern would match the substring 'abbbbc'.
 //
+// ### Useful special characters
+// You can find a full reference to all the special characters and how they work [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions), but here are a few useful characters you might
+// use in your scripts:
+//
+// * `\` - The Backslash is a special 'escape' character. When it preceeds another character it indicates
+// that that character should be treated as a special characther. For example the character `s` will normally
+// be matched as just the `s` character. If we were to use `\s` instead, that will actuall look for a white space
+// character.
+
 // ## Next Task
 //
 // [Working With Time](time.html)
@@ -133,3 +176,4 @@ console.log(html_snippet);
 //
 // - [Working With Strings](http://www.quirksmode.org/js/strings.html) - a great guide to more string basics
 // - [underscore.string](https://github.com/epeli/underscore.string) - for all the other string functions you might want
+// - [underscore.template](http://underscorejs.org/#template) - for a deeper dive into underscore's template function
