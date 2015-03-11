@@ -33,19 +33,74 @@ console.log(data.length);
 //=> 4
 // ```
 //
-// ## Mapping
+// ## Immutability
 //
 // `forEach` provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually. 
 //
 // This works, but can get clunky and confusing fast. Keeping straight what form the data is in at any given time can be confusing, as can side effects of modifying your data that you might not be aware of.
 //
-// To combat this confusion, it can be useful to think of the data as _immutable_ (a data structure that cannot be modified once created. Then to make modifications to your data, you **transform** your original dataset into a new data set. This transformation process creates a new immutable data structure that then can be used downstream.
+// To combat this confusion, it can be useful to think of the data as _immutable_. Immutable data cannot be modified once created. Immutability seems a bit counterintuitive for a task where we want to coerce our data into the form we want - but it comes together with the concept of **transformations**.
 //
-// All this to say that JavaScript's [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) can be a very useful tool to keep things functional and keep your data pipeline free of side effects. 
+// The idea is simple: each immutable dataset can be _transformed_ into another immutable dataset through the use of a transformation function that works on each component of the data.
 //
+// This process helps simplify the data flow, but if you have to make a copy of your data object each time, it can make code a bit brittle as you have to keep track of every attribute of your dataset.
+//
+// ## Cloning
+//
+// To help with this issue of brittle transformations, lodash provides the [clone](https://lodash.com/docs#clone) function.
+//
+// This function takes an object and returns a copy of that object. That copy is now a separate data object that you can edit without effecting the original object.
+//
+var dataObject = {"name":"Carl", "age":"48", "salary":"12300"};
+var copyOfData = _.clone(dataObject);
+copyOfData.age = +copyOfData.age;
+copyOfData.salary = +copyOfData.salary;
+console.log(dataObject);
+// ```
+//=> {name: "Carl", age: "48", salary: "12300"}
+// ```
+console.log(copyOfData);
+// ```
+//=> {name: "Carl", age: 48, salary: 12300}
+// ```
+// 
+// By default, the `clone` function will not copy over nested objects. Instead These nested objects are simply passed by referenced - meaning the original and the copy will still share them. 
+var dataObject = {"name":"Saul", "stats":{"age":"55"}};
+var shallowCopy = _.clone(dataObject);
+shallowCopy.stats.age = +shallowCopy.stats.age;
+console.log(dataObject);
+// ```
+//=> {"name":"Saul","stats":{"age":55}}
+// ```
+console.log(shallowCopy);
+// ```
+//=> {"name":"Saul","stats":{"age":55}}
+// ```
+// Note that because `stats` is a nested object the modification happened in both spots!
+//
+// To prevent this "feature", we can pass `true` as the second parameter to `clone` to indicate that the copy should be deep and copy nested objects as well.
+var dataObject = {"name":"Saul", "stats":{"age":"55"}};
+var deepCopy = _.clone(dataObject, true);
+deepCopy.stats.age = +deepCopy.stats.age;
+console.log(dataObject);
+// ```
+//=> {"name":"Saul","stats":{"age":"55"}}
+// ```
+console.log(deepCopy);
+// ```
+//=> {"name":"Saul","stats":{"age":55}}
+// ```
+//
+// lodash also has a [cloneDeep](https://lodash.com/docs#cloneDeep) that can be used to make the deep-ness more explicit.
+//
+// ## Mapping
+//
+// JavaScript's [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) can be a very useful tool to implement this concept of a transformation on immutable data.
+// 
 // `map` takes an array and produces another array which is the result of the callback function being executed on each element in the array. 
 
 var smallData = data.map(function(d,i) { 
+
   return {
     name: d.city.toUpperCase(),
     index: i + 1,
@@ -61,7 +116,7 @@ console.log(smallData[0]);
 //
 // The callback function gets called for each element in the array, and also has access to the index of that element in the array. The result is an array of returned values from the callback.
 //
-// With plain JavaScript, the immutability of an array is just in the mind of the developer. While `map` does not modify the array, it is easy for your callback method to do so. That is why we return a new object in the callback. lodash's [clone](https://lodash.com/docs#clone) would be another approach to getting a copy of each data element as a starting point for the transformation.
+// With plain JavaScript, the immutability of an array is just _in the mind of the developer_. While `map` does not modify the array, it is easy for your callback method to do so. That is why we return a new object in the callback. lodash's [clone](https://lodash.com/docs#clone) would be another approach to getting a copy of each data element as a starting point for the transformation.
 //
 //
 // ## Filtering
@@ -170,5 +225,5 @@ console.log(bigCities);
 // ## See Also
 //
 // - [Making Juice with Reduce](http://www.macwright.org/2015/01/03/reduce-juice.html) - Tom MacWright's intro to the ill-used reduce
-//
 // - [Immutable JS](https://github.com/facebook/immutable-js) - if you want to get serious about immutable data structures in JavaScript 
+// - [Ramda](http://fr.umio.us/why-ramda/) - a more functional approach to data processing in JS

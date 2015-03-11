@@ -73,8 +73,6 @@ console.log(time);
 //
 // ## Next Task
 //
-// [Exploratory Visualization](visualizations.html)
-//
 // ## See Also
 //
 //

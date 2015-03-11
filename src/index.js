@@ -21,7 +21,6 @@
 //
 // - ### [Strings and Regular Expressions](strings.html)
 // - ### [Working with Time](time.html)
-// - ### [Exploratory Visualizations](visualizations.html)
 //
 // ### Code
 //

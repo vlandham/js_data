@@ -67,7 +67,7 @@ d3.csv("data/cities.csv", function(d) {
 //
 // In this form, you have complete control over the data objects and can rename properties (like `land_area`) and convert values (like `population`) willy-nilly.  On the other hand, you have to be quite explicit about which properties to return. This may or may not be what you are into. 
 //
-// I typically allow D3 to load all the data, and then make modifications in a post-processing step, but you might like this more hands-on approach.
+// I typically allow D3 to load all the data, and then make modifications in a post-processing step, but it might be more effective for you to be more explicit with the modifications.
 
 //
 // ## Reading TSV Files
@@ -187,9 +187,6 @@ function analyze(error, cities, animals) {
 //
 // To add another data file, simply add another defer and extend the input parameters for your callback!
 //
-// ## Reading Invalid Data Files
-//
-//  **TODO**
 //
 // ## Next Task
 //

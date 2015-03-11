@@ -2,9 +2,13 @@
 //
 // ## About Tasks
 //
-// Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. 
+// This guide is broken up into a number of tasks, which we can think of as little modules or _recipes_.
 //
-// Focus is on client side data processing, but could easily be used in a server side (Node) application with a bit of tweaking (specifically, [data loading](read_data.html) should use Node's built in methods to get the raw data loaded).
+// Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. Tasks attempt to be self-contained and stay focused on the, well, _task on hand_. 
+//
+// This guide was built with for client side data processing (in the browser), but could easily be used in a server side (Node) application with a bit of tweaking.
+//
+// _(specifically, [data loading](read_data.html) should use Node's built in methods to get the raw data loaded)_
 //
 // ## Why D3?
 //
@@ -46,9 +50,9 @@
 //
 // There are many options for easy-to-spin-up web servers:
 //
-// - SimpleHTTPServer for Python
-// - thin for Ruby
-// - http-server for Node
+// - [SimpleHTTPServer](http://www.pythonforbeginners.com/modules-in-python/how-to-use-simplehttpserver/) for Python
+// - [httpd](http://www.benjaminoakes.com/2013/09/13/ruby-simple-http-server-minimalist-rake/) for Ruby
+// - [http-server](https://github.com/nodeapps/http-server) for Node
 //
 // Lately, I have been using that last option - `http-server`. If you have Node and npm installed, you can grab the required package by installing it from the command line:
 //
@@ -71,3 +75,6 @@
 //
 // [Reading in Data](read_data.html)
 //
+// ## See Also
+//
+// - [Installing Node](http://howtonode.org/how-to-install-nodejs) - if you need some help getting `http-server` on your machine.
