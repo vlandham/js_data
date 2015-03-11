@@ -47,10 +47,51 @@ console.log(data.length);
 //
 // ## Cloning
 //
-// To help with this issue of brittle transformations, lodash provides the [clone](https://lodash.com/docs#clone) and [cloneDeep](https://lodash.com/docs#cloneDeep) functions.
+// To help with this issue of brittle transformations, lodash provides the [clone](https://lodash.com/docs#clone) function.
 //
-// These functions take an object and return a copy of that object. That copy is now a separate data object that you can edit without effecting the original object.
+// This function takes an object and returns a copy of that object. That copy is now a separate data object that you can edit without effecting the original object.
+//
+var dataObject = {"name":"Carl", "age":"48", "salary":"12300"};
+var copyOfData = _.clone(dataObject);
+copyOfData.age = +copyOfData.age;
+copyOfData.salary = +copyOfData.salary;
+console.log(dataObject);
+// ```
+//=> {name: "Carl", age: "48", salary: "12300"}
+// ```
+console.log(copyOfData);
+// ```
+//=> {name: "Carl", age: 48, salary: 12300}
+// ```
 // 
+// By default, the `clone` function will not copy over nested objects. Instead These nested objects are simply passed by referenced - meaning the original and the copy will still share them. 
+var dataObject = {"name":"Saul", "stats":{"age":"55"}};
+var shallowCopy = _.clone(dataObject);
+shallowCopy.stats.age = +shallowCopy.stats.age;
+console.log(dataObject);
+// ```
+//=> {"name":"Saul","stats":{"age":55}}
+// ```
+console.log(shallowCopy);
+// ```
+//=> {"name":"Saul","stats":{"age":55}}
+// ```
+// Note that because `stats` is a nested object the modification happened in both spots!
+//
+// To prevent this "feature", we can pass `true` as the second parameter to `clone` to indicate that the copy should be deep and copy nested objects as well.
+var dataObject = {"name":"Saul", "stats":{"age":"55"}};
+var deepCopy = _.clone(dataObject, true);
+deepCopy.stats.age = +deepCopy.stats.age;
+console.log(dataObject);
+// ```
+//=> {"name":"Saul","stats":{"age":"55"}}
+// ```
+console.log(deepCopy);
+// ```
+//=> {"name":"Saul","stats":{"age":55}}
+// ```
+//
+// lodash also has a [cloneDeep](https://lodash.com/docs#cloneDeep) that can be used to make the deep-ness more explicit.
 //
 // ## Mapping
 //
@@ -59,6 +100,7 @@ console.log(data.length);
 // `map` takes an array and produces another array which is the result of the callback function being executed on each element in the array. 
 
 var smallData = data.map(function(d,i) { 
+
   return {
     name: d.city.toUpperCase(),
     index: i + 1,
@@ -74,7 +116,7 @@ console.log(smallData[0]);
 //
 // The callback function gets called for each element in the array, and also has access to the index of that element in the array. The result is an array of returned values from the callback.
 //
-// With plain JavaScript, the immutability of an array is just in the mind of the developer. While `map` does not modify the array, it is easy for your callback method to do so. That is why we return a new object in the callback. lodash's [clone](https://lodash.com/docs#clone) would be another approach to getting a copy of each data element as a starting point for the transformation.
+// With plain JavaScript, the immutability of an array is just _in the mind of the developer_. While `map` does not modify the array, it is easy for your callback method to do so. That is why we return a new object in the callback. lodash's [clone](https://lodash.com/docs#clone) would be another approach to getting a copy of each data element as a starting point for the transformation.
 //
 //
 // ## Filtering
