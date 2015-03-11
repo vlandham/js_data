@@ -7,6 +7,7 @@ body {
   color: #30404f;
   margin: 0; padding: 0;
   height:100%;
+
 }
 
 #container {
@@ -16,6 +17,38 @@ body {
   max-width: 90%;
 }
 
+header {
+  clear: both;
+  width: 100%;
+  font-family: 'Bree Serif', serif;
+  display: inline-block;
+  color: #1C1C1C;
+  background-color: #eaeaea;
+  padding-top: 25px;
+  padding: 10px;
+}
+header .contents {
+  margin:0 auto;
+  width:740px;
+  max-width: 90%;
+}
+header a {
+  text-decoration: none;
+}
+header img {
+  float: left;
+  margin-right: 20px;
+}
+header h1 {
+  padding-top: 1.1em;
+  margin-bottom: 10px;
+  color: #0071BC;
+  margin-top: 0;
+}
+header h3 {
+  margin-top: -5px;
+  color: #4D4C4C;
+}
 img {
   max-width:100%;
 }

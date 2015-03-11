@@ -18,6 +18,12 @@ module.exports = function(grunt) {
       cwd : "data/",
       src: ["**"],
       dest: "public/data"
+    },
+    img: {
+      expand: true,
+      cwd: "img/",
+      src: ["**"],
+      dest: "public/img"
     }
   });
 
