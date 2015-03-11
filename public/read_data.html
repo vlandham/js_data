@@ -171,7 +171,7 @@ d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-fun
               </div>
               <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-number">652405</span>, land_area: <span class="hljs-number">83.9</span>}
 </code></pre><p>In this form, you have complete control over the data objects and can rename properties (like <code>land_area</code>) and convert values (like <code>population</code>) willy-nilly.  On the other hand, you have to be quite explicit about which properties to return. This may or may not be what you are into. </p>
-<p>I typically allow D3 to load all the data, and then make modifications in a post-processing step, but you might like this more hands-on approach.</p>
+<p>I typically allow D3 to load all the data, and then make modifications in a post-processing step, but it might be more effective for you to be more explicit with the modifications.</p>
 
             </div>
             
@@ -338,8 +338,6 @@ queue()
 <p>The callback function passed into <code>await</code> gets each dataset as a parameter, with the first parameter being populated if an error has occurred in loading the data. </p>
 <p>It can be useful to output the error, if it is defined, so you catch data loading problems quickly. </p>
 <p>To add another data file, simply add another defer and extend the input parameters for your callback!</p>
-<h2 id="reading-invalid-data-files">Reading Invalid Data Files</h2>
-<p> <strong>TODO</strong></p>
 <h2 id="next-task">Next Task</h2>
 <p><a href="summarize_data.html">Summarizing Data</a></p>
 <h2 id="see-also">See Also</h2>
