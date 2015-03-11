@@ -126,6 +126,7 @@ data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
               </div>
               <pre><code>=&gt; <span class="hljs-number">4</span>
 </code></pre><h2 id="immutability">Immutability</h2>
+<p>Let me sidetrack this task just a bit to talk about </p>
 <p><code>forEach</code> provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually. </p>
 <p>This works, but can get clunky and confusing fast. Keeping straight what form the data is in at any given time can be confusing, as can side effects of modifying your data that you might not be aware of.</p>
 <p>To combat this confusion, it can be useful to think of the data as <em>immutable</em>. Immutable data cannot be modified once created. Immutability seems a bit counterintuitive for a task where we want to coerce our data into the form we want - but it comes together with the concept of <strong>transformations</strong>.</p>
@@ -353,6 +354,38 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
               </div>
               <pre><code>=&gt; [<span class="hljs-number">8405837</span>, <span class="hljs-number">652405</span>, <span class="hljs-number">645966</span>, <span class="hljs-number">467007</span>]
 </code></pre><p>I’m usually looking to keep my data objects together, so I shy away from using these methods, but they might be great for what you are trying to do.</p>
+<p>A <strong>big gotcha</strong> with sorting that you should watch out for is that if you do not pass a comparator function, the default function sorts <em>alphabetically</em>. So, the array:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> nums = [<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">20</span>];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Would be sorted to:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(nums.sort());</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <pre><code>=&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">3</span>]
+</code></pre><p>This is never what you want for data sorting. For this reason, you should never use sort without a comparator function.</p>
 <h2 id="reducing">Reducing</h2>
 <p>These functions all take an array and reduce it down to a single number. But what if that number isn’t the one you want? Well, you can take this reduction into your own hands with <code>reduce</code>!</p>
 <p>The syntax for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce">reduce</a> is always hard for me to remember, so let’s go over it with the classic example: summing up a value.</p>
@@ -368,11 +401,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-18">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-number">749.8</span>
 </code></pre>
@@ -381,11 +414,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-19">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>The first parameter to <code>reduce</code> is the callback function that will return the running “total” of the reduction. This function is passed in the previous value returned from the last time the callback was called. Here, that parameter - <code>sum</code> provides the running total as we move through the array. The second parameter to the callback <code>d</code> is the current value of the array we are working on. </p>
 <p><code>reduce</code> can take an initial value, which is the second parameter to the <code>reduce</code> call. For this example, we start the sum at 0. If there is no starting value provided, then for the first execution of the callback (when there is no previous value) the first parameter to the callback will be the value of the first element of the array, and the reduction starts with the second element.</p>
@@ -403,11 +436,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-20">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <pre><code>=&gt; seattle is cool. <span class="hljs-keyword">new</span> york sucks. boston is cool. kansas city sucks.
 </code></pre>
@@ -416,11 +449,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-21">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p><em>And summing over a variable is only used for example. You can always just use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_sum">d3.sum</a> for this instead.</em></p>
 <h2 id="chaining-functions">Chaining Functions</h2>
@@ -436,11 +469,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-22">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <pre><code>=&gt; [<span class="hljs-string">"boston"</span>, <span class="hljs-string">"seattle"</span>, <span class="hljs-string">"new york"</span>]
 </code></pre><p>Since we are using <code>sort</code> after <code>filter</code>, sort is working on the returned array from <code>filter</code>. The sort function at least is nice enough to also return the array, so chaining is still possible.</p>
