@@ -42,7 +42,7 @@
               <h1 id="checking-data-assumptions">Checking Data Assumptions</h1>
 <p>Data processing is tricky business, full of pitfalls and gotchas. Hopefully the tasks in this guide help with getting started in this process. But you, I, and the entire world will make mistakes. It’s natural.</p>
 <p>But mistakes in data processing, like all other kinds of mistakes, can be painful. They can result in hours of bug hunting, days of reprocessing, and months of crying. Since we know mistakes happen and will continue to happen, what can we do to take away some of the pain?</p>
-<p>In a word, <em>padding</em>. We need some padding to protect us from the bumps and bruises of data processing. And I would suggest that this padding come in the form of simple tests that check the assumptions you have about the shape and contents of your data. </p>
+<p>In a word, <em>padding</em>. We need some padding to protect us from the bumps and bruises of data processing. And I would suggest that this padding come in the form of simple tests that check the assumptions you have about the shape and contents of your data.</p>
 <p>Unless there is an extreme performance need, these tests should run in the data processing pipeline. Optimally, they would be easy to turn on and off so that you can disable them if you need to if your code is deployed.</p>
 <h2 id="assertions">Assertions</h2>
 <p>These tests can be created with <a href="http://en.wikipedia.org/wiki/Assertion_%28software_development%29">assertions</a> - functions that check the truthiness of a statement in code. Typically, they raise an error when an expected truth is not actually true.</p>
@@ -93,7 +93,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Our first entry looks ok, where our second entry has some problems. The age parsing for the immortal <a href="http://en.wikipedia.org/wiki/Sleepwalker_%28comics%29">Sleepwalker</a> has left him with no age. Also, bad input data has left us with a string in <code>superhuman</code>, where we expect a boolean. </p>
+              <p>Our first entry looks ok, where our second entry has some problems. The age parsing for the immortal <a href="http://en.wikipedia.org/wiki/Sleepwalker_%28comics%29">Sleepwalker</a> has left him with no age. Also, bad input data has left us with a string in <code>superhuman</code>, where we expect a boolean.</p>
 <p>A simple assumption checking function that could be run on this data could look something like this:</p>
 
             </div>
@@ -125,7 +125,7 @@ checkDataContent(data);</pre></div></div>
 </code></pre><p>Again, the focus here is on detection of data problems. You want something quick and simple that will serve as an early warning sign.</p>
 <p>Unfortunately, the JavaScript primitive <code>NaN</code> is indeed a number, and so additional checks need to be made. As more data comes in, this function will need to be updated to add more checks. This might get a bit tedious, but a little bit of checking can go a long way towards maintaining sanity.</p>
 <h2 id="data-shape-assumptions">Data Shape Assumptions</h2>
-<p>Just as you can test your assumptions about the content of your data elements, it can be a good idea to test your assumptions about the <em>shape</em> of your data. Here, shape just refers to the size and structure of your data. Rows and columns. </p>
+<p>Just as you can test your assumptions about the content of your data elements, it can be a good idea to test your assumptions about the <em>shape</em> of your data. Here, shape just refers to the size and structure of your data. Rows and columns.</p>
 <p>Something simple to perform this check could look like this:</p>
 
             </div>
@@ -151,10 +151,34 @@ checkDataShape(data);</pre></div></div>
               </div>
               <pre><code>=&gt; data is too small
    wrong number of columns
-</code></pre><p>The two assumption functions could easily be combined into one, but its important to look at both aspects of your data.</p>
-<h2 id="see-also">See Also</h2>
+</code></pre><p>The two assumption functions could easily be combined into one, but it’s important to look at both aspects of your data.</p>
+<h2 id="more-assertions">More Assertions</h2>
+<p>If this is an approach that appeals to you, and your data might get really complicated (or really messy)
+you may want to explore using more complicated assertion code.</p>
+<p>One useful library to explore is <a href="http://chaijs.com/api/assert/">Chai</a> which comes with a great
+collection of assertion helpers. These can help you check for more complicated things like whether
+two objects are equal or whether an object has or doesn’t have a property.</p>
+<p>For example:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+assert.deepEqual({ tea: <span class="hljs-string">'green'</span> }, { tea: <span class="hljs-string">'green'</span> });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-literal">true</span>
+</code></pre><h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="http://www.pgbovine.net/parsing-raw-data.htm">Parsing raw data</a> - a great guide that motivated this section</li>
+<li><a href="http://chaijs.com/api/assert/">Chai</a> - Chai’s assert library</li>
 </ul>
 
             </div>

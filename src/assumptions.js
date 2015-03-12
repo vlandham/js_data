@@ -4,7 +4,7 @@
 //
 // But mistakes in data processing, like all other kinds of mistakes, can be painful. They can result in hours of bug hunting, days of reprocessing, and months of crying. Since we know mistakes happen and will continue to happen, what can we do to take away some of the pain?
 //
-// In a word, _padding_. We need some padding to protect us from the bumps and bruises of data processing. And I would suggest that this padding come in the form of simple tests that check the assumptions you have about the shape and contents of your data. 
+// In a word, _padding_. We need some padding to protect us from the bumps and bruises of data processing. And I would suggest that this padding come in the form of simple tests that check the assumptions you have about the shape and contents of your data.
 //
 // Unless there is an extreme performance need, these tests should run in the data processing pipeline. Optimally, they would be easy to turn on and off so that you can disable them if you need to if your code is deployed.
 //
@@ -40,7 +40,7 @@ var data = [{"name":"Dan",
               "superhuman":"TRUE"}
 ];
 
-// Our first entry looks ok, where our second entry has some problems. The age parsing for the immortal [Sleepwalker](http://en.wikipedia.org/wiki/Sleepwalker_%28comics%29) has left him with no age. Also, bad input data has left us with a string in `superhuman`, where we expect a boolean. 
+// Our first entry looks ok, where our second entry has some problems. The age parsing for the immortal [Sleepwalker](http://en.wikipedia.org/wiki/Sleepwalker_%28comics%29) has left him with no age. Also, bad input data has left us with a string in `superhuman`, where we expect a boolean.
 //
 // A simple assumption checking function that could be run on this data could look something like this:
 
@@ -66,7 +66,7 @@ checkDataContent(data);
 //
 // ## Data Shape Assumptions
 //
-// Just as you can test your assumptions about the content of your data elements, it can be a good idea to test your assumptions about the _shape_ of your data. Here, shape just refers to the size and structure of your data. Rows and columns. 
+// Just as you can test your assumptions about the content of your data elements, it can be a good idea to test your assumptions about the _shape_ of your data. Here, shape just refers to the size and structure of your data. Rows and columns.
 //
 // Something simple to perform this check could look like this:
 
@@ -82,9 +82,26 @@ checkDataShape(data);
 //=> data is too small
 //    wrong number of columns
 //```
-// The two assumption functions could easily be combined into one, but its important to look at both aspects of your data.
+// The two assumption functions could easily be combined into one, but it's important to look at both aspects of your data.
+//
+// ## More Assertions
+//
+// If this is an approach that appeals to you, and your data might get really complicated (or really messy)
+// you may want to explore using more complicated assertion code.
+//
+// One useful library to explore is [Chai](http://chaijs.com/api/assert/) which comes with a great
+// collection of assertion helpers. These can help you check for more complicated things like whether
+// two objects are equal or whether an object has or doesn't have a property.
+//
+// For example:
+
+assert.deepEqual({ tea: 'green' }, { tea: 'green' });
+
+// ```
+// => true
+// ```
 //
 // ## See Also
 //
 // - [Parsing raw data](http://www.pgbovine.net/parsing-raw-data.htm) - a great guide that motivated this section
-// 
+// - [Chai](http://chaijs.com/api/assert/) - Chai's assert library
