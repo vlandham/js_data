@@ -40,7 +40,7 @@
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
               <h1 id="checking-data-assumptions">Checking Data Assumptions</h1>
-<p>Data processing is tricky business, full of pitfalls and gotchas. Hopefully the tasks in this guide help with getting started in this process. But you, I, and the entire world will make mistakes. Its natural.</p>
+<p>Data processing is tricky business, full of pitfalls and gotchas. Hopefully the tasks in this guide help with getting started in this process. But you, I, and the entire world will make mistakes. It’s natural.</p>
 <p>But mistakes in data processing, like all other kinds of mistakes, can be painful. They can result in hours of bug hunting, days of reprocessing, and months of crying. Since we know mistakes happen and will continue to happen, what can we do to take away some of the pain?</p>
 <p>In a word, <em>padding</em>. We need some padding to protect us from the bumps and bruises of data processing. And I would suggest that this padding come in the form of simple tests that check the assumptions you have about the shape and contents of your data. </p>
 <p>Unless there is an extreme performance need, these tests should run in the data processing pipeline. Optimally, they would be easy to turn on and off so that you can disable them if you need to if your code is deployed.</p>
@@ -71,7 +71,7 @@
               <p>This will output a given message if the input is not true. Typically assertions <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw">throw</a> errors, but we can just log it for explaining purposes.</p>
 <h2 id="data-content-assumptions">Data Content Assumptions</h2>
 <p>Now let’s use our <code>assert</code> function to check some assumptions about the details of our data.</p>
-<p>We can use lodash’s suite of [type checking functions(<a href="https://lodash.com/docs#isBoolean">https://lodash.com/docs#isBoolean</a>) to take care of performing the checks, passing the result of the check to <code>assert</code> to produce our errors.</p>
+<p>We can use lodash’s suite of <a href="https://lodash.com/docs#isBoolean">type checking functions</a> to take care of performing the checks, passing the result of the check to <code>assert</code> to produce our errors.</p>
 <p>Let’s say our data importing process has made some mistakes:</p>
 
             </div>
@@ -102,10 +102,10 @@
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkDataContent</span><span class="hljs-params">(data)</span> </span>{
   data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
     <span class="hljs-keyword">var</span> dString = <span class="hljs-built_in">JSON</span>.stringify(d);
-    assert(_.isString(d.name), dString + <span class="hljs-string">" has a bad name "</span>);
-    assert(_.isNumber(d.age), dString + <span class="hljs-string">" has a bad age "</span>);
-    assert(!_.isNaN(d.age), dString + <span class="hljs-string">" has a bad age"</span>);
-    assert(_.isBoolean(d.superhuman), dString + <span class="hljs-string">" has a bad superhuman"</span>);
+    assert(_.isString(d.name), dString + <span class="hljs-string">" has a bad name - should be a string"</span>);
+    assert(_.isNumber(d.age), dString + <span class="hljs-string">" has a bad age - should be a number"</span>);
+    assert(!_.isNaN(d.age), dString + <span class="hljs-string">" has a bad age - should not be NaN"</span>);
+    assert(_.isBoolean(d.superhuman), dString + <span class="hljs-string">" has a bad superhuman - should be boolean"</span>);
   });
 }
 
@@ -120,8 +120,8 @@ checkDataContent(data);</pre></div></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <pre><code>=&gt; {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Sleepwalker"</span>,<span class="hljs-string">"age"</span>:<span class="hljs-literal">null</span>,<span class="hljs-string">"superhuman"</span>:<span class="hljs-string">"TRUE"</span>} has a bad age
-   {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Sleepwalker"</span>,<span class="hljs-string">"age"</span>:<span class="hljs-literal">null</span>,<span class="hljs-string">"superhuman"</span>:<span class="hljs-string">"TRUE"</span>} has a bad superhuman
+              <pre><code>=&gt; {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Sleepwalker"</span>,<span class="hljs-string">"age"</span>:<span class="hljs-literal">null</span>,<span class="hljs-string">"superhuman"</span>:<span class="hljs-string">"TRUE"</span>} has a bad age - should not be <span class="hljs-literal">NaN</span>
+   {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Sleepwalker"</span>,<span class="hljs-string">"age"</span>:<span class="hljs-literal">null</span>,<span class="hljs-string">"superhuman"</span>:<span class="hljs-string">"TRUE"</span>} has a bad superhuman - should be boolean
 </code></pre><p>Again, the focus here is on detection of data problems. You want something quick and simple that will serve as an early warning sign.</p>
 <p>Unfortunately, the JavaScript primitive <code>NaN</code> is indeed a number, and so additional checks need to be made. As more data comes in, this function will need to be updated to add more checks. This might get a bit tedious, but a little bit of checking can go a long way towards maintaining sanity.</p>
 <h2 id="data-shape-assumptions">Data Shape Assumptions</h2>
@@ -150,7 +150,7 @@ checkDataShape(data);</pre></div></div>
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <pre><code>=&gt; data is too small
-  wrong number of columns
+   wrong number of columns
 </code></pre><p>The two assumption functions could easily be combined into one, but its important to look at both aspects of your data.</p>
 <h2 id="next-task">Next Task</h2>
 <p><a href="tools.html">Useful Tools</a></p>

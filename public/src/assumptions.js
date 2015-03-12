@@ -1,6 +1,6 @@
 // # Checking Data Assumptions
 //
-// Data processing is tricky business, full of pitfalls and gotchas. Hopefully the tasks in this guide help with getting started in this process. But you, I, and the entire world will make mistakes. Its natural.
+// Data processing is tricky business, full of pitfalls and gotchas. Hopefully the tasks in this guide help with getting started in this process. But you, I, and the entire world will make mistakes. It's natural.
 //
 // But mistakes in data processing, like all other kinds of mistakes, can be painful. They can result in hours of bug hunting, days of reprocessing, and months of crying. Since we know mistakes happen and will continue to happen, what can we do to take away some of the pain?
 //
@@ -28,7 +28,7 @@ function assert(isTrue, message) {
 //
 // Now let's use our `assert` function to check some assumptions about the details of our data.
 //
-// We can use lodash's suite of [type checking functions(https://lodash.com/docs#isBoolean) to take care of performing the checks, passing the result of the check to `assert` to produce our errors.
+// We can use lodash's suite of [type checking functions](https://lodash.com/docs#isBoolean) to take care of performing the checks, passing the result of the check to `assert` to produce our errors.
 //
 // Let's say our data importing process has made some mistakes:
 //
@@ -47,17 +47,17 @@ var data = [{"name":"Dan",
 function checkDataContent(data) {
   data.forEach(function(d) {
     var dString = JSON.stringify(d);
-    assert(_.isString(d.name), dString + " has a bad name ");
-    assert(_.isNumber(d.age), dString + " has a bad age ");
-    assert(!_.isNaN(d.age), dString + " has a bad age");
-    assert(_.isBoolean(d.superhuman), dString + " has a bad superhuman");
+    assert(_.isString(d.name), dString + " has a bad name - should be a string");
+    assert(_.isNumber(d.age), dString + " has a bad age - should be a number");
+    assert(!_.isNaN(d.age), dString + " has a bad age - should not be NaN");
+    assert(_.isBoolean(d.superhuman), dString + " has a bad superhuman - should be boolean");
   });
 }
 
 checkDataContent(data);
 //```
-//=> {"name":"Sleepwalker","age":null,"superhuman":"TRUE"} has a bad age
-//    {"name":"Sleepwalker","age":null,"superhuman":"TRUE"} has a bad superhuman
+//=> {"name":"Sleepwalker","age":null,"superhuman":"TRUE"} has a bad age - should not be NaN
+//    {"name":"Sleepwalker","age":null,"superhuman":"TRUE"} has a bad superhuman - should be boolean
 //```
 //
 // Again, the focus here is on detection of data problems. You want something quick and simple that will serve as an early warning sign.
@@ -80,7 +80,7 @@ function checkDataShape(data) {
 checkDataShape(data);
 //```
 //=> data is too small
-//   wrong number of columns
+//    wrong number of columns
 //```
 // The two assumption functions could easily be combined into one, but its important to look at both aspects of your data.
 //
