@@ -42,7 +42,7 @@
               <h1 id="working-with-time">Working with Time</h1>
 <p>Time is one of those tricky programming things that seems like it should be easy, but usually turns out not to be. We will use D3’s built in <a href="https://github.com/mbostock/d3/wiki/Time-Formatting">time formating</a> and <a href="https://github.com/mbostock/d3/wiki/Time-Intervals">interval</a> functions. We will also take a look at the powerful <a href="http://momentjs.com/">Moment.js</a> library, for when you just need more time power.</p>
 <h2 id="string-to-date">String to Date</h2>
-<p>The first task when dealing with dates is usually getting a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Data object</a> out of a string. Most of the time, your data will have dates or times in an (mostly) arbitrary format, and you need to force that mess into an actual date. </p>
+<p>The first task when dealing with dates is usually getting a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date object</a> out of a string. Most of the time, your data will have dates or times in an (mostly) arbitrary format, and you need to force that mess into an actual date. </p>
 <p>D3 has <a href="https://github.com/mbostock/d3/wiki/Time-Formatting#format">d3.time.format</a> which provides a way to do this parsing. It was a little confusing for me the first time I tried it. You use this function to create a string parser, and then use the parser to actually convert the string. </p>
 <p>In our <a href="group_data.html">nesting example</a>, we saw data that had dates as strings:</p>
 

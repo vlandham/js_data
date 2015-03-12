@@ -24,6 +24,7 @@ Current contributors:
 - [Jim Vallandingham](https://twitter.com/vlandham)
 - [Irene Ros](https://twitter.com/ireneros)
 - [Yannick Assogba](https://twitter.com/tafsiri)
+- [Earle Castledine](https://twitter.com/mrspeaker)
 - [Lynn Cherny](https://twitter.com/arnicas)
 
 Want to add your own tips and tricks that you use to apply the power of JS to data processing?

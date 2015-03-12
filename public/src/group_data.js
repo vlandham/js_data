@@ -64,7 +64,7 @@ expensesByName = [
 //
 // The nested structure can be great for visualizing your data, but might be a little underwhelming for analytical applications. Never fear! [d3.rollup](https://github.com/mbostock/d3/wiki/Arrays#nest_rollup) is here!
 //
-// With `rollup`, you provide a function that takes the array of values for each group and produces a value or values based on them. This provides for some very flexible _group by_ functionality. 
+// With `rollup`, you provide a function that takes the array of values for each group and it produces a value based on that array. This provides for some very flexible _group by_ functionality. 
 //
 // Here is a simple one to get back the counts for each name:
 

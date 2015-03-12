@@ -169,7 +169,7 @@ copyOfData.salary = +copyOfData.salary;
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <pre><code>=&gt; {name: <span class="hljs-string">"Carl"</span>, age: <span class="hljs-number">48</span>, salary: <span class="hljs-number">12300</span>}
-</code></pre><p>By default, the <code>clone</code> function will not copy over nested objects. Instead These nested objects are simply passed by referenced - meaning the original and the copy will still share them. </p>
+</code></pre><p>By default, the <code>clone</code> function will not copy over nested objects. Instead these nested objects are simply passed by referenced - meaning the original and the copy will still share them. </p>
 
             </div>
             
@@ -291,9 +291,9 @@ deepCopy.stats.age = +deepCopy.stats.age;
               <pre><code>=&gt; [{<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
    {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>,<span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}]
 </code></pre><h2 id="sorting">Sorting</h2>
-<p>Similar to filtering, sorting data based on some attribute is someting you’ll probably want to do frequently. </p>
+<p>Similar to filtering, sorting data based on attributes is something you’ll want to do frequently. </p>
 <p>The built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">sort</a> for arrays can do this. A caveat to this function is that, unlike filter, map, and other functions, this <em>modifies the array you are sorting in place</em>, instead of returning a new array with the objects sorted. </p>
-<p>To sort an array, you need a comparator function. This is a function that takes two pieces of data and indicates which one you want higher in the list. The <em>comparator function way</em> to do this is to return a negative value if the first value should go higher then the second value, and a positive value if the second value should go higher. If they are equal, and you don’t care, then return a 0.</p>
+<p>To sort an array, you need a comparator function. This is a function that takes two pieces of data and indicates which one you want higher in the list. The comparator-function-way to do this is to return a negative value if the first value should go higher then the second value, and a positive value if the second value should go higher. If they are equal, and you don’t care, then return a 0.</p>
 <p>Let’s see it in action. Here is a way to sort by population in a descending order (larger populations come first).</p>
 
             </div>
@@ -422,7 +422,7 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
               </div>
               <p>The first parameter to <code>reduce</code> is the callback function that will return the running “total” of the reduction. This function is passed in the previous value returned from the last time the callback was called. Here, that parameter - <code>sum</code> provides the running total as we move through the array. The second parameter to the callback <code>d</code> is the current value of the array we are working on. </p>
 <p><code>reduce</code> can take an initial value, which is the second parameter to the <code>reduce</code> call. For this example, we start the sum at 0. If there is no starting value provided, then for the first execution of the callback (when there is no previous value) the first parameter to the callback will be the value of the first element of the array, and the reduction starts with the second element.</p>
-<p>It always makes more sense to me to provide a starting value - unless you know what you are doing. You can also get the current index into the array (and the whole array itself) if that is useful to you</p>
+<p>It always makes more sense to me to provide a starting value - unless you know what you are doing. You can also get the current index into the array (and the whole array itself) if that is useful to you.</p>
 
             </div>
             
@@ -443,19 +443,7 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <pre><code>=&gt; seattle is cool. <span class="hljs-keyword">new</span> york sucks. boston is cool. kansas city sucks.
-</code></pre>
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-23">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
-              </div>
-              <p><em>And summing over a variable is only used for example. You can always just use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_sum">d3.sum</a> for this instead.</em></p>
+</code></pre><p><em>And summing over a variable is only used for example. You can always just use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_sum">d3.sum</a> for this instead.</em></p>
 <h2 id="chaining-functions">Chaining Functions</h2>
 <p>One of the great things about these more <em>functional</em> functions is that it is possible to chain them together into one big data wrangling pipeline!</p>
 
@@ -469,11 +457,11 @@ data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>
         </li>
         
         
-        <li id="section-24">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <pre><code>=&gt; [<span class="hljs-string">"boston"</span>, <span class="hljs-string">"seattle"</span>, <span class="hljs-string">"new york"</span>]
 </code></pre><p>Since we are using <code>sort</code> after <code>filter</code>, sort is working on the returned array from <code>filter</code>. The sort function at least is nice enough to also return the array, so chaining is still possible.</p>

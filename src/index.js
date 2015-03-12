@@ -21,6 +21,7 @@
 //
 // - ### [Strings and Regular Expressions](strings.html)
 // - ### [Working with Time](time.html)
+// - ### [Checking Data Assumptions](assumptions.html)
 //
 // ### Code
 //

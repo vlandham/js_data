@@ -1,6 +1,6 @@
 // # Working with Strings
 //
-// String cleaning is something you end up doing quite a lot. Hopefully this task will help make the process less painful. There are a near infinite transformations you might want to do with strings, so we won't get to everything, but hopefully this will be a good starting point for common manipulations that will come up again and again.
+// String cleaning is something you end up doing quite a lot. Hopefully this task will help make the process less painful. There are a near infinite transformations you might want to do with strings, so we won't get to everything, but this will serve as a starting point for common manipulations that will come up again and again.
 //
 // We will start with generic JavaScript string functions and add in a bit of [lodash](https://lodash.com/) magic to make things easier.
 //

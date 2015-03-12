@@ -4,7 +4,7 @@
 //
 // This guide is broken up into a number of tasks, which we can think of as little modules or _recipes_.
 //
-// Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. Tasks attempt to be self-contained and stay focused on the, well, _task on hand_. 
+// Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. Tasks attempt to be self-contained and stay focused on the, well, _task at hand_. 
 //
 // This guide was built with for client side data processing (in the browser), but could easily be used in a server side (Node) application with a bit of tweaking.
 //
@@ -14,7 +14,7 @@
 //
 // [D3.js](http://d3js.org/) is largely known for its data visualization capabilities - and for good reason. It is quickly becoming the de facto standard for interactive visualization on the web.
 //
-// Its core feature of binding data to visual representations happens to require a lot of manipulation of said data. So, while this toolkit is based around visualization, it also seems to me to be well suited for data munging as well!
+// Its core feature of binding data to visual representations happens to require a lot of manipulation of said data. Thus, while this toolkit is focused around visualization, it is well suited for data munging as well!
 //
 // And, a typical output for data manipulation is at least some sort of visualization of that data, in which case you are all ready to go.
 //
