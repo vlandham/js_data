@@ -49,6 +49,21 @@ header h3 {
   margin-top: -5px;
   color: #4D4C4C;
 }
+
+#footer {
+  position: fixed;
+  height: 25px;
+  background-color: #fff;
+  border-top: 1px solid #cfcfcf;
+  bottom: 0;
+  left: 40px;
+  right: 40px;
+  text-align: center;
+  font-size: .7em;
+  color: #aaa;
+  padding-top: 3px;
+}
+
 img {
   max-width:100%;
 }

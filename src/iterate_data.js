@@ -66,7 +66,7 @@ console.log(copyOfData);
 //=> {name: "Carl", age: 48, salary: 12300}
 // ```
 // 
-// By default, the `clone` function will not copy over nested objects. Instead These nested objects are simply passed by referenced - meaning the original and the copy will still share them. 
+// By default, the `clone` function will not copy over nested objects. Instead these nested objects are simply passed by referenced - meaning the original and the copy will still share them. 
 var dataObject = {"name":"Saul", "stats":{"age":"55"}};
 var shallowCopy = _.clone(dataObject);
 shallowCopy.stats.age = +shallowCopy.stats.age;
@@ -134,11 +134,11 @@ console.log(JSON.stringify(large_land));
 //
 // ## Sorting
 //
-// Similar to filtering, sorting data based on some attribute is someting you'll probably want to do frequently. 
+// Similar to filtering, sorting data based on attributes is something you'll want to do frequently. 
 //
 // The built in [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) for arrays can do this. A caveat to this function is that, unlike filter, map, and other functions, this _modifies the array you are sorting in place_, instead of returning a new array with the objects sorted. 
 //
-// To sort an array, you need a comparator function. This is a function that takes two pieces of data and indicates which one you want higher in the list. The _comparator function way_ to do this is to return a negative value if the first value should go higher then the second value, and a positive value if the second value should go higher. If they are equal, and you don't care, then return a 0.
+// To sort an array, you need a comparator function. This is a function that takes two pieces of data and indicates which one you want higher in the list. The comparator-function-way to do this is to return a negative value if the first value should go higher then the second value, and a positive value if the second value should go higher. If they are equal, and you don't care, then return a 0.
 //
 // Let's see it in action. Here is a way to sort by population in a descending order (larger populations come first).
 //
@@ -202,7 +202,7 @@ console.log(landSum);
 //
 // `reduce` can take an initial value, which is the second parameter to the `reduce` call. For this example, we start the sum at 0. If there is no starting value provided, then for the first execution of the callback (when there is no previous value) the first parameter to the callback will be the value of the first element of the array, and the reduction starts with the second element.
 //
-// It always makes more sense to me to provide a starting value - unless you know what you are doing. You can also get the current index into the array (and the whole array itself) if that is useful to you
+// It always makes more sense to me to provide a starting value - unless you know what you are doing. You can also get the current index into the array (and the whole array itself) if that is useful to you.
 
 var weirdString = data.reduce(function(str, d, i) { 
   var ending = (i % 2 === 0) ? " is cool." : " sucks." ;
@@ -212,7 +212,6 @@ console.log(weirdString);
 // ```
 //=> seattle is cool. new york sucks. boston is cool. kansas city sucks.
 // ```
-
 // _And summing over a variable is only used for example. You can always just use [d3.sum](https://github.com/mbostock/d3/wiki/Arrays#d3_sum) for this instead._
 //
 // ## Chaining Functions

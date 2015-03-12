@@ -4,7 +4,7 @@
 //
 // ## String to Date
 //
-// The first task when dealing with dates is usually getting a [Data object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) out of a string. Most of the time, your data will have dates or times in an (mostly) arbitrary format, and you need to force that mess into an actual date. 
+// The first task when dealing with dates is usually getting a [Date object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) out of a string. Most of the time, your data will have dates or times in an (mostly) arbitrary format, and you need to force that mess into an actual date. 
 //
 // D3 has [d3.time.format](https://github.com/mbostock/d3/wiki/Time-Formatting#format) which provides a way to do this parsing. It was a little confusing for me the first time I tried it. You use this function to create a string parser, and then use the parser to actually convert the string. 
 //
@@ -88,7 +88,6 @@ console.log(hourParser(hour));
 // ```
 //=> 11:00PM
 // ```
-// TODO
 //
 // ## Moment.js
 //
@@ -98,7 +97,7 @@ console.log(hourParser(hour));
 //
 // ## Next Task
 //
-// That's it for now!
+// [Checking Data Assumptions](assumptions.html)
 //
 // ## See Also
 //

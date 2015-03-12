@@ -101,10 +101,6 @@ assert.deepEqual({ tea: 'green' }, { tea: 'green' });
 // => true
 // ```
 //
-// ## Next Task
-//
-// [Useful Tools](tools.html)
-//
 // ## See Also
 //
 // - [Parsing raw data](http://www.pgbovine.net/parsing-raw-data.htm) - a great guide that motivated this section
