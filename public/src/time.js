@@ -88,7 +88,6 @@ console.log(hourParser(hour));
 // ```
 //=> 11:00PM
 // ```
-// TODO
 //
 // ## Moment.js
 //
@@ -98,7 +97,7 @@ console.log(hourParser(hour));
 //
 // ## Next Task
 //
-// That's it for now!
+// [Checking Data Assumptions](assumptions.html)
 //
 // ## See Also
 //
