@@ -84,10 +84,6 @@ checkDataShape(data);
 //```
 // The two assumption functions could easily be combined into one, but its important to look at both aspects of your data.
 //
-// ## Next Task
-//
-// [Useful Tools](tools.html)
-//
 // ## See Also
 //
 // - [Parsing raw data](http://www.pgbovine.net/parsing-raw-data.htm) - a great guide that motivated this section
