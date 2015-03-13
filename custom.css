@@ -109,7 +109,13 @@ pre, tt, code {
   font-family: 'M+ 1mn', Menlo, Monaco, Consolas, "Lucida Console", monospace;
   margin: 0; padding: 0;
 }
-
+ul.tasks {
+  font-size: 1.4em;
+  line-height: 1.4em;
+}
+a:hover {
+  color: #0071BC;
+}
 .aside::before {
   content: "\022CF    ";
   font-size: 1.5em;
@@ -156,7 +162,6 @@ ul.sections {
   padding:0 0 5px 0;;
   margin:0;
 }
-
 /*
   Force border-box so that % widths fit the parent
   container without overlap because of margin/padding.
