@@ -125,7 +125,9 @@ d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="h
               </div>
               <pre><code>=&gt; [{<span class="hljs-string">"city  "</span>:<span class="hljs-string">"  seattle  "</span>,<span class="hljs-string">"state "</span>:<span class="hljs-string">"WA "</span>,<span class="hljs-string">"population"</span>:<span class="hljs-string">" 652405 "</span>,<span class="hljs-string">"land area"</span>:<span class="hljs-string">"83.9   "</span>},
      {<span class="hljs-string">"city  "</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state "</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-string">"8405837"</span>,<span class="hljs-string">"land area"</span>:<span class="hljs-string">"  302.6"</span>}]
-</code></pre><p>Note the spaces in the property names as well as the values. In cases like this, it might be best to <a href="iterate_data.html">map</a> the data back to a clean version. Lodash’s <a href="https://lodash.com/docs#trim">trim</a> can help. It removes that unsightly whitespace from the front and back of your strings.</p>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>Note the spaces in the property names as well as the values. In cases like this, it might be best to <a href="iterate_data.html">map</a> the data back to a clean version. Lodash’s <a href="https://lodash.com/docs#trim">trim</a> can help. It removes that unsightly whitespace from the front and back of your strings.</p>
 <p>Here is a version of the data loading function that removes whitespace. It uses</p>
 
             </div>
@@ -153,7 +155,9 @@ d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="h
               </div>
               <pre><code>=&gt;  [{<span class="hljs-string">"city"</span>:<span class="hljs-string">"seattle"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"WA"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-string">"652405"</span>,<span class="hljs-string">"land area"</span>:<span class="hljs-string">"83.9"</span>},
       {<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>,<span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>,<span class="hljs-string">"population"</span>:<span class="hljs-string">"8405837"</span>,<span class="hljs-string">"land area"</span>:<span class="hljs-string">"302.6"</span>}]
-</code></pre><p>The strings are now clear of those pesky spaces.</p>
+</code></pre><div class="aside">This code is using d3.js and lodash</div>
+
+<p>The strings are now clear of those pesky spaces.</p>
 <h2 id="find-and-replace">Find and Replace</h2>
 <p>Extracting data from strings can sometimes mean extracting pieces of strings. Finding out if a string contains a keyword or sub-string of interest is a first step in quantifying the content of a body of text.</p>
 <p><a href="">indexOf</a> can be used to perform this searching. You pass it a sub-string, and it’ll tell you the location in string you are calling it where that sub-string starts. <code>-1</code> is returned if the sub-string can’t be found. You can use this to build a little string finder, by comparing the return value to <code>-1</code>.</p>
@@ -274,11 +278,12 @@ same snippet of html:</p>
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-string">'&lt;div class="person"&gt;&lt;span class="name"&gt;Birdman&lt;/span&gt;&lt;span class="occupation"&gt;Imaginary Super Hero&lt;/span&gt;&lt;/div&gt;'</span>
-</code></pre>
+</code></pre><div class="aside">This code is using lodash</div>
+
+
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> anotherPerson = { name : <span class="hljs-string">"James. James Bond"</span>, occupation: <span class="hljs-string">"Spy"</span> };
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> anotherPerson = { name : <span class="hljs-string">"James. James Bond"</span>, occupation: <span class="hljs-string">"Spy"</span> };
 <span class="hljs-built_in">console</span>.log(templateFunction(anotherPerson));</pre></div></div>
             
         </li>
@@ -310,5 +315,5 @@ same snippet of html:</p>
   <section id="footer">
     Made with ♥ by <a href="http://bocoup.com/datavis">Bocoup DataVis</a>.
   </section>
-  <script type="text/javascript" src="src/strings.js"></script></body>
+  </body>
 </html>

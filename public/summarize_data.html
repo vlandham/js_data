@@ -40,7 +40,7 @@
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
               <h1 id="summarizing-data">Summarizing Data</h1>
-<p>With the data <a href="read_data.html">loaded</a>, we want to take a quick look at what we have. D3 has a number of tools to use for quick data exploration. </p>
+<p>With the data <a href="read_data.html">loaded</a>, we want to take a quick look at what we have. D3 has a number of tools to use for quick data exploration.</p>
 <p>To start, let’s pretend we have loaded up a csv file - and have a dataset that looks something like:</p>
 
             </div>
@@ -80,11 +80,12 @@
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-number">48.3</span>
-</code></pre>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> maxLand = d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> maxLand = d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
 <span class="hljs-built_in">console</span>.log(maxLand);</pre></div></div>
             
         </li>
@@ -97,19 +98,9 @@
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-number">315</span>
-</code></pre>
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-5">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
-              </div>
-              <p>If you want both of them at the same time, you can use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_extent">d3.extent</a></p>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>If you want both of them at the same time, you can use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_extent">d3.extent</a></p>
 
             </div>
             
@@ -120,14 +111,16 @@
         </li>
         
         
-        <li id="section-6">
+        <li id="section-5">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <pre><code>=&gt; [<span class="hljs-number">48.3</span>, <span class="hljs-number">315</span>]
-</code></pre><p>This returns an array with the first element the minimum value and the second element the maximum.</p>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>This returns an array with the first element the minimum value and the second element the maximum.</p>
 <h2 id="summary-statistics">Summary Statistics</h2>
 <p>D3 provides a few basic tools to analyze your data, all using the same format as the min and max functions. Simply provide the property you would like to analyze, and you are good to go.</p>
 <p><a href="https://github.com/mbostock/d3/wiki/Arrays#d3_mean">d3.mean</a></p>
@@ -141,14 +134,16 @@
         </li>
         
         
-        <li id="section-7">
+        <li id="section-6">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-number">187.45</span>
-</code></pre><p><a href="https://github.com/mbostock/d3/wiki/Arrays#d3_median">d3.median</a></p>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p><a href="https://github.com/mbostock/d3/wiki/Arrays#d3_median">d3.median</a></p>
 
             </div>
             
@@ -159,14 +154,16 @@
         </li>
         
         
-        <li id="section-8">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-number">193.25</span>
-</code></pre><p><a href="https://github.com/mbostock/d3/wiki/Arrays#d3_deviation">d3.deviation</a> - for standard deviation</p>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p><a href="https://github.com/mbostock/d3/wiki/Arrays#d3_deviation">d3.deviation</a> - for standard deviation</p>
 
             </div>
             
@@ -177,14 +174,16 @@
         </li>
         
         
-        <li id="section-9">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-number">140.96553952414519</span>
-</code></pre><h2 id="next-task">Next Task</h2>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<h2 id="next-task">Next Task</h2>
 <p><a href="iterate_data.html">Iterating and Reducing</a></p>
 <h2 id="see-also">See Also</h2>
 <ul>
@@ -201,5 +200,5 @@
   <section id="footer">
     Made with ♥ by <a href="http://bocoup.com/datavis">Bocoup DataVis</a>.
   </section>
-  <script type="text/javascript" src="src/summarize_data.js"></script></body>
+  </body>
 </html>
