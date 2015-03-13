@@ -30,6 +30,11 @@ module.exports = function(grunt) {
       cwd: "assets/",
       src: "CNAME",
       dest: "public/"
+    },
+    favicon: {
+      expand: false,
+      src: "favicon.ico",
+      dest: "public/"
     }
   });
 
