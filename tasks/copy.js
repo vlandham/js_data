@@ -24,6 +24,12 @@ module.exports = function(grunt) {
       cwd: "img/",
       src: ["**"],
       dest: "public/img"
+    },
+    cname: {
+      expand: true,
+      cwd: "assets/",
+      src: "CNAME",
+      dest: "public/"
     }
   });
 
