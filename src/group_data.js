@@ -1,6 +1,6 @@
 // # Grouping Data
 //
-// Grouping data is an important capability to have when doing data analysis. Often times, you will want to break apart the data by a categorical variable and look at statistics or details for each group. 
+// Grouping data is an important capability to have when doing data analysis. Often times, you will want to break apart the data by a categorical variable and look at statistics or details for each group.
 //
 // D3 includes the powerful [d3.nest](https://github.com/mbostock/d3/wiki/Arrays#-nest) functionality to produce these groupings with a minimal amount of code.
 //
@@ -39,6 +39,8 @@ var expensesByName = d3.nest()
   .key(function(d) { return d.name; })
   .entries(expenses);
 
+// <div class="aside">This code is using d3.js</div>
+//
 // Which results in a nested data structure:
 
 expensesByName = [
@@ -58,13 +60,13 @@ expensesByName = [
 
 // `expensesByName` is an array of objects. Each object has a `key` property - which is what we used as the grouping value using the `key` function. Here, we used the values associated with the `name` property as the key.
 //
-// The `values` property of these entries is an array containing all the original data objects that had that key. 
+// The `values` property of these entries is an array containing all the original data objects that had that key.
 //
-// ## Summarizing Groups 
+// ## Summarizing Groups
 //
 // The nested structure can be great for visualizing your data, but might be a little underwhelming for analytical applications. Never fear! [d3.rollup](https://github.com/mbostock/d3/wiki/Arrays#nest_rollup) is here!
 //
-// With `rollup`, you provide a function that takes the array of values for each group and it produces a value based on that array. This provides for some very flexible _group by_ functionality. 
+// With `rollup`, you provide a function that takes the array of values for each group and it produces a value based on that array. This provides for some very flexible _group by_ functionality.
 //
 // Here is a simple one to get back the counts for each name:
 
@@ -76,6 +78,7 @@ console.log(JSON.stringify(expensesCount));
 // ```
 //=> [{"key":"jim","values":2},{"key":"carl","values":1},{"key":"stacy","values":3}]
 // ```
+// <div class="aside">This code is using d3.js</div>
 //
 // The individual records are gone (for better or worse) and in their place are the values returned by our rollup function. The naming stays the same (_key_ and _values_) but the content is yours to specify. Note that the value passed into the `rollup` callback is the array of values for that key.
 //
@@ -87,8 +90,9 @@ var expensesAvgAmount = d3.nest()
   .entries(expenses);
 console.log(JSON.stringify(expensesAvgAmount));
 // ```
-//=> [{"key":"jim","values":39.5},{"key":"carl","values":120.11},{"key":"stacy","values":30.3}] 
+//=> [{"key":"jim","values":39.5},{"key":"carl","values":120.11},{"key":"stacy","values":30.3}]
 // ```
+// <div class="aside">This code is using d3.js</div>
 //
 // Pretty cool right? Any roll-up function you can think of, you can make happen. And you don't need to stop at just one. `rollup` can return an object, so you can easily produce multiple metrics on your groups.
 
@@ -97,7 +101,7 @@ var expenseMetrics = d3.nest()
   .rollup(function(v) { return {
     count: v.length,
     total: d3.sum(v, function(d) { return d.amount; }),
-    avg: d3.mean(v, function(d) { return d.amount; }) 
+    avg: d3.mean(v, function(d) { return d.amount; })
   }; })
   .entries(expenses);
 console.log(JSON.stringify(expenseMetrics));
@@ -106,6 +110,7 @@ console.log(JSON.stringify(expenseMetrics));
 //     {"key":"carl","values":{"count":1,"total":120.11,"avg":120.11}},
 //     {"key":"stacy","values":{"count":3,"total":90.9,"avg":30.3}}]
 // ```
+// <div class="aside">This code is using d3.js</div>
 //
 // ## Map Output
 //
@@ -119,6 +124,7 @@ console.log(JSON.stringify(expensesTotal));
 // ```
 //=> {"jim":79,"carl":120.11,"stacy":90.9}
 // ```
+// <div class="aside">This code is using d3.js</div>
 //
 // ## Multi-Level Nesting
 //
@@ -137,8 +143,9 @@ console.log(JSON.stringify(expensesTotalByDay));
 //     "carl":{"11/12/2015":120.11},
 //     "stacy":{"01/04/2016":46.1,"01/05/2016":44.8}}
 // ```
+// <div class="aside">This code is using d3.js</div>
 //
-// Now the `rollup` callback is called for each of our smaller subgroups. 
+// Now the `rollup` callback is called for each of our smaller subgroups.
 //
 // The order of the `nest.key` calls determines the order of the grouping. If we reverse our keys, we get the totals by date and then by name:
 //
@@ -154,6 +161,8 @@ console.log(JSON.stringify(expensesTotalByDay));
 //     "01/04/2016":{"stacy":46.1},
 //     "01/05/2016":{"stacy":44.8}}
 // ```
+// <div class="aside">This code is using d3.js</div>
+//
 // Here the values are the same, but the mapping might be more convenient, depending on the questions you are trying to answer.
 //
 // ## Derived Key Values
@@ -170,6 +179,8 @@ console.log(JSON.stringify(expensesByYear));
 // ```
 //=> {"2015":199.11,"2016":90.9}
 //```
+// <div class="aside">This code is using d3.js</div>
+//
 // All this flexibility provides for a powerful toolkit for exploring your data.
 //
 // ## Next Task

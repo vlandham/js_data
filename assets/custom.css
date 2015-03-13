@@ -110,6 +110,18 @@ pre, tt, code {
   margin: 0; padding: 0;
 }
 
+.aside::before {
+  content: "\022CF    ";
+  font-size: 1.5em;
+  line-height: 1em;
+  font-style: normal;
+}
+.aside {
+  font-size: 0.9em;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 20px;
+}
 .annotation pre {
   display: block;
   margin: 0;
