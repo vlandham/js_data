@@ -417,3 +417,47 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-chunk {
   color: #aaa;
 }
+.precode { display: none; }
+/* Code blocks */
+.ace-result {
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+  color: #63881c;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  line-height: 1.3em!important;
+  font-family: 'Monaco';
+  border-top: 2px solid #f7f7f7;
+  background-color: #fff;
+  border-top: none;
+  padding: 10px;
+}
+.codeblock .ace-buttons {
+  margin-bottom: 10px;
+  height: 17px;
+}
+.codeblock .button {
+  font-family: "facitweb", "Helvetica Neue", "Helvetica", san-serif;
+  margin-right: 5px;
+  padding: 5px;
+  cursor: pointer;
+  background-color: #333;
+  color: #fff;
+
+  float: right;
+  font-size: 11px;
+  line-height: 16px;
+  padding: 2px 6px;
+  /*position: relative;
+  margin-bottom: -20px;
+  margin-right: 10px;*/
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  z-index: 1;
+  top: 8px;
+}
+
+.codeblock .button:hover {
+  background-color: #2685ED;
+}

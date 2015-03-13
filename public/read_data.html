@@ -103,10 +103,17 @@ kansas city,MO,<span class="hljs-number">467007</span>,<span class="hljs-number"
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
-  <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
-});</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 4 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+d3.csv("data/cities.csv", function(data) {
+  console.log(data[0]);
+});
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -126,14 +133,21 @@ d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-fun
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
-  data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 5 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+d3.csv("data/cities.csv", function(data) {
+  data.forEach(function(d) {
     d.population = +d.population;
-    d[<span class="hljs-string">"land area"</span>] = +d[<span class="hljs-string">"land area"</span>];
+    d["land area"] = +d["land area"];
   });
-  <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
-});</pre></div></div>
+  console.log(data[0]);
+});
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -152,17 +166,24 @@ d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-fun
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
-  <span class="hljs-keyword">return</span> {
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 6 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+d3.csv("data/cities.csv", function(d) {
+  return {
     city : d.city,
     state : d.state,
     population : +d.population,
-    land_area : +d[<span class="hljs-string">"land area"</span>]
+    land_area : +d["land area"]
   };
-}, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
-  <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
-});</pre></div></div>
+}, function(data) {
+  console.log(data[0]);
+});
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -204,9 +225,16 @@ komodo dragon    reptile    <span class="hljs-number">150</span>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>d3.tsv(<span class="hljs-string">"data/animals.tsv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
-  <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
-});</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 8 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  d3.tsv("data/animals.tsv", function(data) {
+  console.log(data[0]);
+});
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -234,8 +262,16 @@ komodo dragon|reptile|<span class="hljs-number">150</span>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> psv = d3.dsv(<span class="hljs-string">"|"</span>, <span class="hljs-string">"text/plain"</span>);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 9 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  
+var psv = d3.dsv("|", "text/plain");
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -250,10 +286,17 @@ komodo dragon|reptile|<span class="hljs-number">150</span>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-psv(<span class="hljs-string">"data/animals_piped.txt"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
-  <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">1</span>]);
-});</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 10 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+psv("data/animals_piped.txt", function(data) {
+  console.log(data[1]);
+});
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -287,9 +330,16 @@ psv(<span class="hljs-string">"data/animals_piped.txt"</span>, <span class="hljs
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>d3.json(<span class="hljs-string">"data/employees.json"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
-  <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
-});</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 11 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  d3.json("data/employees.json", function(data) {
+  console.log(data[0]);
+});
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -310,18 +360,25 @@ psv(<span class="hljs-string">"data/animals_piped.txt"</span>, <span class="hljs
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 12 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
 queue()
-  .defer(d3.csv, <span class="hljs-string">"data/cities.csv"</span>)
-  .defer(d3.tsv, <span class="hljs-string">"data/animals.tsv"</span>)
+  .defer(d3.csv, "data/cities.csv")
+  .defer(d3.tsv, "data/animals.tsv")
   .await(analyze);
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">analyze</span><span class="hljs-params">(error, cities, animals)</span> </span>{
-  <span class="hljs-keyword">if</span>(error) { <span class="hljs-built_in">console</span>.log(error); }
+function analyze(error, cities, animals) {
+  if(error) { console.log(error); }
 
-  <span class="hljs-built_in">console</span>.log(cities[<span class="hljs-number">0</span>]);
-  <span class="hljs-built_in">console</span>.log(animals[<span class="hljs-number">0</span>]);
-}</pre></div></div>
+  console.log(cities[0]);
+  console.log(animals[0]);
+}
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -359,5 +416,9 @@ queue()
   <section id="footer">
     Made with ♥ by <a href="http://bocoup.com/datavis">Bocoup DataVis</a>.
   </section>
-  </body>
+  <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/underscore.deferred/underscore.deferred.js"></script>
+  <script type="text/javascript" src="lib/ace-builds/src-min-noconflict/ace.js"></script>
+  <script type="text/javascript" src="lib/codeblocks/acify.js"></script>
+  <script type="text/javascript" src="src/read_data.js"></script></body>
 </html>

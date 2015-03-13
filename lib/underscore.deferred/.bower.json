@@ -1,0 +1,14 @@
+{
+  "name": "underscore.deferred",
+  "homepage": "https://github.com/wookiehangover/underscore.deferred",
+  "_release": "f17bc65cc8",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "f17bc65cc8b1ca9aaf9da9378e39ad1603ca410b"
+  },
+  "_source": "git://github.com/wookiehangover/underscore.deferred.git",
+  "_target": "*",
+  "_originalSource": "underscore.deferred",
+  "_direct": true
+}

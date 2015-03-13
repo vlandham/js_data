@@ -24,6 +24,9 @@
   "dependencies": {
     "d3": "~3.5.5",
     "lodash": "~3.5.0",
-    "queue-async": "~1.0.7"
+    "queue-async": "~1.0.7",
+    "ace-builds": "~1.1.8",
+    "underscore.deferred": "*",
+    "jquery": "~2.1.3"
   }
 }

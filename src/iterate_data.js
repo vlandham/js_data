@@ -58,30 +58,20 @@ var copyOfData = _.clone(dataObject);
 copyOfData.age = +copyOfData.age;
 copyOfData.salary = +copyOfData.salary;
 console.log(dataObject);
-// ```
-//=> {name: "Carl", age: "48", salary: "12300"}
-// ```
+console.log(copyOfData);
 // <div class="aside">This code is using lodash</div>
 //
-console.log(copyOfData);
-// ```
-//=> {name: "Carl", age: 48, salary: 12300}
-// ```
+
 //
 // By default, the `clone` function will not copy over nested objects. Instead these nested objects are simply passed by referenced - meaning the original and the copy will still share them.
 var dataObject = {"name":"Saul", "stats":{"age":"55"}};
 var shallowCopy = _.clone(dataObject);
 shallowCopy.stats.age = +shallowCopy.stats.age;
 console.log(dataObject);
-// ```
-//=> {"name":"Saul","stats":{"age":55}}
-// ```
+console.log(shallowCopy);
 // <div class="aside">This code is using lodash</div>
 //
-console.log(shallowCopy);
-// ```
-//=> {"name":"Saul","stats":{"age":55}}
-// ```
+
 // Note that because `stats` is a nested object the modification happened in both spots!
 //
 // To prevent this "feature", we can pass `true` as the second parameter to `clone` to indicate that the copy should be deep and copy nested objects as well.
@@ -89,15 +79,8 @@ var dataObject = {"name":"Saul", "stats":{"age":"55"}};
 var deepCopy = _.clone(dataObject, true);
 deepCopy.stats.age = +deepCopy.stats.age;
 console.log(dataObject);
-// ```
-//=> {"name":"Saul","stats":{"age":"55"}}
-// ```
-// <div class="aside">This code is using lodash</div>
-//
 console.log(deepCopy);
-// ```
-//=> {"name":"Saul","stats":{"age":55}}
-// ```
+// <div class="aside">This code is using lodash</div>
 //
 // lodash also has a [cloneDeep](https://lodash.com/docs#cloneDeep) that can be used to make the deep-ness more explicit.
 //
@@ -169,13 +152,12 @@ console.log(JSON.stringify(data));
 //
 
 var populations = data.map(function(d) { return d.population; });
-console.log(populations);
+console.log("Populations:", populations);
+populations.sort(d3.ascending);
+console.log("Sorted Populations:", populations);
+
 // ```
 // => [652405, 8405837, 645966, 467007]
-// ```
-populations.sort(d3.descending);
-console.log(populations);
-// ```
 // => [8405837, 652405, 645966, 467007]
 // ```
 //
@@ -211,7 +193,7 @@ console.log(landSum);
 // It always makes more sense to me to provide a starting value - unless you know what you are doing. You can also get the current index into the array (and the whole array itself) if that is useful to you.
 
 var weirdString = data.reduce(function(str, d, i) {
-  var ending = (i % 2 === 0) ? " is cool." : " sucks." ;
+  var ending = (i % 2 === 0) ? " is fun," : " is cool." ;
   return str + " " + d.city + ending;
 }, "");
 console.log(weirdString);

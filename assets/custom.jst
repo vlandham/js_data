@@ -64,7 +64,13 @@
               <%= section.docsHtml %>
             </div>
             <% if (section.codeText.replace(/\s/gm, '') != '') { %>
-            <div class="content"><%= section.codeHtml %></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + <%= i %> class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=<%= ((section.codeText.indexOf("console") > -1 || (section.codeText.indexOf("assert") > -1)) && section.docsHtml.indexOf("hideconsole") === -1) ? 'true' : 'false' %> buttons="reset,run" autorun="false" sandbox="false">
+                  <%= section.codeText %>
+                </textarea>
+              </div>
+            </div>
             <% } %>
         </li>
         <% } %>
@@ -74,5 +80,9 @@
   <section id="footer">
     Made with ♥ by <a href="http://bocoup.com/datavis">Bocoup DataVis</a>.
   </section>
+  <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/underscore.deferred/underscore.deferred.js"></script>
+  <script type="text/javascript" src="lib/ace-builds/src-min-noconflict/ace.js"></script>
+  <script type="text/javascript" src="lib/codeblocks/acify.js"></script>
   </body>
 </html>

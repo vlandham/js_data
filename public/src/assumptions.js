@@ -13,6 +13,7 @@
 // These tests can be created with [assertions](http://en.wikipedia.org/wiki/Assertion_%28software_development%29) - functions that check the truthiness of a statement in code. Typically, they raise an error when an expected truth is not actually true.
 //
 // JavaScript doesn't have a built assertions, but we can rectify this deficiency with a simple function.
+// <div class="hideconsole" />
 
 function assert(isTrue, message) {
   if(!isTrue) {
@@ -43,6 +44,7 @@ var data = [{"name":"Dan",
 // Our first entry looks ok, where our second entry has some problems. The age parsing for the immortal [Sleepwalker](http://en.wikipedia.org/wiki/Sleepwalker_%28comics%29) has left him with no age. Also, bad input data has left us with a string in `superhuman`, where we expect a boolean.
 //
 // A simple assumption checking function that could be run on this data could look something like this:
+// <div class="precode">function assert(isTrue, message) { if(!isTrue) { console.log(message); return false; } return true; }
 
 function checkDataContent(data) {
   data.forEach(function(d) {
@@ -97,10 +99,8 @@ checkDataShape(data);
 // two objects are equal or whether an object has or doesn't have a property.
 //
 // For example:
-
-assert.deepEqual({ tea: 'green' }, { tea: 'green' });
-
 // ```
+// assert.deepEqual({ tea: 'green' }, { tea: 'green' });
 // => true
 // ```
 //

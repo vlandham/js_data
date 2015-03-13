@@ -47,8 +47,15 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> aChar = <span class="hljs-string">"Hello There!"</span>[<span class="hljs-number">6</span>];
-<span class="hljs-built_in">console</span>.log(aChar);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 0 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var aChar = "Hello There!"[6];
+console.log(aChar);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -64,8 +71,15 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> aSlice = <span class="hljs-string">"Hello There!"</span>.slice(<span class="hljs-number">6</span>,<span class="hljs-number">11</span>);
-<span class="hljs-built_in">console</span>.log(aSlice);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 1 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var aSlice = "Hello There!".slice(6,11);
+console.log(aSlice);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -82,9 +96,16 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> orderNum = <span class="hljs-number">8</span>;
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"You are number "</span> + (orderNum + <span class="hljs-number">1</span>) + <span class="hljs-string">" in line."</span>);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 2 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+var orderNum = 8;
+console.log("You are number " + (orderNum + 1) + " in line.");
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -109,10 +130,18 @@ city  ,state ,population,land area
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(data));
-});</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 3 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+d3.csv("data/cities_spaced.csv", function(data) {
+  console.log(JSON.stringify(data));
+});
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -132,17 +161,24 @@ d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="h
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
-  <span class="hljs-keyword">var</span> clean = data.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
-    <span class="hljs-keyword">var</span> cleanD = {};
-    d3.keys(d).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(k)</span> </span>{
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 4 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+d3.csv("data/cities_spaced.csv", function(data) {
+  var clean = data.map(function(d) {
+    var cleanD = {};
+    d3.keys(d).forEach(function(k) {
       cleanD[_.trim(k)] = _.trim(d[k]);
     });
-    <span class="hljs-keyword">return</span> cleanD;
+    return cleanD;
   });
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(clean));
-});</pre></div></div>
+  console.log(JSON.stringify(clean));
+});
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -164,7 +200,14 @@ d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="h
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"A man, a plan, a canal"</span>.indexOf(<span class="hljs-string">"man"</span>) !== -<span class="hljs-number">1</span>);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 5 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  console.log("A man, a plan, a canal".indexOf("man") !== -1);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -179,7 +222,14 @@ d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="h
 </code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"A man, a plan, a canal"</span>.indexOf(<span class="hljs-string">"panama"</span>) !== -<span class="hljs-number">1</span>);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 6 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  console.log("A man, a plan, a canal".indexOf("panama") !== -1);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -195,7 +245,14 @@ d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="h
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"A man, a plan, a canal"</span>.replace(<span class="hljs-string">"canal"</span>, <span class="hljs-string">""</span>));</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 7 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  console.log("A man, a plan, a canal".replace("canal", ""));
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -220,12 +277,20 @@ the following example:</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> person = { name : <span class="hljs-string">"Birdman"</span>, occupation: <span class="hljs-string">"Imaginary Super Hero"</span> };
-<span class="hljs-keyword">var</span> html_snippet = <span class="hljs-string">"&lt;div class=\"person\"&gt;"</span> +
-  <span class="hljs-string">"&lt;span class=\"name\"&gt;"</span> + person.name + <span class="hljs-string">"&lt;/span&gt;"</span> +
-  <span class="hljs-string">"&lt;span class=\"occupation\"&gt;"</span> + person.occupation + <span class="hljs-string">"&lt;/span&gt;"</span> +
-<span class="hljs-string">"&lt;/div&gt;"</span>;
-<span class="hljs-built_in">console</span>.log(html_snippet);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 8 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var person = { name : "Birdman", occupation: "Imaginary Super Hero" };
+var html_snippet = "<div class=\"person\">" +
+  "<span class=\"name\">" + person.name + "</span>" +
+  "<span class=\"occupation\">" + person.occupation + "</span>" +
+"</div>";
+console.log(html_snippet);
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -245,11 +310,19 @@ like so:</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> templateString = <span class="hljs-string">"&lt;div class='person'&gt;"</span> +
-  <span class="hljs-string">"  &lt;span class='name'&gt;&lt;%= name %&gt;&lt;/span&gt;"</span> +
-  <span class="hljs-string">"  &lt;span class='occupation'&gt;&lt;%= occupation %&gt;&lt;/span&gt;"</span> +
-  <span class="hljs-string">"&lt;/div&gt;"</span>;
-<span class="hljs-keyword">var</span> templateFunction = _.template(templateString);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 9 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  var templateString = "<div class='person'>" +
+  "  <span class='name'><%= name %></span>" +
+  "  <span class='occupation'><%= occupation %></span>" +
+  "</div>";
+var templateFunction = _.template(templateString);
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -265,8 +338,16 @@ same snippet of html:</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-built_in">console</span>.log(templateFunction(person));</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 10 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+var person = { name : "Birdman", occupation: "Imaginary Super Hero" };
+console.log(templateFunction(person));
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -283,8 +364,15 @@ same snippet of html:</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> anotherPerson = { name : <span class="hljs-string">"James. James Bond"</span>, occupation: <span class="hljs-string">"Spy"</span> };
-<span class="hljs-built_in">console</span>.log(templateFunction(anotherPerson));</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 11 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var anotherPerson = { name : "James. James Bond", occupation: "Spy" };
+console.log(templateFunction(anotherPerson));
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -315,5 +403,9 @@ same snippet of html:</p>
   <section id="footer">
     Made with ♥ by <a href="http://bocoup.com/datavis">Bocoup DataVis</a>.
   </section>
-  </body>
+  <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/underscore.deferred/underscore.deferred.js"></script>
+  <script type="text/javascript" src="lib/ace-builds/src-min-noconflict/ace.js"></script>
+  <script type="text/javascript" src="lib/codeblocks/acify.js"></script>
+  <script type="text/javascript" src="src/strings.js"></script></body>
 </html>

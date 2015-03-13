@@ -1,0 +1,56 @@
+{
+  "name": "underscore.deferred",
+  "description": "jQuery style Deferreds",
+  "version": "0.4.0",
+  "homepage": "https://github.com/wookiehangover/underscore.deferred",
+  "author": {
+    "name": "Sam Breed",
+    "email": "sam@quickleft.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wookiehangover/underscore.deferred.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wookiehangover/underscore.deferred/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/wookiehangover/underscore.deferred/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "grunt qunit && qunit -l '{ summary:true, errors:true }' -c ./underscore.deferred.js -t ./test/*.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.3.9",
+    "rimraf": "~2.0.1",
+    "underscore": "*",
+    "qunit": "*"
+  },
+  "keywords": [
+    "underscore deferreds", "underscore deferred",
+    "deferreds", "deferred", "Deferred", "defered",
+    "flow", "control", "async", "asynchronous", "flow-control",
+    "underscore", "_",
+    "jquery", "jQuery",
+    "ender"
+  ],
+  "main": "./underscore.deferred.js",
+  "ender": "./lib/ender.js",
+  "jam": {
+    "main": "dist/underscore.deferred.js",
+    "include": ["dist/underscore.deferred.js"],
+    "dependencies": {
+      "lodash": "*"
+    },
+    "shim": {
+      "deps": ["lodash"]
+    }
+  }
+}

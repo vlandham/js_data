@@ -2,8 +2,8 @@ module.exports = function(grunt) {
 
   grunt.config.set('watch', {
     src: {
-      files: ['src/*.js', 'assets/*'],
-      tasks: ['docco', 'inject-script-tag', 'copy:js']
+      files: ['src/*.js', 'assets/**/*'],
+      tasks: ['docco', 'inject-script-tag', 'copy:js', 'copy:codeblocks_js']
     },
     data : {
       files : ['data/*'],

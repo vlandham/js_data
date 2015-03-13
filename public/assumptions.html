@@ -47,17 +47,26 @@
 <h2 id="assertions">Assertions</h2>
 <p>These tests can be created with <a href="http://en.wikipedia.org/wiki/Assertion_%28software_development%29">assertions</a> - functions that check the truthiness of a statement in code. Typically, they raise an error when an expected truth is not actually true.</p>
 <p>JavaScript doesn’t have a built assertions, but we can rectify this deficiency with a simple function.</p>
+<div class="hideconsole" />
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">assert</span><span class="hljs-params">(isTrue, message)</span> </span>{
-  <span class="hljs-keyword">if</span>(!isTrue) {
-    <span class="hljs-built_in">console</span>.log(message);
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 0 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  
+function assert(isTrue, message) {
+  if(!isTrue) {
+    console.log(message);
+    return false;
   }
-  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-}</pre></div></div>
+  return true;
+}
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -76,13 +85,21 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> data = [{<span class="hljs-string">"name"</span>:<span class="hljs-string">"Dan"</span>,
-             <span class="hljs-string">"age"</span>:<span class="hljs-number">23</span>,
-             <span class="hljs-string">"superhuman"</span>:<span class="hljs-literal">false</span>},
-            {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Sleepwalker"</span>,
-              <span class="hljs-string">"age"</span>:<span class="hljs-literal">NaN</span>,
-              <span class="hljs-string">"superhuman"</span>:<span class="hljs-string">"TRUE"</span>}
-];</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 1 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  var data = [{"name":"Dan",
+             "age":23,
+             "superhuman":false},
+            {"name":"Sleepwalker",
+              "age":NaN,
+              "superhuman":"TRUE"}
+];
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -95,21 +112,30 @@
               </div>
               <p>Our first entry looks ok, where our second entry has some problems. The age parsing for the immortal <a href="http://en.wikipedia.org/wiki/Sleepwalker_%28comics%29">Sleepwalker</a> has left him with no age. Also, bad input data has left us with a string in <code>superhuman</code>, where we expect a boolean.</p>
 <p>A simple assumption checking function that could be run on this data could look something like this:</p>
+<p><div class="precode">function assert(isTrue, message) { if(!isTrue) { console.log(message); return false; } return true; }</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkDataContent</span><span class="hljs-params">(data)</span> </span>{
-  data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
-    <span class="hljs-keyword">var</span> dString = <span class="hljs-built_in">JSON</span>.stringify(d);
-    assert(_.isString(d.name), dString + <span class="hljs-string">" has a bad name - should be a string"</span>);
-    assert(_.isNumber(d.age), dString + <span class="hljs-string">" has a bad age - should be a number"</span>);
-    assert(!_.isNaN(d.age), dString + <span class="hljs-string">" has a bad age - should not be NaN"</span>);
-    assert(_.isBoolean(d.superhuman), dString + <span class="hljs-string">" has a bad superhuman - should be boolean"</span>);
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 2 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+function checkDataContent(data) {
+  data.forEach(function(d) {
+    var dString = JSON.stringify(d);
+    assert(_.isString(d.name), dString + " has a bad name - should be a string");
+    assert(_.isNumber(d.age), dString + " has a bad age - should be a number");
+    assert(!_.isNaN(d.age), dString + " has a bad age - should not be NaN");
+    assert(_.isBoolean(d.superhuman), dString + " has a bad superhuman - should be boolean");
   });
 }
 
-checkDataContent(data);</pre></div></div>
+checkDataContent(data);
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -133,15 +159,22 @@ checkDataContent(data);</pre></div></div>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkDataShape</span><span class="hljs-params">(data)</span> </span>{
-  assert(data.length &gt; <span class="hljs-number">0</span>, <span class="hljs-string">"data is empty"</span>);
-  assert(data.length &gt; <span class="hljs-number">4</span>, <span class="hljs-string">"data is too small"</span>);
-  <span class="hljs-keyword">var</span> keys = d3.keys(data[<span class="hljs-number">0</span>]);
-  assert(keys.length === <span class="hljs-number">4</span>, <span class="hljs-string">"wrong number of columns"</span>);
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 3 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+function checkDataShape(data) {
+  assert(data.length > 0, "data is empty");
+  assert(data.length > 4, "data is too small");
+  var keys = d3.keys(data[0]);
+  assert(keys.length === 4, "wrong number of columns");
 }
 
-checkDataShape(data);</pre></div></div>
+checkDataShape(data);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -162,11 +195,11 @@ you may want to explore using more complicated assertion code.</p>
 collection of assertion helpers. These can help you check for more complicated things like whether
 two objects are equal or whether an object has or doesn’t have a property.</p>
 <p>For example:</p>
+<pre><code>assert.deepEqual({ tea: <span class="hljs-string">'green'</span> }, { tea: <span class="hljs-string">'green'</span> });
+=&gt; <span class="hljs-literal">true</span>
+</code></pre><div class="aside">This code is using chai’s assert library</div>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>
-assert.deepEqual({ tea: <span class="hljs-string">'green'</span> }, { tea: <span class="hljs-string">'green'</span> });</pre></div></div>
             
         </li>
         
@@ -176,20 +209,6 @@ assert.deepEqual({ tea: <span class="hljs-string">'green'</span> }, { tea: <span
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
-              </div>
-              <pre><code>=&gt; <span class="hljs-literal">true</span>
-</code></pre><div class="aside">This code is using chai’s assert library</div>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-7">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <h2 id="see-also">See Also</h2>
 <ul>
@@ -207,5 +226,9 @@ assert.deepEqual({ tea: <span class="hljs-string">'green'</span> }, { tea: <span
   <section id="footer">
     Made with ♥ by <a href="http://bocoup.com/datavis">Bocoup DataVis</a>.
   </section>
-  </body>
+  <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/underscore.deferred/underscore.deferred.js"></script>
+  <script type="text/javascript" src="lib/ace-builds/src-min-noconflict/ace.js"></script>
+  <script type="text/javascript" src="lib/codeblocks/acify.js"></script>
+  <script type="text/javascript" src="src/assumptions.js"></script></body>
 </html>

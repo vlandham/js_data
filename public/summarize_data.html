@@ -45,12 +45,19 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> data = [
-  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"seattle"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"WA"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">652405</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">83.9</span>},
-  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
-  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"boston"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"MA"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">645966</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">48.3</span>},
-  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}
-];</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 0 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  var data = [
+  {"city":"seattle", "state":"WA", "population":652405, "land_area":83.9},
+  {"city":"new york", "state":"NY", "population":8405837, "land_area":302.6},
+  {"city":"boston", "state":"MA", "population":645966, "land_area":48.3},
+  {"city":"kansas city", "state":"MO", "population":467007, "land_area":315}
+];
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -66,9 +73,16 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> minLand = d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
-<span class="hljs-built_in">console</span>.log(minLand);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 1 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+var minLand = d3.min(data, function(d) { return d.land_area; });
+console.log(minLand);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -85,8 +99,15 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> maxLand = d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
-<span class="hljs-built_in">console</span>.log(maxLand);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 2 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var maxLand = d3.max(data, function(d) { return d.land_area; });
+console.log(maxLand);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -104,9 +125,16 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> landExtent = d3.extent(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
-<span class="hljs-built_in">console</span>.log(landExtent);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 3 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+var landExtent = d3.extent(data, function(d) { return d.land_area; });
+console.log(landExtent);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -127,9 +155,16 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> landAvg = d3.mean(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
-<span class="hljs-built_in">console</span>.log(landAvg);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 4 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+var landAvg = d3.mean(data, function(d) { return d.land_area; });
+console.log(landAvg);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -147,9 +182,16 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> landMed = d3.median(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
-<span class="hljs-built_in">console</span>.log(landMed);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 5 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+var landMed = d3.median(data, function(d) { return d.land_area; });
+console.log(landMed);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -167,9 +209,16 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> landSD = d3.deviation(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
-<span class="hljs-built_in">console</span>.log(landSD);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 6 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+var landSD = d3.deviation(data, function(d) { return d.land_area; });
+console.log(landSD);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -200,5 +249,9 @@
   <section id="footer">
     Made with ♥ by <a href="http://bocoup.com/datavis">Bocoup DataVis</a>.
   </section>
-  </body>
+  <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/underscore.deferred/underscore.deferred.js"></script>
+  <script type="text/javascript" src="lib/ace-builds/src-min-noconflict/ace.js"></script>
+  <script type="text/javascript" src="lib/codeblocks/acify.js"></script>
+  <script type="text/javascript" src="src/summarize_data.js"></script></body>
 </html>

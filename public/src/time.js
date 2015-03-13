@@ -88,6 +88,9 @@ console.log(time);
 var hourParser = d3.time.format("%I:%M%p");
 var time = hourParser.parse("10:34pm");
 var hour = d3.time.hour.round(time);
+
+//
+
 console.log(hour);
 // ```
 //=> Mon Jan 01 1900 23:00:00 GMT-0500

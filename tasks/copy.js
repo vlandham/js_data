@@ -30,6 +30,12 @@ module.exports = function(grunt) {
       cwd: "assets/",
       src: "CNAME",
       dest: "public/"
+    },
+    codeblocks_js: {
+      expand: true,
+      cwd: "assets/codeblocks",
+      src: ["**"],
+      dest: "public/lib/codeblocks"
     }
   });
 

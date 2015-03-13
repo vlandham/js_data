@@ -48,7 +48,14 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> expense = {<span class="hljs-string">"name"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>};</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 0 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  var expense = {"name":"jim","amount":34,"date":"11/12/2015"};
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -63,7 +70,14 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> parser = d3.time.format(<span class="hljs-string">"%m/%d/%Y"</span>);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 1 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  var parser = d3.time.format("%m/%d/%Y");
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -82,8 +96,15 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>expense.date = parser.parse(expense.date);
-<span class="hljs-built_in">console</span>.log(expense);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 2 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  expense.date = parser.parse(expense.date);
+console.log(expense);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -101,8 +122,15 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> date = d3.time.format(<span class="hljs-string">"%A, %B %-d, %Y"</span>).parse(<span class="hljs-string">"Wednesday, November 12, 2014"</span>);
-<span class="hljs-built_in">console</span>.log(date);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 3 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var date = d3.time.format("%A, %B %-d, %Y").parse("Wednesday, November 12, 2014");
+console.log(date);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -121,8 +149,15 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>date = d3.time.format(<span class="hljs-string">"%m/%y"</span>).parse(<span class="hljs-string">"12/14"</span>);
-<span class="hljs-built_in">console</span>.log(date);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 4 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  date = d3.time.format("%m/%y").parse("12/14");
+console.log(date);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -139,8 +174,15 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> time = d3.time.format(<span class="hljs-string">"%I:%M%p"</span>).parse(<span class="hljs-string">"12:34pm"</span>);
-<span class="hljs-built_in">console</span>.log(time);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 5 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var time = d3.time.format("%I:%M%p").parse("12:34pm");
+console.log(time);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -159,8 +201,15 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>time = d3.time.format(<span class="hljs-string">"%m/%d/%Y %H:%M:%S"</span>).parse(<span class="hljs-string">"01/02/2014 08:22:05"</span>);
-<span class="hljs-built_in">console</span>.log(time);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 6 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  time = d3.time.format("%m/%d/%Y %H:%M:%S").parse("01/02/2014 08:22:05");
+console.log(time);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -178,8 +227,15 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>time = d3.time.format(<span class="hljs-string">"%x %X"</span>).parse(<span class="hljs-string">"01/02/2014 08:22:05"</span>);
-<span class="hljs-built_in">console</span>.log(time);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 7 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  time = d3.time.format("%x %X").parse("01/02/2014 08:22:05");
+console.log(time);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -202,10 +258,17 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> hourParser = d3.time.format(<span class="hljs-string">"%I:%M%p"</span>);
-<span class="hljs-keyword">var</span> time = hourParser.parse(<span class="hljs-string">"10:34pm"</span>);
-<span class="hljs-keyword">var</span> hour = d3.time.hour.round(time);
-<span class="hljs-built_in">console</span>.log(hour);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 8 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  var hourParser = d3.time.format("%I:%M%p");
+var time = hourParser.parse("10:34pm");
+var hour = d3.time.hour.round(time);
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -216,14 +279,18 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <pre><code>=&gt; Mon Jan <span class="hljs-number">01</span> <span class="hljs-number">1900</span> <span class="hljs-number">23</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT-<span class="hljs-number">0500</span>
-</code></pre><div class="aside">This code is using d3.js</div>
-
-<p>It returns a date object that just contains the nearest hour (11:00pm). We can display this by using the <code>d3.time.format</code> parser to format the date object into a string (these formaters can work both ways).</p>
-
+              
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(hourParser(hour));</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 9 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+console.log(hour);
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -233,6 +300,31 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <pre><code>=&gt; Mon Jan <span class="hljs-number">01</span> <span class="hljs-number">1900</span> <span class="hljs-number">23</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT-<span class="hljs-number">0500</span>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>It returns a date object that just contains the nearest hour (11:00pm). We can display this by using the <code>d3.time.format</code> parser to format the date object into a string (these formaters can work both ways).</p>
+
+            </div>
+            
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 10 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  console.log(hourParser(hour));
+
+                </textarea>
+              </div>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-number">11</span>:<span class="hljs-number">00</span>PM
 </code></pre><h2 id="moment-js">Moment.js</h2>
@@ -255,5 +347,9 @@
   <section id="footer">
     Made with ♥ by <a href="http://bocoup.com/datavis">Bocoup DataVis</a>.
   </section>
-  </body>
+  <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/underscore.deferred/underscore.deferred.js"></script>
+  <script type="text/javascript" src="lib/ace-builds/src-min-noconflict/ace.js"></script>
+  <script type="text/javascript" src="lib/codeblocks/acify.js"></script>
+  <script type="text/javascript" src="src/time.js"></script></body>
 </html>

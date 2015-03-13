@@ -56,14 +56,22 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> expenses = [{<span class="hljs-string">"name"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>},
-  {<span class="hljs-string">"name"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">120.11</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>},
-  {<span class="hljs-string">"name"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">45</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"12/01/2015"</span>},
-  {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">12.00</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/04/2016"</span>},
-  {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34.10</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/04/2016"</span>},
-  {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">44.80</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/05/2016"</span>}
-];</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 0 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  
+var expenses = [{"name":"jim","amount":34,"date":"11/12/2015"},
+  {"name":"carl","amount":120.11,"date":"11/12/2015"},
+  {"name":"jim","amount":45,"date":"12/01/2015"},
+  {"name":"stacy","amount":12.00,"date":"01/04/2016"},
+  {"name":"stacy","amount":34.10,"date":"01/04/2016"},
+  {"name":"stacy","amount":44.80,"date":"01/05/2016"}
+];
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -79,10 +87,18 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> expensesByName = d3.nest()
-  .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.name; })
-  .entries(expenses);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 1 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  
+var expensesByName = d3.nest()
+  .key(function(d) { return d.name; })
+  .entries(expenses);
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -96,24 +112,42 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
               <div class="aside">This code is using d3.js</div>
 
 <p>Which results in a nested data structure:</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>
-expensesByName = [
+<pre><code>expensesByName = [
   {<span class="hljs-string">"key"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"values"</span>:[
     {<span class="hljs-string">"name"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>},
     {<span class="hljs-string">"name"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">45</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"12/01/2015"</span>}
   ]},
-    {<span class="hljs-string">"key"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"values"</span>:[
-      {<span class="hljs-string">"name"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">120.11</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>}
-    ]},
-    {<span class="hljs-string">"key"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"values"</span>:[
-      {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">12.00</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/04/2016"</span>},
-      {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34.10</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/04/2016"</span>},
-      {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">44.80</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/05/2016"</span>}
-    ]}
-];</pre></div></div>
+  {<span class="hljs-string">"key"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"values"</span>:[
+    {<span class="hljs-string">"name"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">120.11</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>}
+  ]},
+  {<span class="hljs-string">"key"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"values"</span>:[
+    {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">12.00</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/04/2016"</span>},
+    {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34.10</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/04/2016"</span>},
+    {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">44.80</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/05/2016"</span>}
+  ]}
+];
+</code></pre><p><code>expensesByName</code> is an array of objects. Each object has a <code>key</code> property - which is what we used as the grouping value using the <code>key</code> function. Here, we used the values associated with the <code>name</code> property as the key.</p>
+<p>The <code>values</code> property of these entries is an array containing all the original data objects that had that key.</p>
+<h2 id="summarizing-groups">Summarizing Groups</h2>
+<p>The nested structure can be great for visualizing your data, but might be a little underwhelming for analytical applications. Never fear! <a href="https://github.com/mbostock/d3/wiki/Arrays#nest_rollup">d3.rollup</a> is here!</p>
+<p>With <code>rollup</code>, you provide a function that takes the array of values for each group and it produces a value based on that array. This provides for some very flexible <em>group by</em> functionality.</p>
+<p>Here is a simple one to get back the counts for each name:</p>
+
+            </div>
+            
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 2 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+var expensesCount = d3.nest()
+  .key(function(d) { return d.name; })
+  .rollup(function(v) { return v.length; })
+  .entries(expenses);
+console.log(JSON.stringify(expensesCount));
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -124,21 +158,26 @@ expensesByName = [
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p><code>expensesByName</code> is an array of objects. Each object has a <code>key</code> property - which is what we used as the grouping value using the <code>key</code> function. Here, we used the values associated with the <code>name</code> property as the key.</p>
-<p>The <code>values</code> property of these entries is an array containing all the original data objects that had that key.</p>
-<h2 id="summarizing-groups">Summarizing Groups</h2>
-<p>The nested structure can be great for visualizing your data, but might be a little underwhelming for analytical applications. Never fear! <a href="https://github.com/mbostock/d3/wiki/Arrays#nest_rollup">d3.rollup</a> is here!</p>
-<p>With <code>rollup</code>, you provide a function that takes the array of values for each group and it produces a value based on that array. This provides for some very flexible <em>group by</em> functionality.</p>
-<p>Here is a simple one to get back the counts for each name:</p>
+              <pre><code>=&gt; [{<span class="hljs-string">"key"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"values"</span>:<span class="hljs-number">2</span>},{<span class="hljs-string">"key"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"values"</span>:<span class="hljs-number">1</span>},{<span class="hljs-string">"key"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"values"</span>:<span class="hljs-number">3</span>}]
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>The individual records are gone (for better or worse) and in their place are the values returned by our rollup function. The naming stays the same (<em>key</em> and <em>values</em>) but the content is yours to specify. Note that the value passed into the <code>rollup</code> callback is the array of values for that key.</p>
+<p>Here is another example where we get the average amount per person:</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> expensesCount = d3.nest()
-  .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.name; })
-  .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> v.length; })
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 3 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var expensesAvgAmount = d3.nest()
+  .key(function(d) { return d.name; })
+  .rollup(function(v) { return d3.mean(v, function(d) { return d.amount; }); })
   .entries(expenses);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesCount));</pre></div></div>
+console.log(JSON.stringify(expensesAvgAmount));
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -149,19 +188,30 @@ expensesByName = [
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <pre><code>=&gt; [{<span class="hljs-string">"key"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"values"</span>:<span class="hljs-number">2</span>},{<span class="hljs-string">"key"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"values"</span>:<span class="hljs-number">1</span>},{<span class="hljs-string">"key"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"values"</span>:<span class="hljs-number">3</span>}]
+              <pre><code>=&gt; [{<span class="hljs-string">"key"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"values"</span>:<span class="hljs-number">39.5</span>},{<span class="hljs-string">"key"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"values"</span>:<span class="hljs-number">120.11</span>},{<span class="hljs-string">"key"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"values"</span>:<span class="hljs-number">30.3</span>}]
 </code></pre><div class="aside">This code is using d3.js</div>
 
-<p>The individual records are gone (for better or worse) and in their place are the values returned by our rollup function. The naming stays the same (<em>key</em> and <em>values</em>) but the content is yours to specify. Note that the value passed into the <code>rollup</code> callback is the array of values for that key.</p>
-<p>Here is another example where we get the average amount per person:</p>
+<p>Pretty cool right? Any roll-up function you can think of, you can make happen. And you don’t need to stop at just one. <code>rollup</code> can return an object, so you can easily produce multiple metrics on your groups.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> expensesAvgAmount = d3.nest()
-  .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.name; })
-  .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.mean(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 4 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+var expenseMetrics = d3.nest()
+  .key(function(d) { return d.name; })
+  .rollup(function(v) { return {
+    count: v.length,
+    total: d3.sum(v, function(d) { return d.amount; }),
+    avg: d3.mean(v, function(d) { return d.amount; })
+  }; })
   .entries(expenses);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesAvgAmount));</pre></div></div>
+console.log(JSON.stringify(expenseMetrics));
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -171,33 +221,6 @@ expensesByName = [
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
-              </div>
-              <pre><code>=&gt; [{<span class="hljs-string">"key"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"values"</span>:<span class="hljs-number">39.5</span>},{<span class="hljs-string">"key"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"values"</span>:<span class="hljs-number">120.11</span>},{<span class="hljs-string">"key"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"values"</span>:<span class="hljs-number">30.3</span>}]
-</code></pre><div class="aside">This code is using d3.js</div>
-
-<p>Pretty cool right? Any roll-up function you can think of, you can make happen. And you don’t need to stop at just one. <code>rollup</code> can return an object, so you can easily produce multiple metrics on your groups.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> expenseMetrics = d3.nest()
-  .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.name; })
-  .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> {
-    count: v.length,
-    total: d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }),
-    avg: d3.mean(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; })
-  }; })
-  .entries(expenses);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expenseMetrics));</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-7">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <pre><code>=&gt; [{<span class="hljs-string">"key"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"values"</span>:{<span class="hljs-string">"count"</span>:<span class="hljs-number">2</span>,<span class="hljs-string">"total"</span>:<span class="hljs-number">79</span>,<span class="hljs-string">"avg"</span>:<span class="hljs-number">39.5</span>}},
     {<span class="hljs-string">"key"</span>:<span class="hljs-string">"carl"</span>,<span class="hljs-string">"values"</span>:{<span class="hljs-string">"count"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"total"</span>:<span class="hljs-number">120.11</span>,<span class="hljs-string">"avg"</span>:<span class="hljs-number">120.11</span>}},
@@ -209,20 +232,27 @@ expensesByName = [
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> expensesTotal = d3.nest()
-  .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.name; })
-  .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 5 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var expensesTotal = d3.nest()
+  .key(function(d) { return d.name; })
+  .rollup(function(v) { return d3.sum(v, function(d) { return d.amount; }); })
   .map(expenses);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesTotal));</pre></div></div>
+console.log(JSON.stringify(expensesTotal));
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
         
-        <li id="section-8">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <pre><code>=&gt; {<span class="hljs-string">"jim"</span>:<span class="hljs-number">79</span>,<span class="hljs-string">"carl"</span>:<span class="hljs-number">120.11</span>,<span class="hljs-string">"stacy"</span>:<span class="hljs-number">90.9</span>}
 </code></pre><div class="aside">This code is using d3.js</div>
@@ -233,21 +263,28 @@ expensesByName = [
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> expensesTotalByDay = d3.nest()
-  .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.name; })
-  .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.date; })
-  .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 6 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var expensesTotalByDay = d3.nest()
+  .key(function(d) { return d.name; })
+  .key(function(d) { return d.date; })
+  .rollup(function(v) { return d3.sum(v, function(d) { return d.amount; }); })
   .map(expenses);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesTotalByDay));</pre></div></div>
+console.log(JSON.stringify(expensesTotalByDay));
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
         
-        <li id="section-9">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <pre><code>=&gt; {<span class="hljs-string">"jim"</span>:{<span class="hljs-string">"11/12/2015"</span>:<span class="hljs-number">34</span>,<span class="hljs-string">"12/01/2015"</span>:<span class="hljs-number">45</span>},
     <span class="hljs-string">"carl"</span>:{<span class="hljs-string">"11/12/2015"</span>:<span class="hljs-number">120.11</span>},
@@ -259,21 +296,28 @@ expensesByName = [
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> expensesTotalByDay = d3.nest()
-  .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.date; })
-  .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.name; })
-  .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 7 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var expensesTotalByDay = d3.nest()
+  .key(function(d) { return d.date; })
+  .key(function(d) { return d.name; })
+  .rollup(function(v) { return d3.sum(v, function(d) { return d.amount; }); })
   .map(expenses);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesTotalByDay));</pre></div></div>
+console.log(JSON.stringify(expensesTotalByDay));
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
         
-        <li id="section-10">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <pre><code>=&gt; {<span class="hljs-string">"11/12/2015"</span>:{<span class="hljs-string">"jim"</span>:<span class="hljs-number">34</span>,<span class="hljs-string">"carl"</span>:<span class="hljs-number">120.11</span>},
     <span class="hljs-string">"12/01/2015"</span>:{<span class="hljs-string">"jim"</span>:<span class="hljs-number">45</span>},
@@ -288,20 +332,27 @@ expensesByName = [
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> expensesByYear = d3.nest()
-  .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.date.split(<span class="hljs-string">"/"</span>)[<span class="hljs-number">2</span>]; })
-  .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 8 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var expensesByYear = d3.nest()
+  .key(function(d) { return d.date.split("/")[2]; })
+  .rollup(function(v) { return d3.sum(v, function(d) { return d.amount; }); })
   .map(expenses);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesByYear));</pre></div></div>
+console.log(JSON.stringify(expensesByYear));
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
         
-        <li id="section-11">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <pre><code>=&gt; {<span class="hljs-string">"2015"</span>:<span class="hljs-number">199.11</span>,<span class="hljs-string">"2016"</span>:<span class="hljs-number">90.9</span>}
 </code></pre><div class="aside">This code is using d3.js</div>
@@ -325,5 +376,9 @@ expensesByName = [
   <section id="footer">
     Made with ♥ by <a href="http://bocoup.com/datavis">Bocoup DataVis</a>.
   </section>
-  </body>
+  <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/underscore.deferred/underscore.deferred.js"></script>
+  <script type="text/javascript" src="lib/ace-builds/src-min-noconflict/ace.js"></script>
+  <script type="text/javascript" src="lib/codeblocks/acify.js"></script>
+  <script type="text/javascript" src="src/group_data.js"></script></body>
 </html>

@@ -119,6 +119,7 @@ var html_snippet = "<div class=\"person\">" +
   "<span class=\"occupation\">" + person.occupation + "</span>" +
 "</div>";
 console.log(html_snippet);
+
 // ```
 // => '<div class="person"><span class="name">Birdman</span><span class="occupation">Imaginary Super Hero</span></div>'
 // ```
@@ -139,6 +140,7 @@ var templateFunction = _.template(templateString);
 // Now you can use this template function with lots of data to generate the
 // same snippet of html:
 
+var person = { name : "Birdman", occupation: "Imaginary Super Hero" };
 console.log(templateFunction(person));
 //
 // ```
@@ -152,7 +154,7 @@ console.log(templateFunction(anotherPerson));
 // ```
 // => '<div class="person"><span class="name">James. James Bond</span><span class="occupation">Spy</span></div>'
 // ```
-// 
+//
 // ## Next Task
 //
 // [Regular Expressions](regexes.html)

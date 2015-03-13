@@ -48,9 +48,17 @@ addresses.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> str = <span class="hljs-string">"how much wood would a woodchuck chuck if a woodchuck could chuck wood"</span>;
-<span class="hljs-keyword">var</span> regex = <span class="hljs-regexp">/wood/</span>;</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 0 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  
+var str = "how much wood would a woodchuck chuck if a woodchuck could chuck wood";
+var regex = /wood/;
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -66,9 +74,17 @@ could do the following</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span> (regex.test(str)) {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"we found 'wood' in the string!"</span>);
-}</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 1 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  if (regex.test(str)) {
+  console.log("we found 'wood' in the string!");
+}
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -85,8 +101,16 @@ to find all matches available:</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> matches = str.match(regex);
-<span class="hljs-built_in">console</span>.log(matches);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 2 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  var matches = str.match(regex);
+console.log(matches);
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -104,9 +128,17 @@ to add the global flag, which we can do by adding a <code>g</code> to the end of
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-regex = <span class="hljs-regexp">/wood/g</span>;
-<span class="hljs-built_in">console</span>.log(str.match(regex));</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 3 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+regex = /wood/g;
+console.log(str.match(regex));
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -136,9 +168,17 @@ we could do so in a few ways:</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-regex = <span class="hljs-regexp">/wood.*?\b/g</span>;
-<span class="hljs-built_in">console</span>.log(str.match(regex));</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 5 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+regex = /wood.*?\b/g;
+console.log(str.match(regex));
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -156,8 +196,16 @@ Alternatively, we could also just search for both words:</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>regex = <span class="hljs-regexp">/woodchuck|wood/g</span>;
-<span class="hljs-built_in">console</span>.log(str.match(regex));</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 6 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  regex = /woodchuck|wood/g;
+console.log(str.match(regex));
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -179,10 +227,18 @@ end up with <code>[&quot;wood&quot;, &quot;wood&quot;, &quot;wood&quot;, &quot;w
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-regex = <span class="hljs-regexp">/wood/g</span>;
-<span class="hljs-keyword">var</span> newstr = str.replace(regex, <span class="hljs-string">"nun"</span>);
-<span class="hljs-built_in">console</span>.log(newstr);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 7 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  
+regex = /wood/g;
+var newstr = str.replace(regex, "nun");
+console.log(newstr);
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -216,9 +272,17 @@ on groceries from this message:</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> message = <span class="hljs-string">"I bought a loaf of bread for $3.99, some milk for $2.49 and"</span> +
-  <span class="hljs-string">"a box of chocolate cookies for $6.95"</span>;</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 9 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  
+var message = "I bought a loaf of bread for $3.99, some milk for $2.49 and" +
+  "a box of chocolate cookies for $6.95";
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -234,8 +298,16 @@ pattern like so.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-regex = <span class="hljs-regexp">/\$([0-9\.]+)\b/g</span>;</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 10 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  
+regex = /\$([0-9\.]+)\b/g;
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -258,8 +330,16 @@ our string, for example.</li>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>matches = message.match(regex);
-<span class="hljs-built_in">console</span>.log(matches);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 11 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=true buttons="reset,run" autorun="false" sandbox="false">
+                  matches = message.match(regex);
+console.log(matches);
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -277,10 +357,18 @@ can’t really add them with those <code>$</code> signs. To remove them, we can 
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-matches.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, value)</span> </span>{
-  <span class="hljs-keyword">return</span> sum + <span class="hljs-built_in">Number</span>(value.slice(<span class="hljs-number">1</span>));
-}, <span class="hljs-number">0</span>);</pre></div></div>
+            <div class="content">
+              <div class="codeblock">
+                <textarea name="codehelper" id="code-" + 12 class="code" mode="ace/mode/javascript" globals="_,d3,queue,assert" runnable="true" showConsole=false buttons="reset,run" autorun="false" sandbox="false">
+                  
+matches.reduce(function(sum, value) {
+  return sum + Number(value.slice(1));
+}, 0);
+
+
+                </textarea>
+              </div>
+            </div>
             
         </li>
         
@@ -332,5 +420,9 @@ form feed.</li>
   <section id="footer">
     Made with ♥ by <a href="http://bocoup.com/datavis">Bocoup DataVis</a>.
   </section>
+  <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/underscore.deferred/underscore.deferred.js"></script>
+  <script type="text/javascript" src="lib/ace-builds/src-min-noconflict/ace.js"></script>
+  <script type="text/javascript" src="lib/codeblocks/acify.js"></script>
   <script type="text/javascript" src="src/regexes.js"></script></body>
 </html>
