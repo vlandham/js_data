@@ -24,9 +24,7 @@
 //
 // ## Code Snippets
 //
-// We use a little arrow, `=>`, to indicate output from a code snippet. This same output you can view by opening the [console](https://developer.chrome.com/devtools/docs/console) of your favorite web browser.
-//
-// Snippets in this guide that are not pure JavaScript will be marked with the libraries used to make them work like this:
+// There are a bunch of useful snippets in this guide. Here is an example:
 //
 var theMax = d3.max([1,2,20,3]);
 console.log(theMax);
@@ -34,6 +32,10 @@ console.log(theMax);
 //=> 20
 // ```
 // <div class="aside">This code is using d3.js</div>
+//
+// We use a little arrow, `=>`, to indicate output from a code snippet. This same output you can view by opening the [console](https://developer.chrome.com/devtools/docs/console) of your favorite web browser.
+//
+// Snippets in this guide that are not pure JavaScript will be marked with the libraries used to make them work.
 //
 // ## Preparing Your Site for Data Processing
 //
