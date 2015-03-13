@@ -12,18 +12,17 @@
 // [Get source](https://github.com/vlandham/js_data)
 //
 // ## Tasks
-//
-// - ### [Getting Started](getting_started.html)
-// - ### [Reading in Data](read_data.html)
-// - ### [Summarizing Data](summarize_data.html)
-// - ### [Iterating and Reducing](iterate_data.html)
-// - ### [Nesting and Grouping Data](group_data.html)
-//
-// - ### [Working with Strings](strings.html)
-// - ### [Regular Expressions](regexes.html)
-// - ### [Working with Time](time.html)
-// - ### [Checking Data Assumptions](assumptions.html)
-//
+// <ul class='tasks'>
+//  <li>[Getting Started](getting_started.html)</li>
+//  <li>[Reading in Data](read_data.html)</li>
+//  <li>[Summarizing Data](summarize_data.html)</li>
+//  <li>[Iterating and Reducing](iterate_data.html)</li>
+//  <li>[Nesting and Grouping Data](group_data.html)</li>
+//  <li>[Working with Strings](strings.html)</li>
+//  <li>[Regular Expressions](regexes.html)</li>
+//  <li>[Working with Time](time.html)</li>
+//  <li>[Checking Data Assumptions](assumptions.html)</li>
+// </ul>
 // ### Code
 //
 // Each document in this repo is executed when loaded into a browser. Check it out by opening the Developer Tools Console. You should see the output of the following code block:
