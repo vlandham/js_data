@@ -51,7 +51,28 @@
 <p>And, a typical output for data manipulation is at least some sort of visualization of that data, in which case you are all ready to go.</p>
 <h2 id="why-lodash-">Why lodash?</h2>
 <p><a href="https://lodash.com">Lodash</a> is fast, popular, and fills in some holes in D3’s processing features. Plus, it’s functional style and chaining capabilities make it work well alongside D3.</p>
-<h2 id="preparing-site-for-analysis">Preparing Site for Analysis</h2>
+<h2 id="code-snippets">Code Snippets</h2>
+<p>We use a little arrow, <code>=&gt;</code>, to indicate output from a code snippet. This same output you can view by opening the <a href="https://developer.chrome.com/devtools/docs/console">console</a> of your favorite web browser.</p>
+<p>Snippets in this guide that are not pure JavaScript will be marked with the libraries used to make them work like this:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> theMax = d3.max([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">20</span>,<span class="hljs-number">3</span>]);
+<span class="hljs-built_in">console</span>.log(theMax);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <pre><code>=&gt; <span class="hljs-number">20</span>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<h2 id="preparing-your-site-for-data-processing">Preparing Your Site for Data Processing</h2>
 <p>To get started using these tools for your data processing, you are going to want to include them in your html file along with a JavaScript file to perform the analysis. </p>
 <p>I typically download these scripts and include local copies in my page. To do this, you would want to have your HTML look something like this: </p>
 <pre><code>&lt;!doctype html&gt;

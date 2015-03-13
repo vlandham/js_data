@@ -22,7 +22,20 @@
 //
 // [Lodash](https://lodash.com) is fast, popular, and fills in some holes in D3's processing features. Plus, it's functional style and chaining capabilities make it work well alongside D3.
 //
-// ## Preparing Site for Analysis
+// ## Code Snippets
+//
+// We use a little arrow, `=>`, to indicate output from a code snippet. This same output you can view by opening the [console](https://developer.chrome.com/devtools/docs/console) of your favorite web browser.
+//
+// Snippets in this guide that are not pure JavaScript will be marked with the libraries used to make them work like this:
+//
+var theMax = d3.max([1,2,20,3]);
+console.log(theMax);
+// ```
+//=> 20
+// ```
+// <div class="aside">This code is using d3.js</div>
+//
+// ## Preparing Your Site for Data Processing
 //
 // To get started using these tools for your data processing, you are going to want to include them in your html file along with a JavaScript file to perform the analysis. 
 //
