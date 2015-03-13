@@ -55,10 +55,13 @@ function checkDataContent(data) {
 }
 
 checkDataContent(data);
+
 //```
 //=> {"name":"Sleepwalker","age":null,"superhuman":"TRUE"} has a bad age - should not be NaN
 //    {"name":"Sleepwalker","age":null,"superhuman":"TRUE"} has a bad superhuman - should be boolean
 //```
+// <div class="aside">This code is using lodash</div>
+//
 //
 // Again, the focus here is on detection of data problems. You want something quick and simple that will serve as an early warning sign.
 //
@@ -101,6 +104,8 @@ assert.deepEqual({ tea: 'green' }, { tea: 'green' });
 // => true
 // ```
 //
+// <div class="aside">This code is using chai's assert library</div>
+
 // ## See Also
 //
 // - [Parsing raw data](http://www.pgbovine.net/parsing-raw-data.htm) - a great guide that motivated this section

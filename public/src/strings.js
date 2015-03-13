@@ -54,6 +54,7 @@ d3.csv("data/cities_spaced.csv", function(data) {
 // => [{"city  ":"  seattle  ","state ":"WA ","population":" 652405 ","land area":"83.9   "},
 //      {"city  ":"new york","state ":"NY","population":"8405837","land area":"  302.6"}]
 //```
+// <div class="aside">This code is using d3.js</div>
 //
 // Note the spaces in the property names as well as the values. In cases like this, it might be best to [map](iterate_data.html) the data back to a clean version. Lodash's [trim](https://lodash.com/docs#trim) can help. It removes that unsightly whitespace from the front and back of your strings.
 //
@@ -73,6 +74,7 @@ d3.csv("data/cities_spaced.csv", function(data) {
 // =>  [{"city":"seattle","state":"WA","population":"652405","land area":"83.9"},
 //       {"city":"new york","state":"NY","population":"8405837","land area":"302.6"}]
 // ```
+// <div class="aside">This code is using d3.js and lodash</div>
 //
 // The strings are now clear of those pesky spaces.
 //
@@ -142,7 +144,8 @@ console.log(templateFunction(person));
 // ```
 // => '<div class="person"><span class="name">Birdman</span><span class="occupation">Imaginary Super Hero</span></div>'
 // ```
-
+// <div class="aside">This code is using lodash</div>
+//
 var anotherPerson = { name : "James. James Bond", occupation: "Spy" };
 console.log(templateFunction(anotherPerson));
 //

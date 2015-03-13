@@ -122,7 +122,10 @@ checkDataContent(data);</pre></div></div>
               </div>
               <pre><code>=&gt; {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Sleepwalker"</span>,<span class="hljs-string">"age"</span>:<span class="hljs-literal">null</span>,<span class="hljs-string">"superhuman"</span>:<span class="hljs-string">"TRUE"</span>} has a bad age - should not be <span class="hljs-literal">NaN</span>
    {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Sleepwalker"</span>,<span class="hljs-string">"age"</span>:<span class="hljs-literal">null</span>,<span class="hljs-string">"superhuman"</span>:<span class="hljs-string">"TRUE"</span>} has a bad superhuman - should be boolean
-</code></pre><p>Again, the focus here is on detection of data problems. You want something quick and simple that will serve as an early warning sign.</p>
+</code></pre><div class="aside">This code is using lodash</div>
+
+
+<p>Again, the focus here is on detection of data problems. You want something quick and simple that will serve as an early warning sign.</p>
 <p>Unfortunately, the JavaScript primitive <code>NaN</code> is indeed a number, and so additional checks need to be made. As more data comes in, this function will need to be updated to add more checks. This might get a bit tedious, but a little bit of checking can go a long way towards maintaining sanity.</p>
 <h2 id="data-shape-assumptions">Data Shape Assumptions</h2>
 <p>Just as you can test your assumptions about the content of your data elements, it can be a good idea to test your assumptions about the <em>shape</em> of your data. Here, shape just refers to the size and structure of your data. Rows and columns.</p>
@@ -175,7 +178,20 @@ assert.deepEqual({ tea: <span class="hljs-string">'green'</span> }, { tea: <span
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <pre><code>=&gt; <span class="hljs-literal">true</span>
-</code></pre><h2 id="see-also">See Also</h2>
+</code></pre><div class="aside">This code is using chai’s assert library</div>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="http://www.pgbovine.net/parsing-raw-data.htm">Parsing raw data</a> - a great guide that motivated this section</li>
 <li><a href="http://chaijs.com/api/assert/">Chai</a> - Chai’s assert library</li>
@@ -191,5 +207,5 @@ assert.deepEqual({ tea: <span class="hljs-string">'green'</span> }, { tea: <span
   <section id="footer">
     Made with ♥ by <a href="http://bocoup.com/datavis">Bocoup DataVis</a>.
   </section>
-  <script type="text/javascript" src="src/assumptions.js"></script></body>
+  </body>
 </html>

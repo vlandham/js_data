@@ -118,7 +118,9 @@ d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-fun
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-string">"652405"</span>, land area: <span class="hljs-string">"83.9"</span>}
-</code></pre><p>You can see that the headers of the original CSV have been used as the property names for the data objects. Using <code>d3.csv</code> in this manner requires that your CSV file has a header row.</p>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>You can see that the headers of the original CSV have been used as the property names for the data objects. Using <code>d3.csv</code> in this manner requires that your CSV file has a header row.</p>
 <p>If you look closely, you can also see that the values associated with these properties are all strings. This is probably <em>not what you want</em> in the case of numbers. When loading CSVs and other flat files, you have to do the type conversion.</p>
 <p>We will see more of this in other tasks, but a simple way to do this is to use the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus">+</a> operator (unary plus). <code>forEach</code> can be used to iterate over the data array.</p>
 
@@ -143,8 +145,10 @@ d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-fun
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-number">652405</span>, land area: <span class="hljs-number">83.9</span>}
-</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">Dot notation</a> is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use bracket notation as shown.</p>
-<p>This can also be done during the loading of the data, by <code>d3.csv</code> directly. This is done by providing an accessor function to <code>d3.csv</code>, who’s return value will be the individual data objects in our data array. </p>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">Dot notation</a> is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use bracket notation as shown.</p>
+<p>This can also be done during the loading of the data, by <code>d3.csv</code> directly. This is done by providing an accessor function to <code>d3.csv</code>, who’s return value will be the individual data objects in our data array.</p>
 
             </div>
             
@@ -170,7 +174,9 @@ d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-fun
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-number">652405</span>, land_area: <span class="hljs-number">83.9</span>}
-</code></pre><p>In this form, you have complete control over the data objects and can rename properties (like <code>land_area</code>) and convert values (like <code>population</code>) willy-nilly.  On the other hand, you have to be quite explicit about which properties to return. This may or may not be what you are into. </p>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>In this form, you have complete control over the data objects and can rename properties (like <code>land_area</code>) and convert values (like <code>population</code>) willy-nilly.  On the other hand, you have to be quite explicit about which properties to return. This may or may not be what you are into.</p>
 <p>I typically allow D3 to load all the data, and then make modifications in a post-processing step, but it might be more effective for you to be more explicit with the modifications.</p>
 
             </div>
@@ -185,7 +191,7 @@ d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-fun
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <h2 id="reading-tsv-files">Reading TSV Files</h2>
-<p>CSV is probably the most common flat file format, but in no way the only one. 
+<p>CSV is probably the most common flat file format, but in no way the only one.
 I often like to use TSV (tab separated files) - to get around the issues of numbers and strings often having commas in them.</p>
 <p>D3 can parse TSV’s with <a href="https://github.com/mbostock/d3/wiki/CSV#tsv">d3.tsv</a>:</p>
 <pre><code>animals.tsv:
@@ -212,9 +218,11 @@ komodo dragon    reptile    <span class="hljs-number">150</span>
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <pre><code>=&gt; {name: <span class="hljs-string">"tiger"</span>, type: <span class="hljs-string">"mammal"</span>, avg_weight: <span class="hljs-string">"260"</span>}
-</code></pre><h2 id="reading-other-flat-files">Reading Other Flat Files</h2>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<h2 id="reading-other-flat-files">Reading Other Flat Files</h2>
 <p>In fact, <code>d3.tsv</code> and <code>d3.csv</code> are only the tip of the iceberg. If you have a non-standard delimited file, you can create your own parser easily, using <a href="https://github.com/mbostock/d3/wiki/CSV#arbitrary-delimiters">d3.dsv</a></p>
-<p>Using <code>d3.dsv</code> takes one more step. You first create a new parser by passing in the type of delimiter and <a href="http://en.wikipedia.org/wiki/Internet_media_type">mimeType</a> to use. </p>
+<p>Using <code>d3.dsv</code> takes one more step. You first create a new parser by passing in the type of delimiter and <a href="http://en.wikipedia.org/wiki/Internet_media_type">mimeType</a> to use.</p>
 <p>For example, if we had a file that looked like this:</p>
 <pre><code>animals_piped.txt:
 
@@ -257,7 +265,9 @@ psv(<span class="hljs-string">"data/animals_piped.txt"</span>, <span class="hljs
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <pre><code>=&gt; {name: <span class="hljs-string">"hippo"</span>, type: <span class="hljs-string">"mammal"</span>, avg_weight: <span class="hljs-string">"3400"</span>}
-</code></pre><h2 id="reading-json-files">Reading JSON Files</h2>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<h2 id="reading-json-files">Reading JSON Files</h2>
 <p>For nested data, or for passing around data where you don’t want to mess with data typing, its hard to beat <a href="http://json.org/">JSON</a>.</p>
 <p>JSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with <a href="">d3.json</a> - you too can harness its power.</p>
 <pre><code>employees.json:
@@ -291,9 +301,11 @@ psv(<span class="hljs-string">"data/animals_piped.txt"</span>, <span class="hljs
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <pre><code>=&gt; {name: <span class="hljs-string">"Andy Hunt"</span>, title: <span class="hljs-string">"Big Boss"</span>, age: <span class="hljs-number">68</span>, bonus: <span class="hljs-literal">true</span>}
-</code></pre><p>We can see that, unlike our flat file parsing, numeric types stay numeric. Indeed, a JSON value can be a string, a number, a boolean value, an array, or another object. This allows nested data to be dealt with easily.  </p>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>We can see that, unlike our flat file parsing, numeric types stay numeric. Indeed, a JSON value can be a string, a number, a boolean value, an array, or another object. This allows nested data to be dealt with easily.</p>
 <h2 id="loading-multiple-files">Loading Multiple Files</h2>
-<p>D3’s basic loading mechanism is fine for one file, but starts to get messy as we nest multiple callbacks. </p>
+<p>D3’s basic loading mechanism is fine for one file, but starts to get messy as we nest multiple callbacks.</p>
 <p>For loading multiple files, we can use <a href="https://github.com/mbostock/queue">Queue.js</a> (also written by Mike Bostock) to wait for multiple data sources to be loaded.</p>
 
             </div>
@@ -322,21 +334,11 @@ queue()
               </div>
               <pre><code>=&gt; {city: <span class="hljs-string">"seattle"</span>, state: <span class="hljs-string">"WA"</span>, population: <span class="hljs-string">"652405"</span>, land area: <span class="hljs-string">"83.9"</span>}
 =&gt; {name: <span class="hljs-string">"tiger"</span>, type: <span class="hljs-string">"mammal"</span>, avg_weight: <span class="hljs-string">"260"</span>}
-</code></pre>
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-15">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
-              </div>
-              <p>Note that we <code>defer</code> the loading of two types of files - using two different loading functions - so this is an easy way to mix and match file types. </p>
-<p>The callback function passed into <code>await</code> gets each dataset as a parameter, with the first parameter being populated if an error has occurred in loading the data. </p>
-<p>It can be useful to output the error, if it is defined, so you catch data loading problems quickly. </p>
+</code></pre><div class="aside">This code is using queue.js and d3.js</div>
+
+<p>Note that we <code>defer</code> the loading of two types of files - using two different loading functions - so this is an easy way to mix and match file types.</p>
+<p>The callback function passed into <code>await</code> gets each dataset as a parameter, with the first parameter being populated if an error has occurred in loading the data.</p>
+<p>It can be useful to output the error, if it is defined, so you catch data loading problems quickly.</p>
 <p>To add another data file, simply add another defer and extend the input parameters for your callback!</p>
 <h2 id="next-task">Next Task</h2>
 <p><a href="summarize_data.html">Summarizing Data</a></p>
@@ -357,5 +359,5 @@ queue()
   <section id="footer">
     Made with ♥ by <a href="http://bocoup.com/datavis">Bocoup DataVis</a>.
   </section>
-  <script type="text/javascript" src="src/read_data.js"></script></body>
+  </body>
 </html>
