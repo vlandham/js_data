@@ -17,6 +17,12 @@ body {
   max-width: 90%;
 }
 
+@media only screen and (max-width: 600px) {
+  .github {
+    display: none;
+  }
+}
+
 header {
   clear: both;
   width: 100%;

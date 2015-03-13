@@ -19,7 +19,8 @@
 // - ### [Iterating and Reducing](iterate_data.html)
 // - ### [Nesting and Grouping Data](group_data.html)
 //
-// - ### [Strings and Regular Expressions](strings.html)
+// - ### [Strings](strings.html)
+// - ### [Regular Expressions](regexes.html)
 // - ### [Working with Time](time.html)
 // - ### [Checking Data Assumptions](assumptions.html)
 //
