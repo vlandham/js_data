@@ -35,9 +35,9 @@ console.log(data.length);
 //
 // ## Immutability
 //
-// Let me sidetrack this task just a bit to talk about 
+// Let me sidetrack this task just a bit to talk about
 //
-// `forEach` provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually. 
+// `forEach` provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually.
 //
 // This works, but can get clunky and confusing fast. Keeping straight what form the data is in at any given time can be confusing, as can side effects of modifying your data that you might not be aware of.
 //
@@ -61,12 +61,14 @@ console.log(dataObject);
 // ```
 //=> {name: "Carl", age: "48", salary: "12300"}
 // ```
+// <div class="aside">This code is using lodash</div>
+//
 console.log(copyOfData);
 // ```
 //=> {name: "Carl", age: 48, salary: 12300}
 // ```
-// 
-// By default, the `clone` function will not copy over nested objects. Instead these nested objects are simply passed by referenced - meaning the original and the copy will still share them. 
+//
+// By default, the `clone` function will not copy over nested objects. Instead these nested objects are simply passed by referenced - meaning the original and the copy will still share them.
 var dataObject = {"name":"Saul", "stats":{"age":"55"}};
 var shallowCopy = _.clone(dataObject);
 shallowCopy.stats.age = +shallowCopy.stats.age;
@@ -74,6 +76,8 @@ console.log(dataObject);
 // ```
 //=> {"name":"Saul","stats":{"age":55}}
 // ```
+// <div class="aside">This code is using lodash</div>
+//
 console.log(shallowCopy);
 // ```
 //=> {"name":"Saul","stats":{"age":55}}
@@ -88,6 +92,8 @@ console.log(dataObject);
 // ```
 //=> {"name":"Saul","stats":{"age":"55"}}
 // ```
+// <div class="aside">This code is using lodash</div>
+//
 console.log(deepCopy);
 // ```
 //=> {"name":"Saul","stats":{"age":55}}
@@ -98,10 +104,10 @@ console.log(deepCopy);
 // ## Mapping
 //
 // JavaScript's [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) can be a very useful tool to implement this concept of a transformation on immutable data.
-// 
-// `map` takes an array and produces another array which is the result of the callback function being executed on each element in the array. 
+//
+// `map` takes an array and produces another array which is the result of the callback function being executed on each element in the array.
 
-var smallData = data.map(function(d,i) { 
+var smallData = data.map(function(d,i) {
 
   return {
     name: d.city.toUpperCase(),
@@ -134,9 +140,9 @@ console.log(JSON.stringify(large_land));
 //
 // ## Sorting
 //
-// Similar to filtering, sorting data based on attributes is something you'll want to do frequently. 
+// Similar to filtering, sorting data based on attributes is something you'll want to do frequently.
 //
-// The built in [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) for arrays can do this. A caveat to this function is that, unlike filter, map, and other functions, this _modifies the array you are sorting in place_, instead of returning a new array with the objects sorted. 
+// The built in [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) for arrays can do this. A caveat to this function is that, unlike filter, map, and other functions, this _modifies the array you are sorting in place_, instead of returning a new array with the objects sorted.
 //
 // To sort an array, you need a comparator function. This is a function that takes two pieces of data and indicates which one you want higher in the list. The comparator-function-way to do this is to return a negative value if the first value should go higher then the second value, and a positive value if the second value should go higher. If they are equal, and you don't care, then return a 0.
 //
@@ -157,7 +163,7 @@ console.log(JSON.stringify(data));
 //
 // This `b - a` thing is a pretty common way to generate this kind of sort. But you could also do it more explicitly. Thinking through it, if b's population is larger then a's, then the value returned by `b.population - a.population` will be positive - so b will be sorted toward the top of the array. If the reverse is true, then the result will be negative, and a will be sorted first.
 //
-// Note again, that the sort happened _on the original data_, which I'm not a big fan of. 
+// Note again, that the sort happened _on the original data_, which I'm not a big fan of.
 //
 // D3 also has a few helper functions to implement ascending and descending comparator functions - but (as far as I can tell) they only accept arrays of raw numbers instead of objects. So to use [d3.ascending](https://github.com/mbostock/d3/wiki/Arrays#d3_ascending) or [d3.descending](https://github.com/mbostock/d3/wiki/Arrays#d3_descending) you would have to do something like this:
 //
@@ -190,21 +196,21 @@ console.log(nums.sort());
 //
 // The syntax for [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) is always hard for me to remember, so let's go over it with the classic example: summing up a value.
 
-var landSum = data.reduce(function(sum, d) { 
-  return sum + d.land_area; 
+var landSum = data.reduce(function(sum, d) {
+  return sum + d.land_area;
 }, 0);
 console.log(landSum);
 // ```
 //=> 749.8
 // ```
 
-// The first parameter to `reduce` is the callback function that will return the running "total" of the reduction. This function is passed in the previous value returned from the last time the callback was called. Here, that parameter - `sum` provides the running total as we move through the array. The second parameter to the callback `d` is the current value of the array we are working on. 
+// The first parameter to `reduce` is the callback function that will return the running "total" of the reduction. This function is passed in the previous value returned from the last time the callback was called. Here, that parameter - `sum` provides the running total as we move through the array. The second parameter to the callback `d` is the current value of the array we are working on.
 //
 // `reduce` can take an initial value, which is the second parameter to the `reduce` call. For this example, we start the sum at 0. If there is no starting value provided, then for the first execution of the callback (when there is no previous value) the first parameter to the callback will be the value of the first element of the array, and the reduction starts with the second element.
 //
 // It always makes more sense to me to provide a starting value - unless you know what you are doing. You can also get the current index into the array (and the whole array itself) if that is useful to you.
 
-var weirdString = data.reduce(function(str, d, i) { 
+var weirdString = data.reduce(function(str, d, i) {
   var ending = (i % 2 === 0) ? " is cool." : " sucks." ;
   return str + " " + d.city + ending;
 }, "");
@@ -235,5 +241,5 @@ console.log(bigCities);
 // ## See Also
 //
 // - [Making Juice with Reduce](http://www.macwright.org/2015/01/03/reduce-juice.html) - Tom MacWright's intro to the ill-used reduce
-// - [Immutable JS](https://github.com/facebook/immutable-js) - if you want to get serious about immutable data structures in JavaScript 
+// - [Immutable JS](https://github.com/facebook/immutable-js) - if you want to get serious about immutable data structures in JavaScript
 // - [Ramda](http://fr.umio.us/why-ramda/) - a more functional approach to data processing in JS

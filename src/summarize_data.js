@@ -1,6 +1,6 @@
 // # Summarizing Data
 //
-// With the data [loaded](read_data.html), we want to take a quick look at what we have. D3 has a number of tools to use for quick data exploration. 
+// With the data [loaded](read_data.html), we want to take a quick look at what we have. D3 has a number of tools to use for quick data exploration.
 //
 // To start, let's pretend we have loaded up a csv file - and have a dataset that looks something like:
 //
@@ -20,13 +20,15 @@ console.log(minLand);
 // ```
 //=> 48.3
 // ```
-
+// <div class="aside">This code is using d3.js</div>
+//
 var maxLand = d3.max(data, function(d) { return d.land_area; });
 console.log(maxLand);
 // ```
 //=> 315
 // ```
-
+// <div class="aside">This code is using d3.js</div>
+//
 // If you want both of them at the same time, you can use [d3.extent](https://github.com/mbostock/d3/wiki/Arrays#d3_extent)
 
 var landExtent = d3.extent(data, function(d) { return d.land_area; });
@@ -34,6 +36,8 @@ console.log(landExtent);
 // ```
 //=> [48.3, 315]
 // ```
+// <div class="aside">This code is using d3.js</div>
+//
 // This returns an array with the first element the minimum value and the second element the maximum.
 //
 // ## Summary Statistics
@@ -47,6 +51,8 @@ console.log(landAvg);
 // ```
 //=> 187.45
 // ```
+// <div class="aside">This code is using d3.js</div>
+//
 // [d3.median](https://github.com/mbostock/d3/wiki/Arrays#d3_median)
 
 var landMed = d3.median(data, function(d) { return d.land_area; });
@@ -54,6 +60,8 @@ console.log(landMed);
 // ```
 //=> 193.25
 // ```
+// <div class="aside">This code is using d3.js</div>
+//
 // [d3.deviation](https://github.com/mbostock/d3/wiki/Arrays#d3_deviation) - for standard deviation
 
 var landSD = d3.deviation(data, function(d) { return d.land_area; });
@@ -61,6 +69,7 @@ console.log(landSD);
 // ```
 //=> 140.96553952414519
 // ```
+// <div class="aside">This code is using d3.js</div>
 //
 // ## Next Task
 //
