@@ -22,6 +22,7 @@
 //  <li>[Regular Expressions](regexes.html)</li>
 //  <li>[Working with Time](time.html)</li>
 //  <li>[Checking Data Assumptions](assumptions.html)</li>
+//  <li>[Using Node](node.html)</li>
 // </ul>
 // ### Code
 //
