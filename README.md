@@ -1,8 +1,6 @@
 # Learn JS Data
 
-_WORK IN PROGRESS_
-
-[Live version](http://vallandingham.me/js_data/)
+[Live version](http://learnjsdata.com/)
 
 Data manipulation, data munging, and data processing in JavaScript.
 
@@ -19,7 +17,7 @@ It assumes you already have some basic knowledge of JavaScript.
 
 ## Contribute
 
-Current contributors:
+Thanks to everyone who has worked on this to make it awesome:
 
 - [Jim Vallandingham](https://twitter.com/vlandham)
 - [Irene Ros](https://twitter.com/ireneros)
@@ -31,7 +29,7 @@ Want to add your own tips and tricks that you use to apply the power of JS to da
 
 Fork this project, modify and send me your pull requests!
 
-_(Or you could probably just yell at me on Twitter - and I can add more interesting tasks)_
+_(Or you could probably just yell at me on Twitter - and I can include your suggestions into the guide)_
 
 ## Building
 
