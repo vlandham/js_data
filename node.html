@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Analyzing Data with Node - Learn JS Data</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="description" content="An introduction to data processing and munging in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+  <meta name="keywords" content="javascript,data processing, data munging">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@bocoup">
+  <meta name="twitter:creator" content="@vlandham">
+  <meta name="twitter:title" content="Learn JS Data: Data processing in JavaScript">
+  <meta name="twitter:description" content="An introduction to data processing and munging in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+<meta name="twitter:image:src" content="http://learnjsdata.com/img/logo.png">
+<meta property="og:site_name" content="Learn JS Data"/>
+<meta property="og:title" content="Data manipulation, munging, and processing in JavaScript" />
+<meta property="og:url" content="http://learnjsdata.com" />
+<meta property="og:description" content="This guide teaches the basics of manipulating data using JavaScript in the browser, or in node.js. 
+Specifically, demonstrating tasks that are geared around preparing data for further analysis and visualization. This guide will demonstrate some basic techniques and how to implement them using core JavaScript API, the d3.js library and lodash." />
+<meta property="og:image" content="http://learnjsdata.com/img/fb.jpg" />
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" media="all" href="custom.css" />
+  <script src='lib/d3/d3.min.js'></script>
+  <script src='lib/queue-async/queue.min.js'></script>
+  <script src='lib/lodash/lodash.min.js'></script>
+</head>
+<body>
+
+  <header>
+    <div class="contents">
+      <a href="https://github.com/vlandham/js_data"><img class="github" style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+      <a href='/'>
+        <img class='logo' src="img/logo.png">
+        <h1>Learn JS Data</h1>
+        <h3>Data manipulation, munging, and processing in JavaScript</h3>
+      </a>
+    </div>
+  </header>
+
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h1 id="analyzing-data-with-node">Analyzing Data with Node</h1>
+<p>As mentioned in the <a href="getting_started.html">introduction</a>, this guide is mostly geared for client-side data analysis, but with a few augmentations, the same tools can be readily used server-side with <a href="https://nodejs.org/">Node</a>.</p>
+<p>If the data is too large, this might in fact be your only option if you want to use JavaScript for your data analysis. Trying to deal with large data in the browser might result in your users having to wait for a long time. No user will wait for 5 minutes with a frozen browser, no matter how cool the analysis might be.</p>
+<h2 id="setting-up-a-node-project">Setting up a Node Project</h2>
+<p>To get started with Node, ensure both node and <a href="https://www.npmjs.com/">npm</a>, the Node package manager, are installed and available via the command line:</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">which</span> node
+<span class="hljs-comment"># /usr/local/bin/node</span>
+<span class="hljs-built_in">which</span> npm
+<span class="hljs-comment"># /usr/local/bin/npm</span>
+</code></pre>
+<p>Your paths may be different then mine, but as long as <code>which</code> returns something, you should be good to go. </p>
+<p>If node isn’t installed on your machine, you can <a href="https://github.com/joyent/node/wiki/installing-node.js-via-package-manager#osx">install it easily via a package manager</a>.</p>
+<p>Create a new directory for your data analysis project. In this example, we have a directory with a sub-directory called <code>data</code> which contains our <code>animals.tsv</code> file inside.</p>
+<pre><code class="lang-bash">animals_analysis
+|
+ - data
+   |
+    - animals.tsv
+</code></pre>
+<h2 id="installing-node-modules">Installing Node Modules</h2>
+<p>Next, we want to install our JavaScript tools, D3 and lodash. With Node, we can automate the process by using <code>npm</code>. Inside your data analysis directory run the following:</p>
+<pre><code class="lang-bash">npm install d3
+npm install lodash
+</code></pre>
+<p>You can see that npm creates a new sub-directory called <code>node_modules</code> by default, where your packages are installed. Everything is kept local, so you don’t have to worry about problems with missing or out-of-date packages. Your analysis tools for each project are ready to go.</p>
+<p>A <code>package.json</code> file can be useful for saving this kind of meta information about your project: dependencies, name, description, etc. Check out this <a href="http://browsenpm.org/package.json">interactive example</a> or <a href="https://docs.npmjs.com/files/package.json">npm’s documentation</a> for more information.</p>
+<h2 id="requiring-modules">Requiring Modules</h2>
+<p>Now we create a separate JavaScript file to do our analysis in:</p>
+<pre><code class="lang-bash">touch analyze.js
+</code></pre>
+<p>Inside this file, we first <a href="http://openmymind.net/2012/2/3/Node-Require-and-Exports/">require</a> our external dependencies.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">"fs"</span>);
+<span class="hljs-keyword">var</span> d3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">"d3"</span>);
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">"lodash"</span>);
+</code></pre>
+<p>We are requiring our locally installed <code>d3</code> and <code>lodash</code> packages. Note how we assign them to variables, which are used to access their functions later in the code. </p>
+<p>We also require the <a href="https://nodejs.org/api/fs.html">file system</a> module. As we will see in a second, we need this to load our data - which is really the key difference between client-side and server-side use of these tools</p>
+<h2 id="loading-data-in-node">Loading Data in Node</h2>
+<p>D3’s data loading functionality is based on <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a>, which is great, but Node does not have <code>XMLHttpRequest</code>. There are packages around this mismatch, but a more elegant solution is to just use Node’s built in file system functionality to load the data, and then D3 to parse it.</p>
+<pre><code class="lang-js">fs.readFile(<span class="hljs-string">"data/animals.tsv"</span>, <span class="hljs-string">"utf8"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error, data)</span> </span>{
+  data = d3.tsv.parse(data);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(data));
+});
+</code></pre>
+<p><a href="https://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback">fs.readFile</a> is asynchronous and takes a callback function when it is finished loading the data.</p>
+<p>Like our Queue example in <a href="read_data.html">client-side reading</a>, the parameters of this function start with <code>error</code>, which will be <code>null</code> unless there is an error. </p>
+<p>The data returned by <code>readFile</code> is the raw string contents of the file. </p>
+<p>We can use <a href="https://github.com/mbostock/d3/wiki/CSV#parse">d3.tsv.parse</a> which takes a string and and converts it into an array of data objects - just like what we are used to on the client side!</p>
+<p>From this point on, we can use d3 and lodash functionality to analyze our data.</p>
+<p>A full, but very simple script might look like this:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">"fs"</span>);
+<span class="hljs-keyword">var</span> d3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">"d3"</span>);
+<span class="hljs-keyword">var</span> _  = <span class="hljs-built_in">require</span>(<span class="hljs-string">"lodash"</span>);
+
+fs.readFile(<span class="hljs-string">"data/animals.tsv"</span>, <span class="hljs-string">"utf8"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error, data)</span> </span>{
+  data = d3.tsv.parse(data);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(data));
+
+  <span class="hljs-keyword">var</span> maxWeight = d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.avg_weight; });
+  <span class="hljs-built_in">console</span>.log(maxWeight);
+});
+</code></pre>
+<h2 id="running-the-analysis">Running the Analysis</h2>
+<p>Since this is not in a browser, we need to execute this script, much like you would with a script written in Ruby or Python. </p>
+<p>From the command line, we can simply run it with <code>node</code> to see the results.</p>
+<pre><code class="lang-bash">node analyze.js
+</code></pre>
+<pre><code class="lang-bash">=&gt; [{<span class="hljs-string">"name"</span>:<span class="hljs-string">"tiger"</span>,<span class="hljs-string">"type"</span>:<span class="hljs-string">"mammal"</span>,<span class="hljs-string">"avg_weight"</span>:<span class="hljs-string">"260"</span>},{<span class="hljs-string">"name"</span>:<span class="hljs-string">"hippo"</span>,<span class="hljs-string">"type"</span>:<span class="hljs-string">"mammal"</span>,<span class="hljs-string">"avg_weight"</span>:<span class="hljs-string">"3400"</span>},{<span class="hljs-string">"name"</span>:<span class="hljs-string">"komodo dragon"</span>,<span class="hljs-string">"type"</span>:<span class="hljs-string">"reptile"</span>,<span class="hljs-string">"avg_weight"</span>:<span class="hljs-string">"150"</span>}]
+   <span class="hljs-number">3400</span>
+</code></pre>
+<h2 id="writing-data">Writing Data</h2>
+<p>Maybe the original data set is too big, but we can use Node to perform an initial pre-processing or filtering step and output the result to a new file to work with later.</p>
+<p>Node has <a href="https://nodejs.org/api/fs.html#fs_fs_writefile_filename_data_options_callback">fs.writeFile</a> that can perform this easily.</p>
+<p>Inside the read callback, we can call this to write the data out.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> bigAnimals = data.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.avg_weight &gt; <span class="hljs-number">300</span>; });
+bigAnimalsString = <span class="hljs-built_in">JSON</span>.stringify(bigAnimals);
+
+fs.writeFile(<span class="hljs-string">"big_animals.json"</span>, bigAnimalsString, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err)</span> </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"file written"</span>);
+});
+</code></pre>
+<p>Running this should leave us with a <code>big_animals.json</code> file in our analysis folder.</p>
+<p>This is fine if JSON is what you want, but often times you want to output TSV or CSV files for further analysis. D3 to the rescue again!</p>
+<p>D3 includes <a href="https://github.com/mbostock/d3/wiki/CSV#format">d3.csv.format</a> (and the equivalent for TSV and other file formats) which converts our array of data objects into a string - perfect for writing to a file.</p>
+<p>Let’s use it to make a CSV of our big animals.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> bigAnimals = data.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.avg_weight &gt; <span class="hljs-number">300</span>; });
+bigAnimalsString = d3.csv.format(bigAnimals);
+
+fs.writeFile(<span class="hljs-string">"big_animals.csv"</span>, bigAnimalsString, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err)</span> </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"file written"</span>);
+});
+</code></pre>
+<p>Run this with the same <code>node analysis.js</code> and now you should have a lovely little <code>big_animals.csv</code> file in your directory. It even takes care of the headers for you:</p>
+<pre><code>name,type,avg_weight
+hippo,mammal,<span class="hljs-number">3400</span>
+</code></pre><p>Now even <a href="https://medium.com/@wtrsld/big-data-made-me-do-it-5bfc3f46871c">BIG data</a> is no match for us - using the power of JavaScript!</p>
+
+            </div>
+            
+        </li>
+        
+    </ul>
+  </div>
+  <br/><br/>
+  <section id="footer">
+    Made with ♥ by <a href="http://bocoup.com/datavis">The Bocoup Data Visualization Team</a>.
+  </section>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-60734450-1', 'auto');
+ga('send', 'pageview');
+
+  </script>
+  <script type="text/javascript" src="src/node.js"></script></body>
+  </html>

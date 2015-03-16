@@ -6,9 +6,7 @@
 //
 // Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. Tasks attempt to be self-contained and stay focused on the, well, _task at hand_. 
 //
-// This guide was built with for client side data processing (in the browser), but could easily be used in a server side (Node) application with a bit of tweaking.
-//
-// _(specifically, [data loading](read_data.html) should use Node's built in methods to get the raw data loaded)_
+// This guide was built with for client side data processing (in the browser), but can easily be used in a server side (Node) application with a bit of tweaking. Check out the [analyzing data with Node](node.html) section for the details. 
 //
 // ## Why D3?
 //
