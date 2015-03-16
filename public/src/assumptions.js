@@ -105,7 +105,11 @@ assert.deepEqual({ tea: 'green' }, { tea: 'green' });
 // ```
 //
 // <div class="aside">This code is using chai's assert library</div>
-
+//
+// ## Next Task
+//
+// [Using Node](node.html)
+//
 // ## See Also
 //
 // - [Parsing raw data](http://www.pgbovine.net/parsing-raw-data.htm) - a great guide that motivated this section
