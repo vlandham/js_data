@@ -2,7 +2,7 @@
 //
 // As mentioned in the [introduction](getting_started.html), this guide is mostly geared for client-side data analysis, but with a few augmentations, the same tools can be readily used server-side with [Node](https://nodejs.org/).
 //
-// And the data is too large, this might in fact be your only option if you want to use JavaScript for your data analysis. None of your users will wait 5 minutes on your site while a giant file is loaded up, no matter how cool the analysis.
+// If the data is too large, this might in fact be your only option if you want to use JavaScript for your data analysis. Trying to deal with large data in the browser might result in your users having to wait for a long time. No user will wait for 5 minutes with a frozen browser, no matter how cool the analysis might be.
 //
 // ## Setting up a Node Project
 //
@@ -17,7 +17,17 @@
 //
 // Your paths may be different then mine, but as long as `which` returns something, you should be good to go. 
 //
+// If node isn't installed on your machine, you can [install it easily via a package manager](https://github.com/joyent/node/wiki/installing-node.js-via-package-manager#osx).
+//
 // Create a new directory for your data analysis project. In this example, we have a directory with a sub-directory called `data` which contains our `animals.tsv` file inside.
+//
+// ```bash
+// animals_analysis
+// |
+//  - data
+//    |
+//     - animals.tsv
+// ```
 //
 // ## Installing Node Modules
 //
@@ -30,6 +40,8 @@
 //
 // You can see that npm creates a new sub-directory called `node_modules` by default, where your packages are installed. Everything is kept local, so you don't have to worry about problems with missing or out-of-date packages. Your analysis tools for each project are ready to go.
 //
+// A `package.json` file can be useful for saving this kind of meta information about your project: dependencies, name, description, etc. Check out this [interactive example](http://browsenpm.org/package.json) or [npm's documentation](https://docs.npmjs.com/files/package.json) for more information.
+//
 // ## Requiring Modules
 //
 // Now we create a separate JavaScript file to do our analysis in:
@@ -38,7 +50,7 @@
 // touch analyze.js
 // ```
 //
-// Inside this file, we first [require](http://openmymind.net/2012/2/3/Node-Require-and-Exports/) our external dependencies. With Node, everything is explicit. You need to indicate exactly which tools you want to use.
+// Inside this file, we first [require](http://openmymind.net/2012/2/3/Node-Require-and-Exports/) our external dependencies.
 //
 // ```js
 // var fs = require("fs");
@@ -55,8 +67,8 @@
 //
 // ```js
 // fs.readFile("data/animals.tsv", "utf8", function(error, data) {
-// data = d3.tsv.parse(data);
-// console.log(JSON.stringify(data));
+//   data = d3.tsv.parse(data);
+//   console.log(JSON.stringify(data));
 // });
 // ```
 //
@@ -78,11 +90,11 @@
 // var _  = require("lodash");
 //
 // fs.readFile("data/animals.tsv", "utf8", function(error, data) {
-  // data = d3.tsv.parse(data);
-  // console.log(JSON.stringify(data));
+//   data = d3.tsv.parse(data);
+//   console.log(JSON.stringify(data));
 //
-  // var maxWeight = d3.max(data, function(d) { return d.avg_weight; });
-  // console.log(maxWeight);
+//   var maxWeight = d3.max(data, function(d) { return d.avg_weight; });
+//   console.log(maxWeight);
 // });
 // ```
 // 
@@ -113,7 +125,7 @@
 // bigAnimalsString = JSON.stringify(bigAnimals);
 //
 // fs.writeFile("big_animals.json", bigAnimalsString, function(err) {
-//  console.log("file written");
+//   console.log("file written");
 // });
 // ```
 //
@@ -141,6 +153,6 @@
 // hippo,mammal,3400
 // ```
 // 
-// Now even BIG data is no match for us - using the power of JavaScript!
+// Now even [BIG data](https://medium.com/@wtrsld/big-data-made-me-do-it-5bfc3f46871c) is no match for us - using the power of JavaScript!
 //
 //
