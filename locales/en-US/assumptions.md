@@ -33,10 +33,9 @@ Our first entry looks ok, where our second entry has some problems. The age pars
 A simple assumption checking function that could be run on this data could look something like this:
 
 @@ code=assumptions/assumptions.03.js @@
-```
-=> {"name":"Sleepwalker","age":null,"superhuman":"TRUE"} has a bad age - should not be NaN
-   {"name":"Sleepwalker","age":null,"superhuman":"TRUE"} has a bad superhuman - should be boolean
-```
+
+@@ code=assumptions/assumptions.03.out @@
+
 <div class="aside">This code is using lodash</div>
 
 
@@ -51,10 +50,9 @@ Just as you can test your assumptions about the content of your data elements, i
 Something simple to perform this check could look like this:
 
 @@ code=assumptions/assumptions.04.js @@
-```
-=> data is too small
-   wrong number of columns
-```
+
+@@ code=assumptions/assumptions.04.out @@
+
 The two assumption functions could easily be combined into one, but it's important to look at both aspects of your data.
 
 ## More Assertions
@@ -69,9 +67,9 @@ two objects are equal or whether an object has or doesn't have a property.
 For example:
 
 @@ code=assumptions/assumptions.05.js @@
-```
-=> true
-```
+
+@@ code=assumptions/assumptions.05.out @@
+
 <div class="aside">This code is using chai's assert library</div>
 
 ## Next Task

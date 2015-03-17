@@ -11,16 +11,14 @@ Again, we start with a basic data set already loaded:
 First some basic iteration. We already saw this in the data loading task, but a common way to process each data object is by using [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
 
 @@ code=iterate_data/iterate_data.02.js @@
-```
-=> 4
-```
+
+@@ code=iterate_data/iterate_data.02.out @@
 
 _Of course, data also has the property `length` which would be the actual way to get the number of data elements in `data` - but this is just an example._
 
 @@ code=iterate_data/iterate_data.03.js @@
-```
-=> 4
-```
+
+@@ code=iterate_data/iterate_data.03.out @@
 
 ## Immutability
 
@@ -43,42 +41,40 @@ To help with this issue of brittle transformations, lodash provides the [clone](
 This function takes an object and returns a copy of that object. That copy is now a separate data object that you can edit without effecting the original object.
 
 @@ code=iterate_data/iterate_data.04.js @@
-```
-=> {name: "Carl", age: "48", salary: "12300"}
-```
+
+@@ code=iterate_data/iterate_data.04.out @@
+
 <div class="aside">This code is using lodash</div>
 
 @@ code=iterate_data/iterate_data.05.js @@
-```
-=> {name: "Carl", age: 48, salary: 12300}
-```
+
+@@ code=iterate_data/iterate_data.05.out @@
 
 By default, the `clone` function will not copy over nested objects. Instead these nested objects are simply passed by referenced - meaning the original and the copy will still share them.
 
 @@ code=iterate_data/iterate_data.06.js @@
-```
-=> {"name":"Saul","stats":{"age":55}}
-```
+
+@@ code=iterate_data/iterate_data.06.out @@
+
 <div class="aside">This code is using lodash</div>
 
 @@ code=iterate_data/iterate_data.07.js @@
-```
-=> {"name":"Saul","stats":{"age":55}}
-```
+
+@@ code=iterate_data/iterate_data.07.out @@
+
 Note that because `stats` is a nested object the modification happened in both spots!
 
 To prevent this "feature", we can pass `true` as the second parameter to `clone` to indicate that the copy should be deep and copy nested objects as well.
 
 @@ code=iterate_data/iterate_data.08.js @@
-```
-=> {"name":"Saul","stats":{"age":"55"}}
-```
+
+@@ code=iterate_data/iterate_data.08.out @@
+
 <div class="aside">This code is using lodash</div>
 
 @@ code=iterate_data/iterate_data.09.js @@
-```
-=> {"name":"Saul","stats":{"age":55}}
-```
+
+@@ code=iterate_data/iterate_data.09.out @@
 
 lodash also has a [cloneDeep](https://lodash.com/docs#cloneDeep) that can be used to make the deep-ness more explicit.
 
@@ -89,10 +85,8 @@ JavaScript's [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 `map` takes an array and produces another array which is the result of the callback function being executed on each element in the array.
 
 @@ code=iterate_data/iterate_data.10.js @@
-```
-=> {city: "seattle", state: "WA", population: 652405, land_area: 83.9}
-  {name: "SEATTLE", index: 1, rounded_area: 84}
-```
+
+@@ code=iterate_data/iterate_data.10.out @@
 
 The callback function gets called for each element in the array, and also has access to the index of that element in the array. The result is an array of returned values from the callback.
 
@@ -104,10 +98,8 @@ With plain JavaScript, the immutability of an array is just _in the mind of the 
 Select a subset of the data using the built in [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method. This creates a new array of data (again see transformation talk above) with only the values that the callback function returns `true` for.
 
 @@ code=iterate_data/iterate_data.11.js @@
-```
-=> [{"city":"new york","state":"NY","population":8405837,"land_area":302.6},
-   {"city":"kansas city","state":"MO","population":467007,"land_area":315}]
-```
+
+@@ code=iterate_data/iterate_data.11.out @@
 
 ## Sorting
 
@@ -120,12 +112,8 @@ To sort an array, you need a comparator function. This is a function that takes 
 Let's see it in action. Here is a way to sort by population in a descending order (larger populations come first).
 
 @@ code=iterate_data/iterate_data.12.js @@
-```
-=> [{"city":"new york","state":"NY","population":8405837,"land_area":302.6},
-    {"city":"seattle","state":"WA","population":652405,"land_area":83.9},
-    {"city":"boston","state":"MA","population":645966,"land_area":48.3},
-    {"city":"kansas city","state":"MO","population":467007,"land_area":315}]
-```
+
+@@ code=iterate_data/iterate_data.12.out @@
 
 This `b - a` thing is a pretty common way to generate this kind of sort. But you could also do it more explicitly. Thinking through it, if b's population is larger then a's, then the value returned by `b.population - a.population` will be positive - so b will be sorted toward the top of the array. If the reverse is true, then the result will be negative, and a will be sorted first.
 
@@ -134,14 +122,12 @@ Note again, that the sort happened _on the original data_, which I'm not a big f
 D3 also has a few helper functions to implement ascending and descending comparator functions - but (as far as I can tell) they only accept arrays of raw numbers instead of objects. So to use [d3.ascending](https://github.com/mbostock/d3/wiki/Arrays#d3_ascending) or [d3.descending](https://github.com/mbostock/d3/wiki/Arrays#d3_descending) you would have to do something like this:
 
 @@ code=iterate_data/iterate_data.13.js @@
-```
-=> [652405, 8405837, 645966, 467007]
-```
+
+@@ code=iterate_data/iterate_data.13.out @@
 
 @@ code=iterate_data/iterate_data.14.js @@
-```
-=> [8405837, 652405, 645966, 467007]
-```
+
+@@ code=iterate_data/iterate_data.14.out @@
 
 I'm usually looking to keep my data objects together, so I shy away from using these methods, but they might be great for what you are trying to do.
 
@@ -152,9 +138,9 @@ A **big gotcha** with sorting that you should watch out for is that if you do no
 Would be sorted to:
 
 @@ code=iterate_data/iterate_data.16.js @@
-```
-=> [1, 10, 20, 3]
-```
+
+@@ code=iterate_data/iterate_data.16.out @@
+
 This is never what you want for data sorting. For this reason, you should never use sort without a comparator function.
 
 ## Reducing
@@ -164,9 +150,8 @@ These functions all take an array and reduce it down to a single number. But wha
 The syntax for [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) is always hard for me to remember, so let's go over it with the classic example: summing up a value.
 
 @@ code=iterate_data/iterate_data.17.js @@
-```
-=> 749.8
-```
+
+@@ code=iterate_data/iterate_data.17.out @@
 
 The first parameter to `reduce` is the callback function that will return the running "total" of the reduction. This function is passed in the previous value returned from the last time the callback was called. Here, that parameter - `sum` provides the running total as we move through the array. The second parameter to the callback `d` is the current value of the array we are working on.
 
@@ -175,9 +160,9 @@ The first parameter to `reduce` is the callback function that will return the ru
 It always makes more sense to me to provide a starting value - unless you know what you are doing. You can also get the current index into the array (and the whole array itself) if that is useful to you.
 
 @@ code=iterate_data/iterate_data.18.js @@
-```
-=> seattle is cool. new york sucks. boston is cool. kansas city sucks.
-```
+
+@@ code=iterate_data/iterate_data.18.out @@
+
 _And summing over a variable is only used for example. You can always just use [d3.sum](https://github.com/mbostock/d3/wiki/Arrays#d3_sum) for this instead._
 
 ## Chaining Functions
@@ -185,9 +170,8 @@ _And summing over a variable is only used for example. You can always just use [
 One of the great things about these more _functional_ functions is that it is possible to chain them together into one big data wrangling pipeline!
 
 @@ code=iterate_data/iterate_data.19.js @@
-```
-=> ["boston", "seattle", "new york"]
-```
+
+@@ code=iterate_data/iterate_data.19.out @@
 
 Since we are using `sort` after `filter`, sort is working on the returned array from `filter`. The sort function at least is nice enough to also return the array, so chaining is still possible.
 

@@ -25,7 +25,14 @@ It assumes you already have some basic knowledge of JavaScript.
  <li>[Using Node](node.html)</li>
 </ul>
 
-### Code
+## Translations
+
+Read this guide in:
+
+- [English](/)
+- [Español](/es/)
+
+## Code
 
 Each document in this repo is executed when loaded into a browser. Check it out by opening the Developer Tools Console. You should see the output of the following code block:
 
@@ -33,7 +40,7 @@ Each document in this repo is executed when loaded into a browser. Check it out 
 
 Check out the [full source on github](https://github.com/vlandham/js_data).
 
-### Why?
+## Why?
 
 Is data munging in JavaScript something you would actually want to do? _Maybe_.
 

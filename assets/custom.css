@@ -59,6 +59,19 @@ header h3 {
   color: #4D4C4C;
 }
 
+ul.languages {
+  list-style-type: none;
+}
+
+.languages li {
+  float: left;
+}
+
+.languages li a {
+  display: block;
+  padding-right: 10px;
+}
+
 #footer {
   position: fixed;
   height: 25px;

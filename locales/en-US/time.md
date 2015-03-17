@@ -23,9 +23,8 @@ The input string to `d3.time.format` indicates what the date string should look 
 Next we use the parser to parse our string.
 
 @@ code=time/time.03.js @@
-```
-=> {name: "jim", amount: 34, date: Thu Nov 12 2015 00:00:00 GMT-0500 (EST)}
-```
+
+@@ code=time/time.03.out @@
 
 Cool! Now our date is actually a Date object.
 
@@ -34,25 +33,25 @@ Here are a few more time parsers to show the capabilities of D3's parsing.
 Just the date:
 
 @@ code=time/time.04.js @@
-```
-=> Wed Nov 12 2014 00:00:00 GMT-0500 (EST)
-```
+
+@@ code=time/time.04.out @@
+
 <div class="aside">This code is using d3.js</div>
 
 The little dash in front of the `d` is to remove the 0-padding)
 
 @@ code=time/time.05.js @@
-```
-=> Mon Dec 01 2014 00:00:00 GMT-0500 (EST)
-```
+
+@@ code=time/time.05.out @@
+
 You can see it defaults to the first day of the month.
 
 Just the time:
 
 @@ code=time/time.06.js @@
-```
-=> Mon Jan 01 1900 12:34:00 GMT-0500 (EST)
-```
+
+@@ code=time/time.06.out @@
+
 <div class="aside">This code is using d3.js</div>
 
 Gives you a somewhat strange default date.
@@ -60,17 +59,17 @@ Gives you a somewhat strange default date.
 Date and time:
 
 @@ code=time/time.07.js @@
-```
-=> Thu Jan 02 2014 08:22:05 GMT-0500 (EST)
-```
+
+@@ code=time/time.07.out @@
+
 <div class="aside">This code is using d3.js</div>
 
 This could also be done using some built in short-hands:
 
 @@ code=time/time.08.js @@
-```
-=> Thu Jan 02 2014 08:22:05 GMT-0500 (EST)
-```
+
+@@ code=time/time.08.out @@
+
 <div class="aside">This code is using d3.js</div>
 
 You can see that `d3.time.format` gives you a lot of flexibility about what your time string will look like.
@@ -86,17 +85,16 @@ Intervals allow for modifying dates around specific time slices like minutes, ho
 So, to get the nearest hour from a date, we can use [d3.time.hour.round](https://github.com/mbostock/d3/wiki/Time-Intervals#interval_round)
 
 @@ code=time/time.09.js @@
-```
-=> Mon Jan 01 1900 23:00:00 GMT-0500
-```
+
+@@ code=time/time.09.out @@
+
 <div class="aside">This code is using d3.js</div>
 
 It returns a date object that just contains the nearest hour (11:00pm). We can display this by using the `d3.time.format` parser to format the date object into a string (these formaters can work both ways).
 
 @@ code=time/time.10.js @@
-```
-=> 11:00PM
-```
+
+@@ code=time/time.10.out @@
 
 ## Moment.js
 

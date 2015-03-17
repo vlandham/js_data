@@ -25,6 +25,7 @@ And, a typical output for data manipulation is at least some sort of visualizati
 There are a bunch of useful snippets in this guide. Here is an example:
 
 @@ code=getting_started/getting_started.01.js @@
+
 @@ code=getting_started/getting_started.01.out @@
 
 <div class="aside">This code is using d3.js</div>
