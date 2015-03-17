@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title><%= title %> - Learn JS Data</title>
+  <title>Learn JS Data</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="description" content="An introduction to data processing and munging in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
@@ -23,10 +23,10 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 
   <link rel="shortcut icon" href="/favicon.ico">
   <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" media="all" href="<%= css %>" />
-  <script src='lib/d3/d3.min.js'></script>
-  <script src='lib/queue-async/queue.min.js'></script>
-  <script src='lib/lodash/lodash.min.js'></script>
+  <link rel="stylesheet" media="all" href="/custom.css" />
+  <script src='/lib/d3/d3.min.js'></script>
+  <script src='/lib/queue-async/queue.min.js'></script>
+  <script src='/lib/lodash/lodash.min.js'></script>
 </head>
 <body>
 
@@ -35,7 +35,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
       <a href="https://github.com/vlandham/js_data"><img class="github" style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
       <a href='/'>
-        <img class='logo' src="img/logo.png">
+        <img class='logo' src="/img/logo.png">
         <h1>Learn JS Data</h1>
         <h3>Data manipulation, munging, and processing in JavaScript</h3>
       </a>
@@ -43,48 +43,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
   </header>
 
   <div id="container">
-    <div id="background"></div>
-    <% if (sources.length > 1 && false) { %>
-      <ul id="jump_to">
-        <li>
-          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
-          <a class="small" href="javascript:void(0);">+</a>
-          <div id="jump_wrapper">
-          <div id="jump_page">
-            <% for (var i=0, l=sources.length; i<l; i++) { %>
-              <% var xsource = sources[i]; %>
-              <a class="source" href="<%= path.basename(destination(xsource)) %>">
-                <%= path.basename(xsource) %>
-              </a>
-            <% } %>
-          </div>
-        </li>
-      </ul>
-    <% } %>
-    <ul class="sections">
-        <% if (!hasTitle) { %>
-          <li id="title">
-              <div class="annotation">
-                  <h1><%= title %></h1>
-              </div>
-          </li>
-        <% } %>
-        <% for (var i=0, l=sections.length; i<l; i++) { %>
-        <% var section = sections[i]; %>
-        <li id="section-<%= i + 1 %>">
-            <div class="annotation">
-              <% heading = section.docsHtml.match(/^\s*<(h\d)>/) %>
-              <div class="pilwrap <%= heading ? 'for-' + heading[1] : '' %>">
-                <a class="pilcrow" href="#section-<%= i + 1 %>">&#182;</a>
-              </div>
-              <%= section.docsHtml %>
-            </div>
-            <% if (section.codeText.replace(/\s/gm, '') != '') { %>
-            <div class="content"><%= section.codeHtml %></div>
-            <% } %>
-        </li>
-        <% } %>
-    </ul>
+    <%= content %>
   </div>
   <br/><br/>
   <section id="footer">

@@ -7,6 +7,6 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   grunt.registerTask('default', ['http-server:dev', 'watch']);
-  grunt.registerTask('build', ['docco', 'inject-script-tag', 'copy']);
+  grunt.registerTask('build', ['code-inject', 'markdown', 'copy']);
   grunt.registerTask('deploy', ['build', 'gh-pages']);
 };
