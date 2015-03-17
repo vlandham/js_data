@@ -7,6 +7,12 @@ module.exports = function(grunt) {
       src: ["*.js"],
       dest: "public/src"
     },
+    css: {
+      expand: true,
+      cwd: "assets/",
+      src: ["*.css"],
+      dest: "public"
+    },
     lib: {
       expand: true,
       cwd: "lib/",

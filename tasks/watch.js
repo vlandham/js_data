@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
   grunt.config.set('watch', {
     src: {
-      files: ['locales/**/*.md', 'assets/*'],
+      files: ['locales/**/*.md', 'assets/*', 'snippets/**/*'],
       tasks: ['code-inject', 'markdown', 'copy:js']
     },
     data : {
@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     },
     css : {
       files: ['assets/*.css'],
-      tasks: ['markdown']
+      tasks: ['copy:css']
     }
   });
 

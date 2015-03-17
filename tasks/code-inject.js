@@ -20,7 +20,7 @@ module.exports = function(grunt) {
    * out by opening the Developer Tools Console. You should see the output of
    * the following code block:
    *
-   * @@ code=index/index.1.js @@
+   * @@ code=index/index.01.js @@
    *
    * Check out the [full source on github](https://github.com/vlandham/js_data).
    */
