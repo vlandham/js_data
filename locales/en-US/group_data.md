@@ -22,19 +22,19 @@ stacy,44.80,01/05/2016
 
 And that has been converted to a nice array of objects via our [data reading powers](read_data.html) into something like this:
 
-@@ code=group_data/group_data.1.js @@
+@@ code=group_data/group_data.01.js @@
 
 And now we want to slice up this data in different ways.
 
 First, let's use nest to group by `name`:
 
-@@ code=group_data/group_data.2.js @@
+@@ code=group_data/group_data.02.js @@
 
 <div class="aside">This code is using d3.js</div>
 
 Which results in a nested data structure:
 
-@@ code=group_data/group_data.3.js @@
+@@ code=group_data/group_data.03.js @@
 
 `expensesByName` is an array of objects. Each object has a `key` property - which is what we used as the grouping value using the `key` function. Here, we used the values associated with the `name` property as the key.
 
@@ -48,7 +48,7 @@ With `rollup`, you provide a function that takes the array of values for each gr
 
 Here is a simple one to get back the counts for each name:
 
-@@ code=group_data/group_data.4.js @@
+@@ code=group_data/group_data.04.js @@
 ```
 => [{"key":"jim","values":2},{"key":"carl","values":1},{"key":"stacy","values":3}]
 ```
@@ -58,7 +58,7 @@ The individual records are gone (for better or worse) and in their place are the
 
 Here is another example where we get the average amount per person:
 
-@@ code=group_data/group_data.5.js @@
+@@ code=group_data/group_data.05.js @@
 ```
 => [{"key":"jim","values":39.5},{"key":"carl","values":120.11},{"key":"stacy","values":30.3}]
 ```
@@ -66,7 +66,7 @@ Here is another example where we get the average amount per person:
 
 Pretty cool right? Any roll-up function you can think of, you can make happen. And you don't need to stop at just one. `rollup` can return an object, so you can easily produce multiple metrics on your groups.
 
-@@ code=group_data/group_data.6.js @@
+@@ code=group_data/group_data.06.js @@
 ```
 => [{"key":"jim","values":{"count":2,"total":79,"avg":39.5}},
     {"key":"carl","values":{"count":1,"total":120.11,"avg":120.11}},
@@ -78,7 +78,7 @@ Pretty cool right? Any roll-up function you can think of, you can make happen. A
 
 The array output can be useful for using `map` or `forEach` as discussed in the [iteration and summation task](https://github.com/mbostock/d3/wiki/Arrays#nest_sortValues). But you can also have `d3.nest` return an object (or [d3.map]()) of the results, for direct access. Note the use of [nest.map](https://github.com/mbostock/d3/wiki/Arrays#nest_map) below.
 
-@@ code=group_data/group_data.7.js @@
+@@ code=group_data/group_data.07.js @@
 ```
 => {"jim":79,"carl":120.11,"stacy":90.9}
 ```
@@ -90,7 +90,7 @@ And you thought that single-level nesting was cool. Wait till you try multiple l
 
 By adding more keys, you can sub-divide your data even further. Here is expense sums by name and then by date:
 
-@@ code=group_data/group_data.8.js @@
+@@ code=group_data/group_data.08.js @@
 ```
 => {"jim":{"11/12/2015":34,"12/01/2015":45},
     "carl":{"11/12/2015":120.11},
@@ -102,7 +102,7 @@ Now the `rollup` callback is called for each of our smaller subgroups.
 
 The order of the `nest.key` calls determines the order of the grouping. If we reverse our keys, we get the totals by date and then by name:
 
-@@ code=group_data/group_data.9.js @@
+@@ code=group_data/group_data.09.js @@
 ```
 => {"11/12/2015":{"jim":34,"carl":120.11},
     "12/01/2015":{"jim":45},
