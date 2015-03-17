@@ -21,7 +21,7 @@ kansas city,MO,467007,315.0
 
 Use [d3.csv](https://github.com/mbostock/d3/wiki/CSV) to convert it into an array of objects
 
-@@ code=read_data/read_data.1.js @@
+@@ code=read_data/read_data.01.js @@
  ```
 => {city: "seattle", state: "WA", population: "652405", land area: "83.9"}
  ```
@@ -33,7 +33,7 @@ If you look closely, you can also see that the values associated with these prop
 
 We will see more of this in other tasks, but a simple way to do this is to use the [+](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus) operator (unary plus). `forEach` can be used to iterate over the data array.
 
-@@ code=read_data/read_data.2.js @@
+@@ code=read_data/read_data.02.js @@
 ```
 => {city: "seattle", state: "WA", population: 652405, land area: 83.9}
 ```
@@ -44,7 +44,7 @@ We will see more of this in other tasks, but a simple way to do this is to use t
 
 This can also be done during the loading of the data, by `d3.csv` directly. This is done by providing an accessor function to `d3.csv`, who's return value will be the individual data objects in our data array.
 
-@@ code=read_data/read_data.3.js @@
+@@ code=read_data/read_data.03.js @@
 ```
 => {city: "seattle", state: "WA", population: 652405, land_area: 83.9}
 ```
@@ -73,7 +73,7 @@ komodo dragon	reptile	150
 ```
 Loading animals.tsv with `d3.tsv`:
 
-@@ code=read_data/read_data.4.js @@
+@@ code=read_data/read_data.04.js @@
  ```
 => {name: "tiger", type: "mammal", avg_weight: "260"}
  ```
@@ -96,11 +96,11 @@ komodo dragon|reptile|150
 ```
 We could create a pipe separated values (PSV) parser using `d3.dsv`:
 
-@@ code=read_data/read_data.5.js @@
+@@ code=read_data/read_data.05.js @@
 
 And then use this to parse the strangely formated file.
 
-@@ code=read_data/read_data.6.js @@
+@@ code=read_data/read_data.06.js @@
 ```
 => {name: "hippo", type: "mammal", avg_weight: "3400"}
 ```
@@ -132,7 +132,7 @@ employees.json:
 
 Loading employees.json with `d3.json`:
 
-@@ code=read_data/read_data.7.js @@
+@@ code=read_data/read_data.07.js @@
 ```
 => {name: "Andy Hunt", title: "Big Boss", age: 68, bonus: true}
 ```
@@ -146,7 +146,7 @@ D3's basic loading mechanism is fine for one file, but starts to get messy as we
 
 For loading multiple files, we can use [Queue.js](https://github.com/mbostock/queue) (also written by Mike Bostock) to wait for multiple data sources to be loaded.
 
-@@ code=read_data/read_data.8.js @@
+@@ code=read_data/read_data.08.js @@
 ```
 => {city: "seattle", state: "WA", population: "652405", land area: "83.9"}
 => {name: "tiger", type: "mammal", avg_weight: "260"}
