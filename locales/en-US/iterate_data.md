@@ -4,20 +4,20 @@ Most of the functions we used to [summarize](summarize_data.html) our data had t
 
 Again, we start with a basic data set already loaded:
 
-@@ code=iterate_data/iterate_data.1.js @@
+@@ code=iterate_data/iterate_data.01.js @@
 
 ## Iterating
 
 First some basic iteration. We already saw this in the data loading task, but a common way to process each data object is by using [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
 
-@@ code=iterate_data/iterate_data.2.js @@
+@@ code=iterate_data/iterate_data.02.js @@
 ```
 => 4
 ```
 
 _Of course, data also has the property `length` which would be the actual way to get the number of data elements in `data` - but this is just an example._
 
-@@ code=iterate_data/iterate_data.3.js @@
+@@ code=iterate_data/iterate_data.03.js @@
 ```
 => 4
 ```
@@ -42,26 +42,26 @@ To help with this issue of brittle transformations, lodash provides the [clone](
 
 This function takes an object and returns a copy of that object. That copy is now a separate data object that you can edit without effecting the original object.
 
-@@ code=iterate_data/iterate_data.4.js @@
+@@ code=iterate_data/iterate_data.04.js @@
 ```
 => {name: "Carl", age: "48", salary: "12300"}
 ```
 <div class="aside">This code is using lodash</div>
 
-@@ code=iterate_data/iterate_data.5.js @@
+@@ code=iterate_data/iterate_data.05.js @@
 ```
 => {name: "Carl", age: 48, salary: 12300}
 ```
 
 By default, the `clone` function will not copy over nested objects. Instead these nested objects are simply passed by referenced - meaning the original and the copy will still share them.
 
-@@ code=iterate_data/iterate_data.6.js @@
+@@ code=iterate_data/iterate_data.06.js @@
 ```
 => {"name":"Saul","stats":{"age":55}}
 ```
 <div class="aside">This code is using lodash</div>
 
-@@ code=iterate_data/iterate_data.7.js @@
+@@ code=iterate_data/iterate_data.07.js @@
 ```
 => {"name":"Saul","stats":{"age":55}}
 ```
@@ -69,13 +69,13 @@ Note that because `stats` is a nested object the modification happened in both s
 
 To prevent this "feature", we can pass `true` as the second parameter to `clone` to indicate that the copy should be deep and copy nested objects as well.
 
-@@ code=iterate_data/iterate_data.8.js @@
+@@ code=iterate_data/iterate_data.08.js @@
 ```
 => {"name":"Saul","stats":{"age":"55"}}
 ```
 <div class="aside">This code is using lodash</div>
 
-@@ code=iterate_data/iterate_data.9.js @@
+@@ code=iterate_data/iterate_data.09.js @@
 ```
 => {"name":"Saul","stats":{"age":55}}
 ```

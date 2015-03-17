@@ -29,7 +29,7 @@ It assumes you already have some basic knowledge of JavaScript.
 
 Each document in this repo is executed when loaded into a browser. Check it out by opening the Developer Tools Console. You should see the output of the following code block:
 
-@@ code=index/index.1.js @@
+@@ code=index/index.01.js @@
 
 Check out the [full source on github](https://github.com/vlandham/js_data).
 
