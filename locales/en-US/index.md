@@ -9,8 +9,6 @@ using core JavaScript API, the [d3.js](http://d3js.org/) library and [lodash](ht
 
 It assumes you already have some basic knowledge of JavaScript.
 
-[Get source](https://github.com/vlandham/js_data)
-
 ## Tasks
 <ul class='tasks'>
  <li>[Getting Started](getting_started.html)</li>
@@ -27,7 +25,7 @@ It assumes you already have some basic knowledge of JavaScript.
 
 ## Translations
 
-Read this guide in:
+Access this guide in:
 
 - [English](/)
 - [Español](/es/)
