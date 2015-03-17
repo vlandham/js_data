@@ -9,24 +9,22 @@ We will start with generic JavaScript string functions and add in a bit of [loda
 Similar to arrays, the characters in strings are accessible via indexing
 
 @@ code=strings/strings.01.js @@
-```
-=> T
-```
+
+@@ code=strings/strings.01.out @@
 
 Also, just like arrays, you have access to the powerful [slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) method, which is used to extract sub-sections based on indexes.
 
 @@ code=strings/strings.02.js @@
-```
-=> There
-```
+
+@@ code=strings/strings.02.out @@
+
 The sliced string goes up to - but not including - the last index.
 
 And, of course, string concatenation is done in JavaScript using the `+` operator. Use parenthesis if you want to do actual arithmetic inside your concatenation.
 
 @@ code=strings/strings.03.js @@
-```
-=> You are number 9 in line.
-```
+
+@@ code=strings/strings.03.out @@
 
 Check [the documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) for all the other basic tools.
 
@@ -45,10 +43,9 @@ new york,NY,8405837,  302.6
 When [read in](read_data.html) can produce quite the messy dataset:
 
 @@ code=strings/strings.04.js @@
-```
-=> [{"city  ":"  seattle  ","state ":"WA ","population":" 652405 ","land area":"83.9   "},
-     {"city  ":"new york","state ":"NY","population":"8405837","land area":"  302.6"}]
-```
+
+@@ code=strings/strings.04.out @@
+
 <div class="aside">This code is using d3.js</div>
 
 Note the spaces in the property names as well as the values. In cases like this, it might be best to [map](iterate_data.html) the data back to a clean version. Lodash's [trim](https://lodash.com/docs#trim) can help. It removes that unsightly whitespace from the front and back of your strings.
@@ -56,10 +53,9 @@ Note the spaces in the property names as well as the values. In cases like this,
 Here is a version of the data loading function that removes whitespace. It uses
 
 @@ code=strings/strings.05.js @@
-```
-=>  [{"city":"seattle","state":"WA","population":"652405","land area":"83.9"},
-      {"city":"new york","state":"NY","population":"8405837","land area":"302.6"}]
-```
+
+@@ code=strings/strings.05.out @@
+
 <div class="aside">This code is using d3.js and lodash</div>
 
 The strings are now clear of those pesky spaces.
@@ -71,20 +67,18 @@ Extracting data from strings can sometimes mean extracting pieces of strings. Fi
 [indexOf]() can be used to perform this searching. You pass it a sub-string, and it'll tell you the location in string you are calling it where that sub-string starts. `-1` is returned if the sub-string can't be found. You can use this to build a little string finder, by comparing the return value to `-1`.
 
 @@ code=strings/strings.06.js @@
-```
-=> true
-```
+
+@@ code=strings/strings.06.out @@
 
 @@ code=strings/strings.07.js @@
-```
-=> false
-```
+
+@@ code=strings/strings.07.out @@
+
 Replace is the butter to find's bread. We will see more replacing when we get to regular expressions, but replacing sections of a string can be done with the [replace]() method.
 
 @@ code=strings/strings.08.js @@
-```
-=> "A man, a plan, a"
-```
+
+@@ code=strings/strings.08.out @@
 
 ## Templating
 
@@ -101,9 +95,8 @@ the following example:
 If we wanted to build it using string concatenation, it might look like this:
 
 @@ code=strings/strings.09.js @@
-```
-=> '<div class="person"><span class="name">Birdman</span><span class="occupation">Imaginary Super Hero</span></div>'
-```
+
+@@ code=strings/strings.09.out @@
 
 That's a lot of string escaping! You can imagine this gets pretty hard to manage
 after a while.
@@ -118,15 +111,14 @@ Now you can use this template function with lots of data to generate the
 same snippet of html:
 
 @@ code=strings/strings.11.js @@
-```
-=> '<div class="person"><span class="name">Birdman</span><span class="occupation">Imaginary Super Hero</span></div>'
-```
+
+@@ code=strings/strings.11.out @@
+
 <div class="aside">This code is using lodash</div>
 
 @@ code=strings/strings.12.js @@
-```
-=> '<div class="person"><span class="name">James. James Bond</span><span class="occupation">Spy</span></div>'
-```
+
+@@ code=strings/strings.12.out @@
 
 ## Next Task
 
