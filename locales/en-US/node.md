@@ -15,7 +15,7 @@ which npm
 # /usr/local/bin/npm
 ```
 
-Your paths may be different then mine, but as long as `which` returns something, you should be good to go. 
+Your paths may be different then mine, but as long as `which` returns something, you should be good to go.
 
 If node isn't installed on your machine, you can [install it easily via a package manager](https://github.com/joyent/node/wiki/installing-node.js-via-package-manager#osx).
 
@@ -57,7 +57,7 @@ var fs = require("fs");
 var d3 = require("d3");
 var _ = require("lodash");
 ```
-We are requiring our locally installed `d3` and `lodash` packages. Note how we assign them to variables, which are used to access their functions later in the code. 
+We are requiring our locally installed `d3` and `lodash` packages. Note how we assign them to variables, which are used to access their functions later in the code.
 
 We also require the [file system](https://nodejs.org/api/fs.html) module. As we will see in a second, we need this to load our data - which is really the key difference between client-side and server-side use of these tools
 
@@ -74,9 +74,9 @@ fs.readFile("data/animals.tsv", "utf8", function(error, data) {
 
 [fs.readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback) is asynchronous and takes a callback function when it is finished loading the data.
 
-Like our Queue example in [client-side reading](read_data.html), the parameters of this function start with `error`, which will be `null` unless there is an error. 
+Like our Queue example in [client-side reading](read_data.html), the parameters of this function start with `error`, which will be `null` unless there is an error.
 
-The data returned by `readFile` is the raw string contents of the file. 
+The data returned by `readFile` is the raw string contents of the file.
 
 We can use [d3.tsv.parse](https://github.com/mbostock/d3/wiki/CSV#parse) which takes a string and and converts it into an array of data objects - just like what we are used to on the client side!
 
@@ -100,17 +100,15 @@ fs.readFile("data/animals.tsv", "utf8", function(error, data) {
 
 ## Running the Analysis
 
-Since this is not in a browser, we need to execute this script, much like you would with a script written in Ruby or Python. 
+Since this is not in a browser, we need to execute this script, much like you would with a script written in Ruby or Python.
 
 From the command line, we can simply run it with `node` to see the results.
 
 ```bash
 node analyze.js
 ```
-```bash
-> [{"name":"tiger","type":"mammal","avg_weight":"260"},{"name":"hippo","type":"mammal","avg_weight":"3400"},{"name":"komodo dragon","type":"reptile","avg_weight":"150"}]
-   3400
-```
+
+@@ code=node/node.01.out @@
 
 ## Writing Data
 
