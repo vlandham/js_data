@@ -22,9 +22,8 @@ kansas city,MO,467007,315.0
 Use [d3.csv](https://github.com/mbostock/d3/wiki/CSV) to convert it into an array of objects
 
 @@ code=read_data/read_data.01.js @@
- ```
-=> {city: "seattle", state: "WA", population: "652405", land area: "83.9"}
- ```
+@@ code=read_data/read_data.01.out @@
+
 <div class="aside">This code is using d3.js</div>
 
 You can see that the headers of the original CSV have been used as the property names for the data objects. Using `d3.csv` in this manner requires that your CSV file has a header row.
@@ -34,9 +33,8 @@ If you look closely, you can also see that the values associated with these prop
 We will see more of this in other tasks, but a simple way to do this is to use the [+](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus) operator (unary plus). `forEach` can be used to iterate over the data array.
 
 @@ code=read_data/read_data.02.js @@
-```
-=> {city: "seattle", state: "WA", population: 652405, land area: 83.9}
-```
+@@ code=read_data/read_data.02.out @@
+
 <div class="aside">This code is using d3.js</div>
 
 [Dot notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors) is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use bracket notation as shown.
@@ -45,9 +43,8 @@ We will see more of this in other tasks, but a simple way to do this is to use t
 This can also be done during the loading of the data, by `d3.csv` directly. This is done by providing an accessor function to `d3.csv`, who's return value will be the individual data objects in our data array.
 
 @@ code=read_data/read_data.03.js @@
-```
-=> {city: "seattle", state: "WA", population: 652405, land_area: 83.9}
-```
+@@ code=read_data/read_data.03.out @@
+
 <div class="aside">This code is using d3.js</div>
 
 In this form, you have complete control over the data objects and can rename properties (like `land_area`) and convert values (like `population`) willy-nilly.  On the other hand, you have to be quite explicit about which properties to return. This may or may not be what you are into.
@@ -74,9 +71,8 @@ komodo dragon	reptile	150
 Loading animals.tsv with `d3.tsv`:
 
 @@ code=read_data/read_data.04.js @@
- ```
-=> {name: "tiger", type: "mammal", avg_weight: "260"}
- ```
+@@ code=read_data/read_data.04.out @@
+
 <div class="aside">This code is using d3.js</div>
 
 ## Reading Other Flat Files
@@ -101,9 +97,8 @@ We could create a pipe separated values (PSV) parser using `d3.dsv`:
 And then use this to parse the strangely formated file.
 
 @@ code=read_data/read_data.06.js @@
-```
-=> {name: "hippo", type: "mammal", avg_weight: "3400"}
-```
+@@ code=read_data/read_data.06.out @@
+
 <div class="aside">This code is using d3.js</div>
 
 ## Reading JSON Files
@@ -133,9 +128,8 @@ employees.json:
 Loading employees.json with `d3.json`:
 
 @@ code=read_data/read_data.07.js @@
-```
-=> {name: "Andy Hunt", title: "Big Boss", age: 68, bonus: true}
-```
+@@ code=read_data/read_data.07.out @@
+
 <div class="aside">This code is using d3.js</div>
 
 We can see that, unlike our flat file parsing, numeric types stay numeric. Indeed, a JSON value can be a string, a number, a boolean value, an array, or another object. This allows nested data to be dealt with easily.
@@ -147,10 +141,8 @@ D3's basic loading mechanism is fine for one file, but starts to get messy as we
 For loading multiple files, we can use [Queue.js](https://github.com/mbostock/queue) (also written by Mike Bostock) to wait for multiple data sources to be loaded.
 
 @@ code=read_data/read_data.08.js @@
-```
-=> {city: "seattle", state: "WA", population: "652405", land area: "83.9"}
-=> {name: "tiger", type: "mammal", avg_weight: "260"}
-```
+@@ code=read_data/read_data.08.out @@
+
 <div class="aside">This code is using queue.js and d3.js</div>
 
 Note that we `defer` the loading of two types of files - using two different loading functions - so this is an easy way to mix and match file types.
