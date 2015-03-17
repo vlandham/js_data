@@ -47,6 +47,8 @@ module.exports = function(grunt) {
           snippet_file = "```javascript\n" + snippet_file + "\n```";
         } else if (snippet_path.indexOf('.html') > -1) {
           snippet_file = "```html\n" + snippet_file + "\n```";
+        } else if (snippet_path.indexOf('.out') > -1) {
+            snippet_file = "```\n=> " + snippet_file + "\n```";
         }
 
         md = md.replace(matches[0], snippet_file);
