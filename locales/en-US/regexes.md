@@ -14,44 +14,39 @@ If we want to know whether the string "wood" appears in our larger string `str` 
 could do the following
 
 @@ code=regexes/regexes.02.js @@
-```
-=> "we found 'wood' in the string!"
-```
+
+@@ code=regexes/regexes.02.out @@
 
 To see the actual matches we found in the string, we can use the `match` method
 to find all matches available:
 
 @@ code=regexes/regexes.03.js @@
-```
-=> ["wood"]
-```
+
+@@ code=regexes/regexes.03.out @@
 
 Note that this only returned one match, even though the word "wood" appears several
 times in our original string. In order to find all individual instances of wood, we need
 to add the global flag, which we can do by adding a `g` to the end of our expression:
 
 @@ code=regexes/regexes.04.js @@
-```
-=> ["wood", "wood", "wood", "wood"]
-```
+
+@@ code=regexes/regexes.04.out @@
 
 Now, note that two of those matches actually belonged to the word "woodchuck", which
 was not a part of our results. If we wanted to extend our regular expression to match both
 we could do so in a few ways:
 
 @@ code=regexes/regexes.05.js @@
-```
-=> ["wood", "woodchuck", "woodchuck", "wood"]
-```
+
+@@ code=regexes/regexes.05.out @@
 
 In this regular expression we are matching everything that starts with the string "wood"
 followed by 0 or more characters (`.*?`) until a word break (`\b`) occures.
 Alternatively, we could also just search for both words:
 
 @@ code=regexes/regexes.06.js @@
-```
-=> ["wood", "woodchuck", "woodchuck", "wood"]
-```
+
+@@ code=regexes/regexes.06.out @@
 
 Note the order in which we did the last search. We used the word "woodchuch" before
 the word "wood". If we were to run our expression like so: `/wood|woodchuck/g`, we would
@@ -64,9 +59,8 @@ If we wanted to replace the word "wood" in our original string, with the word
 "nun", we could do it like so:
 
 @@ code=regexes/regexes.07.js @@
-```
-=> "how much nun would a nunchuck chuck if a nunchuck could chuck nun"
-```
+
+@@ code=regexes/regexes.07.out @@
 
 Probablay not what you'd be going for, but you get our drift.
 
@@ -93,18 +87,16 @@ this pattern looks for:
 If we wanted to find all the matches, we could use our string `match` function like so:
 
 @@ code=regexes/regexes.10.js @@
-```
-=> ["$3.99", "$2.49", "$6.95"]
-```
+
+@@ code=regexes/regexes.10.out @@
 
 This is great! We have all our dollar amounts. While this gets us 90% there, we
 can't really add them with those `$` signs. To remove them, we can use our trusty
 `reduce` function like so:
 
 @@ code=regexes/regexes.11.js @@
-```
-=> 13.43
-```
+
+@@ code=regexes/regexes.11.out @@
 
 ## Useful special characters
 We've used a few special characters so far, like `\b` to indicate a word break. There
