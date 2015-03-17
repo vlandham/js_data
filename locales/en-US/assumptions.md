@@ -14,7 +14,7 @@ These tests can be created with [assertions](http://en.wikipedia.org/wiki/Assert
 
 JavaScript doesn't have a built assertions, but we can rectify this deficiency with a simple function.
 
-@@ code=assumptions/assumptions.1.js @@
+@@ code=assumptions/assumptions.01.js @@
 
 This will output a given message if the input is not true. Typically assertions [throw](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw) errors, but we can just log it for explaining purposes.
 
@@ -26,13 +26,13 @@ We can use lodash's suite of [type checking functions](https://lodash.com/docs#i
 
 Let's say our data importing process has made some mistakes:
 
-@@ code=assumptions/assumptions.2.js @@
+@@ code=assumptions/assumptions.02.js @@
 
 Our first entry looks ok, where our second entry has some problems. The age parsing for the immortal [Sleepwalker](http://en.wikipedia.org/wiki/Sleepwalker_%28comics%29) has left him with no age. Also, bad input data has left us with a string in `superhuman`, where we expect a boolean.
 
 A simple assumption checking function that could be run on this data could look something like this:
 
-@@ code=assumptions/assumptions.3.js @@
+@@ code=assumptions/assumptions.03.js @@
 ```
 => {"name":"Sleepwalker","age":null,"superhuman":"TRUE"} has a bad age - should not be NaN
    {"name":"Sleepwalker","age":null,"superhuman":"TRUE"} has a bad superhuman - should be boolean
@@ -50,7 +50,7 @@ Just as you can test your assumptions about the content of your data elements, i
 
 Something simple to perform this check could look like this:
 
-@@ code=assumptions/assumptions.4.js @@
+@@ code=assumptions/assumptions.04.js @@
 ```
 => data is too small
    wrong number of columns
@@ -68,7 +68,7 @@ two objects are equal or whether an object has or doesn't have a property.
 
 For example:
 
-@@ code=assumptions/assumptions.5.js @@
+@@ code=assumptions/assumptions.05.js @@
 ```
 => true
 ```
