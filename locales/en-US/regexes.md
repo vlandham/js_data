@@ -8,12 +8,12 @@ addresses.
 
 ## Finding Strings
 
-@@ code=regexes/regexes.1.js @@
+@@ code=regexes/regexes.01.js @@
 
 If we want to know whether the string "wood" appears in our larger string `str` we
 could do the following
 
-@@ code=regexes/regexes.2.js @@
+@@ code=regexes/regexes.02.js @@
 ```
 => "we found 'wood' in the string!"
 ```
@@ -21,7 +21,7 @@ could do the following
 To see the actual matches we found in the string, we can use the `match` method
 to find all matches available:
 
-@@ code=regexes/regexes.3.js @@
+@@ code=regexes/regexes.03.js @@
 ```
 => ["wood"]
 ```
@@ -30,7 +30,7 @@ Note that this only returned one match, even though the word "wood" appears seve
 times in our original string. In order to find all individual instances of wood, we need
 to add the global flag, which we can do by adding a `g` to the end of our expression:
 
-@@ code=regexes/regexes.4.js @@
+@@ code=regexes/regexes.04.js @@
 ```
 => ["wood", "wood", "wood", "wood"]
 ```
@@ -39,7 +39,7 @@ Now, note that two of those matches actually belonged to the word "woodchuck", w
 was not a part of our results. If we wanted to extend our regular expression to match both
 we could do so in a few ways:
 
-@@ code=regexes/regexes.5.js @@
+@@ code=regexes/regexes.05.js @@
 ```
 => ["wood", "woodchuck", "woodchuck", "wood"]
 ```
@@ -48,7 +48,7 @@ In this regular expression we are matching everything that starts with the strin
 followed by 0 or more characters (`.*?`) until a word break (`\b`) occures.
 Alternatively, we could also just search for both words:
 
-@@ code=regexes/regexes.6.js @@
+@@ code=regexes/regexes.06.js @@
 ```
 => ["wood", "woodchuck", "woodchuck", "wood"]
 ```
@@ -63,7 +63,7 @@ end up with `["wood", "wood", "wood", "wood"]` again because that search would b
 If we wanted to replace the word "wood" in our original string, with the word
 "nun", we could do it like so:
 
-@@ code=regexes/regexes.7.js @@
+@@ code=regexes/regexes.07.js @@
 ```
 => "how much nun would a nunchuck chuck if a nunchuck could chuck nun"
 ```
@@ -78,12 +78,12 @@ in the text.
 For example, if we wanted to extract the total amount of money spent
 on groceries from this message:
 
-@@ code=regexes/regexes.8.js @@
+@@ code=regexes/regexes.08.js @@
 
 we could define a regular expression that looks for dollar amounts by defining a
 pattern like so.
 
-@@ code=regexes/regexes.9.js @@
+@@ code=regexes/regexes.09.js @@
 
 this pattern looks for:
 * A dollar sign (`\$`) to indicate the beginning of a price
