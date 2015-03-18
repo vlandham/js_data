@@ -1,4 +1,4 @@
-d3.csv("data/cities.csv", function(d) {
+d3.csv("/data/cities.csv", function(d) {
   return {
     city : d.city,
     state : d.state,

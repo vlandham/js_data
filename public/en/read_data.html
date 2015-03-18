@@ -57,7 +57,7 @@ boston,MA,<span class="hljs-number">645966</span>,<span class="hljs-number">48.3
 kansas city,MO,<span class="hljs-number">467007</span>,<span class="hljs-number">315.0</span>
 </code></pre>
 <p>Use <a href="https://github.com/mbostock/d3/wiki/CSV">d3.csv</a> to convert it into an array of objects</p>
-<pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+<pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"/data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
   <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
 });
 </code></pre>
@@ -67,7 +67,7 @@ kansas city,MO,<span class="hljs-number">467007</span>,<span class="hljs-number"
 <p>You can see that the headers of the original CSV have been used as the property names for the data objects. Using <code>d3.csv</code> in this manner requires that your CSV file has a header row.</p>
 <p>If you look closely, you can also see that the values associated with these properties are all strings. This is probably <em>not what you want</em> in the case of numbers. When loading CSVs and other flat files, you have to do the type conversion.</p>
 <p>We will see more of this in other tasks, but a simple way to do this is to use the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus">+</a> operator (unary plus). <code>forEach</code> can be used to iterate over the data array.</p>
-<pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+<pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"/data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
   data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
     d.population = +d.population;
     d[<span class="hljs-string">"land area"</span>] = +d[<span class="hljs-string">"land area"</span>];
@@ -80,7 +80,7 @@ kansas city,MO,<span class="hljs-number">467007</span>,<span class="hljs-number"
 
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">Dot notation</a> is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use bracket notation as shown.</p>
 <p>This can also be done during the loading of the data, by <code>d3.csv</code> directly. This is done by providing an accessor function to <code>d3.csv</code>, who&#39;s return value will be the individual data objects in our data array.</p>
-<pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+<pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"/data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
   <span class="hljs-keyword">return</span> {
     city : d.city,
     state : d.state,
@@ -107,7 +107,7 @@ tiger    mammal    <span class="hljs-number">260</span>
 hippo    mammal    <span class="hljs-number">3400</span>
 komodo dragon    reptile    <span class="hljs-number">150</span>
 </code></pre><p>Loading animals.tsv with <code>d3.tsv</code>:</p>
-<pre><code class="lang-javascript">d3.tsv(<span class="hljs-string">"data/animals.tsv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+<pre><code class="lang-javascript">d3.tsv(<span class="hljs-string">"/data/animals.tsv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
   <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
 });
 </code></pre>
@@ -128,7 +128,7 @@ komodo dragon<span class="hljs-localvars">|reptile|</span><span class="hljs-numb
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> psv = d3.dsv(<span class="hljs-string">"|"</span>, <span class="hljs-string">"text/plain"</span>);
 </code></pre>
 <p>And then use this to parse the strangely formated file.</p>
-<pre><code class="lang-javascript">psv(<span class="hljs-string">"data/animals_piped.txt"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+<pre><code class="lang-javascript">psv(<span class="hljs-string">"/data/animals_piped.txt"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
   <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">1</span>]);
 });
 </code></pre>
@@ -153,7 +153,7 @@ komodo dragon<span class="hljs-localvars">|reptile|</span><span class="hljs-numb
  }
 ]
 </code></pre><p>Loading employees.json with <code>d3.json</code>:</p>
-<pre><code class="lang-javascript">d3.json(<span class="hljs-string">"data/employees.json"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+<pre><code class="lang-javascript">d3.json(<span class="hljs-string">"/data/employees.json"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
   <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
 });
 </code></pre>
@@ -165,8 +165,8 @@ komodo dragon<span class="hljs-localvars">|reptile|</span><span class="hljs-numb
 <p>D3&#39;s basic loading mechanism is fine for one file, but starts to get messy as we nest multiple callbacks.</p>
 <p>For loading multiple files, we can use <a href="https://github.com/mbostock/queue">Queue.js</a> (also written by Mike Bostock) to wait for multiple data sources to be loaded.</p>
 <pre><code class="lang-javascript">queue()
-  .defer(d3.csv, <span class="hljs-string">"data/cities.csv"</span>)
-  .defer(d3.tsv, <span class="hljs-string">"data/animals.tsv"</span>)
+  .defer(d3.csv, <span class="hljs-string">"/data/cities.csv"</span>)
+  .defer(d3.tsv, <span class="hljs-string">"/data/animals.tsv"</span>)
   .await(analyze);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">analyze</span><span class="hljs-params">(error, cities, animals)</span> </span>{
