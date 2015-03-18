@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Regular Expressions - Learn JS Data</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="description" content="An introduction to data processing and munging in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+  <meta name="keywords" content="javascript,data processing, data munging">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@bocoup">
+  <meta name="twitter:creator" content="@vlandham">
+  <meta name="twitter:title" content="Learn JS Data: Data processing in JavaScript">
+  <meta name="twitter:description" content="An introduction to data processing and munging in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+<meta name="twitter:image:src" content="http://learnjsdata.com/img/logo.png">
+<meta property="og:site_name" content="Learn JS Data"/>
+<meta property="og:title" content="Data manipulation, munging, and processing in JavaScript" />
+<meta property="og:url" content="http://learnjsdata.com" />
+<meta property="og:description" content="This guide teaches the basics of manipulating data using JavaScript in the browser, or in node.js. 
+Specifically, demonstrating tasks that are geared around preparing data for further analysis and visualization. This guide will demonstrate some basic techniques and how to implement them using core JavaScript API, the d3.js library and lodash." />
+<meta property="og:image" content="http://learnjsdata.com/img/fb.jpg" />
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" media="all" href="/custom.css" />
+  <script src='/lib/d3/d3.min.js'></script>
+  <script src='/lib/queue-async/queue.min.js'></script>
+  <script src='/lib/lodash/lodash.min.js'></script>
+</head>
+<body>
+
+  <header>
+    <div class="contents">
+      <a href="https://github.com/vlandham/js_data"><img class="github" style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+      <a href='index.html'>
+        <img class='logo' src="/img/logo.png">
+        <h1>Learn JS Data</h1>
+        <h3>Data manipulation, munging, and processing in JavaScript</h3>
+      </a>
+    </div>
+  </header>
+
+  <div id="container">
+    <h1 id="regular-expressions">Regular Expressions</h1>
+<p>Regular expressions are used to match certain patterns of strings within other strings.</p>
+<p>They can be a useful tool for extracting <em>patterns</em> rather than exact strings, for example:
+telephone numbers (sequences of numbers of a specific length,) street numbers or email
+addresses.</p>
+<h2 id="finding-strings">Finding Strings</h2>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">"how much wood would a woodchuck chuck if a woodchuck could chuck wood"</span>;
+<span class="hljs-keyword">var</span> regex = <span class="hljs-regexp">/wood/</span>;
+</code></pre>
+<p>If we want to know whether the string &quot;wood&quot; appears in our larger string <code>str</code> we
+could do the following</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">if</span> (regex.test(str)) {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"we found 'wood' in the string!"</span>);
+}
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-string">"we found 'wood' in the string!"</span>
+</code></pre><p>To see the actual matches we found in the string, we can use the <code>match</code> method
+to find all matches available:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> matches = str.match(regex);
+<span class="hljs-built_in">console</span>.log(matches);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-string">"wood"</span>]
+</code></pre><p>Note that this only returned one match, even though the word &quot;wood&quot; appears several
+times in our original string. In order to find all individual instances of wood, we need
+to add the global flag, which we can do by adding a <code>g</code> to the end of our expression:</p>
+<pre><code class="lang-javascript">regex = <span class="hljs-regexp">/wood/g</span>;
+<span class="hljs-built_in">console</span>.log(str.match(regex));
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-string">"wood"</span>, <span class="hljs-string">"wood"</span>, <span class="hljs-string">"wood"</span>, <span class="hljs-string">"wood"</span>]
+</code></pre><p>Now, note that two of those matches actually belonged to the word &quot;woodchuck&quot;, which
+was not a part of our results. If we wanted to extend our regular expression to match both
+we could do so in a few ways:</p>
+<pre><code class="lang-javascript">regex = <span class="hljs-regexp">/wood.*?\b/g</span>;
+<span class="hljs-built_in">console</span>.log(str.match(regex));
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-string">"wood"</span>, <span class="hljs-string">"woodchuck"</span>, <span class="hljs-string">"woodchuck"</span>, <span class="hljs-string">"wood"</span>]
+</code></pre><p>In this regular expression we are matching everything that starts with the string &quot;wood&quot;
+followed by 0 or more characters (<code>.*?</code>) until a word break (<code>\b</code>) occures.
+Alternatively, we could also just search for both words:</p>
+<pre><code class="lang-javascript">regex = <span class="hljs-regexp">/woodchuck|wood/g</span>;
+<span class="hljs-built_in">console</span>.log(str.match(regex));
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-string">"wood"</span>, <span class="hljs-string">"woodchuck"</span>, <span class="hljs-string">"woodchuck"</span>, <span class="hljs-string">"wood"</span>]
+</code></pre><p>Note the order in which we did the last search. We used the word &quot;woodchuch&quot; before
+the word &quot;wood&quot;. If we were to run our expression like so: <code>/wood|woodchuck/g</code>, we would
+end up with <code>[&quot;wood&quot;, &quot;wood&quot;, &quot;wood&quot;, &quot;wood&quot;]</code> again because that search would be
+&quot;greedy&quot;.</p>
+<h2 id="replacing-with-regular-expressions">Replacing with regular expressions</h2>
+<p>If we wanted to replace the word &quot;wood&quot; in our original string, with the word
+&quot;nun&quot;, we could do it like so:</p>
+<pre><code class="lang-javascript">regex = <span class="hljs-regexp">/wood/g</span>;
+<span class="hljs-keyword">var</span> newstr = str.replace(regex, <span class="hljs-string">"nun"</span>);
+<span class="hljs-built_in">console</span>.log(newstr);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-string">"how much nun would a nunchuck chuck if a nunchuck could chuck nun"</span>
+</code></pre><p>Probablay not what you&#39;d be going for, but you get our drift.</p>
+<h2 id="finding-numbers">Finding Numbers</h2>
+<p>Extracting numbers from strings is a common task when looking for things like
+dollar amounts or any other numerical measurements that might be scattered about
+in the text.
+For example, if we wanted to extract the total amount of money spent
+on groceries from this message:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> message = <span class="hljs-string">"I bought a loaf of bread for $3.99, some milk for $2.49 and"</span> +
+  <span class="hljs-string">"a box of chocolate cookies for $6.95"</span>;
+</code></pre>
+<p>we could define a regular expression that looks for dollar amounts by defining a
+pattern like so.</p>
+<pre><code class="lang-javascript">regex = <span class="hljs-regexp">/\$([0-9\.]+)\b/g</span>;
+</code></pre>
+<p>this pattern looks for:</p>
+<ul>
+<li>A dollar sign (<code>\$</code>) to indicate the beginning of a price</li>
+<li>A set of repeating characters that can be a number (<code>0-9</code>) or the period character <code>.</code>. These can appear repeatedly (<code>+</code>). Note that we&#39;re not being particularly careful in making sure we only have one period in our string, for example.</li>
+<li>A word break that would indicate the end of the price string (<code>\b</code>).</li>
+</ul>
+<p>If we wanted to find all the matches, we could use our string <code>match</code> function like so:</p>
+<pre><code class="lang-javascript">matches = message.match(regex);
+<span class="hljs-built_in">console</span>.log(matches);
+</code></pre>
+<pre><code>=&gt; [<span class="hljs-string">"<span class="hljs-variable">$3</span>.99"</span>, <span class="hljs-string">"<span class="hljs-variable">$2</span>.49"</span>, <span class="hljs-string">"<span class="hljs-variable">$6</span>.95"</span>]
+</code></pre><p>This is great! We have all our dollar amounts. While this gets us 90% there, we
+can&#39;t really add them with those <code>$</code> signs. To remove them, we can use our trusty
+<code>reduce</code> function like so:</p>
+<pre><code class="lang-javascript">matches.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, value)</span> </span>{
+  <span class="hljs-keyword">return</span> sum + <span class="hljs-built_in">Number</span>(value.slice(<span class="hljs-number">1</span>));
+}, <span class="hljs-number">0</span>);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">13.43</span>
+</code></pre><h2 id="useful-special-characters">Useful special characters</h2>
+<p>We&#39;ve used a few special characters so far, like <code>\b</code> to indicate a word break. There
+are a few others that might be useful to you:</p>
+<ul>
+<li><code>\d</code> - any number character.  Equivalent to [0-9].</li>
+<li><code>\D</code> - any non number character. Equivalent to [^0-9].</li>
+<li><code>\s</code> - any single space character. This includes a single space, tab, line feed or
+form feed.</li>
+</ul>
+<p>You can see a full list of all special characters here:
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">MDN - Regular Expressions</a></p>
+<h2 id="next-task">Next Task</h2>
+<p><a href="time.html">Working With Time</a></p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">MDN - Regular Expressions</a> - for more information about regular expressions</li>
+</ul>
+
+  </div>
+  <br/><br/>
+  <section id="footer">
+    Made with ♥ by <a href="http://bocoup.com/datavis">The Bocoup Data Visualization Team</a>.
+  </section>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-60734450-1', 'auto');
+ga('send', 'pageview');
+
+  </script>
+  </body>
+  </html>

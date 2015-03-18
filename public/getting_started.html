@@ -23,10 +23,10 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 
   <link rel="shortcut icon" href="/favicon.ico">
   <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" media="all" href="custom.css" />
-  <script src='lib/d3/d3.min.js'></script>
-  <script src='lib/queue-async/queue.min.js'></script>
-  <script src='lib/lodash/lodash.min.js'></script>
+  <link rel="stylesheet" media="all" href="/custom.css" />
+  <script src='/lib/d3/d3.min.js'></script>
+  <script src='/lib/queue-async/queue.min.js'></script>
+  <script src='/lib/lodash/lodash.min.js'></script>
 </head>
 <body>
 
@@ -34,8 +34,8 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
     <div class="contents">
       <a href="https://github.com/vlandham/js_data"><img class="github" style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
-      <a href='/'>
-        <img class='logo' src="img/logo.png">
+      <a href='index.html'>
+        <img class='logo' src="/img/logo.png">
         <h1>Learn JS Data</h1>
         <h3>Data manipulation, munging, and processing in JavaScript</h3>
       </a>
@@ -43,19 +43,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
   </header>
 
   <div id="container">
-    <div id="background"></div>
-    
-    <ul class="sections">
-        
-        
-        
-        <li id="section-1">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-1">&#182;</a>
-              </div>
-              <h1 id="getting-started">Getting Started</h1>
+    <h1 id="getting-started">Getting Started</h1>
 <h2 id="about-tasks">About Tasks</h2>
 <p>This guide is broken up into a number of tasks, which we can think of as little modules or <em>recipes</em>.</p>
 <p>Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. Tasks attempt to be self-contained and stay focused on the, well, <em>task at hand</em>. </p>
@@ -65,25 +53,13 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <p>Its core feature of binding data to visual representations happens to require a lot of manipulation of said data. Thus, while this toolkit is focused around visualization, it is well suited for data munging as well!</p>
 <p>And, a typical output for data manipulation is at least some sort of visualization of that data, in which case you are all ready to go.</p>
 <h2 id="why-lodash-">Why lodash?</h2>
-<p><a href="https://lodash.com">Lodash</a> is fast, popular, and fills in some holes in D3’s processing features. Plus, it’s functional style and chaining capabilities make it work well alongside D3.</p>
+<p><a href="https://lodash.com">Lodash</a> is fast, popular, and fills in some holes in D3&#39;s processing features. Plus, it&#39;s functional style and chaining capabilities make it work well alongside D3.</p>
 <h2 id="code-snippets">Code Snippets</h2>
 <p>There are a bunch of useful snippets in this guide. Here is an example:</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> theMax = d3.max([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">20</span>,<span class="hljs-number">3</span>]);
-<span class="hljs-built_in">console</span>.log(theMax);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-2">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-2">&#182;</a>
-              </div>
-              <pre><code>=&gt; <span class="hljs-number">20</span>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> theMax = d3.max([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">20</span>,<span class="hljs-number">3</span>]);
+<span class="hljs-built_in">console</span>.log(theMax);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">20</span>
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>We use a little arrow, <code>=&gt;</code>, to indicate output from a code snippet. This same output you can view by opening the <a href="https://developer.chrome.com/devtools/docs/console">console</a> of your favorite web browser.</p>
@@ -91,8 +67,8 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <h2 id="preparing-your-site-for-data-processing">Preparing Your Site for Data Processing</h2>
 <p>To get started using these tools for your data processing, you are going to want to include them in your html file along with a JavaScript file to perform the analysis. </p>
 <p>I typically download these scripts and include local copies in my page. To do this, you would want to have your HTML look something like this: </p>
-<pre><code>&lt;!doctype html&gt;
-<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
+<pre><code class="lang-html"><span class="hljs-doctype">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
@@ -101,10 +77,11 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'js/lodash.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'js/analysis.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span></span>
-</code></pre><p><code>analysis.js</code> would be where your analysis code goes. I put them at the end of the <code>body</code> - just so that if there is other content on the page, it won’t be delayed in loading. Typically, I name this file <code>index.html</code> - so that its loaded automatically as the root page.</p>
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
+</code></pre>
+<p><code>analysis.js</code> would be where your analysis code goes. I put them at the end of the <code>body</code> - just so that if there is other content on the page, it won&#39;t be delayed in loading. Typically, I name this file <code>index.html</code> - so that its loaded automatically as the root page.</p>
 <h2 id="running-a-local-server">Running a Local Server</h2>
-<p>D3’s functions for <a href="read_data.html">reading data</a> require you be running the page from a server. You can do this on your own machine by running a local server out of the root directory of your site.</p>
+<p>D3&#39;s functions for <a href="read_data.html">reading data</a> require you be running the page from a server. You can do this on your own machine by running a local server out of the root directory of your site.</p>
 <p>There are many options for easy-to-spin-up web servers:</p>
 <ul>
 <li><a href="http://www.pythonforbeginners.com/modules-in-python/how-to-use-simplehttpserver/">SimpleHTTPServer</a> for Python</li>
@@ -112,12 +89,14 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <li><a href="https://github.com/nodeapps/http-server">http-server</a> for Node</li>
 </ul>
 <p>Lately, I have been using that last option - <code>http-server</code>. If you have Node and npm installed, you can grab the required package by installing it from the command line:</p>
-<pre><code>npm install -g http-server
-</code></pre><p>(The <code>-g</code> flag stands for <em>global</em> - which allows you to access <code>http-server</code> from any directory on your machine.</p>
+<pre><code class="lang-bash">npm install -g http-server
+</code></pre>
+<p>(The <code>-g</code> flag stands for <em>global</em> - which allows you to access <code>http-server</code> from any directory on your machine.</p>
 <p>Then <code>cd</code> to your analysis directory and start it up!</p>
-<pre><code>cd /path/to/dir
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> /path/to/dir
 http-server
-</code></pre><p>In your web browser, open up <a href="http://0.0.0.0:8080">http://0.0.0.0:8080</a> and you should be ready to go!</p>
+</code></pre>
+<p>In your web browser, open up <a href="http://0.0.0.0:8080">http://0.0.0.0:8080</a> and you should be ready to go!</p>
 <h2 id="next-task">Next Task</h2>
 <p><a href="read_data.html">Reading in Data</a></p>
 <h2 id="see-also">See Also</h2>
@@ -125,11 +104,6 @@ http-server
 <li><a href="http://howtonode.org/how-to-install-nodejs">Installing Node</a> - if you need some help getting <code>http-server</code> on your machine.</li>
 </ul>
 
-            </div>
-            
-        </li>
-        
-    </ul>
   </div>
   <br/><br/>
   <section id="footer">
