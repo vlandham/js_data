@@ -29,7 +29,7 @@ module.exports = function(grunt) {
       var html = grunt.file.read(html_file);
       var js = grunt.file.read(js_file);
 
-      html = html.replace('</body>', '<script type="text/javascript" src="' + js_file + '"></script></body>');
+      html = html.replace('</body>', '<script type="text/javascript" src="/' + js_file + '"></script></body>');
       grunt.file.write(html_file, html);
       grunt.log.ok(html_file);
     });
