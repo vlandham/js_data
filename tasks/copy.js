@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   grunt.config.set("copy", {
     js: {
       expand: true,
-      cwd: "src/",
+      cwd: "build/src/",
       src: ["*.js"],
       dest: "public/src"
     },
