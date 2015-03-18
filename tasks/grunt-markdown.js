@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         },
         {
         expand: true,
-        cwd: 'build/locales/en-US',
+        cwd: 'build/locales/en',
         src: '*.md',
         dest: 'public/',
         ext: '.html'
