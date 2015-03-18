@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/vlandham/js_data",
   "devDependencies": {
+    "glob": "^5.0.3",
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-copy": "^0.8.0",
