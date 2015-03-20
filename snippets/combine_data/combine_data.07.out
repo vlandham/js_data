@@ -1,0 +1,11 @@
+[{
+    'type': 'boat',
+    'model': 'Ocean Queen 2000',
+    'price': 23202020,
+    'weight': 5656.9
+}, {
+    'type': 'car',
+    'model': 'Ferrari',
+    'price': 59988,
+    'weight': 1.9
+}];
