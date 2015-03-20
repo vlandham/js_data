@@ -156,7 +156,7 @@ To add another data file, simply add another defer and extend the input paramete
 
 ## Next Task
 
-[Summarizing Data](summarize_data.html)
+[Combining Data](combine_data.html)
 
 ## See Also
 

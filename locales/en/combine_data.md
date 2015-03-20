@@ -83,3 +83,7 @@ So in both data sets we essentially have separate information about the same con
 
 @@ code=combine_data/combine_data.07.out @@
 <div class="aside">This code is using lodash</div>
+
+## Next Task
+
+[Summarizing Data](summarize_data.html)
