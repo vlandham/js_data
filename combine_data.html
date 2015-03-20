@@ -92,7 +92,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <p>As you can see, in each article, <code>brand_id</code> points to a particular brand, whose details are saved in another data set - which can be considered a <em>lookup table</em> in this case. This is often how separate data schemes are stored in a server-side database. Also note that the last article in the list has a <code>brand_id</code> for which no brand is stored in <code>brands</code>.</p>
 <p>What we want to do now is to combine both datasets, so we can reference the brand&#39;s <code>name</code> directly from an article. There are several ways to achieve this.</p>
 <h3 id="using-native-array-functions">Using native <code>Array</code> functions</h3>
-<p>We can implement a simple (<em>left outer</em> in database terms) join using native, i.e., already existing <code>Array</code> functions as follows. The method presented here modifies the <code>articles</code> array <em>in place</em> by adding a new key-value-pair for <code>brand</code>.</p>
+<p>We can implement a simple join (<em>left outer join</em> in database terms) using native, i.e., already existing <code>Array</code> functions as follows. The method presented here modifies the <code>articles</code> array <em>in place</em> by adding a new key-value-pair for <code>brand</code>.</p>
 <pre><code class="lang-javascript">articles.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(article)</span> </span>{
     <span class="hljs-keyword">var</span> result = brands.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(brand)</span> </span>{
         <span class="hljs-keyword">return</span> brand.id === article.brand_id;
@@ -193,7 +193,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 }];
 </code></pre><p>Note that we don&#39;t modify <code>articles</code> <em>in place</em> but create a new array.</p>
 <h2 id="add-together-rows-from-different-data-sets">Add together rows from different data sets</h2>
-<p>Let&#39;s say we want to load a huge data set from the server, but because of network performance reasons, we load it in three chunks and reassemble it on the client side. Using Queue.js, as illustrated in <a href="read_data.html">reading in data</a>, we get the data and immediately combine it. For this, we can use D3&#39;s <code>d3.merge</code> to combine the single arrays one after another. In database terms, this operation is called &quot;union&quot;.</p>
+<p>Let&#39;s say we want to load a huge data set from the server, but because of network performance reasons, we load it in three chunks and reassemble it on the client side. Using Queue.js, as illustrated in <a href="read_data.html">reading in data</a>, we get the data and immediately combine it. For this, we can use D3&#39;s <code>merge</code> to combine the single arrays one after another. In database terms, this operation is called &quot;union&quot;.</p>
 <pre><code class="lang-javascript">queue()
     .defer(d3.csv, <span class="hljs-string">"/data/big_data_1.csv"</span>)
     .defer(d3.csv, <span class="hljs-string">"/data/big_data_2.csv"</span>)
@@ -212,7 +212,24 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 
 <p>Note that the argument passed to <code>d3.merge</code> must be an array itself, which is why we use the square brackets.</p>
 <h2 id="combine-attributes-from-different-data-sets">Combine attributes from different data sets</h2>
-<p>In the last case, we have two or more data sets which contain attributes describing the same observations, or, conceptual entities, and they thus need to be combined. This implies that all data sets have the same length. For example, <code>dataset_1</code> below contains two observations of attribute <code>a</code> and attribute <code>b</code>, while <code>dataset_2</code> contains the same two entities, but observed through attributes <code>c</code> and <code>d</code>.</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<h1 id="in-the-last-case-we-have-two-or-more-data-sets-which-contain-attributes-describing-the-same-observations-or-conceptual-entities-and-they-thus-need-to-be-combined-this-implies-that-all-data-sets-have-the-same-length-for-example-dataset_1-below-contains-two-observations-of-attribute-a-and-attribute-b-while-dataset_2-contains-the-same-two-entities-but-observed-through-attributes-c-and-d-">In the last case, we have two or more data sets which contain attributes describing the same observations, or, conceptual entities, and they thus need to be combined. This implies that all data sets have the same length. For example, <code>dataset_1</code> below contains two observations of attribute <code>a</code> and attribute <code>b</code>, while <code>dataset_2</code> contains the same two entities, but observed through attributes <code>c</code> and <code>d</code>.</h1>
+<p>In the last case, we have two or more data sets which contain attributes describing the same observations, or, conceptual entities, and they thus need to be combined. This implies that all data sets have the same length. For example, <code>dataset_1</code> below contains two observations of attribute <code>type</code> and attribute <code>model</code>, while <code>dataset_2</code> contains the same two entities, but observed through attributes <code>price</code> and <code>weight</code>.</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>67f1f706163f5c6f623a6d9f3b91e4efcbbf87a1</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> dataset_1 = [{
     <span class="hljs-string">'type'</span>: <span class="hljs-string">'boat'</span>,
     <span class="hljs-string">'model'</span>: <span class="hljs-string">'Ocean Queen 2000'</span>
