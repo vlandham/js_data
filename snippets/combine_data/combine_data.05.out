@@ -16,4 +16,10 @@
     "weight": 1.2,
     "price": 24.99,
     "brand": "HomeSweetHome"
+}, {
+    "id": 4,
+    "name": "super fast laptop",
+    "weight": 400,
+    "price": 899.9,
+    "brand": null
 }];
