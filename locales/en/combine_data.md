@@ -73,11 +73,7 @@ Note that the argument passed to `d3.merge` must be an array itself, which is wh
 
 ## Combine attributes from different data sets
 
-<<<<<<< HEAD
-In the last case, we have two or more data sets which contain attributes describing the same observations, or, conceptual entities, and they thus need to be combined. This implies that all data sets have the same length. For example, `dataset_1` below contains two observations of attribute `a` and attribute `b`, while `dataset_2` contains the same two entities, but observed through attributes `c` and `d`.
-=======
-In the last case, we have two or more data sets which contain attributes describing the same observations, or, conceptual entities, and they thus need to be combined. This implies that all data sets have the same length. For example, `dataset_1` below contains two observations of attribute `type` and attribute `model`, while `dataset_2` contains the same two entities, but observed through attributes `price` and `weight`.
->>>>>>> 67f1f706163f5c6f623a6d9f3b91e4efcbbf87a1
+In the last case, we have two or more data sets that contain attributes describing the same observations, or conceptual entities, and they need to be combined. This implies that all data sets have the same length. For example, `dataset_1` below contains two observations of attribute `type` and attribute `model`, while `dataset_2` contains the same two entities, but observed through attributes `price` and `weight`.
 
 @@ code=combine_data/combine_data.07a.js @@
 
