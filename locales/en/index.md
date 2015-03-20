@@ -14,6 +14,7 @@ It assumes you already have some basic knowledge of JavaScript.
  <li>[Getting Started](getting_started.html)</li>
  <li>[Reading in Data](read_data.html)</li>
  <li>[Summarizing Data](summarize_data.html)</li>
+ <li>[Combining Data](combine_data.html)</li>
  <li>[Iterating and Reducing](iterate_data.html)</li>
  <li>[Nesting and Grouping Data](group_data.html)</li>
  <li>[Working with Strings](strings.html)</li>
