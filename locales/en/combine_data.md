@@ -26,7 +26,7 @@ What we want to do now is to combine both datasets, so we can reference the bran
 
 ### Using native `Array` functions
 
-We can implement a simple (*left outer* in database terms) join using native, i.e., already existing `Array` functions as follows. The method presented here modifies the `articles` array *in place* by adding a new key-value-pair for `brand`.
+We can implement a simple join (*left outer join* in database terms) using native, i.e., already existing `Array` functions as follows. The method presented here modifies the `articles` array *in place* by adding a new key-value-pair for `brand`.
 
 @@ code=combine_data/combine_data.03.js @@
 
@@ -61,7 +61,7 @@ Note that we don't modify `articles` *in place* but create a new array.
 
 ## Add together rows from different data sets
 
-Let's say we want to load a huge data set from the server, but because of network performance reasons, we load it in three chunks and reassemble it on the client side. Using Queue.js, as illustrated in [reading in data](read_data.html), we get the data and immediately combine it. For this, we can use D3's `d3.merge` to combine the single arrays one after another. In database terms, this operation is called "union".
+Let's say we want to load a huge data set from the server, but because of network performance reasons, we load it in three chunks and reassemble it on the client side. Using Queue.js, as illustrated in [reading in data](read_data.html), we get the data and immediately combine it. For this, we can use D3's `merge` to combine the single arrays one after another. In database terms, this operation is called "union".
 
 @@ code=combine_data/combine_data.06.js @@
 
@@ -73,7 +73,11 @@ Note that the argument passed to `d3.merge` must be an array itself, which is wh
 
 ## Combine attributes from different data sets
 
+<<<<<<< HEAD
 In the last case, we have two or more data sets which contain attributes describing the same observations, or, conceptual entities, and they thus need to be combined. This implies that all data sets have the same length. For example, `dataset_1` below contains two observations of attribute `a` and attribute `b`, while `dataset_2` contains the same two entities, but observed through attributes `c` and `d`.
+=======
+In the last case, we have two or more data sets which contain attributes describing the same observations, or, conceptual entities, and they thus need to be combined. This implies that all data sets have the same length. For example, `dataset_1` below contains two observations of attribute `type` and attribute `model`, while `dataset_2` contains the same two entities, but observed through attributes `price` and `weight`.
+>>>>>>> 67f1f706163f5c6f623a6d9f3b91e4efcbbf87a1
 
 @@ code=combine_data/combine_data.07a.js @@
 
