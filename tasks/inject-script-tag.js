@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   grunt.config.set('inject-script-tag', {
     options: {
       html_files: ['public/*.html', 'public/**/*.html'],
-      js_files: "src/*.js",
+      js_files: "build/src/*.js",
     }
   });
 
@@ -28,8 +28,10 @@ module.exports = function(grunt) {
 
       var html = grunt.file.read(html_file);
       var js = grunt.file.read(js_file);
+      var base_js_file = path.basename(js_file);
 
-      html = html.replace('</body>', '<script type="text/javascript" src="/' + js_file + '"></script></body>');
+
+      html = html.replace('</body>', '<script type="text/javascript" src="/src/' + base_js_file + '"></script></body>');
       grunt.file.write(html_file, html);
       grunt.log.ok(html_file);
     });
