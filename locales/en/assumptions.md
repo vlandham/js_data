@@ -80,3 +80,5 @@ For example:
 
 - [Parsing raw data](http://www.pgbovine.net/parsing-raw-data.htm) - a great guide that motivated this section
 - [Chai](http://chaijs.com/api/assert/) - Chai's assert library
+- [is.js](http://arasatasaygin.github.io/is.js/) - provides a great set of checking functions to complement lodash's set.
+- [validate.io](https://github.com/validate-io) - provides a similar set of checking functions, but all as separate projects - so you can include only the checks you want to use.
