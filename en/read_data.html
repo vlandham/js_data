@@ -138,18 +138,18 @@ komodo dragon<span class="hljs-localvars">|reptile|</span><span class="hljs-numb
 <h2 id="reading-json-files">Reading JSON Files</h2>
 <p>For nested data, or for passing around data where you don&#39;t want to mess with data typing, its hard to beat <a href="http://json.org/">JSON</a>.</p>
 <p>JSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with <a href="">d3.json</a> - you too can harness its power.</p>
-<pre><code>employees.<span class="hljs-symbol">json:</span>
+<pre><code>employees.<span class="hljs-string">json:</span>
 
 [
- {<span class="hljs-string">"name"</span><span class="hljs-symbol">:<span class="hljs-string">"Andy Hunt,
- "</span>title<span class="hljs-string">":"</span>Big</span> <span class="hljs-constant">Boss"</span>,
-   <span class="hljs-string">"age"</span><span class="hljs-symbol">:</span> <span class="hljs-number">68</span>,
-   <span class="hljs-string">"bonus"</span><span class="hljs-symbol">:</span> <span class="hljs-keyword">true</span>
+ {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Andy Hunt"</span>,
+  <span class="hljs-string">"title"</span>:<span class="hljs-string">"Big Boss"</span>,
+  <span class="hljs-string">"age"</span>: <span class="hljs-number">68</span>,
+  <span class="hljs-string">"bonus"</span>: <span class="hljs-literal">true</span>
  },
- {<span class="hljs-string">"name"</span><span class="hljs-symbol">:<span class="hljs-string">"Charles Mack"</span></span>,
-  <span class="hljs-string">"title"</span><span class="hljs-symbol">:<span class="hljs-string">"Jr Dev"</span></span>,
-  <span class="hljs-string">"age"</span><span class="hljs-symbol">:</span><span class="hljs-number">24</span>,
-  <span class="hljs-string">"bonus"</span><span class="hljs-symbol">:</span> <span class="hljs-keyword">false</span>
+ {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Charles Mack"</span>,
+  <span class="hljs-string">"title"</span>:<span class="hljs-string">"Jr Dev"</span>,
+  <span class="hljs-string">"age"</span>:<span class="hljs-number">24</span>,
+  <span class="hljs-string">"bonus"</span>: <span class="hljs-literal">false</span>
  }
 ]
 </code></pre><p>Loading employees.json with <code>d3.json</code>:</p>
