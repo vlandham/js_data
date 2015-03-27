@@ -112,10 +112,10 @@ JSON has become the language of the internet for good reason. Its easy to unders
 employees.json:
 
 [
- {"name":"Andy Hunt,
- "title":"Big Boss",
-   "age": 68,
-   "bonus": true
+ {"name":"Andy Hunt",
+  "title":"Big Boss",
+  "age": 68,
+  "bonus": true
  },
  {"name":"Charles Mack",
   "title":"Jr Dev",
