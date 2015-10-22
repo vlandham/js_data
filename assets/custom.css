@@ -123,6 +123,7 @@ hr {
 pre {
   margin: 5px 0 5px 0;
   padding: 5px 10px 5px 10px;
+  overflow-x: auto;
 }
 
 pre, tt, code {
