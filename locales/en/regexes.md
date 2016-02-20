@@ -62,7 +62,7 @@ If we wanted to replace the word "wood" in our original string, with the word
 
 @@ code=regexes/regexes.07.out @@
 
-Probablay not what you'd be going for, but you get our drift.
+Probably not what you'd be going for, but you get our drift.
 
 ## Finding Numbers
 
