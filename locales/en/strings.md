@@ -129,3 +129,4 @@ same snippet of html:
 - [Working With Strings](http://www.quirksmode.org/js/strings.html) - a great guide to more string basics
 - [underscore.string](https://github.com/epeli/underscore.string) - for all the other string functions you might want
 - [underscore.template](http://underscorejs.org/#template) - for a deeper dive into underscore's template function
+- [ES2016's Template Literal syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) that allows template string without the need for lodash/underscore if you use ES2016 or [TypeScript](https://basarat.gitbooks.io/typescript/content/docs/template-strings.html). 
