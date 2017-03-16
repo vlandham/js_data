@@ -68,4 +68,4 @@ D3 provides a few basic tools to analyze your data, all using the same format as
 ## See Also
 
 - [simple statistics](https://github.com/tmcw/simple-statistics) - more JavaScript based stats written in easier to comprehend code.
-
+- [Datalib](http://vega.github.io/datalib/) - A Javascript utility library for data loading, type inference, common statistics, and string templates that was created to power [Vega](http://vega.github.io/vega) and [Vega-Lite](http://vega.github.io/vega-lite).
