@@ -2,7 +2,7 @@
 
 [Live version](http://learnjsdata.com/)
 
-Data manipulation, data munging, and data processing in JavaScript.
+Data manipulation, data minging, and data processing in JavaScript.
 
 ## About
 
