@@ -41,7 +41,7 @@ Check out the [full source on github](https://github.com/vlandham/js_data).
 
 ## Why?
 
-Is data munging in JavaScript something you would actually want to do? _Maybe_.
+Is data cleaning and processing in JavaScript something you would actually want to do? _Maybe_.
 
 There are other languages out there that do a great job with data wrangling:
 

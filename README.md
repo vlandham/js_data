@@ -2,7 +2,7 @@
 
 [Live version](http://learnjsdata.com/)
 
-Data manipulation, data munging, and data processing in JavaScript.
+Data manipulation, data cleaning, and data processing in JavaScript.
 
 ## About
 
@@ -72,4 +72,3 @@ The presentation format of this repo borrows heavily from Tom MacWright's [Liter
 ## License
 
 This code and accompanying text is released under CC0, or Public Domain where applicable.
-
