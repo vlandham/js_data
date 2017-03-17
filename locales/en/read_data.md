@@ -4,7 +4,7 @@ The first step in any data processing is getting the data! Here is how to parse 
 
 ## Parsing CSV Files
 
-[D3 has a bunch](https://github.com/mbostock/d3/wiki/Requests) of filetypes it can support when loading data, and one of the most common is probably plain old CSV (comma separated values).
+[D3 has a bunch](https://github.com/d3/d3/blob/master/API.md#requests-d3-request) of filetypes it can support when loading data, and one of the most common is probably plain old CSV (comma separated values).
 
 Let's say you had a csv file with some city data in it:
 
@@ -19,7 +19,7 @@ boston,MA,645966,48.3
 kansas city,MO,467007,315.0
 ```
 
-Use [d3.csv](https://github.com/mbostock/d3/wiki/CSV) to convert it into an array of objects
+Use [d3.csv](https://github.com/d3/d3-request/blob/master/README.md#csv) to convert it into an array of objects
 
 @@ code=read_data/read_data.01.js @@
 @@ code=read_data/read_data.01.out @@
@@ -58,11 +58,11 @@ CSV is probably the most common flat file format, but in no way the only one.
 
 I often like to use TSV (tab separated files) - to get around the issues of numbers and strings often having commas in them.
 
-D3 can parse TSV's with [d3.tsv](https://github.com/mbostock/d3/wiki/CSV#tsv):
+D3 can parse TSV's with [d3.tsv](https://github.com/d3/d3-request/blob/master/README.md#tsv).
+
+Here is `animals.tsv`, as an example:
 
 ```
-animals.tsv:
-
 name	type	avg_weight
 tiger	mammal	260
 hippo	mammal	3400
@@ -77,24 +77,28 @@ Loading animals.tsv with `d3.tsv`:
 
 ## Reading Other Flat Files
 
-In fact, `d3.tsv` and `d3.csv` are only the tip of the iceberg. If you have a non-standard delimited file, you can create your own parser easily, using [d3.dsv](https://github.com/mbostock/d3/wiki/CSV#arbitrary-delimiters)
+In fact, `d3.csv` and `d3.tsv` are only the tip of the iceberg. If you have a non-standard delimited flat file, you can parse them too with D3!
 
-Using `d3.dsv` takes one more step. You first create a new parser by passing in the type of delimiter and [mimeType](http://en.wikipedia.org/wiki/Internet_media_type) to use.
+The process takes a few more steps. First we need to use the [d3.dsvFormat](https://github.com/d3/d3-dsv#dsvFormat) function to create a new parser that knows how to read our strangely delimited file type.
 
-For example, if we had a file that looked like this:
+For example, if we had a pipe-delimited file called `animals_piped.txt` that looked like this:
+
 ```
-animals_piped.txt:
-
 name|type|avg_weight
 tiger|mammal|260
 hippo|mammal|3400
 komodo dragon|reptile|150
 ```
-We could create a pipe separated values (PSV) parser using `d3.dsv`:
+We could create a pipe separated values (PSV) parser using `d3.dsvFormat`:
 
 @@ code=read_data/read_data.05.js @@
+@@ code=read_data/read_data.05.out @@
 
-And then use this to parse the strangely formated file.
+Note that this handles the parsing of the text, once we have the text.
+
+The next step is to use this custom parser to build a [d3.request](https://github.com/d3/d3-request/blob/master/README.md#request) that can read in our pipe-delimited file and parse it:
+
+And then use this to parse this pipe-delimited file.
 
 @@ code=read_data/read_data.06.js @@
 @@ code=read_data/read_data.06.out @@
@@ -105,12 +109,12 @@ And then use this to parse the strangely formated file.
 
 For nested data, or for passing around data where you don't want to mess with data typing, its hard to beat [JSON](http://json.org/).
 
-JSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with [d3.json]() - you too can harness its power.
+JSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with [d3.json](https://github.com/d3/d3-request/blob/master/README.md#json) - you too can harness its power.
 
+
+Here is an example JSON file called `employees.json`:
 
 ```
-employees.json:
-
 [
  {"name":"Andy Hunt",
   "title":"Big Boss",
@@ -125,7 +129,7 @@ employees.json:
 ]
 ```
 
-Loading employees.json with `d3.json`:
+Loading `employees.json` with `d3.json`:
 
 @@ code=read_data/read_data.07.js @@
 @@ code=read_data/read_data.07.out @@
@@ -138,12 +142,12 @@ We can see that, unlike our flat file parsing, numeric types stay numeric. Indee
 
 D3's basic loading mechanism is fine for one file, but starts to get messy as we nest multiple callbacks.
 
-For loading multiple files, we can use [Queue.js](https://github.com/mbostock/queue) (also written by Mike Bostock) to wait for multiple data sources to be loaded.
+For loading multiple files, we can use [d3.queue](https://github.com/d3/d3-queue/blob/master/README.md#queue) to wait for multiple data sources to be loaded.
 
 @@ code=read_data/read_data.08.js @@
 @@ code=read_data/read_data.08.out @@
 
-<div class="aside">This code is using queue.js and d3.js</div>
+<div class="aside">This code is using d3.js</div>
 
 Note that we `defer` the loading of two types of files - using two different loading functions - so this is an easy way to mix and match file types.
 
@@ -163,4 +167,3 @@ To add another data file, simply add another defer and extend the input paramete
 - [D3 documentation](https://github.com/mbostock/d3/wiki/Requests)
 - [Loading XML with D3](https://github.com/mbostock/d3/wiki/Requests#d3_xml)
 - [Loading External SVG with D3](http://bl.ocks.org/mbostock/1014829) - SVG is just XML!
-

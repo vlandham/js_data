@@ -2,7 +2,7 @@
 
 Grouping data is an important capability to have when doing data analysis. Often times, you will want to break apart the data by a categorical variable and look at statistics or details for each group.
 
-D3 includes the powerful [d3.nest](https://github.com/mbostock/d3/wiki/Arrays#-nest) functionality to produce these groupings with a minimal amount of code.
+D3 includes the powerful [d3.nest](https://github.com/d3/d3-collection/blob/master/README.md#nest) functionality to produce these groupings with a minimal amount of code.
 
 ## Nest Basics
 
@@ -42,7 +42,7 @@ The `values` property of these entries is an array containing all the original d
 
 ## Summarizing Groups
 
-The nested structure can be great for visualizing your data, but might be a little underwhelming for analytical applications. Never fear! [d3.rollup](https://github.com/mbostock/d3/wiki/Arrays#nest_rollup) is here!
+The nested structure can be great for visualizing your data, but might be a little underwhelming for analytical applications. Never fear! [d3.rollup](https://github.com/d3/d3-collection/blob/master/README.md#nest_rollup) is here!
 
 With `rollup`, you provide a function that takes the array of values for each group and it produces a value based on that array. This provides for some very flexible _group by_ functionality.
 
@@ -72,15 +72,17 @@ Pretty cool right? Any roll-up function you can think of, you can make happen. A
 
 <div class="aside">This code is using d3.js</div>
 
-## Map Output
+## Object Output
 
-The array output can be useful for using `map` or `forEach` as discussed in the [iteration and summation task](https://github.com/mbostock/d3/wiki/Arrays#nest_sortValues). But you can also have `d3.nest` return an object (or [d3.map]()) of the results, for direct access. Note the use of [nest.map](https://github.com/mbostock/d3/wiki/Arrays#nest_map) below.
+The array output can be useful for using [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) or [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach). But you can also have `d3.nest` return an object of the results, for direct access. Note the use of [nest.object](https://github.com/d3/d3-collection/blob/master/README.md#nest_object) below.
 
 @@ code=group_data/group_data.07.js @@
 
 @@ code=group_data/group_data.07.out @@
 
 <div class="aside">This code is using d3.js</div>
+
+And if you want to get real fancy, take a look at [nest.map](https://github.com/d3/d3-collection/blob/master/README.md#nest_map) for getting a [d3.map](https://github.com/d3/d3-collection/blob/master/README.md#map) instance back.
 
 ## Multi-Level Nesting
 
