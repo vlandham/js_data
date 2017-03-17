@@ -1,2 +1,2 @@
-time = d3.timeParse("%x %X")("01/02/2014 08:22:05");
+time = d3.timeParse("%x %X")("1/2/2014 8:22:05 AM");
 console.log(time);

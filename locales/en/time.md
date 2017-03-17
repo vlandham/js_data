@@ -83,11 +83,11 @@ You can see that `d3.time.format` gives you a lot of flexibility about what your
 
 In many cases, you might want to modify a date object. Perhaps you only want to display the hour from a date, or maybe you want to figure out what a week from now would be.
 
-The [d3.time.interval](https://github.com/mbostock/d3/wiki/Time-Intervals) set of functions provides a starting point for these kinds of manipulations.
+The [d3.time](https://github.com/d3/d3-time/blob/master/README.md#d3-time) set of functions provides a starting point for these kinds of manipulations.
 
 Intervals allow for modifying dates around specific time slices like minutes, hours, days, months, or years. We are given a number of functions to work with each interval, depending on what we might want to do.
 
-So, to get the nearest hour from a date, we can use [d3.time.hour.round](https://github.com/mbostock/d3/wiki/Time-Intervals#interval_round)
+So, to get the nearest hour from a date, we can use [d3.timeHour](https://github.com/d3/d3-time/blob/master/README.md#timeHour) and the interval's [round](https://github.com/d3/d3-time/blob/master/README.md#interval_round) function:
 
 @@ code=time/time.09.js @@
 
@@ -95,7 +95,7 @@ So, to get the nearest hour from a date, we can use [d3.time.hour.round](https:/
 
 <div class="aside">This code is using d3.js</div>
 
-It returns a date object that just contains the nearest hour (11:00pm). We can display this by using the `d3.time.format` parser to format the date object into a string (these formaters can work both ways).
+It returns a date object that just contains the nearest hour (11:00pm). We can display this by using a [d3.timeFormat](https://github.com/d3/d3-time-format/blob/master/README.md#timeFormat) to format the date object into a string.
 
 @@ code=time/time.10.js @@
 
