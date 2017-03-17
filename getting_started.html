@@ -5,19 +5,19 @@
   <title>Getting Started - Learn JS Data</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="description" content="An introduction to data processing and munging in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
-  <meta name="keywords" content="javascript,data processing, data munging">
+  <meta name="description" content="An introduction to data processing and cleaning in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+  <meta name="keywords" content="javascript,data processing, data cleaning">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@bocoup">
   <meta name="twitter:creator" content="@vlandham">
   <meta name="twitter:title" content="Learn JS Data: Data processing in JavaScript">
-  <meta name="twitter:description" content="An introduction to data processing and munging in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+  <meta name="twitter:description" content="An introduction to data processing and cleaning in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
 <meta name="twitter:image:src" content="http://learnjsdata.com/img/logo.png">
 <meta property="og:site_name" content="Learn JS Data"/>
-<meta property="og:title" content="Data manipulation, munging, and processing in JavaScript" />
+<meta property="og:title" content="Data manipulation, cleaning, and processing in JavaScript" />
 <meta property="og:url" content="http://learnjsdata.com" />
-<meta property="og:description" content="This guide teaches the basics of manipulating data using JavaScript in the browser, or in node.js. 
+<meta property="og:description" content="This guide teaches the basics of manipulating data using JavaScript in the browser, or in node.js.
 Specifically, demonstrating tasks that are geared around preparing data for further analysis and visualization. This guide will demonstrate some basic techniques and how to implement them using core JavaScript API, the d3.js library and lodash." />
 <meta property="og:image" content="http://learnjsdata.com/img/fb.jpg" />
 
@@ -37,7 +37,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
       <a href='index.html'>
         <img class='logo' src="/img/logo.png">
         <h1>Learn JS Data</h1>
-        <h3>Data manipulation, munging, and processing in JavaScript</h3>
+        <h3>Data cleaning, manipulation, and wrangling in JavaScript</h3>
       </a>
     </div>
   </header>
@@ -46,11 +46,11 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
     <h1 id="getting-started">Getting Started</h1>
 <h2 id="about-tasks">About Tasks</h2>
 <p>This guide is broken up into a number of tasks, which we can think of as little modules or <em>recipes</em>.</p>
-<p>Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. Tasks attempt to be self-contained and stay focused on the, well, <em>task at hand</em>. </p>
-<p>This guide was built with for client side data processing (in the browser), but can easily be used in a server side (Node) application with a bit of tweaking. Check out the <a href="node.html">analyzing data with Node</a> section for the details. </p>
+<p>Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. Tasks attempt to be self-contained and stay focused on the, well, <em>task at hand</em>.</p>
+<p>This guide was built with for client side data processing (in the browser), but can easily be used in a server side (Node) application with a bit of tweaking. Check out the <a href="node.html">analyzing data with Node</a> section for the details.</p>
 <h2 id="why-d3-">Why D3?</h2>
 <p><a href="http://d3js.org/">D3.js</a> is largely known for its data visualization capabilities - and for good reason. It is quickly becoming the de facto standard for interactive visualization on the web.</p>
-<p>Its core feature of binding data to visual representations happens to require a lot of manipulation of said data. Thus, while this toolkit is focused around visualization, it is well suited for data munging as well!</p>
+<p>Its core feature of binding data to visual representations happens to require a lot of manipulation of said data. Thus, while this toolkit is focused around visualization, it is well suited for data processing as well!</p>
 <p>And, a typical output for data manipulation is at least some sort of visualization of that data, in which case you are all ready to go.</p>
 <h2 id="why-lodash-">Why lodash?</h2>
 <p><a href="https://lodash.com">Lodash</a> is fast, popular, and fills in some holes in D3&#39;s processing features. Plus, it&#39;s functional style and chaining capabilities make it work well alongside D3.</p>
@@ -65,8 +65,8 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <p>We use a little arrow, <code>=&gt;</code>, to indicate output from a code snippet. This same output you can view by opening the <a href="https://developer.chrome.com/devtools/docs/console">console</a> of your favorite web browser.</p>
 <p>Snippets in this guide that are not pure JavaScript will be marked with the libraries used to make them work.</p>
 <h2 id="preparing-your-site-for-data-processing">Preparing Your Site for Data Processing</h2>
-<p>To get started using these tools for your data processing, you are going to want to include them in your html file along with a JavaScript file to perform the analysis. </p>
-<p>I typically download these scripts and include local copies in my page. To do this, you would want to have your HTML look something like this: </p>
+<p>To get started using these tools for your data processing, you are going to want to include them in your html file along with a JavaScript file to perform the analysis.</p>
+<p>I typically download these scripts and include local copies in my page. To do this, you would want to have your HTML look something like this:</p>
 <pre><code class="lang-html"><span class="hljs-doctype">&lt;!doctype html&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
