@@ -2,8 +2,8 @@
 html { height: 100%; }
 body {
   font-family: "Helvetica Neue", "Helvetica";
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 18px;
+  line-height: 28px;
   color: #30404f;
   margin: 0; padding: 0;
   height:100%;
@@ -102,7 +102,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #112233;
   line-height: 1em;
   font-weight: normal;
-  margin: 30px 0 15px 0;
+  margin: 2em 0 15px 0;
 }
 
 h1 {
@@ -118,19 +118,20 @@ hr {
 
 pre {
   margin: 5px 0 5px 0;
-  padding: 5px 10px 5px 10px;
+  padding: 10px 10px 10px 10px;
   overflow-x: auto;
 }
 
 pre, tt, code {
-  font-size: 12px; line-height: 16px;
+  font-size: 16px;
+  line-height: 26px;
   font-family: 'M+ 1mn', Menlo, Monaco, Consolas, "Lucida Console", monospace;
   background: #f5f5f8;
 }
 
 ul.tasks {
   font-size: 1.4em;
-  line-height: 1.4em;
+  line-height: 1.6em;
 }
 a:hover {
   color: #0071BC;
