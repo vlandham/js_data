@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Working with Time - Learn JS Data</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="description" content="An introduction to data processing and cleaning in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+  <meta name="keywords" content="javascript,data processing, data cleaning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@bocoup">
+  <meta name="twitter:creator" content="@vlandham">
+  <meta name="twitter:title" content="Learn JS Data: Data processing in JavaScript">
+  <meta name="twitter:description" content="An introduction to data processing and cleaning in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+<meta name="twitter:image:src" content="http://learnjsdata.com/img/logo.png">
+<meta property="og:site_name" content="Learn JS Data"/>
+<meta property="og:title" content="Data manipulation, cleaning, and processing in JavaScript" />
+<meta property="og:url" content="http://learnjsdata.com" />
+<meta property="og:description" content="This guide teaches the basics of manipulating data using JavaScript in the browser, or in node.js.
+Specifically, demonstrating tasks that are geared around preparing data for further analysis and visualization. This guide will demonstrate some basic techniques and how to implement them using core JavaScript API, the d3.js library and lodash." />
+<meta property="og:image" content="http://learnjsdata.com/img/fb.jpg" />
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" media="all" href="/custom.css" />
+  <script src='/lib/d3/d3.min.js'></script>
+  <script src='/lib/queue-async/queue.min.js'></script>
+  <script src='/lib/lodash/lodash.min.js'></script>
+</head>
+<body>
+
+  <header>
+    <div class="contents">
+      <a href="https://github.com/vlandham/js_data"><img class="github" style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+      <a href='index.html'>
+        <img class='logo' src="/img/logo.png">
+        <h1>Learn JS Data</h1>
+        <h3>Data cleaning, manipulation, and wrangling in JavaScript</h3>
+      </a>
+    </div>
+  </header>
+
+  <div id="container">
+    <h1 id="working-with-time">Working with Time</h1>
+<p>Time is one of those tricky programming things that seems like it should be easy, but usually turns out not to be. We will use D3&#39;s built in <a href="https://github.com/mbostock/d3/wiki/Time-Formatting">time formating</a> and <a href="https://github.com/mbostock/d3/wiki/Time-Intervals">interval</a> functions. We will also take a look at the powerful <a href="http://momentjs.com/">Moment.js</a> library, for when you just need more time power.</p>
+<h2 id="string-to-date">String to Date</h2>
+<p>The first task when dealing with dates is usually getting a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date object</a> out of a string. Most of the time, your data will have dates or times in an (mostly) arbitrary format, and you need to force that mess into an actual date.</p>
+<p>D3 has <a href="https://github.com/mbostock/d3/wiki/Time-Formatting#format">d3.time.format</a> which provides a way to do this parsing. It was a little confusing for me the first time I tried it. You use this function to create a string parser, and then use the parser to actually convert the string.</p>
+<p>In our <a href="group_data.html">nesting example</a>, we saw data that had dates as strings:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> expense = {<span class="hljs-string">"name"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>};
+</code></pre>
+<p>To convert this date string to a Date object, we would need a parser that looks like:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> parser = d3.time.format(<span class="hljs-string">"%m/%d/%Y"</span>);
+</code></pre>
+<div class="aside">This code is using d3.js</div>
+
+
+<p>The input string to <code>d3.time.format</code> indicates what the date string should look like. You have a <a href="https://github.com/mbostock/d3/wiki/Time-Formatting#format">lot of options</a> for the special, percent-sign-prefixed variables. You can see in the string I&#39;m using month, day, and four-digit year. The slashes in the format string are not special variables - but just what we expect to find separating the fields in the date string.</p>
+<p>Next we use the parser to parse our string.</p>
+<pre><code class="lang-javascript">expense.date = parser.parse(expense.date);
+<span class="hljs-built_in">console</span>.log(expense);
+</code></pre>
+<pre><code>=&gt; {<span class="hljs-string">name:</span> <span class="hljs-string">"jim"</span>, <span class="hljs-string">amount:</span> <span class="hljs-number">34</span>, <span class="hljs-string">date:</span> Thu Nov <span class="hljs-number">12</span> <span class="hljs-number">2015</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT-<span class="hljs-number">0500</span> (EST)}
+</code></pre><p>Cool! Now our date is actually a Date object.</p>
+<p>Here are a few more time parsers to show the capabilities of D3&#39;s parsing.</p>
+<p>Just the date:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> date = d3.time.format(<span class="hljs-string">"%A, %B %-d, %Y"</span>).parse(<span class="hljs-string">"Wednesday, November 12, 2014"</span>);
+<span class="hljs-built_in">console</span>.log(date);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-constant">Wed</span> <span class="hljs-constant">Nov</span> <span class="hljs-number">12</span> <span class="hljs-number">2014</span> <span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span> <span class="hljs-constant">GMT</span>-<span class="hljs-number">0500</span> (<span class="hljs-constant">EST</span>)
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>The little dash in front of the <code>d</code> is to remove the 0-padding)</p>
+<pre><code class="lang-javascript">date = d3.time.format(<span class="hljs-string">"%m/%y"</span>).parse(<span class="hljs-string">"12/14"</span>);
+<span class="hljs-built_in">console</span>.log(date);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-constant">Mon</span> <span class="hljs-constant">Dec</span> <span class="hljs-number">01</span> <span class="hljs-number">2014</span> <span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span> <span class="hljs-constant">GMT</span>-<span class="hljs-number">0500</span> (<span class="hljs-constant">EST</span>)
+</code></pre><p>You can see it defaults to the first day of the month.</p>
+<p>Just the time:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> time = d3.time.format(<span class="hljs-string">"%I:%M%p"</span>).parse(<span class="hljs-string">"12:34pm"</span>);
+<span class="hljs-built_in">console</span>.log(time);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-constant">Mon</span> <span class="hljs-constant">Jan</span> <span class="hljs-number">01</span> <span class="hljs-number">1900</span> <span class="hljs-number">12</span><span class="hljs-symbol">:</span><span class="hljs-number">34</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span> <span class="hljs-constant">GMT</span>-<span class="hljs-number">0500</span> (<span class="hljs-constant">EST</span>)
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>Gives you a somewhat strange default date.</p>
+<p>Date and time:</p>
+<pre><code class="lang-javascript">time = d3.time.format(<span class="hljs-string">"%m/%d/%Y %H:%M:%S"</span>).parse(<span class="hljs-string">"01/02/2014 08:22:05"</span>);
+<span class="hljs-built_in">console</span>.log(time);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-constant">Thu</span> <span class="hljs-constant">Jan</span> <span class="hljs-number">02</span> <span class="hljs-number">2014</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">22</span><span class="hljs-symbol">:</span><span class="hljs-number">05</span> <span class="hljs-constant">GMT</span>-<span class="hljs-number">0500</span> (<span class="hljs-constant">EST</span>)
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>This could also be done using some built in short-hands:</p>
+<pre><code class="lang-javascript">time = d3.time.format(<span class="hljs-string">"%x %X"</span>).parse(<span class="hljs-string">"01/02/2014 08:22:05"</span>);
+<span class="hljs-built_in">console</span>.log(time);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-constant">Thu</span> <span class="hljs-constant">Jan</span> <span class="hljs-number">02</span> <span class="hljs-number">2014</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">22</span><span class="hljs-symbol">:</span><span class="hljs-number">05</span> <span class="hljs-constant">GMT</span>-<span class="hljs-number">0500</span> (<span class="hljs-constant">EST</span>)
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>You can see that <code>d3.time.format</code> gives you a lot of flexibility about what your time string will look like.</p>
+<h2 id="modifying-time">Modifying Time</h2>
+<p>In many cases, you might want to modify a date object. Perhaps you only want to display the hour from a date, or maybe you want to figure out what a week from now would be.</p>
+<p>The <a href="https://github.com/mbostock/d3/wiki/Time-Intervals">d3.time.interval</a> set of functions provides a starting point for these kinds of manipulations.</p>
+<p>Intervals allow for modifying dates around specific time slices like minutes, hours, days, months, or years. We are given a number of functions to work with each interval, depending on what we might want to do.</p>
+<p>So, to get the nearest hour from a date, we can use <a href="https://github.com/mbostock/d3/wiki/Time-Intervals#interval_round">d3.time.hour.round</a></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> hourParser = d3.time.format(<span class="hljs-string">"%I:%M%p"</span>);
+<span class="hljs-keyword">var</span> time = hourParser.parse(<span class="hljs-string">"10:34pm"</span>);
+<span class="hljs-keyword">var</span> hour = d3.time.hour.round(time);
+<span class="hljs-built_in">console</span>.log(hour);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-constant">Mon</span> <span class="hljs-constant">Jan</span> <span class="hljs-number">01</span> <span class="hljs-number">1900</span> <span class="hljs-number">23</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span> <span class="hljs-constant">GMT</span>-<span class="hljs-number">0500</span>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>It returns a date object that just contains the nearest hour (11:00pm). We can display this by using the <code>d3.time.format</code> parser to format the date object into a string (these formaters can work both ways).</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">console</span>.log(hourParser(hour));
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">11</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span>PM
+</code></pre><h2 id="moment-js">Moment.js</h2>
+<p><a href="http://momentjs.com/">Moment.js</a> is another JavaScript library that could be better suited to your needs, if you happen to be doing a lot of time manipulations. Its syntax and capabilities seem a bit more intuitive for certain <a href="http://momentjs.com/docs/#/manipulating/">time manipulations</a>.</p>
+<p>Check it out if you need more time control power!</p>
+<h2 id="next-task">Next Task</h2>
+<p><a href="assumptions.html">Checking Data Assumptions</a></p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="http://momentjs.com/">moment.js</a></li>
+</ul>
+
+  </div>
+  <br/><br/>
+  <section id="footer">
+    Made with ♥ by <a href="http://bocoup.com/datavis">The Bocoup Data Visualization Team</a>.
+  </section>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-60734450-1', 'auto');
+ga('send', 'pageview');
+
+  </script>
+  <script type="text/javascript" src="/src/time.js"></script></body>
+  </html>

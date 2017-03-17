@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>About this guide - Learn JS Data</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="description" content="An introduction to data processing and cleaning in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+  <meta name="keywords" content="javascript,data processing, data cleaning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@bocoup">
+  <meta name="twitter:creator" content="@vlandham">
+  <meta name="twitter:title" content="Learn JS Data: Data processing in JavaScript">
+  <meta name="twitter:description" content="An introduction to data processing and cleaning in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+<meta name="twitter:image:src" content="http://learnjsdata.com/img/logo.png">
+<meta property="og:site_name" content="Learn JS Data"/>
+<meta property="og:title" content="Data manipulation, cleaning, and processing in JavaScript" />
+<meta property="og:url" content="http://learnjsdata.com" />
+<meta property="og:description" content="This guide teaches the basics of manipulating data using JavaScript in the browser, or in node.js.
+Specifically, demonstrating tasks that are geared around preparing data for further analysis and visualization. This guide will demonstrate some basic techniques and how to implement them using core JavaScript API, the d3.js library and lodash." />
+<meta property="og:image" content="http://learnjsdata.com/img/fb.jpg" />
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" media="all" href="/custom.css" />
+  <script src='/lib/d3/d3.min.js'></script>
+  <script src='/lib/queue-async/queue.min.js'></script>
+  <script src='/lib/lodash/lodash.min.js'></script>
+</head>
+<body>
+
+  <header>
+    <div class="contents">
+      <a href="https://github.com/vlandham/js_data"><img class="github" style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+      <a href='index.html'>
+        <img class='logo' src="/img/logo.png">
+        <h1>Learn JS Data</h1>
+        <h3>Data cleaning, manipulation, and wrangling in JavaScript</h3>
+      </a>
+    </div>
+  </header>
+
+  <div id="container">
+    <h1 id="about-this-guide">About this guide</h1>
+<p>This guide teaches the basics of manipulating data using JavaScript in the
+browser, or in node.js. Specifically, these tasks are geared around preparing
+data for further analysis and visualization.</p>
+<p>This guide will demonstrate some basic techniques and how to implement them
+using core JavaScript API, the <a href="http://d3js.org/">d3.js</a> library and <a href="http://lodash.com/">lodash</a>.</p>
+<p>It assumes you already have some basic knowledge of JavaScript.</p>
+<h2 id="tasks">Tasks</h2>
+<ul class='tasks'>
+ <li><a href="getting_started.html">Getting Started</a></li>
+ <li><a href="read_data.html">Reading in Data</a></li>
+ <li><a href="combine_data.html">Combining Data</a></li>
+ <li><a href="summarize_data.html">Summarizing Data</a></li>
+ <li><a href="iterate_data.html">Iterating and Reducing</a></li>
+ <li><a href="group_data.html">Nesting and Grouping Data</a></li>
+ <li><a href="strings.html">Working with Strings</a></li>
+ <li><a href="regexes.html">Regular Expressions</a></li>
+ <li><a href="time.html">Working with Time</a></li>
+ <li><a href="assumptions.html">Checking Data Assumptions</a></li>
+ <li><a href="node.html">Using Node</a></li>
+</ul>
+
+<h2 id="translations">Translations</h2>
+<p>Access this guide in:</p>
+<ul>
+<li><a href="/en/">English</a></li>
+<li><a href="/es/">Español</a> - coming soon!</li>
+</ul>
+<h2 id="code">Code</h2>
+<p>Each document in this repo is executed when loaded into a browser. Check it out by opening the Developer Tools Console. You should see the output of the following code block:</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"This is the index!"</span>);
+</code></pre>
+<p>Check out the <a href="https://github.com/vlandham/js_data">full source on github</a>.</p>
+<h2 id="why-">Why?</h2>
+<p>Is data cleaning and processing in JavaScript something you would actually want to do? <em>Maybe</em>.</p>
+<p>There are other languages out there that do a great job with data wrangling:</p>
+<ul>
+<li><a href="https://ramnathv.github.io/pycon2014-r/explore/README.html">R with dplyr</a></li>
+<li><a href="http://nbviewer.ipython.org/gist/fonnesbeck/5850413">python with pandas</a></li>
+<li><a href="">java (just kidding)</a></li>
+</ul>
+<p>These tools are great and you should use them. Often times, however, you are already familiar with a particular language (like JavaScript) and would like to get started with data, but want to take it one step at a time.</p>
+<p>Additionally, sometimes you are already in a particular environment (like JavaScript) and don&#39;t have the luxury of switching to one of these other options.</p>
+<p>In these cases, JavaScript could be considered a viable option for your data analysis. And if you find yourself in one of these situations, or just want to try out JavaScript for data analysis for fun, then <em>this guide is for you</em>!</p>
+<p>Check out some of the tasks, and see if JavaScript Data something you want to try yourself.</p>
+
+  </div>
+  <br/><br/>
+  <section id="footer">
+    Made with ♥ by <a href="http://bocoup.com/datavis">The Bocoup Data Visualization Team</a>.
+  </section>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-60734450-1', 'auto');
+ga('send', 'pageview');
+
+  </script>
+  <script type="text/javascript" src="/src/index.js"></script></body>
+  </html>

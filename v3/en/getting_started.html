@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Getting Started - Learn JS Data</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="description" content="An introduction to data processing and cleaning in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+  <meta name="keywords" content="javascript,data processing, data cleaning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@bocoup">
+  <meta name="twitter:creator" content="@vlandham">
+  <meta name="twitter:title" content="Learn JS Data: Data processing in JavaScript">
+  <meta name="twitter:description" content="An introduction to data processing and cleaning in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+<meta name="twitter:image:src" content="http://learnjsdata.com/img/logo.png">
+<meta property="og:site_name" content="Learn JS Data"/>
+<meta property="og:title" content="Data manipulation, cleaning, and processing in JavaScript" />
+<meta property="og:url" content="http://learnjsdata.com" />
+<meta property="og:description" content="This guide teaches the basics of manipulating data using JavaScript in the browser, or in node.js.
+Specifically, demonstrating tasks that are geared around preparing data for further analysis and visualization. This guide will demonstrate some basic techniques and how to implement them using core JavaScript API, the d3.js library and lodash." />
+<meta property="og:image" content="http://learnjsdata.com/img/fb.jpg" />
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" media="all" href="/custom.css" />
+  <script src='/lib/d3/d3.min.js'></script>
+  <script src='/lib/queue-async/queue.min.js'></script>
+  <script src='/lib/lodash/lodash.min.js'></script>
+</head>
+<body>
+
+  <header>
+    <div class="contents">
+      <a href="https://github.com/vlandham/js_data"><img class="github" style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+      <a href='index.html'>
+        <img class='logo' src="/img/logo.png">
+        <h1>Learn JS Data</h1>
+        <h3>Data cleaning, manipulation, and wrangling in JavaScript</h3>
+      </a>
+    </div>
+  </header>
+
+  <div id="container">
+    <h1 id="getting-started">Getting Started</h1>
+<h2 id="about-tasks">About Tasks</h2>
+<p>This guide is broken up into a number of tasks, which we can think of as little modules or <em>recipes</em>.</p>
+<p>Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. Tasks attempt to be self-contained and stay focused on the, well, <em>task at hand</em>.</p>
+<p>This guide was built with for client side data processing (in the browser), but can easily be used in a server side (Node) application with a bit of tweaking. Check out the <a href="node.html">analyzing data with Node</a> section for the details.</p>
+<h2 id="why-d3-">Why D3?</h2>
+<p><a href="http://d3js.org/">D3.js</a> is largely known for its data visualization capabilities - and for good reason. It is quickly becoming the de facto standard for interactive visualization on the web.</p>
+<p>Its core feature of binding data to visual representations happens to require a lot of manipulation of said data. Thus, while this toolkit is focused around visualization, it is well suited for data processing as well!</p>
+<p>And, a typical output for data manipulation is at least some sort of visualization of that data, in which case you are all ready to go.</p>
+<h2 id="why-lodash-">Why lodash?</h2>
+<p><a href="https://lodash.com">Lodash</a> is fast, popular, and fills in some holes in D3&#39;s processing features. Plus, it&#39;s functional style and chaining capabilities make it work well alongside D3.</p>
+<h2 id="code-snippets">Code Snippets</h2>
+<p>There are a bunch of useful snippets in this guide. Here is an example:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> theMax = d3.max([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">20</span>,<span class="hljs-number">3</span>]);
+<span class="hljs-built_in">console</span>.log(theMax);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">20</span>
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>We use a little arrow, <code>=&gt;</code>, to indicate output from a code snippet. This same output you can view by opening the <a href="https://developer.chrome.com/devtools/docs/console">console</a> of your favorite web browser.</p>
+<p>Snippets in this guide that are not pure JavaScript will be marked with the libraries used to make them work.</p>
+<h2 id="preparing-your-site-for-data-processing">Preparing Your Site for Data Processing</h2>
+<p>To get started using these tools for your data processing, you are going to want to include them in your html file along with a JavaScript file to perform the analysis.</p>
+<p>I typically download these scripts and include local copies in my page. To do this, you would want to have your HTML look something like this:</p>
+<pre><code class="lang-html"><span class="hljs-doctype">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'js/d3.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'js/lodash.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'js/analysis.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
+</code></pre>
+<p><code>analysis.js</code> would be where your analysis code goes. I put them at the end of the <code>body</code> - just so that if there is other content on the page, it won&#39;t be delayed in loading. Typically, I name this file <code>index.html</code> - so that its loaded automatically as the root page.</p>
+<h2 id="running-a-local-server">Running a Local Server</h2>
+<p>D3&#39;s functions for <a href="read_data.html">reading data</a> require you be running the page from a server. You can do this on your own machine by running a local server out of the root directory of your site.</p>
+<p>There are many options for easy-to-spin-up web servers:</p>
+<ul>
+<li><a href="http://www.pythonforbeginners.com/modules-in-python/how-to-use-simplehttpserver/">SimpleHTTPServer</a> for Python</li>
+<li><a href="http://www.benjaminoakes.com/2013/09/13/ruby-simple-http-server-minimalist-rake/">httpd</a> for Ruby</li>
+<li><a href="https://github.com/nodeapps/http-server">http-server</a> for Node</li>
+</ul>
+<p>Lately, I have been using that last option - <code>http-server</code>. If you have Node and npm installed, you can grab the required package by installing it from the command line:</p>
+<pre><code class="lang-bash">npm install -g http-server
+</code></pre>
+<p>(The <code>-g</code> flag stands for <em>global</em> - which allows you to access <code>http-server</code> from any directory on your machine.</p>
+<p>Then <code>cd</code> to your analysis directory and start it up!</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> /path/to/dir
+http-server
+</code></pre>
+<p>In your web browser, open up <a href="http://0.0.0.0:8080">http://0.0.0.0:8080</a> and you should be ready to go!</p>
+<h2 id="next-task">Next Task</h2>
+<p><a href="read_data.html">Reading in Data</a></p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="http://howtonode.org/how-to-install-nodejs">Installing Node</a> - if you need some help getting <code>http-server</code> on your machine.</li>
+</ul>
+
+  </div>
+  <br/><br/>
+  <section id="footer">
+    Made with ♥ by <a href="http://bocoup.com/datavis">The Bocoup Data Visualization Team</a>.
+  </section>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-60734450-1', 'auto');
+ga('send', 'pageview');
+
+  </script>
+  <script type="text/javascript" src="/src/getting_started.js"></script></body>
+  </html>
