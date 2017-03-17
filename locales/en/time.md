@@ -1,12 +1,12 @@
 # Working with Time
 
-Time is one of those tricky programming things that seems like it should be easy, but usually turns out not to be. We will use D3's built in [time formating](https://github.com/mbostock/d3/wiki/Time-Formatting) and [interval](https://github.com/mbostock/d3/wiki/Time-Intervals) functions. We will also take a look at the powerful [Moment.js](http://momentjs.com/) library, for when you just need more time power.
+Time is one of those tricky programming things that seems like it should be easy, but usually turns out not to be. We will use D3's built in [time formating](https://github.com/d3/d3-time-format) and [interval](https://github.com/d3/d3-time#_interval) functions. We will also take a look at the powerful [Moment.js](http://momentjs.com/) library, for when you just need more time power.
 
 ## String to Date
 
 The first task when dealing with dates is usually getting a [Date object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) out of a string. Most of the time, your data will have dates or times in an (mostly) arbitrary format, and you need to force that mess into an actual date.
 
-D3 has [d3.time.format](https://github.com/mbostock/d3/wiki/Time-Formatting#format) which provides a way to do this parsing. It was a little confusing for me the first time I tried it. You use this function to create a string parser, and then use the parser to actually convert the string.
+D3 has [d3.timeParse](https://github.com/d3/d3-time-format#timeParse) which provides a way to do this parsing. It was a little confusing for me the first time I tried it. You use this function to create a string parser, and then use the parser to actually convert the string.
 
 In our [nesting example](group_data.html), we saw data that had dates as strings:
 
@@ -18,7 +18,7 @@ To convert this date string to a Date object, we would need a parser that looks 
 <div class="aside">This code is using d3.js</div>
 
 
-The input string to `d3.time.format` indicates what the date string should look like. You have a [lot of options](https://github.com/mbostock/d3/wiki/Time-Formatting#format) for the special, percent-sign-prefixed variables. You can see in the string I'm using month, day, and four-digit year. The slashes in the format string are not special variables - but just what we expect to find separating the fields in the date string.
+The input string to `d3.timeFormat` indicates what the date string should look like. You have a [lot of options](https://github.com/d3/d3-time-format#locale_format) for the special, percent-sign-prefixed variables. You can see in the string I'm using month, day, and four-digit year. The slashes in the format string are not special variables - but just what we expect to find separating the fields in the date string.
 
 Next we use the parser to parse our string.
 
@@ -72,7 +72,7 @@ This could also be done using some built in short-hands:
 
 <div class="aside">This code is using d3.js</div>
 
-You can see that `d3.time.format` gives you a lot of flexibility about what your time string will look like.
+You can see that `d3.timeParse` gives you a lot of flexibility about what your time string will look like.
 
 ## Modifying Time
 
@@ -82,7 +82,7 @@ The [d3.time.interval](https://github.com/mbostock/d3/wiki/Time-Intervals) set o
 
 Intervals allow for modifying dates around specific time slices like minutes, hours, days, months, or years. We are given a number of functions to work with each interval, depending on what we might want to do.
 
-So, to get the nearest hour from a date, we can use [d3.time.hour.round](https://github.com/mbostock/d3/wiki/Time-Intervals#interval_round)
+So, to get the nearest hour from a date, we can use [d3.timeHour.round](https://github.com/d3/d3-time#interval_round)
 
 @@ code=time/time.09.js @@
 

@@ -119,7 +119,7 @@ This `b - a` thing is a pretty common way to generate this kind of sort. But you
 
 Note again, that the sort happened _on the original data_, which I'm not a big fan of.
 
-D3 also has a few helper functions to implement ascending and descending comparator functions - but (as far as I can tell) they only accept arrays of raw numbers instead of objects. So to use [d3.ascending](https://github.com/mbostock/d3/wiki/Arrays#d3_ascending) or [d3.descending](https://github.com/mbostock/d3/wiki/Arrays#d3_descending) you would have to do something like this:
+D3 also has a few helper functions to implement ascending and descending comparator functions - but (as far as I can tell) they only accept arrays of raw numbers instead of objects. So to use [d3.ascending](https://github.com/d3/d3-array#ascending) or [d3.descending](https://github.com/d3/d3-array#descending) you would have to do something like this:
 
 @@ code=iterate_data/iterate_data.13.js @@
 
@@ -163,7 +163,7 @@ It always makes more sense to me to provide a starting value - unless you know w
 
 @@ code=iterate_data/iterate_data.18.out @@
 
-_And summing over a variable is only used for example. You can always just use [d3.sum](https://github.com/mbostock/d3/wiki/Arrays#d3_sum) for this instead._
+_And summing over a variable is only used for example. You can always just use [d3.sum](https://github.com/d3/d3-array#d3_sum) for this instead._
 
 ## Chaining Functions
 

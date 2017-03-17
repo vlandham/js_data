@@ -8,7 +8,7 @@ To start, let's pretend we have loaded up a csv file - and have a dataset that l
 
 ## Min & Max
 
-As it turns out, D3 comes to the rescue again, with [d3.min](https://github.com/mbostock/d3/wiki/Arrays#d3_min) and [d3.max](https://github.com/mbostock/d3/wiki/Arrays#d3_max). Use the callback function to indicate which property (or computed value based on the properties) to access.
+As it turns out, D3 comes to the rescue again, with [d3.min](https://github.com/d3/d3-array#min) and [d3.max](https://github.com/d3/d3-array#max). Use the callback function to indicate which property (or computed value based on the properties) to access.
 
 
 @@ code=summarize_data/summarize_data.02.js @@
@@ -23,7 +23,7 @@ As it turns out, D3 comes to the rescue again, with [d3.min](https://github.com/
 
 <div class="aside">This code is using d3.js</div>
 
-If you want both of them at the same time, you can use [d3.extent](https://github.com/mbostock/d3/wiki/Arrays#d3_extent)
+If you want both of them at the same time, you can use [d3.extent](https://github.com/d3/d3-array#extent)
 
 @@ code=summarize_data/summarize_data.04.js @@
 
@@ -37,7 +37,7 @@ This returns an array with the first element the minimum value and the second el
 
 D3 provides a few basic tools to analyze your data, all using the same format as the min and max functions. Simply provide the property you would like to analyze, and you are good to go.
 
-[d3.mean](https://github.com/mbostock/d3/wiki/Arrays#d3_mean)
+[d3.mean](https://github.com/d3/d3-array#mean)
 
 @@ code=summarize_data/summarize_data.05.js @@
 
@@ -45,7 +45,7 @@ D3 provides a few basic tools to analyze your data, all using the same format as
 
 <div class="aside">This code is using d3.js</div>
 
-[d3.median](https://github.com/mbostock/d3/wiki/Arrays#d3_median)
+[d3.median](https://github.com/d3/d3-array#median)
 
 @@ code=summarize_data/summarize_data.06.js @@
 
@@ -53,7 +53,7 @@ D3 provides a few basic tools to analyze your data, all using the same format as
 
 <div class="aside">This code is using d3.js</div>
 
-[d3.deviation](https://github.com/mbostock/d3/wiki/Arrays#d3_deviation) - for standard deviation
+[d3.deviation](https://github.com/d3/d3-array#deviation) - for standard deviation
 
 @@ code=summarize_data/summarize_data.07.js @@
 

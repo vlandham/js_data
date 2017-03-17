@@ -138,12 +138,12 @@ We can see that, unlike our flat file parsing, numeric types stay numeric. Indee
 
 D3's basic loading mechanism is fine for one file, but starts to get messy as we nest multiple callbacks.
 
-For loading multiple files, we can use [Queue.js](https://github.com/mbostock/queue) (also written by Mike Bostock) to wait for multiple data sources to be loaded.
+For loading multiple files, we can use [d3.queue](https://github.com/d3/d3-queue) to wait for multiple data sources to be loaded.
 
 @@ code=read_data/read_data.08.js @@
 @@ code=read_data/read_data.08.out @@
 
-<div class="aside">This code is using queue.js and d3.js</div>
+<div class="aside">This code is using d3.js</div>
 
 Note that we `defer` the loading of two types of files - using two different loading functions - so this is an easy way to mix and match file types.
 
@@ -160,7 +160,7 @@ To add another data file, simply add another defer and extend the input paramete
 
 ## See Also
 
-- [D3 documentation](https://github.com/mbostock/d3/wiki/Requests)
-- [Loading XML with D3](https://github.com/mbostock/d3/wiki/Requests#d3_xml)
+- [D3 documentation](https://github.com/d3/d3-request)
+- [Loading XML with D3](https://github.com/d3/d3-request#xml)
 - [Loading External SVG with D3](http://bl.ocks.org/mbostock/1014829) - SVG is just XML!
 
