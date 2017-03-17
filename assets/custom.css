@@ -94,10 +94,6 @@ a {
   color: #000;
 }
 
-b, strong {
-  font-weight: normal;
-}
-
 p, ul, ol {
   margin: 15px 0 15px 0;
 }
