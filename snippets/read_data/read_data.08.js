@@ -1,4 +1,4 @@
-queue()
+d3.queue()
   .defer(d3.csv, "/data/cities.csv")
   .defer(d3.tsv, "/data/animals.tsv")
   .await(analyze);

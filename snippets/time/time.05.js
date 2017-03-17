@@ -1,2 +1,2 @@
-date = d3.time.format("%m/%y").parse("12/14");
+date = d3.timeParse("%m/%y")("12/14");
 console.log(date);

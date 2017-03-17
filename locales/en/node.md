@@ -67,7 +67,7 @@ D3's data loading functionality is based on [XMLHttpRequest](https://developer.m
 
 ```js
 fs.readFile("data/animals.tsv", "utf8", function(error, data) {
-  data = d3.tsv.parse(data);
+  data = d3.tsvParse(data);
   console.log(JSON.stringify(data));
 });
 ```
@@ -78,7 +78,7 @@ Like our Queue example in [client-side reading](read_data.html), the parameters 
 
 The data returned by `readFile` is the raw string contents of the file.
 
-We can use [d3.tsv.parse](https://github.com/mbostock/d3/wiki/CSV#parse) which takes a string and and converts it into an array of data objects - just like what we are used to on the client side!
+We can use [d3.tsvParse](https://github.com/d3/d3-dsv#tsvParseRows) which takes a string and and converts it into an array of data objects - just like what we are used to on the client side!
 
 From this point on, we can use d3 and lodash functionality to analyze our data.
 
@@ -90,7 +90,7 @@ var d3 = require("d3");
 var _  = require("lodash");
 
 fs.readFile("data/animals.tsv", "utf8", function(error, data) {
-  data = d3.tsv.parse(data);
+  data = d3.tsvParse(data);
   console.log(JSON.stringify(data));
 
   var maxWeight = d3.max(data, function(d) { return d.avg_weight; });
@@ -131,13 +131,13 @@ Running this should leave us with a `big_animals.json` file in our analysis fold
 
 This is fine if JSON is what you want, but often times you want to output TSV or CSV files for further analysis. D3 to the rescue again!
 
-D3 includes [d3.csv.format](https://github.com/mbostock/d3/wiki/CSV#format) (and the equivalent for TSV and other file formats) which converts our array of data objects into a string - perfect for writing to a file.
+D3 includes [d3.csvFormat](https://github.com/d3/d3-dsv#csvFormat) (and the equivalent for TSV and other file formats) which converts our array of data objects into a string - perfect for writing to a file.
 
 Let's use it to make a CSV of our big animals.
 
 ```js
 var bigAnimals = data.filter(function(d) { return d.avg_weight > 300; });
-bigAnimalsString = d3.csv.format(bigAnimals);
+bigAnimalsString = d3.csvFormat(bigAnimals);
 
 fs.writeFile("big_animals.csv", bigAnimalsString, function(err) {
   console.log("file written");
