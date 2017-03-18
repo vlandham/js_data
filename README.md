@@ -22,6 +22,8 @@ Thanks to everyone who has worked on this to make it awesome:
 - [Jim Vallandingham](https://twitter.com/vlandham)
 - [Irene Ros](https://twitter.com/ireneros)
 - [Timo Grossenbacher](https://twitter.com/grssnbchr)
+- [Adam Pearce](https://twitter.com/adamrpearce)
+- [Kanit Ham Wong](https://twitter.com/kanitw)
 - [Yannick Assogba](https://twitter.com/tafsiri)
 - [Earle Castledine](https://twitter.com/mrspeaker)
 - [Lynn Cherny](https://twitter.com/arnicas)
