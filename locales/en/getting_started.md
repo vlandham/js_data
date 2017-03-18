@@ -20,7 +20,7 @@ And, a typical output for data manipulation is at least some sort of visualizati
 
 In the not too distant past, a major rewrite of the D3.js library was completed and released into the wild. In includes quite a few API changes and a [very modular structure](https://github.com/d3) (meaning in theory you can just use the bits of D3 that you want and not the rest).
 
-This major rewrite makes D3 a lot better - but it also makes it more challenging to read and use old code and sometimes to understand the documentation. But don't despair! We've [maintained the old version of this guide using D3v3](/v3/) in case you have old code you need help with. 
+This major rewrite makes D3 a lot better - but it also makes it more challenging to read and use old code and sometimes to understand the documentation. But don't despair! We've [maintained the old version of this guide using D3v3](v3/) in case you have old code you need help with. 
 
 ## Why lodash?
 
