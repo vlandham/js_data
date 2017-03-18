@@ -68,7 +68,7 @@ var result = join(brands, articles, "id", "brand_id", function(article, brand) {
     };
 });
 console.log(result);
-queue()
+d3.queue()
     .defer(d3.csv, "/data/big_data_1.csv")
     .defer(d3.csv, "/data/big_data_2.csv")
     .defer(d3.csv, "/data/big_data_3.csv")

@@ -24,9 +24,8 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
   <link rel="shortcut icon" href="/favicon.ico">
   <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" media="all" href="/custom.css" />
-  <script src='/lib/d3/d3.min.js'></script>
-  <script src='/lib/queue-async/queue.min.js'></script>
-  <script src='/lib/lodash/lodash.min.js'></script>
+  <script src='/lib/d3/d3.js'></script>
+  <script src='/lib/lodash/lodash.js'></script>
 </head>
 <body>
 
@@ -47,11 +46,14 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <h2 id="about-tasks">About Tasks</h2>
 <p>This guide is broken up into a number of tasks, which we can think of as little modules or <em>recipes</em>.</p>
 <p>Each task tries to encapsulate a concrete lesson around common data manipulation and analysis processes. Tasks attempt to be self-contained and stay focused on the, well, <em>task at hand</em>.</p>
-<p>This guide was built with for client side data processing (in the browser), but can easily be used in a server side (Node) application with a bit of tweaking. Check out the <a href="node.html">analyzing data with Node</a> section for the details.</p>
+<p>This guide was built with for client side data processing (in the browser), but can easily be used in a server side (Node) application with a bit of tweaking (you can check out the <a href="node.html">analyzing data with Node</a> section for the details later).</p>
 <h2 id="why-d3-">Why D3?</h2>
 <p><a href="http://d3js.org/">D3.js</a> is largely known for its data visualization capabilities - and for good reason. It is quickly becoming the de facto standard for interactive visualization on the web.</p>
 <p>Its core feature of binding data to visual representations happens to require a lot of manipulation of said data. Thus, while this toolkit is focused around visualization, it is well suited for data processing as well!</p>
 <p>And, a typical output for data manipulation is at least some sort of visualization of that data, in which case you are all ready to go.</p>
+<h2 id="a-note-about-d3v4">A Note about D3v4</h2>
+<p>In the not too distant past, a major rewrite of the D3.js library was completed and released into the wild. In includes quite a few API changes and a <a href="https://github.com/d3">very modular structure</a> (meaning in theory you can just use the bits of D3 that you want and not the rest).</p>
+<p>This major rewrite makes D3 a lot better - but it also makes it more challenging to read and use old code and sometimes to understand the documentation. But don&#39;t despair! We&#39;ve <a href="v3/">maintained the old version of this guide using D3v3</a> in case you have old code you need help with. </p>
 <h2 id="why-lodash-">Why lodash?</h2>
 <p><a href="https://lodash.com">Lodash</a> is fast, popular, and fills in some holes in D3&#39;s processing features. Plus, it&#39;s functional style and chaining capabilities make it work well alongside D3.</p>
 <h2 id="code-snippets">Code Snippets</h2>
@@ -66,20 +68,20 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <p>Snippets in this guide that are not pure JavaScript will be marked with the libraries used to make them work.</p>
 <h2 id="preparing-your-site-for-data-processing">Preparing Your Site for Data Processing</h2>
 <p>To get started using these tools for your data processing, you are going to want to include them in your html file along with a JavaScript file to perform the analysis.</p>
-<p>I typically download these scripts and include local copies in my page. To do this, you would want to have your HTML look something like this:</p>
+<p>I typically download these scripts and include local copies in my page. You can keep &quot;libraries&quot; that you are using but didn&#39;t write in a <code>lib</code> folder, and the code you write yourself in a <code>src</code> folder. Then you want to load all these files on an HTML page. To do this, you would want to have your HTML look something like this:</p>
 <pre><code class="lang-html"><span class="hljs-doctype">&lt;!doctype html&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'js/d3.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'js/lodash.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'js/analysis.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'lib/d3.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'lib/lodash.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'src/analysis.js'</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
 </code></pre>
-<p><code>analysis.js</code> would be where your analysis code goes. I put them at the end of the <code>body</code> - just so that if there is other content on the page, it won&#39;t be delayed in loading. Typically, I name this file <code>index.html</code> - so that its loaded automatically as the root page.</p>
+<p><code>src/analysis.js</code> would be where your analysis code goes. I put these <code>script</code> tags at the end of the <code>body</code> - just so that if there is other content on the page, it won&#39;t be delayed in loading. Typically, I name this main HTML file <code>index.html</code> - so that its loaded automatically as the root page.</p>
 <h2 id="running-a-local-server">Running a Local Server</h2>
 <p>D3&#39;s functions for <a href="read_data.html">reading data</a> require you be running the page from a server. You can do this on your own machine by running a local server out of the root directory of your site.</p>
 <p>There are many options for easy-to-spin-up web servers:</p>
@@ -88,7 +90,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <li><a href="http://www.benjaminoakes.com/2013/09/13/ruby-simple-http-server-minimalist-rake/">httpd</a> for Ruby</li>
 <li><a href="https://github.com/nodeapps/http-server">http-server</a> for Node</li>
 </ul>
-<p>Lately, I have been using that last option - <code>http-server</code>. If you have Node and npm installed, you can grab the required package by installing it from the command line:</p>
+<p>Lately, I have been using that last option - <code>http-server</code>. If you have <a href="https://nodejs.org/en/">Node</a> and <a href="https://www.npmjs.com/">npm</a> installed, you can grab the required package by installing it from the command line:</p>
 <pre><code class="lang-bash">npm install -g http-server
 </code></pre>
 <p>(The <code>-g</code> flag stands for <em>global</em> - which allows you to access <code>http-server</code> from any directory on your machine.</p>

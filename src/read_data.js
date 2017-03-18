@@ -25,17 +25,25 @@ d3.tsv("/data/animals.tsv", function(data) {
   console.log(data[0]);
 });
 
-var psv = d3.dsv("|", "text/plain");
+var psv = d3.dsvFormat("|");
 
-psv("/data/animals_piped.txt", function(data) {
-  console.log(data[1]);
-});
+// This parser can parse pipe-delimited text:
+var output = psv.parse("first|last\nabe|lincoln")
+console.log(output[0])
+
+d3.request("/data/animals_piped.txt")
+  .mimeType("text/plain")
+  .response(function(xhr) { return psv.parse(xhr.responseText) })
+  .get(function(data) {
+    console.log("pipe-delimited data:")
+    console.log(data[1]);
+  });
 
 d3.json("/data/employees.json", function(data) {
   console.log(data[0]);
 });
 
-queue()
+d3.queue()
   .defer(d3.csv, "/data/cities.csv")
   .defer(d3.tsv, "/data/animals.tsv")
   .await(analyze);

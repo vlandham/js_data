@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Iterating Over and Reducing Data - Learn JS Data</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="description" content="An introduction to data processing and cleaning in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+  <meta name="keywords" content="javascript,data processing, data cleaning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@bocoup">
+  <meta name="twitter:creator" content="@vlandham">
+  <meta name="twitter:title" content="Learn JS Data: Data processing in JavaScript">
+  <meta name="twitter:description" content="An introduction to data processing and cleaning in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+<meta name="twitter:image:src" content="http://learnjsdata.com/img/logo.png">
+<meta property="og:site_name" content="Learn JS Data"/>
+<meta property="og:title" content="Data manipulation, cleaning, and processing in JavaScript" />
+<meta property="og:url" content="http://learnjsdata.com" />
+<meta property="og:description" content="This guide teaches the basics of manipulating data using JavaScript in the browser, or in node.js.
+Specifically, demonstrating tasks that are geared around preparing data for further analysis and visualization. This guide will demonstrate some basic techniques and how to implement them using core JavaScript API, the d3.js library and lodash." />
+<meta property="og:image" content="http://learnjsdata.com/img/fb.jpg" />
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" media="all" href="/custom.css" />
+  <script src='/lib/d3/d3.min.js'></script>
+  <script src='/lib/queue-async/queue.min.js'></script>
+  <script src='/lib/lodash/lodash.min.js'></script>
+</head>
+<body>
+
+  <header>
+    <div class="contents">
+      <a href="https://github.com/vlandham/js_data"><img class="github" style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+      <a href='index.html'>
+        <img class='logo' src="/img/logo.png">
+        <h1>Learn JS Data</h1>
+        <h3>Data cleaning, manipulation, and wrangling in JavaScript</h3>
+      </a>
+    </div>
+  </header>
+
+  <div id="container">
+    <h1 id="iterating-over-and-reducing-data">Iterating Over and Reducing Data</h1>
+<p>Most of the functions we used to <a href="summarize_data.html">summarize</a> our data had to iterate over the entire dataset to generate their results - but the details were hidden behind the function. Now let&#39;s look at how we might perform this iteration ourselves for other metrics and manipulations!</p>
+<p>Again, we start with a basic data set already loaded:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> data = [
+  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"seattle"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"WA"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">652405</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">83.9</span>},
+  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"new york"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"NY"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">8405837</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">302.6</span>},
+  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"boston"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"MA"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">645966</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">48.3</span>},
+  {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}
+];
+</code></pre>
+<h2 id="iterating">Iterating</h2>
+<p>First some basic iteration. We already saw this in the data loading task, but a common way to process each data object is by using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">forEach</a></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
+
+data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
+  count += <span class="hljs-number">1</span>;
+});
+
+<span class="hljs-built_in">console</span>.log(count);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">4</span>
+</code></pre><p><em>Of course, data also has the property <code>length</code> which would be the actual way to get the number of data elements in <code>data</code> - but this is just an example.</em></p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">console</span>.log(data.length);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">4</span>
+</code></pre><h2 id="immutability">Immutability</h2>
+<p>Let me sidetrack this task just a bit to talk about</p>
+<p><code>forEach</code> provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually.</p>
+<p>This works, but can get clunky and confusing fast. Keeping straight what form the data is in at any given time can be confusing, as can side effects of modifying your data that you might not be aware of.</p>
+<p>To combat this confusion, it can be useful to think of the data as <em>immutable</em>. Immutable data cannot be modified once created. Immutability seems a bit counterintuitive for a task where we want to coerce our data into the form we want - but it comes together with the concept of <strong>transformations</strong>.</p>
+<p>The idea is simple: each immutable dataset can be <em>transformed</em> into another immutable dataset through the use of a transformation function that works on each component of the data.</p>
+<p>This process helps simplify the data flow, but if you have to make a copy of your data object each time, it can make code a bit brittle as you have to keep track of every attribute of your dataset.</p>
+<h2 id="cloning">Cloning</h2>
+<p>To help with this issue of brittle transformations, lodash provides the <a href="https://lodash.com/docs#clone">clone</a> function.</p>
+<p>This function takes an object and returns a copy of that object. That copy is now a separate data object that you can edit without effecting the original object.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> dataObject = {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Carl"</span>, <span class="hljs-string">"age"</span>:<span class="hljs-string">"48"</span>, <span class="hljs-string">"salary"</span>:<span class="hljs-string">"12300"</span>};
+<span class="hljs-keyword">var</span> copyOfData = _.clone(dataObject);
+copyOfData.age = +copyOfData.age;
+copyOfData.salary = +copyOfData.salary;
+<span class="hljs-built_in">console</span>.log(dataObject);
+</code></pre>
+<pre><code>=&gt; {<span class="hljs-string">name:</span> <span class="hljs-string">"Carl"</span>, <span class="hljs-string">age:</span> <span class="hljs-string">"48"</span>, <span class="hljs-string">salary:</span> <span class="hljs-string">"12300"</span>}
+</code></pre><div class="aside">This code is using lodash</div>
+
+<pre><code class="lang-javascript"><span class="hljs-built_in">console</span>.log(copyOfData);
+</code></pre>
+<pre><code>=&gt; {<span class="hljs-string">name:</span> <span class="hljs-string">"Carl"</span>, <span class="hljs-string">age:</span> <span class="hljs-number">48</span>, <span class="hljs-string">salary:</span> <span class="hljs-number">12300</span>}
+</code></pre><p>By default, the <code>clone</code> function will not copy over nested objects. Instead these nested objects are simply passed by referenced - meaning the original and the copy will still share them.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> dataObject = {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Saul"</span>, <span class="hljs-string">"stats"</span>:{<span class="hljs-string">"age"</span>:<span class="hljs-string">"55"</span>}};
+<span class="hljs-keyword">var</span> shallowCopy = _.clone(dataObject);
+shallowCopy.stats.age = +shallowCopy.stats.age;
+<span class="hljs-built_in">console</span>.log(dataObject);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"name"</span><span class="hljs-symbol">:<span class="hljs-string">"Saul"</span></span>,<span class="hljs-string">"stats"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"age"</span><span class="hljs-symbol">:</span><span class="hljs-number">55</span>}}
+</code></pre><div class="aside">This code is using lodash</div>
+
+<pre><code class="lang-javascript"><span class="hljs-built_in">console</span>.log(shallowCopy);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"name"</span><span class="hljs-symbol">:<span class="hljs-string">"Saul"</span></span>,<span class="hljs-string">"stats"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"age"</span><span class="hljs-symbol">:</span><span class="hljs-number">55</span>}}
+</code></pre><p>Note that because <code>stats</code> is a nested object the modification happened in both spots!</p>
+<p>To prevent this &quot;feature&quot;, we can pass <code>true</code> as the second parameter to <code>clone</code> to indicate that the copy should be deep and copy nested objects as well.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> dataObject = {<span class="hljs-string">"name"</span>:<span class="hljs-string">"Saul"</span>, <span class="hljs-string">"stats"</span>:{<span class="hljs-string">"age"</span>:<span class="hljs-string">"55"</span>}};
+<span class="hljs-keyword">var</span> deepCopy = _.clone(dataObject, <span class="hljs-literal">true</span>);
+deepCopy.stats.age = +deepCopy.stats.age;
+<span class="hljs-built_in">console</span>.log(dataObject);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"name"</span><span class="hljs-symbol">:<span class="hljs-string">"Saul"</span></span>,<span class="hljs-string">"stats"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"age"</span><span class="hljs-symbol">:<span class="hljs-string">"55"</span></span>}}
+</code></pre><div class="aside">This code is using lodash</div>
+
+<pre><code class="lang-javascript"><span class="hljs-built_in">console</span>.log(deepCopy);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"name"</span><span class="hljs-symbol">:<span class="hljs-string">"Saul"</span></span>,<span class="hljs-string">"stats"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"age"</span><span class="hljs-symbol">:</span><span class="hljs-number">55</span>}}
+</code></pre><p>lodash also has a <a href="https://lodash.com/docs#cloneDeep">cloneDeep</a> that can be used to make the deep-ness more explicit.</p>
+<h2 id="mapping">Mapping</h2>
+<p>JavaScript&#39;s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a> can be a very useful tool to implement this concept of a transformation on immutable data.</p>
+<p><code>map</code> takes an array and produces another array which is the result of the callback function being executed on each element in the array.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> smallData = data.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d,i)</span> </span>{
+
+  <span class="hljs-keyword">return</span> {
+    name: d.city.toUpperCase(),
+    index: i + <span class="hljs-number">1</span>,
+    rounded_area: <span class="hljs-built_in">Math</span>.round(d.land_area)
+  };
+});
+<span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
+<span class="hljs-built_in">console</span>.log(smallData[<span class="hljs-number">0</span>]);
+</code></pre>
+<pre><code>=&gt; {<span class="hljs-string">city:</span> <span class="hljs-string">"seattle"</span>, <span class="hljs-string">state:</span> <span class="hljs-string">"WA"</span>, <span class="hljs-string">population:</span> <span class="hljs-number">652405</span>, <span class="hljs-string">land_area:</span> <span class="hljs-number">83.9</span>}
+  {<span class="hljs-string">name:</span> <span class="hljs-string">"SEATTLE"</span>, <span class="hljs-string">index:</span> <span class="hljs-number">1</span>, <span class="hljs-string">rounded_area:</span> <span class="hljs-number">84</span>}
+</code></pre><p>The callback function gets called for each element in the array, and also has access to the index of that element in the array. The result is an array of returned values from the callback.</p>
+<p>With plain JavaScript, the immutability of an array is just <em>in the mind of the developer</em>. While <code>map</code> does not modify the array, it is easy for your callback method to do so. That is why we return a new object in the callback. lodash&#39;s <a href="https://lodash.com/docs#clone">clone</a> would be another approach to getting a copy of each data element as a starting point for the transformation.</p>
+<h2 id="filtering">Filtering</h2>
+<p>Select a subset of the data using the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter</a> method. This creates a new array of data (again see transformation talk above) with only the values that the callback function returns <code>true</code> for.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> large_land = data.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area &gt; <span class="hljs-number">200</span>; });
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(large_land));
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> [{<span class="hljs-string">"city"</span><span class="hljs-symbol">:<span class="hljs-string">"new york"</span></span>,<span class="hljs-string">"state"</span><span class="hljs-symbol">:<span class="hljs-string">"NY"</span></span>,<span class="hljs-string">"population"</span><span class="hljs-symbol">:</span><span class="hljs-number">8405837</span>,<span class="hljs-string">"land_area"</span><span class="hljs-symbol">:</span><span class="hljs-number">302.6</span>},
+  {<span class="hljs-string">"city"</span><span class="hljs-symbol">:<span class="hljs-string">"kansas city"</span></span>,<span class="hljs-string">"state"</span><span class="hljs-symbol">:<span class="hljs-string">"MO"</span></span>,<span class="hljs-string">"population"</span><span class="hljs-symbol">:</span><span class="hljs-number">467007</span>,<span class="hljs-string">"land_area"</span><span class="hljs-symbol">:</span><span class="hljs-number">315</span>}]
+</code></pre><h2 id="sorting">Sorting</h2>
+<p>Similar to filtering, sorting data based on attributes is something you&#39;ll want to do frequently.</p>
+<p>The built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">sort</a> for arrays can do this. A caveat to this function is that, unlike filter, map, and other functions, this <em>modifies the array you are sorting in place</em>, instead of returning a new array with the objects sorted.</p>
+<p>To sort an array, you need a comparator function. This is a function that takes two pieces of data and indicates which one you want higher in the list. The comparator-function-way to do this is to return a negative value if the first value should go higher then the second value, and a positive value if the second value should go higher. If they are equal, and you don&#39;t care, then return a 0.</p>
+<p>Let&#39;s see it in action. Here is a way to sort by population in a descending order (larger populations come first).</p>
+<pre><code class="lang-javascript">data.sort(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a,b)</span> </span>{
+  <span class="hljs-keyword">return</span> b.population - a.population;
+});
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(data));
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> [{<span class="hljs-string">"city"</span><span class="hljs-symbol">:<span class="hljs-string">"new york"</span></span>,<span class="hljs-string">"state"</span><span class="hljs-symbol">:<span class="hljs-string">"NY"</span></span>,<span class="hljs-string">"population"</span><span class="hljs-symbol">:</span><span class="hljs-number">8405837</span>,<span class="hljs-string">"land_area"</span><span class="hljs-symbol">:</span><span class="hljs-number">302.6</span>},
+   {<span class="hljs-string">"city"</span><span class="hljs-symbol">:<span class="hljs-string">"seattle"</span></span>,<span class="hljs-string">"state"</span><span class="hljs-symbol">:<span class="hljs-string">"WA"</span></span>,<span class="hljs-string">"population"</span><span class="hljs-symbol">:</span><span class="hljs-number">652405</span>,<span class="hljs-string">"land_area"</span><span class="hljs-symbol">:</span><span class="hljs-number">83.9</span>},
+   {<span class="hljs-string">"city"</span><span class="hljs-symbol">:<span class="hljs-string">"boston"</span></span>,<span class="hljs-string">"state"</span><span class="hljs-symbol">:<span class="hljs-string">"MA"</span></span>,<span class="hljs-string">"population"</span><span class="hljs-symbol">:</span><span class="hljs-number">645966</span>,<span class="hljs-string">"land_area"</span><span class="hljs-symbol">:</span><span class="hljs-number">48.3</span>},
+   {<span class="hljs-string">"city"</span><span class="hljs-symbol">:<span class="hljs-string">"kansas city"</span></span>,<span class="hljs-string">"state"</span><span class="hljs-symbol">:<span class="hljs-string">"MO"</span></span>,<span class="hljs-string">"population"</span><span class="hljs-symbol">:</span><span class="hljs-number">467007</span>,<span class="hljs-string">"land_area"</span><span class="hljs-symbol">:</span><span class="hljs-number">315</span>}]
+</code></pre><p>This <code>b - a</code> thing is a pretty common way to generate this kind of sort. But you could also do it more explicitly. Thinking through it, if b&#39;s population is larger then a&#39;s, then the value returned by <code>b.population - a.population</code> will be positive - so b will be sorted toward the top of the array. If the reverse is true, then the result will be negative, and a will be sorted first.</p>
+<p>Note again, that the sort happened <em>on the original data</em>, which I&#39;m not a big fan of.</p>
+<p>D3 also has a few helper functions to implement ascending and descending comparator functions - but (as far as I can tell) they only accept arrays of raw numbers instead of objects. So to use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_ascending">d3.ascending</a> or <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_descending">d3.descending</a> you would have to do something like this:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> populations = data.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.population; });
+<span class="hljs-built_in">console</span>.log(populations);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-number">652405</span>, <span class="hljs-number">8405837</span>, <span class="hljs-number">645966</span>, <span class="hljs-number">467007</span>]
+</code></pre><pre><code class="lang-javascript">populations.sort(d3.descending);
+<span class="hljs-built_in">console</span>.log(populations);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-number">8405837</span>, <span class="hljs-number">652405</span>, <span class="hljs-number">645966</span>, <span class="hljs-number">467007</span>]
+</code></pre><p>I&#39;m usually looking to keep my data objects together, so I shy away from using these methods, but they might be great for what you are trying to do.</p>
+<p>A <strong>big gotcha</strong> with sorting that you should watch out for is that if you do not pass a comparator function, the default function sorts <em>alphabetically</em>. So, the array:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> nums = [<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">20</span>];
+</code></pre>
+<p>Would be sorted to:</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">console</span>.log(nums.sort());
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-number">1</span>, <span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">3</span>]
+</code></pre><p>This is never what you want for data sorting. For this reason, you should never use sort without a comparator function.</p>
+<h2 id="reducing">Reducing</h2>
+<p>These functions all take an array and reduce it down to a single number. But what if that number isn&#39;t the one you want? Well, you can take this reduction into your own hands with <code>reduce</code>!</p>
+<p>The syntax for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce">reduce</a> is always hard for me to remember, so let&#39;s go over it with the classic example: summing up a value.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> landSum = data.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, d)</span> </span>{
+  <span class="hljs-keyword">return</span> sum + d.land_area;
+}, <span class="hljs-number">0</span>);
+<span class="hljs-built_in">console</span>.log(landSum);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">749.8</span>
+</code></pre><p>The first parameter to <code>reduce</code> is the callback function that will return the running &quot;total&quot; of the reduction. This function is passed in the previous value returned from the last time the callback was called. Here, that parameter - <code>sum</code> provides the running total as we move through the array. The second parameter to the callback <code>d</code> is the current value of the array we are working on.</p>
+<p><code>reduce</code> can take an initial value, which is the second parameter to the <code>reduce</code> call. For this example, we start the sum at 0. If there is no starting value provided, then for the first execution of the callback (when there is no previous value) the first parameter to the callback will be the value of the first element of the array, and the reduction starts with the second element.</p>
+<p>It always makes more sense to me to provide a starting value - unless you know what you are doing. You can also get the current index into the array (and the whole array itself) if that is useful to you.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> weirdString = data.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str, d, i)</span> </span>{
+  <span class="hljs-keyword">var</span> ending = (i % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>) ? <span class="hljs-string">" is cool."</span> : <span class="hljs-string">" sucks."</span> ;
+  <span class="hljs-keyword">return</span> str + <span class="hljs-string">" "</span> + d.city + ending;
+}, <span class="hljs-string">""</span>);
+<span class="hljs-built_in">console</span>.log(weirdString);
+</code></pre>
+<pre><code>=&gt; seattle <span class="hljs-keyword">is</span> cool. <span class="hljs-keyword">new</span> york sucks. boston <span class="hljs-keyword">is</span> cool. kansas city sucks.
+</code></pre><p>_And summing over a variable is only used for example. You can always just use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_sum">d3.sum</a> for this instead._</p>
+<h2 id="chaining-functions">Chaining Functions</h2>
+<p>One of the great things about these more <em>functional</em> functions is that it is possible to chain them together into one big data wrangling pipeline!</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> bigCities = data.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.population &gt; <span class="hljs-number">500000</span>; })
+  .sort(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a,b)</span> </span>{ <span class="hljs-keyword">return</span> a.population - b.population; })
+  .map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.city; });
+<span class="hljs-built_in">console</span>.log(bigCities);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-string">"boston"</span>, <span class="hljs-string">"seattle"</span>, <span class="hljs-string">"new york"</span>]
+</code></pre><p>Since we are using <code>sort</code> after <code>filter</code>, sort is working on the returned array from <code>filter</code>. The sort function at least is nice enough to also return the array, so chaining is still possible.</p>
+<h2 id="next-task">Next Task</h2>
+<p><a href="group_data.html">Grouping Data</a></p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="http://www.macwright.org/2015/01/03/reduce-juice.html">Making Juice with Reduce</a> - Tom MacWright&#39;s intro to the ill-used reduce</li>
+<li><a href="https://github.com/facebook/immutable-js">Immutable JS</a> - if you want to get serious about immutable data structures in JavaScript</li>
+<li><a href="http://fr.umio.us/why-ramda/">Ramda</a> - a more functional approach to data processing in JS</li>
+</ul>
+
+  </div>
+  <br/><br/>
+  <section id="footer">
+    Made with ♥ by <a href="http://bocoup.com/datavis">The Bocoup Data Visualization Team</a>.
+  </section>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-60734450-1', 'auto');
+ga('send', 'pageview');
+
+  </script>
+  <script type="text/javascript" src="/src/iterate_data.js"></script></body>
+  </html>

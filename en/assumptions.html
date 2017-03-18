@@ -24,9 +24,8 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
   <link rel="shortcut icon" href="/favicon.ico">
   <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" media="all" href="/custom.css" />
-  <script src='/lib/d3/d3.min.js'></script>
-  <script src='/lib/queue-async/queue.min.js'></script>
-  <script src='/lib/lodash/lodash.min.js'></script>
+  <script src='/lib/d3/d3.js'></script>
+  <script src='/lib/lodash/lodash.js'></script>
 </head>
 <body>
 
@@ -108,18 +107,20 @@ checkDataShape(data);
 <pre><code>=&gt; <span class="hljs-typedef"><span class="hljs-keyword">data</span> is too small</span>
 <span class="hljs-title">wrong</span> number <span class="hljs-keyword">of</span> columns
 </code></pre><p>The two assumption functions could easily be combined into one, but it&#39;s important to look at both aspects of your data.</p>
-<h2 id="more-assertions">More Assertions</h2>
-<p>If this is an approach that appeals to you, and your data might get really complicated (or really messy)
-you may want to explore using more complicated assertion code.</p>
-<p>One useful library to explore is <a href="http://chaijs.com/api/assert/">Chai</a> which comes with a great
-collection of assertion helpers. These can help you check for more complicated things like whether
-two objects are equal or whether an object has or doesn&#39;t have a property.</p>
-<p>For example:</p>
-<pre><code class="lang-javascript">assert.deepEqual({ tea: <span class="hljs-string">'green'</span> }, { tea: <span class="hljs-string">'green'</span> });
+<h2 id="data-equality-assumptions">Data Equality Assumptions</h2>
+<p>Finally, its often useful to check assumptions about data objects being equal. Lodash comes to the rescue again with the <a href="https://lodash.com/docs/4.17.4#isEqual">isEqual</a> function:</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">console</span>.log(_.isEqual({ tea: <span class="hljs-string">'green'</span> }, { tea: <span class="hljs-string">'green'</span> }));
+
+<span class="hljs-built_in">console</span>.log(_.isEqual({ tea: <span class="hljs-string">'earl'</span> }, { tea: <span class="hljs-string">'green'</span> }));
 </code></pre>
 <pre><code>=&gt; <span class="hljs-keyword">true</span>
-</code></pre><div class="aside">This code is using chai&#39;s assert library</div>
 
+<span class="hljs-keyword">false</span>
+</code></pre><h2 id="more-assertions">More Assertions</h2>
+<p>If this is an approach that appeals to you, it might be worth exploring more powerful assertion libraries.</p>
+<p>One such tool is <a href="http://chaijs.com/api/assert/">Chai</a> which comes with a great
+collection of assertion helpers. These can help you check for more complicated things like whether
+two objects are equal or whether an object has or doesn&#39;t have a property in a more succinct style.</p>
 <h2 id="next-task">Next Task</h2>
 <p><a href="node.html">Using Node</a></p>
 <h2 id="see-also">See Also</h2>

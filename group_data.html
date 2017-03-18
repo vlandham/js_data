@@ -24,9 +24,8 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
   <link rel="shortcut icon" href="/favicon.ico">
   <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" media="all" href="/custom.css" />
-  <script src='/lib/d3/d3.min.js'></script>
-  <script src='/lib/queue-async/queue.min.js'></script>
-  <script src='/lib/lodash/lodash.min.js'></script>
+  <script src='/lib/d3/d3.js'></script>
+  <script src='/lib/lodash/lodash.js'></script>
 </head>
 <body>
 
@@ -45,7 +44,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
   <div id="container">
     <h1 id="grouping-data">Grouping Data</h1>
 <p>Grouping data is an important capability to have when doing data analysis. Often times, you will want to break apart the data by a categorical variable and look at statistics or details for each group.</p>
-<p>D3 includes the powerful <a href="https://github.com/mbostock/d3/wiki/Arrays#-nest">d3.nest</a> functionality to produce these groupings with a minimal amount of code.</p>
+<p>D3 includes the powerful <a href="https://github.com/d3/d3-collection#nests">d3.nest</a> functionality to produce these groupings with a minimal amount of code.</p>
 <h2 id="nest-basics">Nest Basics</h2>
 <p>Fundamentally, <code>d3.nest</code> is about taking a flat data structure and turning it into a nested one. The user gets to decide how the nesting should occur, and how deep to nest. This is a bit different then many group_by concepts, where only a single level of nesting is allowed.</p>
 <p>Let&#39;s say we have the following CSV file of &quot;expenses&quot;:</p>
@@ -92,7 +91,7 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
 <p><code>expensesByName</code> is an array of objects. Each object has a <code>key</code> property - which is what we used as the grouping value using the <code>key</code> function. Here, we used the values associated with the <code>name</code> property as the key.</p>
 <p>The <code>values</code> property of these entries is an array containing all the original data objects that had that key.</p>
 <h2 id="summarizing-groups">Summarizing Groups</h2>
-<p>The nested structure can be great for visualizing your data, but might be a little underwhelming for analytical applications. Never fear! <a href="https://github.com/mbostock/d3/wiki/Arrays#nest_rollup">d3.rollup</a> is here!</p>
+<p>The nested structure can be great for visualizing your data, but might be a little underwhelming for analytical applications. Never fear! <a href="https://github.com/d3/d3-collection#nest_rollup">d3.rollup</a> is here!</p>
 <p>With <code>rollup</code>, you provide a function that takes the array of values for each group and it produces a value based on that array. This provides for some very flexible <em>group by</em> functionality.</p>
 <p>Here is a simple one to get back the counts for each name:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> expensesCount = d3.nest()
@@ -131,17 +130,18 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
  {<span class="hljs-string">"key"</span><span class="hljs-symbol">:<span class="hljs-string">"stacy"</span></span>,<span class="hljs-string">"values"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"count"</span><span class="hljs-symbol">:</span><span class="hljs-number">3</span>,<span class="hljs-string">"total"</span><span class="hljs-symbol">:</span><span class="hljs-number">90.9</span>,<span class="hljs-string">"avg"</span><span class="hljs-symbol">:</span><span class="hljs-number">30.3</span>}}]
 </code></pre><div class="aside">This code is using d3.js</div>
 
-<h2 id="map-output">Map Output</h2>
-<p>The array output can be useful for using <code>map</code> or <code>forEach</code> as discussed in the <a href="https://github.com/mbostock/d3/wiki/Arrays#nest_sortValues">iteration and summation task</a>. But you can also have <code>d3.nest</code> return an object (or <a href="">d3.map</a>) of the results, for direct access. Note the use of <a href="https://github.com/mbostock/d3/wiki/Arrays#nest_map">nest.map</a> below.</p>
+<h2 id="object-output">Object Output</h2>
+<p>The array output can be useful for using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">forEach</a>. But you can also have <code>d3.nest</code> return an object of the results, for direct access. Note the use of <a href="https://github.com/d3/d3-collection#nest_object">nest.object</a> below.</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> expensesTotal = d3.nest()
   .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.name; })
   .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
-  .map(expenses);
+  .object(expenses);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesTotal));
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"jim"</span><span class="hljs-symbol">:</span><span class="hljs-number">79</span>,<span class="hljs-string">"carl"</span><span class="hljs-symbol">:</span><span class="hljs-number">120.11</span>,<span class="hljs-string">"stacy"</span><span class="hljs-symbol">:</span><span class="hljs-number">90.9</span>}
 </code></pre><div class="aside">This code is using d3.js</div>
 
+<p>And if you want to get real fancy, take a look at <a href="https://github.com/d3/d3-collection#nest_map">nest.map</a> for getting a <a href="https://github.com/d3/d3-collection#map">d3.map</a> instance back.</p>
 <h2 id="multi-level-nesting">Multi-Level Nesting</h2>
 <p>And you thought that single-level nesting was cool. Wait till you try multiple levels!</p>
 <p>By adding more keys, you can sub-divide your data even further. Here is expense sums by name and then by date:</p>
@@ -149,7 +149,7 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
   .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.name; })
   .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.date; })
   .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
-  .map(expenses);
+  .object(expenses);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesTotalByDay));
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"jim"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"11/12/2015"</span><span class="hljs-symbol">:</span><span class="hljs-number">34</span>,<span class="hljs-string">"12/01/2015"</span><span class="hljs-symbol">:</span><span class="hljs-number">45</span>},
@@ -163,7 +163,7 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
   .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.date; })
   .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.name; })
   .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
-  .map(expenses);
+  .object(expenses);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesTotalByDay));
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"11/12/2015"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"jim"</span><span class="hljs-symbol">:</span><span class="hljs-number">34</span>,<span class="hljs-string">"carl"</span><span class="hljs-symbol">:</span><span class="hljs-number">120.11</span>},
@@ -179,7 +179,7 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> expensesByYear = d3.nest()
   .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.date.split(<span class="hljs-string">"/"</span>)[<span class="hljs-number">2</span>]; })
   .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
-  .map(expenses);
+  .object(expenses);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesByYear));
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"2015"</span><span class="hljs-symbol">:</span><span class="hljs-number">199.11</span>,<span class="hljs-string">"2016"</span><span class="hljs-symbol">:</span><span class="hljs-number">90.9</span>}

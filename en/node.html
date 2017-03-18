@@ -24,9 +24,8 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
   <link rel="shortcut icon" href="/favicon.ico">
   <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" media="all" href="/custom.css" />
-  <script src='/lib/d3/d3.min.js'></script>
-  <script src='/lib/queue-async/queue.min.js'></script>
-  <script src='/lib/lodash/lodash.min.js'></script>
+  <script src='/lib/d3/d3.js'></script>
+  <script src='/lib/lodash/lodash.js'></script>
 </head>
 <body>
 
@@ -83,14 +82,14 @@ npm install lodash
 <h2 id="loading-data-in-node">Loading Data in Node</h2>
 <p>D3&#39;s data loading functionality is based on <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a>, which is great, but Node does not have <code>XMLHttpRequest</code>. There are packages around this mismatch, but a more elegant solution is to just use Node&#39;s built in file system functionality to load the data, and then D3 to parse it.</p>
 <pre><code class="lang-js">fs.readFile(<span class="hljs-string">"data/animals.tsv"</span>, <span class="hljs-string">"utf8"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error, data)</span> </span>{
-  data = d3.tsv.parse(data);
+  data = d3.tsvParse(data);
   <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(data));
 });
 </code></pre>
 <p><a href="https://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback">fs.readFile</a> is asynchronous and takes a callback function when it is finished loading the data.</p>
 <p>Like our Queue example in <a href="read_data.html">client-side reading</a>, the parameters of this function start with <code>error</code>, which will be <code>null</code> unless there is an error.</p>
 <p>The data returned by <code>readFile</code> is the raw string contents of the file.</p>
-<p>We can use <a href="https://github.com/mbostock/d3/wiki/CSV#parse">d3.tsv.parse</a> which takes a string and and converts it into an array of data objects - just like what we are used to on the client side!</p>
+<p>We can use <a href="https://github.com/d3/d3-dsv#tsvParseRows">d3.tsvParse</a> which takes a string and and converts it into an array of data objects - just like what we are used to on the client side!</p>
 <p>From this point on, we can use d3 and lodash functionality to analyze our data.</p>
 <p>A full, but very simple script might look like this:</p>
 <pre><code class="lang-js"><span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">"fs"</span>);
@@ -98,7 +97,7 @@ npm install lodash
 <span class="hljs-keyword">var</span> _  = <span class="hljs-built_in">require</span>(<span class="hljs-string">"lodash"</span>);
 
 fs.readFile(<span class="hljs-string">"data/animals.tsv"</span>, <span class="hljs-string">"utf8"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error, data)</span> </span>{
-  data = d3.tsv.parse(data);
+  data = d3.tsvParse(data);
   <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(data));
 
   <span class="hljs-keyword">var</span> maxWeight = d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.avg_weight; });
@@ -125,10 +124,10 @@ fs.writeFile(<span class="hljs-string">"big_animals.json"</span>, bigAnimalsStri
 </code></pre>
 <p>Running this should leave us with a <code>big_animals.json</code> file in our analysis folder.</p>
 <p>This is fine if JSON is what you want, but often times you want to output TSV or CSV files for further analysis. D3 to the rescue again!</p>
-<p>D3 includes <a href="https://github.com/mbostock/d3/wiki/CSV#format">d3.csv.format</a> (and the equivalent for TSV and other file formats) which converts our array of data objects into a string - perfect for writing to a file.</p>
+<p>D3 includes <a href="https://github.com/d3/d3-dsv#csvFormat">d3.csvFormat</a> (and the equivalent for TSV and other file formats) which converts our array of data objects into a string - perfect for writing to a file.</p>
 <p>Let&#39;s use it to make a CSV of our big animals.</p>
 <pre><code class="lang-js"><span class="hljs-keyword">var</span> bigAnimals = data.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.avg_weight &gt; <span class="hljs-number">300</span>; });
-bigAnimalsString = d3.csv.format(bigAnimals);
+bigAnimalsString = d3.csvFormat(bigAnimals);
 
 fs.writeFile(<span class="hljs-string">"big_animals.csv"</span>, bigAnimalsString, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err)</span> </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"file written"</span>);

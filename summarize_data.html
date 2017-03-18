@@ -24,9 +24,8 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
   <link rel="shortcut icon" href="/favicon.ico">
   <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" media="all" href="/custom.css" />
-  <script src='/lib/d3/d3.min.js'></script>
-  <script src='/lib/queue-async/queue.min.js'></script>
-  <script src='/lib/lodash/lodash.min.js'></script>
+  <script src='/lib/d3/d3.js'></script>
+  <script src='/lib/lodash/lodash.js'></script>
 </head>
 <body>
 
@@ -54,7 +53,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 ];
 </code></pre>
 <h2 id="min-max">Min &amp; Max</h2>
-<p>As it turns out, D3 comes to the rescue again, with <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_min">d3.min</a> and <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_max">d3.max</a>. Use the callback function to indicate which property (or computed value based on the properties) to access.</p>
+<p>As it turns out, D3 comes to the rescue again, with <a href="https://github.com/d3/d3-array#min">d3.min</a> and <a href="https://github.com/d3/d3-array#max">d3.max</a>. Use the callback function to indicate which property (or computed value based on the properties) to access.</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> minLand = d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
 <span class="hljs-built_in">console</span>.log(minLand);
 </code></pre>
@@ -67,7 +66,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">315</span>
 </code></pre><div class="aside">This code is using d3.js</div>
 
-<p>If you want both of them at the same time, you can use <a href="https://github.com/mbostock/d3/wiki/Arrays#d3_extent">d3.extent</a></p>
+<p>If you want both of them at the same time, you can use <a href="https://github.com/d3/d3-array#extent">d3.extent</a></p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> landExtent = d3.extent(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
 <span class="hljs-built_in">console</span>.log(landExtent);
 </code></pre>
@@ -77,21 +76,21 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <p>This returns an array with the first element the minimum value and the second element the maximum.</p>
 <h2 id="summary-statistics">Summary Statistics</h2>
 <p>D3 provides a few basic tools to analyze your data, all using the same format as the min and max functions. Simply provide the property you would like to analyze, and you are good to go.</p>
-<p><a href="https://github.com/mbostock/d3/wiki/Arrays#d3_mean">d3.mean</a></p>
+<p><a href="https://github.com/d3/d3-array#mean">d3.mean</a></p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> landAvg = d3.mean(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
 <span class="hljs-built_in">console</span>.log(landAvg);
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">187.45</span>
 </code></pre><div class="aside">This code is using d3.js</div>
 
-<p><a href="https://github.com/mbostock/d3/wiki/Arrays#d3_median">d3.median</a></p>
+<p><a href="https://github.com/d3/d3-array#median">d3.median</a></p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> landMed = d3.median(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
 <span class="hljs-built_in">console</span>.log(landMed);
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">193.25</span>
 </code></pre><div class="aside">This code is using d3.js</div>
 
-<p><a href="https://github.com/mbostock/d3/wiki/Arrays#d3_deviation">d3.deviation</a> - for standard deviation</p>
+<p><a href="https://github.com/d3/d3-array#deviation">d3.deviation</a> - for standard deviation</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> landSD = d3.deviation(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
 <span class="hljs-built_in">console</span>.log(landSD);
 </code></pre>
