@@ -24,12 +24,12 @@ It assumes you already have some basic knowledge of JavaScript.
  <li>[Using Node](node.html)</li>
 </ul>
 
-## Translations
+## News
 
-Access this guide in:
+**03/20/2017**: We've updated the guide to use **D3v4**!! Thanks very much to [Kanit Ham Wong](https://twitter.com/kanitw) and others at the [UW Interactive Data Lab](https://idl.cs.washington.edu/) for support, suggestions, and motivation for this process. Thanks to [Adam Pearce](https://twitter.com/adamrpearce) for doing most of the converting!
 
-- [English](/en/)
-- [Español](/es/) - coming soon!
+If you need the old D3v3 guide, [its been archived here](v3/)
+
 
 ## Code
 

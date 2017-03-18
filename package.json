@@ -9,7 +9,7 @@
   "scripts": {
     "build": "grunt build",
     "deploy": "grunt deploy",
-    "start": "grunt watch"
+    "start": "grunt"
   },
   "repository": {
     "type": "git",

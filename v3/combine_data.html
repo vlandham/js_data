@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Combining Data - Learn JS Data</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="description" content="An introduction to data processing and cleaning in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+  <meta name="keywords" content="javascript,data processing, data cleaning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@bocoup">
+  <meta name="twitter:creator" content="@vlandham">
+  <meta name="twitter:title" content="Learn JS Data: Data processing in JavaScript">
+  <meta name="twitter:description" content="An introduction to data processing and cleaning in JavaScript. Learn to load, modify, and transform data quickly using powerful JavaScript libraries.">
+<meta name="twitter:image:src" content="http://learnjsdata.com/img/logo.png">
+<meta property="og:site_name" content="Learn JS Data"/>
+<meta property="og:title" content="Data manipulation, cleaning, and processing in JavaScript" />
+<meta property="og:url" content="http://learnjsdata.com" />
+<meta property="og:description" content="This guide teaches the basics of manipulating data using JavaScript in the browser, or in node.js.
+Specifically, demonstrating tasks that are geared around preparing data for further analysis and visualization. This guide will demonstrate some basic techniques and how to implement them using core JavaScript API, the d3.js library and lodash." />
+<meta property="og:image" content="http://learnjsdata.com/img/fb.jpg" />
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" media="all" href="/custom.css" />
+  <script src='/lib/d3/d3.min.js'></script>
+  <script src='/lib/queue-async/queue.min.js'></script>
+  <script src='/lib/lodash/lodash.min.js'></script>
+</head>
+<body>
+
+  <header>
+    <div class="contents">
+      <a href="https://github.com/vlandham/js_data"><img class="github" style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+      <a href='index.html'>
+        <img class='logo' src="/img/logo.png">
+        <h1>Learn JS Data</h1>
+        <h3>Data cleaning, manipulation, and wrangling in JavaScript</h3>
+      </a>
+    </div>
+  </header>
+
+  <div id="container">
+    <h1 id="combining-data">Combining Data</h1>
+<p><em>Note: This task was very generously contributed by <a href="http://timogrossenbacher.ch/">Timo Grossenbacher</a> - Geographer and Data Specialist extraordinaire. Thanks very much Timo!</em></p>
+<p>Often, you have to combine two or more different data sets because they contain complementary information. Or, for example, the data come in chunks from the server and need to be reassembled on the client side.</p>
+<p>Combining or <em>merging</em> data may involve one of the following tasks:</p>
+<ul>
+<li>Combine data sets by one or more common attributes</li>
+<li>Add together rows from different data sets</li>
+<li>Combine attributes from different data sets</li>
+</ul>
+<h2 id="combine-data-sets-by-one-or-more-common-attributes">Combine data sets by one or more common attributes</h2>
+<p>Let&#39;s say we have a list of the following articles:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> articles = [{
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"vacuum cleaner"</span>,
+    <span class="hljs-string">"weight"</span>: <span class="hljs-number">9.9</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">89.9</span>,
+    <span class="hljs-string">"brand_id"</span>: <span class="hljs-number">2</span>
+}, {
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"washing machine"</span>,
+    <span class="hljs-string">"weight"</span>: <span class="hljs-number">540</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">230</span>,
+    <span class="hljs-string">"brand_id"</span>: <span class="hljs-number">1</span>
+}, {
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"hair dryer"</span>,
+    <span class="hljs-string">"weight"</span>: <span class="hljs-number">1.2</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">24.99</span>,
+    <span class="hljs-string">"brand_id"</span>: <span class="hljs-number">2</span>
+}, {
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"super fast laptop"</span>,
+    <span class="hljs-string">"weight"</span>: <span class="hljs-number">400</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">899.9</span>,
+    <span class="hljs-string">"brand_id"</span>: <span class="hljs-number">3</span>
+}];
+</code></pre>
+<p>And of the following brands:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> brands = [{
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"SuperKitchen"</span>
+}, {
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"HomeSweetHome"</span>
+}];
+</code></pre>
+<p>As you can see, in each article, <code>brand_id</code> points to a particular brand, whose details are saved in another data set - which can be considered a <em>lookup table</em> in this case. This is often how separate data schemes are stored in a server-side database. Also note that the last article in the list has a <code>brand_id</code> for which no brand is stored in <code>brands</code>.</p>
+<p>What we want to do now is to combine both datasets, so we can reference the brand&#39;s <code>name</code> directly from an article. There are several ways to achieve this.</p>
+<h3 id="using-native-array-functions">Using native <code>Array</code> functions</h3>
+<p>We can implement a simple join (<em>left outer join</em> in database terms) using native, i.e., already existing <code>Array</code> functions as follows. The method presented here modifies the <code>articles</code> array <em>in place</em> by adding a new key-value-pair for <code>brand</code>.</p>
+<pre><code class="lang-javascript">articles.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(article)</span> </span>{
+    <span class="hljs-keyword">var</span> result = brands.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(brand)</span> </span>{
+        <span class="hljs-keyword">return</span> brand.id === article.brand_id;
+    });
+    <span class="hljs-keyword">delete</span> article.brand_id;
+    article.brand = (result[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span>) ? result[<span class="hljs-number">0</span>].name : <span class="hljs-literal">null</span>;
+});
+<span class="hljs-built_in">console</span>.log(articles);
+</code></pre>
+<pre><code>=&gt; [{
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"vacuum cleaner"</span>,
+    <span class="hljs-string">"weight"</span>: <span class="hljs-number">9.9</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">89.9</span>,
+    <span class="hljs-string">"brand"</span>: <span class="hljs-string">"HomeSweetHome"</span>
+}, {
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"washing machine"</span>,
+    <span class="hljs-string">"weight"</span>: <span class="hljs-number">540</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">230</span>,
+    <span class="hljs-string">"brand"</span>: <span class="hljs-string">"SuperKitchen"</span>
+}, {
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"hair dryer"</span>,
+    <span class="hljs-string">"weight"</span>: <span class="hljs-number">1.2</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">24.99</span>,
+    <span class="hljs-string">"brand"</span>: <span class="hljs-string">"HomeSweetHome"</span>
+}, {
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"super fast laptop"</span>,
+    <span class="hljs-string">"weight"</span>: <span class="hljs-number">400</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">899.9</span>,
+    <span class="hljs-string">"brand"</span>: <span class="hljs-keyword">null</span>
+}];
+</code></pre><p>First, we loop over each <code>article</code>, where we take its <code>brand_id</code> to look up the corresponding <code>brand</code> using the native <code>filter</code> function. Note that this function returns an array and we expect it to have only one element. In case there is no corresponding <code>brand</code>, <code>result[0]</code> will be <code>undefined</code>, and in order to prevent an error (something like <code>result[0] is undefined</code>), we use the ternary operator.</p>
+<p>Also, as we no longer need <code>brand_id</code> after the lookup has been done, we can safely delete it.</p>
+<p>If we want to join by more than one attribute, we can modify the filter function to achieve this. Hypothetically, this might look something like:</p>
+<pre><code class="lang-js">innerArray.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(innerArrayItem)</span> </span>{
+    <span class="hljs-keyword">return</span> innerArrayItem.idA === outerArrayItem.idA &amp;&amp;
+        innerArrayItem.idB === outerArrayItem.idB;
+});
+</code></pre>
+<h3 id="using-a-generic-and-more-efficient-approach">Using a generic and more efficient approach</h3>
+<p>A more generic, and also more performant version of a join is proposed below (abbreviated from <a href="http://stackoverflow.com/questions/17500312/is-there-some-way-i-can-join-the-contents-of-two-javascript-arrays-much-like-i/17500836#17500836">this StackOverflow answer</a>). Its output is equivalent to the one of the above method.</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">join</span><span class="hljs-params">(lookupTable, mainTable, lookupKey, mainKey, select)</span> </span>{
+    <span class="hljs-keyword">var</span> l = lookupTable.length,
+        m = mainTable.length,
+        lookupIndex = [],
+        output = [];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; l; i++) { <span class="hljs-comment">// loop through l items</span>
+        <span class="hljs-keyword">var</span> row = lookupTable[i];
+        lookupIndex[row[lookupKey]] = row; <span class="hljs-comment">// create an index for lookup table</span>
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; m; j++) { <span class="hljs-comment">// loop through m items</span>
+        <span class="hljs-keyword">var</span> y = mainTable[j];
+        <span class="hljs-keyword">var</span> x = lookupIndex[y[mainKey]]; <span class="hljs-comment">// get corresponding row from lookupTable</span>
+        output.push(select(y, x)); <span class="hljs-comment">// select only the columns you need</span>
+    }
+    <span class="hljs-keyword">return</span> output;
+};
+</code></pre>
+<p>Because above defined function creates an index for the <code>lookupTable</code> (in our case <code>brands</code>) in the first iteration, it runs considerably faster than the previously shown method. Also, via a callback, it allows us to directly define which keys (or &quot;attributes&quot;) we want to retain in the resulting, joined array (<code>output</code>). It is used like so:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> result = join(brands, articles, <span class="hljs-string">"id"</span>, <span class="hljs-string">"brand_id"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(article, brand)</span> </span>{
+    <span class="hljs-keyword">return</span> {
+        id: article.id,
+        name: article.name,
+        weight: article.weight,
+        price: article.price,
+        brand: (brand !== <span class="hljs-literal">undefined</span>) ? brand.name : <span class="hljs-literal">null</span>
+    };
+});
+<span class="hljs-built_in">console</span>.log(result);
+</code></pre>
+<pre><code>=&gt; [{
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"vacuum cleaner"</span>,
+    <span class="hljs-string">"weight"</span>: <span class="hljs-number">9.9</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">89.9</span>,
+    <span class="hljs-string">"brand"</span>: <span class="hljs-string">"HomeSweetHome"</span>
+}, {
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"washing machine"</span>,
+    <span class="hljs-string">"weight"</span>: <span class="hljs-number">540</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">230</span>,
+    <span class="hljs-string">"brand"</span>: <span class="hljs-string">"SuperKitchen"</span>
+}, {
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"hair dryer"</span>,
+    <span class="hljs-string">"weight"</span>: <span class="hljs-number">1.2</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">24.99</span>,
+    <span class="hljs-string">"brand"</span>: <span class="hljs-string">"HomeSweetHome"</span>
+}, {
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"super fast laptop"</span>,
+    <span class="hljs-string">"weight"</span>: <span class="hljs-number">400</span>,
+    <span class="hljs-string">"price"</span>: <span class="hljs-number">899.9</span>,
+    <span class="hljs-string">"brand"</span>: <span class="hljs-keyword">null</span>
+}];
+</code></pre><p>Note that we don&#39;t modify <code>articles</code> <em>in place</em> but create a new array.</p>
+<h2 id="add-together-rows-from-different-data-sets">Add together rows from different data sets</h2>
+<p>Let&#39;s say we want to load a huge data set from the server, but because of network performance reasons, we load it in three chunks and reassemble it on the client side. Using Queue.js, as illustrated in <a href="read_data.html">reading in data</a>, we get the data and immediately combine it. For this, we can use D3&#39;s <code>merge</code> to combine the single arrays one after another. In database terms, this operation is called &quot;union&quot;.</p>
+<pre><code class="lang-javascript">queue()
+    .defer(d3.csv, <span class="hljs-string">"/data/big_data_1.csv"</span>)
+    .defer(d3.csv, <span class="hljs-string">"/data/big_data_2.csv"</span>)
+    .defer(d3.csv, <span class="hljs-string">"/data/big_data_3.csv"</span>)
+    .await(combine);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">combine</span><span class="hljs-params">(error, big_data_1, big_data_2, big_data_3)</span> </span>{
+    <span class="hljs-keyword">if</span> (error) {
+        <span class="hljs-built_in">console</span>.log(error);
+    }
+    <span class="hljs-built_in">console</span>.log(d3.merge([big_data_1, big_data_2, big_data_3]));
+}
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> [{<span class="hljs-string">"a"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"1"</span>, <span class="hljs-string">"b"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"2"</span>},{<span class="hljs-string">"a"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"3"</span>, <span class="hljs-string">"b"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"4"</span>},{<span class="hljs-string">"a"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"5"</span>, <span class="hljs-string">"b"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"6"</span>}]
+</code></pre><div class="aside">This code is using d3.js</div>
+
+<p>Note that the argument passed to <code>d3.merge</code> must be an array itself, which is why we use the square brackets.</p>
+<h2 id="combine-attributes-from-different-data-sets">Combine attributes from different data sets</h2>
+<p>In the last case, we have two or more data sets that contain attributes describing the same observations, or conceptual entities, and they need to be combined. This implies that all data sets have the same length. For example, <code>dataset_1</code> below contains two observations of attribute <code>type</code> and attribute <code>model</code>, while <code>dataset_2</code> contains the same two entities, but observed through attributes <code>price</code> and <code>weight</code>.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> dataset_1 = [{
+    <span class="hljs-string">'type'</span>: <span class="hljs-string">'boat'</span>,
+    <span class="hljs-string">'model'</span>: <span class="hljs-string">'Ocean Queen 2000'</span>
+}, {
+    <span class="hljs-string">'type'</span>: <span class="hljs-string">'car'</span>,
+    <span class="hljs-string">'model'</span>: <span class="hljs-string">'Ferrari'</span>
+}];
+<span class="hljs-keyword">var</span> dataset_2 = [{
+    <span class="hljs-string">'price'</span>: <span class="hljs-number">23202020</span>,
+    <span class="hljs-string">'weight'</span>: <span class="hljs-number">5656.9</span>
+}, {
+    <span class="hljs-string">'price'</span>: <span class="hljs-number">59988</span>,
+    <span class="hljs-string">'weight'</span>: <span class="hljs-number">1.9</span>
+}];
+</code></pre>
+<p>So in both data sets we essentially have separate information about the same conceptual entities, thus it makes sense to &quot;merge&quot; them, for which we can use  lodash&#39;s <code>merge</code> function:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> result = _.merge(dataset_1, dataset_2);
+<span class="hljs-built_in">console</span>.log(result);
+</code></pre>
+<pre><code><span class="hljs-status">=&gt;</span> [{
+    <span class="hljs-string">'type'</span><span class="hljs-symbol">:</span> <span class="hljs-string">'boat'</span>,
+    <span class="hljs-string">'model'</span><span class="hljs-symbol">:</span> <span class="hljs-string">'Ocean Queen 2000'</span>,
+    <span class="hljs-string">'price'</span><span class="hljs-symbol">:</span> <span class="hljs-number">23202020</span>,
+    <span class="hljs-string">'weight'</span><span class="hljs-symbol">:</span> <span class="hljs-number">5656.9</span>
+}, {
+    <span class="hljs-string">'type'</span><span class="hljs-symbol">:</span> <span class="hljs-string">'car'</span>,
+    <span class="hljs-string">'model'</span><span class="hljs-symbol">:</span> <span class="hljs-string">'Ferrari'</span>,
+    <span class="hljs-string">'price'</span><span class="hljs-symbol">:</span> <span class="hljs-number">59988</span>,
+    <span class="hljs-string">'weight'</span><span class="hljs-symbol">:</span> <span class="hljs-number">1.9</span>
+}];
+</code></pre><div class="aside">This code is using lodash</div>
+
+<h2 id="next-task">Next Task</h2>
+<p><a href="summarize_data.html">Summarizing Data</a></p>
+
+  </div>
+  <br/><br/>
+  <section id="footer">
+    Made with ♥ by <a href="http://bocoup.com/datavis">The Bocoup Data Visualization Team</a>.
+  </section>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-60734450-1', 'auto');
+ga('send', 'pageview');
+
+  </script>
+  <script type="text/javascript" src="/src/combine_data.js"></script></body>
+  </html>

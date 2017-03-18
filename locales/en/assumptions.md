@@ -55,22 +55,22 @@ Something simple to perform this check could look like this:
 
 The two assumption functions could easily be combined into one, but it's important to look at both aspects of your data.
 
-## More Assertions
+## Data Equality Assumptions
 
-If this is an approach that appeals to you, and your data might get really complicated (or really messy)
-you may want to explore using more complicated assertion code.
-
-One useful library to explore is [Chai](http://chaijs.com/api/assert/) which comes with a great
-collection of assertion helpers. These can help you check for more complicated things like whether
-two objects are equal or whether an object has or doesn't have a property.
-
-For example:
+Finally, its often useful to check assumptions about data objects being equal. Lodash comes to the rescue again with the [isEqual](https://lodash.com/docs/4.17.4#isEqual) function:
 
 @@ code=assumptions/assumptions.05.js @@
 
 @@ code=assumptions/assumptions.05.out @@
 
-<div class="aside">This code is using chai's assert library</div>
+
+## More Assertions
+
+If this is an approach that appeals to you, it might be worth exploring more powerful assertion libraries.
+
+One such tool is [Chai](http://chaijs.com/api/assert/) which comes with a great
+collection of assertion helpers. These can help you check for more complicated things like whether
+two objects are equal or whether an object has or doesn't have a property in a more succinct style.
 
 ## Next Task
 

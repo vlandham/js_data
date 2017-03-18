@@ -1,2 +1,2 @@
-expense.date = parser.parse(expense.date);
+expense.date = parser(expense.date);
 console.log(expense);

@@ -37,6 +37,12 @@ module.exports = function(grunt) {
       src: "CNAME",
       dest: "public/"
     },
+    v3: {
+      expand: true,
+      cwd: "v3/",
+      src: ["**"],
+      dest: "public/v3"
+    },
     favicon: {
       expand: false,
       src: "favicon.ico",

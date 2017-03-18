@@ -72,15 +72,17 @@ Pretty cool right? Any roll-up function you can think of, you can make happen. A
 
 <div class="aside">This code is using d3.js</div>
 
-## Map Output
+## Object Output
 
-The array output can be useful for using `map` or `forEach` as discussed in the [iteration and summation task](https://github.com/d3/d3-collection#nest_sortValues). But you can also have `d3.nest` return an object (or [d3.map](https://github.com/d3/d3-collection#nest_map)) of the results, for direct access. Note the use of [nest.object](https://github.com/d3/d3-collection#nest_object) below.
+The array output can be useful for using [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) or [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach). But you can also have `d3.nest` return an object of the results, for direct access. Note the use of [nest.object](https://github.com/d3/d3-collection#nest_object) below.
 
 @@ code=group_data/group_data.07.js @@
 
 @@ code=group_data/group_data.07.out @@
 
 <div class="aside">This code is using d3.js</div>
+
+And if you want to get real fancy, take a look at [nest.map](https://github.com/d3/d3-collection#nest_map) for getting a [d3.map](https://github.com/d3/d3-collection#map) instance back.
 
 ## Multi-Level Nesting
 
