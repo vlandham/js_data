@@ -1,6 +1,7 @@
 # Learn JS Data
 
-[Live version](http://learnjsdata.com/)
++ [Live version](http://learnjsdata.com/)
++ [Observable version](https://beta.observablehq.com/@dakoop/learn-js-data)
 
 Data manipulation, data cleaning, and data processing in JavaScript.
 
