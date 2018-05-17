@@ -1,0 +1,117 @@
+[
+        {
+            "id": 3,
+            "value": "md`# Working with Time (Learn JS Data)\n\n*This notebook was generated from the [learnjsdata source](https://github.com/vlandham/js_data) and updated.*\n\nTime is one of those tricky programming things that seems like it should be easy, but usually turns out not to be. We will use D3's built in [time parsing](https://github.com/d3/d3-time-format#timeParse) and [interval](https://github.com/d3/d3-time#_interval) functions. We will also take a look at the powerful [Moment.js](http://momentjs.com/) library, for when you just need more time power.\n\n## String to Date\n\nThe first task when dealing with dates is usually getting a [Date object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) out of a string. Most of the time, your data will have dates or times in an (mostly) arbitrary format, and you need to force that mess into an actual date.\n\nD3 has [d3.timeParse](https://github.com/d3/d3-time-format#timeParse) which provides a way to do this parsing. It was a little confusing for me the first time I tried it. You use this function to create a string parser, and then use the parser to actually convert the string.\n\nIn our [nesting example](group_data.html), we saw data that had dates as strings:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 4,
+            "value": "expense = ({\"name\":\"jim\",\"amount\":34,\"date\":\"11/12/2015\"})",
+            "pinned": false
+        },
+        {
+            "id": 5,
+            "value": "md`To convert this date string to a Date object, we would need a parser that looks like:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 6,
+            "value": "parser = d3.timeParse(\"%m/%d/%Y\")",
+            "pinned": true
+        },
+        {
+            "id": 7,
+            "value": "md`\nThe input string to \\`d3.timeParse\\` indicates what the date string should look like. You have a [lot of options](https://github.com/d3/d3-time-format#locale_format) for the special, percent-sign-prefixed variables. You can see in the string I'm using month, day, and four-digit year. The slashes in the format string are not special variables - but just what we expect to find separating the fields in the date string.\n\nNext we use the parser to parse our string.\n`",
+            "pinned": false
+        },
+        {
+            "id": 8,
+            "value": "{\n  let e = _.clone(expense)\n  e.date = parser(e.date)\n  return e\n}",
+            "pinned": true
+        },
+        {
+            "id": 9,
+            "value": "md`\nNote that the returned value of the \\`d3.timeParse\\` function is itself a function, so we can just pass our date string to this function directly.\n\nAlso note that the timezone is dependent on your local browser, so you might see a different value if you live in a different timezone.\n\nCool! Now our date is actually a Date object.\n\nHere are a few more time parsers to show the capabilities of D3's parsing. Note again that we are creating a \\`d3.timeParse\\` function and then passing in a string to parse, this time all on one line.\n\nJust the date:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 10,
+            "value": "d3.timeParse(\"%A, %B %-d, %Y\")(\"Wednesday, November 12, 2014\")",
+            "pinned": true
+        },
+        {
+            "id": 11,
+            "value": "md`\nThe little dash in front of the \\`d\\` is to remove the 0-padding)\n`",
+            "pinned": false
+        },
+        {
+            "id": 12,
+            "value": "d3.timeParse(\"%m/%y\")(\"12/14\")",
+            "pinned": true
+        },
+        {
+            "id": 13,
+            "value": "md`You can see it defaults to the first day of the month.\n\nJust the time:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 14,
+            "value": "d3.timeParse(\"%I:%M%p\")(\"12:34pm\")",
+            "pinned": true
+        },
+        {
+            "id": 15,
+            "value": "md`\nGives you a somewhat strange default date.\n\nDate and time:\n`",
+            "pinned": false
+        },
+        {
+            "id": 16,
+            "value": "d3.timeParse(\"%m/%d/%Y %H:%M:%S %p\")(\"1/2/2014 8:22:05 AM\")",
+            "pinned": true
+        },
+        {
+            "id": 17,
+            "value": "md`\nThis could also be done using some built in shorthand:\n`",
+            "pinned": false
+        },
+        {
+            "id": 18,
+            "value": "d3.timeParse(\"%x %X\")(\"1/2/2014 8:22:05 AM\")",
+            "pinned": false
+        },
+        {
+            "id": 19,
+            "value": "md`\nYou can see that \\`d3.timeParse\\` gives you a lot of flexibility about what your time string will look like.\n\n## Modifying Time\n\nIn many cases, you might want to modify a date object. Perhaps you only want to display the hour from a date, or maybe you want to figure out what a week from now would be.\n\nThe [d3.time](https://github.com/d3/d3-time#_interval) set of functions provides a starting point for these kinds of manipulations.\n\nIntervals allow for modifying dates around specific time slices like minutes, hours, days, months, or years. We are given a number of functions to work with each interval, depending on what we might want to do.\n\nSo, to get the nearest hour from a date, we can use [d3.timeHour.round](https://github.com/d3/d3-time#interval_round)\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 20,
+            "value": "hour = {\n  const hourParser = d3.timeParse(\"%I:%M%p\");\n  const time = hourParser(\"10:34pm\");\n  return d3.timeHour.round(time);\n}",
+            "pinned": true
+        },
+        {
+            "id": 21,
+            "value": "md`\nIt returns a date object that just contains the nearest hour (11:00pm). We can display this by using a [d3.timeFormat](https://github.com/d3/d3-time-format#timeFormat) to format the date object into a string.\n`",
+            "pinned": false
+        },
+        {
+            "id": 22,
+            "value": "d3.timeFormat(\"%I:%M%p\")(hour)",
+            "pinned": true
+        },
+        {
+            "id": 23,
+            "value": "md`## Moment.js\n\n[Moment.js](http://momentjs.com/) is another JavaScript library that could be better suited to your needs, if you happen to be doing a lot of time manipulations. Its syntax and capabilities seem a bit more intuitive for certain [time manipulations](http://momentjs.com/docs/#/manipulating/).\n\nCheck it out if you need more time control power!\n\n## See Also\n\n- [moment.js](http://momentjs.com/)\n\n## Navigation\n\n- Next Task: [Checking Data Assumptions](/@dakoop/checking-data-assumptions-learn-js-data)\n- [Learn JS Data Notebooks Index](/@dakoop/learn-js-data)\n`",
+            "pinned": false
+        },
+        {
+            "id": 24,
+            "value": "d3 = require('d3')",
+            "pinned": false
+        },
+        {
+            "id": 48,
+            "value": "_ = require('lodash')",
+            "pinned": false
+        }
+    ]

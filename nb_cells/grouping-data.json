@@ -1,0 +1,112 @@
+[
+        {
+            "id": 3,
+            "value": "md`# Grouping Data (Learn JS Data)\n\n*This notebook was generated from the [learnjsdata source](https://github.com/vlandham/js_data) and updated.*\n\nGrouping data is an important capability to have when doing data analysis. Often times, you will want to break apart the data by a categorical variable and look at statistics or details for each group.\n\nD3 includes the powerful [d3.nest](https://github.com/d3/d3-collection#nests) functionality to produce these groupings with a minimal amount of code.\n\n## Nest Basics\n\nFundamentally, \\`d3.nest\\` is about taking a flat data structure and turning it into a nested one. The user gets to decide how the nesting should occur, and how deep to nest. This is a bit different then many group_by concepts, where only a single level of nesting is allowed.\n\nLet's say we have the following CSV file of \"expenses\":\n\n\\`\\`\\`\nname,amount,date\njim,34.0,11/12/2015\ncarl,120.11,11/12/2015\njim,45.0,12/01/2015\nstacy,12.00,01/04/2016\nstacy,34.10,01/04/2016\nstacy,44.80,01/05/2016\n\\`\\`\\`\n\nAnd that has been converted to a nice array of objects via our [data reading powers](read_data.html) into something like this:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 4,
+            "value": "expenses = [{\"name\":\"jim\",\"amount\":34,\"date\":\"11/12/2015\"},\n  {\"name\":\"carl\",\"amount\":120.11,\"date\":\"11/12/2015\"},\n  {\"name\":\"jim\",\"amount\":45,\"date\":\"12/01/2015\"},\n  {\"name\":\"stacy\",\"amount\":12.00,\"date\":\"01/04/2016\"},\n  {\"name\":\"stacy\",\"amount\":34.10,\"date\":\"01/04/2016\"},\n  {\"name\":\"stacy\",\"amount\":44.80,\"date\":\"01/05/2016\"}\n]",
+            "pinned": true
+        },
+        {
+            "id": 5,
+            "value": "md`And now we want to slice up this data in different ways.\n\nFirst, let's use nest to group by \\`name\\`:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 6,
+            "value": "expensesByName = d3.nest()\n  .key(d => d.name)\n  .entries(expenses)",
+            "pinned": true
+        },
+        {
+            "id": 7,
+            "value": "md`\nWhich results in a nested data structure:\n`",
+            "pinned": false
+        },
+        {
+            "id": 8,
+            "value": "html`<pre>\n${JSON.stringify(expensesByName, null, '  ')}\n</pre>`",
+            "pinned": false
+        },
+        {
+            "id": 9,
+            "value": "md`\\`expensesByName\\` is an array of objects. Each object has a \\`key\\` property - which is what we used as the grouping value using the \\`key\\` function. Here, we used the values associated with the \\`name\\` property as the key.\n\nThe \\`values\\` property of these entries is an array containing all the original data objects that had that key.\n\n## Summarizing Groups\n\nThe nested structure can be great for visualizing your data, but might be a little underwhelming for analytical applications. Never fear! [d3.rollup](https://github.com/d3/d3-collection#nest_rollup) is here!\n\nWith \\`rollup\\`, you provide a function that takes the array of values for each group and it produces a value based on that array. This provides for some very flexible _group by_ functionality.\n\nHere is a simple one to get back the counts for each name:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 10,
+            "value": "expensesCount = d3.nest()\n  .key(d => d.name)\n  .rollup(v => v.length)\n  .entries(expenses)",
+            "pinned": true
+        },
+        {
+            "id": 11,
+            "value": "md`\nThe individual records are gone (for better or worse) and in their place are the values returned by our rollup function. The naming stays the same (_key_ and _values_) but the content is yours to specify. Note that the value passed into the \\`rollup\\` callback is the array of values for that key.\n\nHere is another example where we get the average amount per person:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 12,
+            "value": "expensesAvgAmount = d3.nest()\n  .key(d => d.name)\n  .rollup(v => d3.mean(v, d => d.amount))\n  .entries(expenses)",
+            "pinned": true
+        },
+        {
+            "id": 13,
+            "value": "md`\nPretty cool right? Any roll-up function you can think of, you can make happen. And you don't need to stop at just one. \\`rollup\\` can return an object, so you can easily produce multiple metrics on your groups.\n`",
+            "pinned": false
+        },
+        {
+            "id": 14,
+            "value": "expenseMetrics = d3.nest()\n  .key(d => d.name)\n  .rollup(v => ({\n    count: v.length,\n    total: d3.sum(v, d => d.amount),\n    avg: d3.mean(v, d => d.amount)\n  }))\n  .entries(expenses)",
+            "pinned": true
+        },
+        {
+            "id": 15,
+            "value": "md`\n## Object Output\n\nThe array output can be useful for using [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) or [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach). But you can also have \\`d3.nest\\` return an object of the results, for direct access. Note the use of [nest.object](https://github.com/d3/d3-collection#nest_object) below.\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 16,
+            "value": "expensesTotal = d3.nest()\n  .key(d => d.name)\n  .rollup(v => d3.sum(v, d => d.amount))\n  .object(expenses)",
+            "pinned": true
+        },
+        {
+            "id": 17,
+            "value": "md`\nAnd if you want to get real fancy, take a look at [nest.map](https://github.com/d3/d3-collection#nest_map) for getting a [d3.map](https://github.com/d3/d3-collection#map) instance back.\n\n## Multi-Level Nesting\n\nAnd you thought that single-level nesting was cool. Wait till you try multiple levels!\n\nBy adding more keys, you can sub-divide your data even further. Here is expense sums by name and then by date:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 18,
+            "value": "expensesTotalByName = d3.nest()\n  .key(d => d.name)\n  .key(d => d.date)\n  .rollup(v => d3.sum(v, d => d.amount))\n  .object(expenses)",
+            "pinned": true
+        },
+        {
+            "id": 19,
+            "value": "md`\nNow the \\`rollup\\` callback is called for each of our smaller subgroups.\n\nThe order of the \\`nest.key\\` calls determines the order of the grouping. If we reverse our keys, we get the totals by date and then by name:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 20,
+            "value": "expensesTotalByDay = d3.nest()\n  .key(d => d.date)\n  .key(d => d.name)\n  .rollup(v => d3.sum(v, d => d.amount))\n  .object(expenses)",
+            "pinned": true
+        },
+        {
+            "id": 21,
+            "value": "md`\nHere the values are the same, but the mapping might be more convenient, depending on the questions you are trying to answer.\n\n## Derived Key Values\n\nRemember, we are specifying our key value using a function. This gives us the power to group on derived or otherwise on-the-fly keys.\n\nFor example, if we wanted to find out totals for all expenses for each year, we would just do some [basic string manipulation](strings.html) on the date string:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 22,
+            "value": "expensesByYear = d3.nest()\n  .key(d => d.date.split(\"/\")[2])\n  .rollup(v => d3.sum(v, d => d.amount))\n  .object(expenses)",
+            "pinned": true
+        },
+        {
+            "id": 23,
+            "value": "md`\nAll this flexibility provides for a powerful toolkit for exploring your data.\n\n## See Also\n\n- [Mister Nester](http://bl.ocks.org/shancarter/raw/4748131/) - a \\`d3.nest\\` power tool!\n- [Phoebe Bright Nest Tutorial](http://bl.ocks.org/phoebebright/raw/3176159/) - lots more nest examples\n\n## Navigation\n\n- Next Task: [Working with Strings](/@dakoop/working-with-strings-learn-js-data)\n- [Learn JS Data Notebooks Index](/@dakoop/learn-js-data)\n`",
+            "pinned": false
+        },
+        {
+            "id": 24,
+            "value": "d3 = require('d3')",
+            "pinned": false
+        }
+    ]

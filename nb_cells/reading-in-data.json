@@ -1,0 +1,97 @@
+[
+        {
+            "id": 4,
+            "value": "md`# Reading in Data (Learn JS Data)\n\n*This notebook was generated from the [learnjsdata source](https://github.com/vlandham/js_data)* and updated.\n\nThe first step in any data processing is getting the data! Here is how to parse in and prepare common input formats using D3.js\n## Parsing CSV Files\n[D3 has a bunch](https://github.com/d3/d3/blob/master/API.md#fetches-d3-fetch) of filetypes it can support when loading data, and one of the most common is probably plain old CSV (comma separated values).\nLet's say you had a csv file with some city data in it:\n\\`\\`\\`bash\ncities.csv:\ncity,state,population,land area\nseattle,WA,652405,83.9\nnew york,NY,8405837,302.6\nboston,MA,645966,48.3\nkansas city,MO,467007,315.0\n\\`\\`\\`\nUse [d3.csv](https://github.com/d3/d3-fetch/blob/master/README.md#csv) to convert it into an array of objects\n`",
+            "pinned": false
+        },
+        {
+            "id": 5,
+            "value": "data = d3.csv(\"https://cdn.rawgit.com/vlandham/js_data/master/data/cities.csv\")",
+            "pinned": true
+        },
+        {
+            "id": 6,
+            "value": "md`\nClick the caret next to \\`Array\\` above to see the individual elements and objects that have been loaded.\nYou can see that the headers of the original CSV have been used as the property names for the data objects. Using \\`d3.csv\\` in this manner requires that your CSV file has a header row.\nIf you look closely, you can also see that the values associated with these properties are all strings. This is probably _not what you want_ in the case of numbers. When loading CSVs and other flat files, you have to do the type conversion.\nWe will see more of this in other tasks, but a simple way to do this is to use the [+](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus) operator (unary plus). \\`forEach\\` can be used to iterate over the data array.\n`",
+            "pinned": false
+        },
+        {
+            "id": 7,
+            "value": "d3.csv(\"https://cdn.rawgit.com/vlandham/js_data/master/data/cities.csv\").then(\n  function(data) {\n    data.forEach(function(d) {\n      d.population = +d.population;\n      d[\"land area\"] = +d[\"land area\"];\n    });\n    return data;\n  }\n)",
+            "pinned": true
+        },
+        {
+            "id": 8,
+            "value": "md`\n*Note that here we see the use of \\`then\\` to wait for the csv file to load before we continue with the rest of the code, specified as a function that takes the loaded data and processes it. It is part of the [Promises paradigm](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) for dealing with asynchronous operations.*\n\n[Dot notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors) is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use bracket notation as shown.\nThis can also be done during the loading of the data, by \\`d3.csv\\` directly. This is done by providing an row conversion function to \\`d3.csv\\`, whose return value will be the individual data objects in our data array.\n`",
+            "pinned": false
+        },
+        {
+            "id": 9,
+            "value": "d3.csv(\"https://cdn.rawgit.com/vlandham/js_data/master/data/cities.csv\", function(d) {\n  return {\n    city : d.city,\n    state : d.state,\n    population : +d.population,\n    land_area : +d[\"land area\"]\n  };\n})",
+            "pinned": true
+        },
+        {
+            "id": 10,
+            "value": "md`\nIn this form, you have complete control over the data objects and can rename properties (like \\`land_area\\`) and convert values (like \\`population\\`) willy-nilly.  On the other hand, you have to be quite explicit about which properties to return. This may or may not be what you are into.\nI typically allow D3 to load all the data, and then make modifications in a post-processing step, but it might be more effective for you to be more explicit with the modifications.\n## Reading TSV Files\nCSV is probably the most common flat file format, but in no way the only one.\nI often like to use TSV (tab separated files) - to get around the issues of numbers and strings often having commas in them.\nD3 can parse TSV's with [d3.tsv](https://github.com/d3/d3-fetch/blob/master/README.md#tsv).\nHere is \\`animals.tsv\\`, as an example:\n\\`\\`\\`\nname\ttype\tavg_weight\ntiger\tmammal\t260\nhippo\tmammal\t3400\nkomodo dragon\treptile\t150\n\\`\\`\\`\nLoading animals.tsv with \\`d3.tsv\\`:\n`",
+            "pinned": false
+        },
+        {
+            "id": 11,
+            "value": "d3.tsv(\"https://cdn.rawgit.com/vlandham/js_data/master/data/animals.tsv\")",
+            "pinned": true
+        },
+        {
+            "id": 12,
+            "value": "md`\n## Reading Other Flat Files\nIn fact, \\`d3.csv\\` and \\`d3.tsv\\` are only the tip of the iceberg. If you have a non-standard delimited flat file, you can parse them too with D3!\nThe process takes a few more steps. First we need to use the [d3.dsvFormat](https://github.com/d3/d3-dsv#dsvFormat) function to create a new parser that knows how to read our strangely delimited file type.\nFor example, if we had a pipe-delimited file called \\`animals_piped.txt\\` that looked like this:\n\\`\\`\\`\nname|type|avg_weight\ntiger|mammal|260\nhippo|mammal|3400\nkomodo dragon|reptile|150\n\\`\\`\\`\nWe could create a pipe separated values (PSV) parser using \\`d3.dsvFormat\\`:\n`",
+            "pinned": false
+        },
+        {
+            "id": 13,
+            "value": "psv = d3.dsvFormat(\"|\")",
+            "pinned": true
+        },
+        {
+            "id": 67,
+            "value": "// This parser can parse pipe-delimited text:\npsv.parse(\"first|last\\nabe|lincoln\")[0]",
+            "pinned": true
+        },
+        {
+            "id": 14,
+            "value": "md`Note that this handles the parsing of the text, once we have the text.\nThe next step is to use this custom parser with [d3.text](https://github.com/d3/d3-fetch/blob/master/README.md#text) that can read in our pipe-delimited file and then use \\`psv\\` to parse the pipe-delimited file.\n`",
+            "pinned": false
+        },
+        {
+            "id": 15,
+            "value": "d3.text(\"https://cdn.rawgit.com/vlandham/js_data/master/data/animals_piped.txt\").then(\n  (txt) => psv.parse(txt))",
+            "pinned": true
+        },
+        {
+            "id": 16,
+            "value": "md`\n## Reading JSON Files\nFor nested data, or for passing around data where you don't want to mess with data typing, its hard to beat [JSON](http://json.org/).\nJSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with [d3.json](https://github.com/d3/d3-fetch/blob/master/README.md#json) - you too can harness its power.\nHere is an example JSON file called \\`employees.json\\`:\n\\`\\`\\`\n[\n {\"name\":\"Andy Hunt\",\n  \"title\":\"Big Boss\",\n  \"age\": 68,\n  \"bonus\": true\n },\n {\"name\":\"Charles Mack\",\n  \"title\":\"Jr Dev\",\n  \"age\":24,\n  \"bonus\": false\n }\n]\n\\`\\`\\`\nLoading \\`employees.json\\` with \\`d3.json\\`:\n`",
+            "pinned": false
+        },
+        {
+            "id": 17,
+            "value": "d3.json(\"https://cdn.rawgit.com/vlandham/js_data/master/data/employees.json\")",
+            "pinned": true
+        },
+        {
+            "id": 18,
+            "value": "md`\nWe can see that, unlike our flat file parsing, numeric types stay numeric. Indeed, a JSON value can be a string, a number, a boolean value, an array, or another object. This allows nested data to be dealt with easily.\n## Loading Multiple Files\nD3's basic loading mechanism is fine for one file but starts to get messy as we nest multiple callbacks.\nFor loading multiple files, we can use [\\`Promise.all\\`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) to wait for multiple data sources to be loaded.\n`",
+            "pinned": false
+        },
+        {
+            "id": 19,
+            "value": "Promise.all([d3.csv(\"https://cdn.rawgit.com/vlandham/js_data/master/data/cities.csv\"),\n             d3.tsv(\"https://cdn.rawgit.com/vlandham/js_data/master/data/animals.tsv\")])\n  .then(\n  function success(allData) {\n    const cities = allData[0],\n          animals = allData[1];\n    return [cities[0], animals[0]];\n  },\n  function error(e) {\n    throw e;\n  }\n)",
+            "pinned": true
+        },
+        {
+            "id": 20,
+            "value": "md`\nNote that we load two different types of files–using two different loading functions–so this is an easy way to mix and match file types.\nThe first callback function passed into \\`Promise.then\\` gets an array of datasets as a parameter. If an error has occurred in loading the data, the second callback function is executed so you can catch data loading problems quickly.\nTo add another data file, add another call to the array and process the new entry in the resulting array in your callback!\n\n## See Also\n- [D3 documentation](https://github.com/d3/d3-request)\n- [Loading XML with D3](https://github.com/d3/d3-request#xml)\n- [Loading External SVG with D3](http://bl.ocks.org/mbostock/1014829) - SVG is just XML!\n\n## Navigation\n\n- Next Task: [Combining Data](/@dakoop/combining-data-learn-js-data)\n- [Learn JS Data Notebooks Index](/@dakoop/learn-js-data)\n`",
+            "pinned": false
+        },
+        {
+            "id": 21,
+            "value": "d3 = require('d3')",
+            "pinned": false
+        }
+    ]

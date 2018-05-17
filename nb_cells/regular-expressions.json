@@ -1,0 +1,147 @@
+[
+        {
+            "id": 3,
+            "value": "md`\n# Regular Expressions (Learn JS Data)\n\n*This notebook was generated from the [learnjsdata source](https://github.com/vlandham/js_data) and updated.*\n\nRegular expressions are used to match certain patterns of strings within other strings.\n\nThey can be a useful tool for extracting _patterns_ rather than exact strings, for example:\ntelephone numbers (sequences of numbers of a specific length,) street numbers or email\naddresses.\n\n## Finding Strings\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 4,
+            "value": "str = \"how much wood would a woodchuck chuck if a woodchuck could chuck wood\"",
+            "pinned": false
+        },
+        {
+            "id": 31,
+            "value": "regex = /wood/",
+            "pinned": false
+        },
+        {
+            "id": 5,
+            "value": "md`If we want to know whether the string \"wood\" appears in our larger string \\`str\\` we\ncould do the following\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 6,
+            "value": "{\n  if (regex.test(str)) {\n    return \"we found 'wood' in the string!\";\n  }\n}",
+            "pinned": true
+        },
+        {
+            "id": 7,
+            "value": "md`To see the actual matches we found in the string, we can use the \\`match\\` method\nto find all matches available:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 8,
+            "value": "matches = str.match(regex)",
+            "pinned": true
+        },
+        {
+            "id": 9,
+            "value": "md`Note that this only returned one match, even though the word \"wood\" appears several\ntimes in our original string. In order to find all individual instances of wood, we need\nto add the global flag, which we can do by adding a \\`g\\` to the end of our expression:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 10,
+            "value": "regex2 = /wood/g",
+            "pinned": false
+        },
+        {
+            "id": 39,
+            "value": "str.match(regex2)",
+            "pinned": true
+        },
+        {
+            "id": 11,
+            "value": "md`Now, note that two of those matches actually belonged to the word \"woodchuck\", which\nwas not a part of our results. If we wanted to extend our regular expression to match both\nwe could do so in a few ways:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 12,
+            "value": "regex3 = /wood.*?\\b/g",
+            "pinned": false
+        },
+        {
+            "id": 43,
+            "value": "str.match(regex3)",
+            "pinned": true
+        },
+        {
+            "id": 13,
+            "value": "md`In this regular expression we are matching everything that starts with the string \"wood\"\nfollowed by 0 or more characters (\\`.*?\\`) until a word break (\\`\\b\\`) occures.\nAlternatively, we could also just search for both words:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 14,
+            "value": "regex4 = /woodchuck|wood/g",
+            "pinned": false
+        },
+        {
+            "id": 48,
+            "value": "str.match(regex4)",
+            "pinned": true
+        },
+        {
+            "id": 15,
+            "value": "md`Note the order in which we did the last search. We used the word \"woodchuch\" before\nthe word \"wood\". If we were to run our expression like so: \\`/wood|woodchuck/g\\`, we would\nend up with \\`[\"wood\", \"wood\", \"wood\", \"wood\"]\\` again because that search would be\n\"greedy\".\n\n## Replacing with regular expressions\n\nIf we wanted to replace the word \"wood\" in our original string, with the word\n\"nun\", we could do it like so:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 16,
+            "value": "regex5 = /wood/g",
+            "pinned": false
+        },
+        {
+            "id": 51,
+            "value": "str.replace(regex5, \"nun\")",
+            "pinned": true
+        },
+        {
+            "id": 17,
+            "value": "md`Probably not what you'd be going for, but you get our drift.\n\n## Finding Numbers\n\nExtracting numbers from strings is a common task when looking for things like\ndollar amounts or any other numerical measurements that might be scattered about\nin the text.\nFor example, if we wanted to extract the total amount of money spent\non groceries from this message:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 18,
+            "value": "message = \"I bought a loaf of bread for $3.99, some milk for $2.49 and \" +\n  \"a box of chocolate cookies for $6.95\"",
+            "pinned": false
+        },
+        {
+            "id": 19,
+            "value": "md`we could define a regular expression that looks for dollar amounts by defining a\npattern like so.\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 20,
+            "value": "regex6 = /\\$([0-9\\.]+)\\b/g",
+            "pinned": false
+        },
+        {
+            "id": 21,
+            "value": "md`this pattern looks for:\n* A dollar sign (\\`\\$\\`) to indicate the beginning of a price\n* A set of repeating characters that can be a number (\\`0-9\\`) or the period character \\`.\\`. These can appear repeatedly (\\`+\\`). Note that we're not being particularly careful in making sure we only have one period in our string, for example.\n* A word break that would indicate the end of the price string (\\`\\b\\`).\n\nIf we wanted to find all the matches, we could use our string \\`match\\` function like so:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 22,
+            "value": "matches6 = message.match(regex6)",
+            "pinned": true
+        },
+        {
+            "id": 23,
+            "value": "md`This is great! We have all our dollar amounts. While this gets us 90% there, we\ncan't really add them with those \\`$\\` signs. To remove them, we can use our trusty\n\\`reduce\\` function like so:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 24,
+            "value": "matches6.reduce(function(sum, value) {\n  return sum + Number(value.slice(1));\n}, 0)",
+            "pinned": true
+        },
+        {
+            "id": 25,
+            "value": "md`## Useful special characters\nWe've used a few special characters so far, like \\`\\b\\` to indicate a word break. There\nare a few others that might be useful to you:\n\n* \\`\\d\\` - any number character.  Equivalent to [0-9].\n* \\`\\D\\` - any non number character. Equivalent to [^0-9].\n* \\`\\s\\` - any single space character. This includes a single space, tab, line feed or\nform feed.\n\nYou can see a full list of all special characters here:\n[MDN - Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)\n\n## See Also\n\n- [MDN - Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) - for more information about regular expressions\n\n## Navigation\n\n- Next Task: [Working With Time](/@dakoop/working-with-time-learn-js-data)\n- [Learn JS Data Notebooks Index](/@dakoop/learn-js-data)\n`",
+            "pinned": false
+        },
+        {
+            "id": 26,
+            "value": "d3 = require('d3')",
+            "pinned": false
+        }
+    ]

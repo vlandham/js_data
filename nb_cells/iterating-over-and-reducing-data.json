@@ -1,0 +1,222 @@
+[
+        {
+            "id": 3,
+            "value": "md`# Iterating Over and Reducing Data (Learn JS Data)\n\n*This notebook was generated from the [learnjsdata source](https://github.com/vlandham/js_data) and updated.*\n\nMost of the functions we used to [summarize](summarize_data.html) our data had to iterate over the entire dataset to generate their results - but the details were hidden behind the function. Now let's look at how we might perform this iteration ourselves for other metrics and manipulations!\n\nAgain, we start with a basic data set already loaded:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 4,
+            "value": "data = [\n  {\"city\":\"seattle\", \"state\":\"WA\", \"population\":652405, \"land_area\":83.9},\n  {\"city\":\"new york\", \"state\":\"NY\", \"population\":8405837, \"land_area\":302.6},\n  {\"city\":\"boston\", \"state\":\"MA\", \"population\":645966, \"land_area\":48.3},\n  {\"city\":\"kansas city\", \"state\":\"MO\", \"population\":467007, \"land_area\":315}\n]",
+            "pinned": true
+        },
+        {
+            "id": 5,
+            "value": "md`## Iterating\n\nFirst some basic iteration. We already saw this in the data loading task, but a common way to process each data object is by using [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 6,
+            "value": "{\n  let count = 0;\n  data.forEach(function(d) {\n    count += 1;\n  });\n  return count;\n}",
+            "pinned": true
+        },
+        {
+            "id": 7,
+            "value": "md`_Of course, data also has the property \\`length\\` which would be the actual way to get the number of data elements in \\`data\\` - but this is just an example._\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 8,
+            "value": "data.length",
+            "pinned": true
+        },
+        {
+            "id": 9,
+            "value": "md`## Immutability\n\nLet me sidetrack this task just a bit to talk about immutability.\n\n\\`forEach\\` provides for a basic way to loop through our data set. We can use this to modify the data in place, generate counts, or perform other manipulations that deal with each piece of data individually.\n\nThis works, but can get clunky and confusing fast. Keeping straight what form the data is in at any given time can be confusing, as can side effects of modifying your data that you might not be aware of.\n\nTo combat this confusion, it can be useful to think of the data as _immutable_. Immutable data cannot be modified once created. Immutability seems a bit counterintuitive for a task where we want to coerce our data into the form we want - but it comes together with the concept of **transformations**.\n\nThe idea is simple: each immutable dataset can be _transformed_ into another immutable dataset through the use of a transformation function that works on each component of the data.\n\nThis process helps simplify the data flow, but if you have to make a copy of your data object each time, it can make code a bit brittle as you have to keep track of every attribute of your dataset.\n\n## Cloning\n\nTo help with this issue of brittle transformations, lodash provides the [clone](https://lodash.com/docs/#clone) function.\n\nThis function takes an object and returns a copy of that object. That copy is now a separate data object that you can edit without effecting the original object.\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 10,
+            "value": "dataObject = ({\"name\":\"Carl\", \"age\":\"48\", \"salary\":\"12300\"})",
+            "pinned": false
+        },
+        {
+            "id": 53,
+            "value": "copyOfData = {\n  let c = _.clone(dataObject);\n  c.age = +c.age;\n  c.salary = +c.salary;\n  return c;\n}",
+            "pinned": true
+        },
+        {
+            "id": 11,
+            "value": "md`\nBy default, the \\`clone\\` function will not copy over nested objects. Instead these nested objects are simply passed by referenced - meaning the original and the copy will still share them.\n`",
+            "pinned": false
+        },
+        {
+            "id": 67,
+            "value": "dataObject2 = ({\"name\":\"Saul\", \"stats\":{\"age\":\"55\"}})",
+            "pinned": false
+        },
+        {
+            "id": 63,
+            "value": "shallowCopy = {\n  let c = _.clone(dataObject2);\n  c.stats.age = +c.stats.age;\n  return c;\n}",
+            "pinned": true
+        },
+        {
+            "id": 16,
+            "value": "html`<pre>\ndataObject2: ${JSON.stringify(dataObject2)}\nshallowCopy: ${JSON.stringify(shallowCopy)}\n</pre>\n`",
+            "pinned": false
+        },
+        {
+            "id": 17,
+            "value": "md`Note that because \\`stats\\` is a nested object the modification happened in both spots!\n\nTo prevent this \"feature\", we can lodash's [cloneDeep](https://lodash.com/docs/#cloneDeep) method to indicate that the copy should be deep and copy nested objects as well.\n`",
+            "pinned": false
+        },
+        {
+            "id": 18,
+            "value": "dataObject3 = ({\"name\":\"Saul\", \"stats\":{\"age\":\"55\"}})",
+            "pinned": false
+        },
+        {
+            "id": 75,
+            "value": "deepCopy = {\n  let c = _.cloneDeep(dataObject3);\n  c.stats.age = +c.stats.age;\n  return c;\n}",
+            "pinned": true
+        },
+        {
+            "id": 20,
+            "value": "html`<pre>\ndataObject3: ${JSON.stringify(dataObject3)}\ndeepCopy: ${JSON.stringify(deepCopy)}\n</pre>\n`",
+            "pinned": false
+        },
+        {
+            "id": 121,
+            "value": "md`We can also use the [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to create a shallow clone of an array.`",
+            "pinned": false
+        },
+        {
+            "id": 129,
+            "value": "dataArray = [{name:\"Saul\", age: 55}, {name: \"Carl\", age: 48}]",
+            "pinned": false
+        },
+        {
+            "id": 132,
+            "value": "spreadCopy = {\n  let a = [...dataArray];\n  a.push({name: \"Mary\", age: 34});\n  return a;\n}",
+            "pinned": true
+        },
+        {
+            "id": 145,
+            "value": "html`<pre>\ndataArray: ${JSON.stringify(dataArray)}\nspreadCopy: ${JSON.stringify(spreadCopy)}\n</pre>\n`",
+            "pinned": false
+        },
+        {
+            "id": 21,
+            "value": "md`\n## Mapping\n\nJavaScript's [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) can be a very useful tool to implement this concept of a transformation on immutable data.\n\n\\`map\\` takes an array and produces another array which is the result of the callback function being executed on each element in the array.\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 22,
+            "value": "smallData = data.map(function(d,i) {\n  return {\n    name: d.city.toUpperCase(),\n    index: i + 1,\n    rounded_area: Math.round(d.land_area)\n  };\n})",
+            "pinned": true
+        },
+        {
+            "id": 86,
+            "value": "html`<pre>\ndata[0]: ${JSON.stringify(data[0])}\nsmallData[0]: ${JSON.stringify(smallData[0])}\n</pre>`",
+            "pinned": false
+        },
+        {
+            "id": 23,
+            "value": "md`The callback function gets called for each element in the array, and also has access to the index of that element in the array. The result is an array of returned values from the callback.\n\nWith plain JavaScript, the immutability of an array is just _in the mind of the developer_. While \\`map\\` does not modify the array, it is easy for your callback method to do so. That is why we return a new object in the callback. lodash's [clone](https://lodash.com/docs/#clone) would be another approach to getting a copy of each data element as a starting point for the transformation.\n\n\n## Filtering\n\nSelect a subset of the data using the built in [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method. This creates a new array of data (again see transformation talk above) with only the values that the callback function returns \\`true\\` for.\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 24,
+            "value": "large_land = data.filter(d => d.land_area > 200)",
+            "pinned": true
+        },
+        {
+            "id": 25,
+            "value": "md`## Sorting\n\nSimilar to filtering, sorting data based on attributes is something you'll want to do frequently.\n\nThe built in [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) for arrays can do this. A caveat to this function is that, unlike filter, map, and other functions, this _modifies the array you are sorting in place_, instead of returning a new array with the objects sorted.\n\nTo sort an array, you need a comparator function. This is a function that takes two pieces of data and indicates which one you want higher in the list. The comparator-function-way to do this is to return a negative value if the first value should go higher then the second value, and a positive value if the second value should go higher. If they are equal, and you don't care, then return a 0.\n\nLet's see it in action. Here is a way to sort by population in a descending order (larger populations come first).\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 26,
+            "value": "sortedData = {\n  let d = [...data];\n  d.sort(function(a,b) {\n    return b.population - a.population;\n  });\n  return d;\n}",
+            "pinned": true
+        },
+        {
+            "id": 27,
+            "value": "md`This \\`b - a\\` thing is a pretty common way to generate this kind of sort. But you could also do it more explicitly. Thinking through it, if b's population is larger then a's, then the value returned by \\`b.population - a.population\\` will be positive - so b will be sorted toward the top of the array. If the reverse is true, then the result will be negative, and a will be sorted first.\n\nNote again, that the sort happened _on the original data_, which required us to clone it (via spread syntax) before running the sort.\n\nD3 also has a few helper functions to implement ascending and descending comparator functions - but (as far as I can tell) they only accept arrays of raw numbers instead of objects. So to use [d3.ascending](https://github.com/d3/d3-array#ascending) or [d3.descending](https://github.com/d3/d3-array#descending) you would have to do something like this:\n`",
+            "pinned": false
+        },
+        {
+            "id": 28,
+            "value": "populations = data.map(d => d.population)",
+            "pinned": false
+        },
+        {
+            "id": 29,
+            "value": "populations.sort(d3.descending)",
+            "pinned": true
+        },
+        {
+            "id": 30,
+            "value": "md`I'm usually looking to keep my data objects together, so I shy away from using these methods, but they might be great for what you are trying to do.\n\nA **big gotcha** with sorting that you should watch out for is that if you do not pass a comparator function, the default function sorts _alphabetically_. So, the array:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 31,
+            "value": "nums = [3,1,10,20]",
+            "pinned": false
+        },
+        {
+            "id": 32,
+            "value": "md`Would be sorted to:\n`",
+            "pinned": false
+        },
+        {
+            "id": 33,
+            "value": "_.clone(nums).sort()",
+            "pinned": false
+        },
+        {
+            "id": 34,
+            "value": "md`This is never what you want for data sorting. For this reason, you should never use sort without a comparator function.\n\n## Reducing\n\nThese functions all take an array and reduce it down to a single number. But what if that number isn't the one you want? Well, you can take this reduction into your own hands with \\`reduce\\`!\n\nThe syntax for [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) is always hard for me to remember, so let's go over it with the classic example: summing up a value.\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 35,
+            "value": "landSum = data.reduce(function(sum, d) {\n  return sum + d.land_area;\n}, 0)",
+            "pinned": true
+        },
+        {
+            "id": 36,
+            "value": "md`The first parameter to \\`reduce\\` is the callback function that will return the running \"total\" of the reduction. This function is passed in the previous value returned from the last time the callback was called. Here, that parameter - \\`sum\\` provides the running total as we move through the array. The second parameter to the callback \\`d\\` is the current value of the array we are working on.\n\n\\`reduce\\` can take an initial value, which is the second parameter to the \\`reduce\\` call. For this example, we start the sum at 0. If there is no starting value provided, then for the first execution of the callback (when there is no previous value) the first parameter to the callback will be the value of the first element of the array, and the reduction starts with the second element.\n\nIt always makes more sense to me to provide a starting value - unless you know what you are doing. You can also get the current index into the array (and the whole array itself) if that is useful to you.\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 37,
+            "value": "weirdString = data.reduce(function(str, d, i) {\n  var ending = (i % 2 === 0) ? \" is cool.\" : \" sucks.\" ;\n  return str + \" \" + d.city + ending;\n}, \"\")",
+            "pinned": true
+        },
+        {
+            "id": 38,
+            "value": "md`*And summing over a variable is only used for example. You can always just use [d3.sum](https://github.com/d3/d3-array#d3_sum) for this instead.*\n\n## Chaining Functions\n\nOne of the great things about these more _functional_ functions is that it is possible to chain them together into one big data wrangling pipeline!\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 39,
+            "value": "bigCities = data.filter(d => d.population > 500000)\n  .sort((a,b) => a.population - b.population)\n  .map(d => d.city)",
+            "pinned": true
+        },
+        {
+            "id": 40,
+            "value": "md`Since we are using \\`sort\\` after \\`filter\\`, sort is working on the returned array from \\`filter\\`. The sort function at least is nice enough to also return the array, so chaining is still possible.\n\n## See Also\n\n- [Making Juice with Reduce](http://www.macwright.org/2015/01/03/reduce-juice.html) - Tom MacWright's intro to the ill-used reduce\n- [Immutable JS](https://github.com/facebook/immutable-js) - if you want to get serious about immutable data structures in JavaScript\n- [Ramda](http://fr.umio.us/why-ramda/) - a more functional approach to data processing in JS\n\n## Navigation\n\n- Next Task: [Grouping Data](/@dakoop/grouping-data-learn-js-data)\n- [Learn JS Data Notebooks Index](/@dakoop/learn-js-data)\n`",
+            "pinned": false
+        },
+        {
+            "id": 41,
+            "value": "d3 = require('d3')",
+            "pinned": false
+        },
+        {
+            "id": 50,
+            "value": "_ = require('lodash')",
+            "pinned": false
+        }
+    ]
