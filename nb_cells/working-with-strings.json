@@ -1,0 +1,137 @@
+[
+        {
+            "id": 3,
+            "value": "md`# Working with Strings (Learn JS Data)\n\n*This notebook was generated from the [learnjsdata source](https://github.com/vlandham/js_data) and updated.*\n\nString cleaning is something you end up doing quite a lot. Hopefully this task will help make the process less painful. There are a near infinite transformations you might want to do with strings, so we won't get to everything, but this will serve as a starting point for common manipulations that will come up again and again.\n\nWe will start with generic JavaScript string functions and add in a bit of [lodash](https://lodash.com/) magic to make things easier.\n\n## String Basics\n\nSimilar to arrays, the characters in strings are accessible via indexing\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 4,
+            "value": "aChar = \"Hello There!\"[6]",
+            "pinned": true
+        },
+        {
+            "id": 5,
+            "value": "md`Also, just like arrays, you have access to the powerful [slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) method, which is used to extract sub-sections based on indexes.\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 6,
+            "value": "aSlice = \"Hello There!\".slice(6,11)",
+            "pinned": true
+        },
+        {
+            "id": 7,
+            "value": "md`The sliced string goes up to - but not including - the last index.\n\nAnd, of course, string concatenation is done in JavaScript using the \\`+\\` operator. Use parenthesis if you want to do actual arithmetic inside your concatenation.\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 8,
+            "value": "{\n  let orderNum = 8;\n  return \"You are number \" + (orderNum + 1) + \" in line.\";\n}",
+            "pinned": true
+        },
+        {
+            "id": 9,
+            "value": "md`Check [the documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) for all the other basic tools.\n\n## Stripping Whitespace\n\nOften, you are going to have some surrounding whitespace that you don't want corrupting the rest of your data. Reading CSV files gives a good example of this, as spaces are typically also used in conjunction with the commas to separate columns.\n\nA data file like this:\n\\`\\`\\`\ncities_spaced.csv:\n\ncity  ,state ,population,land area\n  seattle  ,WA , 652405 ,83.9\nnew york,NY,8405837,  302.6\n\\`\\`\\`\nWhen [read in](read_data.html) can produce quite the messy dataset:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 10,
+            "value": "data = d3.csv(\"https://cdn.rawgit.com/vlandham/js_data/master/data/cities_spaced.csv\")",
+            "pinned": false
+        },
+        {
+            "id": 11,
+            "value": "md`\nNote the spaces in the property names as well as the values. In cases like this, it might be best to [map](iterate_data.html) the data back to a clean version. Lodash's [trim](https://lodash.com/docs#trim) can help. It removes that unsightly whitespace from the front and back of your strings.\n\nHere is a version of the data loading function that removes whitespace. It uses a row conversion function with \\`d3.csv\\` that makes use of \\`trim\\`.\n`",
+            "pinned": false
+        },
+        {
+            "id": 12,
+            "value": "d3.csv(\"https://cdn.rawgit.com/vlandham/js_data/master/data/cities_spaced.csv\", function(d) {\n  let cleanD = {};\n  d3.keys(d).forEach(function(k) {\n    cleanD[_.trim(k)] = _.trim(d[k]);\n  });\n  return cleanD;\n})",
+            "pinned": true
+        },
+        {
+            "id": 13,
+            "value": "md`\nThe strings are now clear of those pesky spaces.\n\n## Find and Replace\n\nExtracting data from strings can sometimes mean extracting pieces of strings. Finding out if a string contains a keyword or sub-string of interest is a first step in quantifying the content of a body of text.\n\n[indexOf]() can be used to perform this searching. You pass it a sub-string, and it'll tell you the location in string you are calling it where that sub-string starts. \\`-1\\` is returned if the sub-string can't be found. You can use this to build a little string finder, by comparing the return value to \\`-1\\`.\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 14,
+            "value": "\"A man, a plan, a canal\".indexOf(\"man\") !== -1",
+            "pinned": true
+        },
+        {
+            "id": 15,
+            "value": "\"A man, a plan, a canal\".indexOf(\"panama\") !== -1",
+            "pinned": true
+        },
+        {
+            "id": 16,
+            "value": "md`Replace is the butter to find's bread. We will see more replacing when we get to regular expressions, but replacing sections of a string can be done with the [replace]() method.\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 17,
+            "value": "\"A man, a plan, a canal\".replace(\"canal\", \"\")",
+            "pinned": true
+        },
+        {
+            "id": 18,
+            "value": "md`## Templating\n\nWhen you need to create a more complicated string, such as an html snippet, it may\nbecome too tedious to just combine strings by concatenating them with your variables. Consider\nthe following following object:\n`",
+            "pinned": false
+        },
+        {
+            "id": 62,
+            "value": "person = ({ name : \"Birdman\", occupation: \"Imaginary Super Hero\" })",
+            "pinned": false
+        },
+        {
+            "id": 80,
+            "value": "md`that we wish to display like this\n\\`\\`\\`html\n<div class=\"person\">\n  <span class=\"name\">Birdman</span>\n  <span class=\"occupation\">Imaginary Super Hero</span>\n</div>\n\\`\\`\\`\n\nIf we wanted to build this display using string concatenation, it might look like this:\n`",
+            "pinned": false
+        },
+        {
+            "id": 19,
+            "value": "html_snippet = \"<div class=\\\"person\\\">\" +\n  \"<span class=\\\"name\\\">\" + person.name + \"</span>\" +\n  \"<span class=\\\"occupation\\\">\" + person.occupation + \"</span>\" +\n  \"</div>\"",
+            "pinned": true
+        },
+        {
+            "id": 20,
+            "value": "md`That's a lot of string escaping! You can imagine this gets pretty hard to manage\nafter a while. Instead, we can use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) to do this more easily.\n`",
+            "pinned": false
+        },
+        {
+            "id": 94,
+            "value": "`<div class=\"person\">\n  <span class=\"name\">${person.name}</span>\n  <span class=\"occupation\">${person.occupation}</span>\n</div>`",
+            "pinned": true
+        },
+        {
+            "id": 96,
+            "value": "md`\nAnd we can easily define the template literal in a function for reuse\n`",
+            "pinned": false
+        },
+        {
+            "id": 98,
+            "value": "templateFunction = (person) => {\n  return `<div class=\"person\">\n  <span class=\"name\">${person.name}</span>\n  <span class=\"occupation\">${person.occupation}</span>\n</div>`\n}",
+            "pinned": true
+        },
+        {
+            "id": 25,
+            "value": "templateFunction({ name : \"James. James Bond\", occupation: \"Spy\" })",
+            "pinned": true
+        },
+        {
+            "id": 26,
+            "value": "md`\n## See Also\n\n- [Working With Strings](http://www.quirksmode.org/js/strings.html) - a great guide to more string basics\n- [underscore.string](https://github.com/epeli/underscore.string) - for all the other string functions you might want\n- [underscore.template](http://underscorejs.org/#template) - for a deeper dive into underscore's template function\n- [ES2016's Template Literal syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) that allows template string without the need for lodash/underscore if you use ES2016 or [TypeScript](https://basarat.gitbooks.io/typescript/content/docs/template-strings.html).\n\n## Navigation\n\n- Next Task: [Regular Expressions](/@dakoop/regular-expressions-learn-js-data)\n- [Learn JS Data Notebooks Index](/@dakoop/learn-js-data)\n`",
+            "pinned": false
+        },
+        {
+            "id": 27,
+            "value": "d3 = require('d3')",
+            "pinned": false
+        },
+        {
+            "id": 40,
+            "value": "_ = require('lodash')",
+            "pinned": false
+        }
+    ]

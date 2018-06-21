@@ -1,0 +1,82 @@
+[
+        {
+            "id": 3,
+            "value": "md`# Checking Data Assumptions (Learn JS Data)\n\n*This notebook was generated from the [learnjsdata source](https://github.com/vlandham/js_data) and updated.*\n\nData processing is tricky business, full of pitfalls and gotchas. Hopefully the tasks in this guide help with getting started in this process. But you, I, and the entire world will make mistakes. It's natural.\n\nBut mistakes in data processing, like all other kinds of mistakes, can be painful. They can result in hours of bug hunting, days of reprocessing, and months of crying. Since we know mistakes happen and will continue to happen, what can we do to take away some of the pain?\n\nIn a word, _padding_. We need some padding to protect us from the bumps and bruises of data processing. And I would suggest that this padding come in the form of simple tests that check the assumptions you have about the shape and contents of your data.\n\nUnless there is an extreme performance need, these tests should run in the data processing pipeline. Optimally, they would be easy to turn on and off so that you can disable them if you need to if your code is deployed.\n\n## Assertions\n\nThese tests can be created with [assertions](http://en.wikipedia.org/wiki/Assertion_%28software_development%29) - functions that check the truthiness of a statement in code. Typically, they raise an error when an expected truth is not actually true.\n\nJavaScript doesn't have built-in assertions, but we can rectify this deficiency with a simple function.\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 4,
+            "value": "function assert(isTrue, message) {\n  if(!isTrue) {\n    return message;\n  }\n  return null;\n}",
+            "pinned": true
+        },
+        {
+            "id": 5,
+            "value": "md`This will output a given message if the input is not true. Typically assertions [throw](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw) errors, but we can just log it for explaining purposes.\n\n## Data Content Assumptions\n\nNow let's use our \\`assert\\` function to check some assumptions about the details of our data.\n\nWe can use lodash's suite of [type checking functions](https://lodash.com/docs#isBoolean) to take care of performing the checks, passing the result of the check to \\`assert\\` to produce our errors.\n\nLet's say our data importing process has made some mistakes:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 6,
+            "value": "data = [{\"name\":\"Dan\",\n         \"age\":23,\n         \"superhuman\":false},\n        {\"name\":\"Sleepwalker\",\n         \"age\":NaN,\n         \"superhuman\":\"TRUE\"}]",
+            "pinned": true
+        },
+        {
+            "id": 7,
+            "value": "md`Our first entry looks ok, where our second entry has some problems. The age parsing for the immortal [Sleepwalker](http://en.wikipedia.org/wiki/Sleepwalker_%28comics%29) has left him with no age. Also, bad input data has left us with a string in \\`superhuman\\`, where we expect a boolean.\n\nA simple assumption checking function that could be run on this data could look something like this:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 8,
+            "value": "function checkDataContent(data) {\n  return data.reduce((arr, d) => {\n    const dString = JSON.stringify(d);\n    let msgs = [];\n    msgs.push(assert(_.isString(d.name), dString + \" has a bad name - should be a string\"));\n    msgs.push(assert(_.isNumber(d.age), dString + \" has a bad age - should be a number\"));\n    msgs.push(assert(!_.isNaN(d.age), dString + \" has a bad age - should not be NaN\"));\n    msgs.push(assert(_.isBoolean(d.superhuman), dString + \" has a bad superhuman - should be boolean\"));\n    return arr.concat(msgs.filter(d => d !== null))\n  }, [])\n}",
+            "pinned": true
+        },
+        {
+            "id": 21,
+            "value": "html`<pre>\n${checkDataContent(data).join('\\n')}\n</pre>\n`",
+            "pinned": false
+        },
+        {
+            "id": 9,
+            "value": "md`\nAgain, the focus here is on detection of data problems. You want something quick and simple that will serve as an early warning sign.\n\nUnfortunately, the JavaScript primitive \\`NaN\\` is indeed a number, and so additional checks need to be made. As more data comes in, this function will need to be updated to add more checks. This might get a bit tedious, but a little bit of checking can go a long way towards maintaining sanity.\n\n## Data Shape Assumptions\n\nJust as you can test your assumptions about the content of your data elements, it can be a good idea to test your assumptions about the _shape_ of your data. Here, shape just refers to the size and structure of your data. Rows and columns.\n\nSomething simple to perform this check could look like this:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 10,
+            "value": "function checkDataShape(data) {\n  let msgs = [];\n  msgs.push(assert(data.length > 0, \"data is empty\"));\n  msgs.push(assert(data.length > 4, \"data is too small\"));\n  var keys = d3.keys(data[0]);\n  msgs.push(assert(keys.length === 4, \"wrong number of columns\"));\n  return msgs.filter(d => d !== null);\n}",
+            "pinned": true
+        },
+        {
+            "id": 30,
+            "value": "html`<pre>\n${checkDataShape(data).join('\\n')}\n</pre>\n`",
+            "pinned": false
+        },
+        {
+            "id": 11,
+            "value": "md`The two assumption functions could easily be combined into one, but it's important to look at both aspects of your data.\n\n## Data Equality Assumptions\n\nFinally, its often useful to check assumptions about data objects being equal. Lodash comes to the rescue again with the [isEqual](https://lodash.com/docs/4.17.4#isEqual) function:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 12,
+            "value": "_.isEqual({ tea: 'green' }, { tea: 'green' })",
+            "pinned": true
+        },
+        {
+            "id": 35,
+            "value": "_.isEqual({ tea: 'earl' }, { tea: 'green' })",
+            "pinned": true
+        },
+        {
+            "id": 13,
+            "value": "md`## More Assertions\n\nIf this is an approach that appeals to you, it might be worth exploring more powerful assertion libraries.\n\nOne such tool is [Chai](http://chaijs.com/api/assert/) which comes with a great\ncollection of assertion helpers. These can help you check for more complicated things like whether\ntwo objects are equal or whether an object has or doesn't have a property in a more succinct style.\n\n## See Also\n\n- [Parsing raw data](http://www.pgbovine.net/parsing-raw-data.htm) - a great guide that motivated this section\n- [Chai](http://chaijs.com/api/assert/) - Chai's assert library\n- [is.js](http://arasatasaygin.github.io/is.js/) - provides a great set of checking functions to complement lodash's set.\n- [validate.io](https://github.com/validate-io) - provides a similar set of checking functions, but all as separate projects - so you can include only the checks you want to use.\n\n## Navigation\n\n- [Learn JS Data Notebooks Index](/@dakoop/learn-js-data)\n`",
+            "pinned": false
+        },
+        {
+            "id": 14,
+            "value": "d3 = require('d3')",
+            "pinned": false
+        },
+        {
+            "id": 22,
+            "value": "_ = require('lodash')",
+            "pinned": false
+        }
+    ]

@@ -1,0 +1,77 @@
+[
+        {
+            "id": 3,
+            "value": "md`# Summarizing Data (Learn JS Data)\n\n*This notebook was generated from the [learnjsdata source](https://github.com/vlandham/js_data) and updated.*\n\nWith the data [loaded](read_data.html), we want to take a quick look at what we have. D3 has a number of tools to use for quick data exploration.\n\nTo start, let's pretend we have loaded up a csv file - and have a dataset that looks something like:\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 4,
+            "value": "data = [\n  {\"city\":\"seattle\", \"state\":\"WA\", \"population\":652405, \"land_area\":83.9},\n  {\"city\":\"new york\", \"state\":\"NY\", \"population\":8405837, \"land_area\":302.6},\n  {\"city\":\"boston\", \"state\":\"MA\", \"population\":645966, \"land_area\":48.3},\n  {\"city\":\"kansas city\", \"state\":\"MO\", \"population\":467007, \"land_area\":315}\n]",
+            "pinned": true
+        },
+        {
+            "id": 5,
+            "value": "md`## Min & Max\n\nAs it turns out, D3 comes to the rescue again, with [d3.min](https://github.com/d3/d3-array#min) and [d3.max](https://github.com/d3/d3-array#max). Use the callback function to indicate which property (or computed value based on the properties) to access.\n\n\n`",
+            "pinned": false
+        },
+        {
+            "id": 6,
+            "value": "minLand = d3.min(data, function(d) { return d.land_area; })",
+            "pinned": true
+        },
+        {
+            "id": 8,
+            "value": "maxLand = d3.max(data, d => d.land_area)",
+            "pinned": true
+        },
+        {
+            "id": 9,
+            "value": "md`\nNote how the [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) makes the call much shorter. If you want both the min and max at the same time, you can use [d3.extent](https://github.com/d3/d3-array#extent)\n`",
+            "pinned": false
+        },
+        {
+            "id": 10,
+            "value": "landExtent = d3.extent(data, d => d.land_area)",
+            "pinned": true
+        },
+        {
+            "id": 11,
+            "value": "md`\nThis returns an array with the first element the minimum value and the second element the maximum.\n\n## Summary Statistics\n\nD3 provides a few basic tools to analyze your data, all using the same format as the min and max functions. Simply provide the property you would like to analyze, and you are good to go.\n\n[d3.mean](https://github.com/d3/d3-array#mean)\n`",
+            "pinned": false
+        },
+        {
+            "id": 12,
+            "value": "landAvg = d3.mean(data, d => d.land_area)",
+            "pinned": true
+        },
+        {
+            "id": 13,
+            "value": "md`\n[d3.median](https://github.com/d3/d3-array#median)\n`",
+            "pinned": false
+        },
+        {
+            "id": 14,
+            "value": "landMed = d3.median(data, d => d.land_area)",
+            "pinned": true
+        },
+        {
+            "id": 15,
+            "value": "md`\n[d3.deviation](https://github.com/d3/d3-array#deviation) - for standard deviation\n`",
+            "pinned": false
+        },
+        {
+            "id": 16,
+            "value": "landSD = d3.deviation(data, d => d.land_area)",
+            "pinned": true
+        },
+        {
+            "id": 17,
+            "value": "md`\n## See Also\n\n- [simple statistics](https://github.com/tmcw/simple-statistics) - more JavaScript based stats written in easier to comprehend code.\n- [Datalib](http://vega.github.io/datalib/) - A Javascript utility library for data loading, type inference, common statistics, and string templates that was created to power [Vega](http://vega.github.io/vega) and [Vega-Lite](http://vega.github.io/vega-lite).\n\n## Navigation\n\n- Next Task: [Iterating and Reducing](/@dakoop/iterating-over-and-reducing-data-learn-js-data)\n- [Learn JS Data Notebooks Index](/@dakoop/learn-js-data)\n`",
+            "pinned": false
+        },
+        {
+            "id": 18,
+            "value": "d3 = require('d3')",
+            "pinned": false
+        }
+    ]
