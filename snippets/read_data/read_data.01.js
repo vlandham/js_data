@@ -1,3 +1,3 @@
-d3.csv("/data/cities.csv", function(data) {
+d3.csv("/data/cities.csv").then(function(data) {
   console.log(data[0]);
 });

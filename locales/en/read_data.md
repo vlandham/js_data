@@ -4,7 +4,7 @@ The first step in any data processing is getting the data! Here is how to parse 
 
 ## Parsing CSV Files
 
-[D3 has a bunch](https://github.com/d3/d3/blob/master/API.md#requests-d3-request) of filetypes it can support when loading data, and one of the most common is probably plain old CSV (comma separated values).
+[D3 has a bunch](https://github.com/d3/d3/blob/master/API.md#fetches-d3-fetch) of filetypes it can support when loading data, and one of the most common is probably plain old CSV (comma separated values).
 
 Let's say you had a csv file with some city data in it:
 
@@ -19,7 +19,7 @@ boston,MA,645966,48.3
 kansas city,MO,467007,315.0
 ```
 
-Use [d3.csv](https://github.com/d3/d3-request/blob/master/README.md#csv) to convert it into an array of objects
+Use [d3.csv](https://github.com/d3/d3-fetch/blob/master/README.md#csv) to convert it into an array of objects
 
 @@ code=read_data/read_data.01.js @@
 @@ code=read_data/read_data.01.out @@
@@ -40,7 +40,7 @@ We will see more of this in other tasks, but a simple way to do this is to use t
 [Dot notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors) is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use bracket notation as shown.
 
 
-This can also be done during the loading of the data, by `d3.csv` directly. This is done by providing an accessor function to `d3.csv`, who's return value will be the individual data objects in our data array.
+This can also be done during the loading of the data, by `d3.csv` directly. This is done by providing an accessor function to `d3.csv`, whose return value will be the individual data objects in our data array.
 
 @@ code=read_data/read_data.03.js @@
 @@ code=read_data/read_data.03.out @@
@@ -58,7 +58,7 @@ CSV is probably the most common flat file format, but in no way the only one.
 
 I often like to use TSV (tab separated files) - to get around the issues of numbers and strings often having commas in them.
 
-D3 can parse TSV's with [d3.tsv](https://github.com/d3/d3-request/blob/master/README.md#tsv).
+D3 can parse TSV's with [d3.tsv](https://github.com/d3/d3-fetch/blob/master/README.md#tsv).
 
 Here is `animals.tsv`, as an example:
 
@@ -77,11 +77,9 @@ Loading animals.tsv with `d3.tsv`:
 
 ## Reading Other Flat Files
 
-In fact, `d3.csv` and `d3.tsv` are only the tip of the iceberg. If you have a non-standard delimited flat file, you can parse them too with D3!
+In fact, `d3.csv` and `d3.tsv` are only the tip of the iceberg. If you have a non-standard delimited flat file, you can parse them too using [d3.dsv](https://github.com/d3/d3-fetch/blob/master/README.md#dsv)!
 
-The process takes a few more steps. First we need to use the [d3.dsvFormat](https://github.com/d3/d3-dsv#dsvFormat) function to create a new parser that knows how to read our strangely delimited file type.
-
-For example, if we had a pipe-delimited file called `animals_piped.txt` that looked like this:
+For example, here is a pipe-delimited file called `animals_piped.txt`:
 
 ```
 name|type|avg_weight
@@ -89,19 +87,10 @@ tiger|mammal|260
 hippo|mammal|3400
 komodo dragon|reptile|150
 ```
-We could create a pipe separated values (PSV) parser using `d3.dsvFormat`:
+We first provide `d3.dsv` with the delimiter, in this case, a pipe (`|`), then read in our file:
 
 @@ code=read_data/read_data.05.js @@
 @@ code=read_data/read_data.05.out @@
-
-Note that this handles the parsing of the text, once we have the text.
-
-The next step is to use this custom parser to build a [d3.request](https://github.com/d3/d3-request/blob/master/README.md#request) that can read in our pipe-delimited file and parse it:
-
-And then use this to parse this pipe-delimited file.
-
-@@ code=read_data/read_data.06.js @@
-@@ code=read_data/read_data.06.out @@
 
 <div class="aside">This code is using d3.js</div>
 
@@ -109,7 +98,7 @@ And then use this to parse this pipe-delimited file.
 
 For nested data, or for passing around data where you don't want to mess with data typing, its hard to beat [JSON](http://json.org/).
 
-JSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with [d3.json](https://github.com/d3/d3-request/blob/master/README.md#json) - you too can harness its power.
+JSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with [d3.json](https://github.com/d3/d3-fetch/blob/master/README.md#json) - you too can harness its power.
 
 
 Here is an example JSON file called `employees.json`:
@@ -131,8 +120,8 @@ Here is an example JSON file called `employees.json`:
 
 Loading `employees.json` with `d3.json`:
 
-@@ code=read_data/read_data.07.js @@
-@@ code=read_data/read_data.07.out @@
+@@ code=read_data/read_data.06.js @@
+@@ code=read_data/read_data.06.out @@
 
 <div class="aside">This code is using d3.js</div>
 
@@ -142,20 +131,16 @@ We can see that, unlike our flat file parsing, numeric types stay numeric. Indee
 
 D3's basic loading mechanism is fine for one file, but starts to get messy as we nest multiple callbacks.
 
-For loading multiple files, we can use [d3.queue](https://github.com/d3/d3-queue) to wait for multiple data sources to be loaded.
+For loading multiple files, we can use [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) to wait for multiple data sources to be loaded.
 
-@@ code=read_data/read_data.08.js @@
-@@ code=read_data/read_data.08.out @@
+@@ code=read_data/read_data.07.js @@
+@@ code=read_data/read_data.07.out @@
 
 <div class="aside">This code is using d3.js</div>
 
-Note that we `defer` the loading of two types of files - using two different loading functions - so this is an easy way to mix and match file types.
+Note that inside the `all` method we load two types of files - using two different loading functions - so this is an easy way to mix and match file types.
 
-The callback function passed into `await` gets each dataset as a parameter, with the first parameter being populated if an error has occurred in loading the data.
-
-It can be useful to output the error, if it is defined, so you catch data loading problems quickly.
-
-To add another data file, simply add another defer and extend the input parameters for your callback!
+The method returns an array of our data sources. The first item returns our cities; the second, our animals.
 
 
 ## Next Task
@@ -164,6 +149,6 @@ To add another data file, simply add another defer and extend the input paramete
 
 ## See Also
 
-- [D3 documentation](https://github.com/d3/d3-request)
-- [Loading XML with D3](https://github.com/d3/d3-request#xml)
+- [D3 documentation](https://github.com/d3/d3-fetch)
+- [Loading XML with D3](https://github.com/d3/d3-fetch#xml)
 - [Loading External SVG with D3](http://bl.ocks.org/mbostock/1014829) - SVG is just XML!

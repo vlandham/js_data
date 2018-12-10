@@ -5,6 +5,6 @@ d3.csv("/data/cities.csv", function(d) {
     population : +d.population,
     land_area : +d["land area"]
   };
-}, function(data) {
+}).then(function(data) {
   console.log(data[0]);
 });

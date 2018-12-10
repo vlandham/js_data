@@ -1,2 +1,1 @@
-pipe-delimited data:
-{name: "hippo", type: "mammal", avg_weight: "3400"}
+{name: "Andy Hunt", title: "Big Boss", age: 68, bonus: true}
