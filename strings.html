@@ -86,7 +86,7 @@ city  ,state ,population,land area
 
 <p>Note the spaces in the property names as well as the values. In cases like this, it might be best to <a href="iterate_data.html">map</a> the data back to a clean version. Lodash&#39;s <a href="https://lodash.com/docs#trim">trim</a> can help. It removes that unsightly whitespace from the front and back of your strings.</p>
 <p>Here is a version of the data loading function that removes whitespace. It uses</p>
-<pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+<pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"data/cities_spaced.csv"</span>).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
   <span class="hljs-keyword">var</span> clean = data.map(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
     <span class="hljs-keyword">var</span> cleanD = {};
     d3.keys(d).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(k)</span> </span>{

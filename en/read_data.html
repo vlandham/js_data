@@ -124,7 +124,7 @@ tiger|mammal|</span><span class="hljs-number">260</span>
 hippo<span class="hljs-localvars">|mammal|</span><span class="hljs-number">3400</span>
 komodo dragon<span class="hljs-localvars">|reptile|</span><span class="hljs-number">150</span>
 </code></pre><p>We first provide <code>d3.dsv</code> with the delimiter, in this case, a pipe (<code>|</code>), then read in our file:</p>
-<pre><code class="lang-javascript">d3.dsv(<span class="hljs-string">"|"</span>, <span class="hljs-string">"/data/animals.txt"</span>).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span></span>{
+<pre><code class="lang-javascript">d3.dsv(<span class="hljs-string">"|"</span>, <span class="hljs-string">"/data/animals_piped.txt"</span>).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span></span>{
   <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">1</span>]);
 });
 

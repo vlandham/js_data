@@ -134,8 +134,10 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <p>Also, as we no longer need <code>brand_id</code> after the lookup has been done, we can safely delete it.</p>
 <p>If we want to join by more than one attribute, we can modify the filter function to achieve this. Hypothetically, this might look something like:</p>
 <pre><code class="lang-js">innerArray.filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(innerArrayItem)</span> </span>{
-    <span class="hljs-keyword">return</span> innerArrayItem.idA === outerArrayItem.idA &amp;&amp;
-        innerArrayItem.idB === outerArrayItem.idB;
+  <span class="hljs-keyword">return</span> (
+    innerArrayItem.idA === outerArrayItem.idA &amp;&amp;
+    innerArrayItem.idB === outerArrayItem.idB
+  );
 });
 </code></pre>
 <h3 id="using-a-generic-and-more-efficient-approach">Using a generic and more efficient approach</h3>
@@ -198,19 +200,14 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 
 </code></pre><p>Note that we don&#39;t modify <code>articles</code> <em>in place</em> but create a new array.</p>
 <h2 id="add-together-rows-from-different-data-sets">Add together rows from different data sets</h2>
-<p>Let&#39;s say we want to load a huge data set from the server, but because of network performance reasons, we load it in three chunks and reassemble it on the client side. Using Queue.js, as illustrated in <a href="read_data.html">reading in data</a>, we get the data and immediately combine it. For this, we can use D3&#39;s <code>merge</code> to combine the single arrays one after another. In database terms, this operation is called &quot;union&quot;.</p>
-<pre><code class="lang-javascript">d3.queue()
-    .defer(d3.csv, <span class="hljs-string">"/data/big_data_1.csv"</span>)
-    .defer(d3.csv, <span class="hljs-string">"/data/big_data_2.csv"</span>)
-    .defer(d3.csv, <span class="hljs-string">"/data/big_data_3.csv"</span>)
-    .await(combine);
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">combine</span><span class="hljs-params">(error, big_data_1, big_data_2, big_data_3)</span> </span>{
-    <span class="hljs-keyword">if</span> (error) {
-        <span class="hljs-built_in">console</span>.log(error);
-    }
-    <span class="hljs-built_in">console</span>.log(d3.merge([big_data_1, big_data_2, big_data_3]));
-}
+<p>Let&#39;s say we want to load a huge data set from the server, but because of network performance reasons, we load it in three chunks and reassemble it on the client side. With D3v5 and later, we can use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">Promise.all()</a> to run many requests concurrently, combining them after they have finished downloading using <a href="https://github.com/d3/d3-array/blob/master/README.md#merge">d3.merge()</a>. Note that <code>Promise.all()</code> takes an array of Promises, in this case supplied by calls to <code>d3.csv()</code>.</p>
+<pre><code class="lang-javascript">Promise.all([
+    d3.csv(<span class="hljs-string">"/data/big_data_1.csv"</span>),
+    d3.csv(<span class="hljs-string">"/data/big_data_2.csv"</span>),
+    d3.csv(<span class="hljs-string">"/data/big_data_3.csv"</span>)
+]).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(allData)</span> </span>{
+    <span class="hljs-built_in">console</span>.log(d3.merge(allData));
+});
 
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> [{<span class="hljs-string">"a"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"1"</span>, <span class="hljs-string">"b"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"2"</span>},{<span class="hljs-string">"a"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"3"</span>, <span class="hljs-string">"b"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"4"</span>},{<span class="hljs-string">"a"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"5"</span>, <span class="hljs-string">"b"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"6"</span>}]
@@ -234,7 +231,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
     <span class="hljs-string">'weight'</span>: <span class="hljs-number">1.9</span>
 }];
 </code></pre>
-<p>So in both data sets we essentially have separate information about the same conceptual entities, thus it makes sense to &quot;merge&quot; them, for which we can use  lodash&#39;s <code>merge</code> function:</p>
+<p>So in both data sets we essentially have separate information about the same conceptual entities, thus it makes sense to &quot;merge&quot; them, for which we can use lodash&#39;s <code>merge</code> function:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> result = _.merge(dataset_1, dataset_2);
 <span class="hljs-built_in">console</span>.log(result);
 </code></pre>

@@ -25,7 +25,7 @@ d3.tsv("/data/animals.tsv").then(function(data) {
   console.log(data[0]);
 });
 
-d3.dsv("|", "/data/animals.txt").then(function(data){
+d3.dsv("|", "/data/animals_piped.txt").then(function(data){
   console.log(data[1]);
 });
 
