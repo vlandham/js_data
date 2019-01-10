@@ -4,7 +4,7 @@ This guide teaches the basics of manipulating data using JavaScript in the
 browser, or in node.js. Specifically, these tasks are geared around preparing
 data for further analysis and visualization.
 
-This guide will demonstrate some basic techniques and how to implement them
+Here we demonstrate some basic techniques and how to implement them
 using core JavaScript API, the [d3.js](http://d3js.org/) library and [lodash](http://lodash.com/).
 
 It assumes you already have some basic knowledge of JavaScript.
@@ -47,9 +47,9 @@ Is data cleaning and processing in JavaScript something you would actually want 
 
 There are other languages out there that do a great job with data wrangling:
 
-- [R with dplyr](https://ramnathv.github.io/pycon2014-r/explore/README.html)
-- [python with pandas](http://nbviewer.ipython.org/gist/fonnesbeck/5850413)
-- [java (just kidding)]()
+- [R with the Tidyverse](https://www.tidyverse.org/)
+- [Python with pandas](http://nbviewer.ipython.org/gist/fonnesbeck/5850413)
+- [Java (just kidding)]()
 
 These tools are great and you should use them. Often times, however, you are already familiar with a particular language (like JavaScript) and would like to get started with data, but want to take it one step at a time.
 
@@ -58,3 +58,17 @@ Additionally, sometimes you are already in a particular environment (like JavaSc
 In these cases, JavaScript could be considered a viable option for your data analysis. And if you find yourself in one of these situations, or just want to try out JavaScript for data analysis for fun, then _this guide is for you_!
 
 Check out some of the tasks, and see if JavaScript Data something you want to try yourself.
+
+## Thanks!
+
+This guide is the result of quite a team effort.
+
+Its inspiration came from a ponderous tweet by the one and only [Lynn Cherney](http://ghostweather.com/), who lamented the dirth of JavaScript data guidance at the time.
+
+The beautiful folks at [Bocoup](https://bocoup.com/) are the reason this guide exists. They had the foresight to provide the all important luxury of time so that it could be written. Thanks to [Jory Burson](https://bocoup.com/about/bocouper/jory-burson) and [Boaz Sender](https://bocoup.com/about/bocouper/boaz-sender) for creating a culture that gave space for these kinds of things to be created.
+
+The bulk of this guide was written while at Bocoup by [Irene Ros](https://medium.com/@ireneros), [Yannick Assogba](http://clome.info/), and [Jim Vallandingham](http://vallandingham.me/).
+
+Since that time, we have had [numerous other contributors](https://github.com/vlandham/js_data/graphs/contributors), who have seen something to improve, and made us all better for their help.
+
+Perhaps hackneyed, but almost always true - It takes a village. So to that village we want to say, "Thanks!".
