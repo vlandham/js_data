@@ -6,9 +6,9 @@ Often, you have to combine two or more different data sets because they contain 
 
 Combining or _merging_ data may involve one of the following tasks:
 
-* Combine data sets by one or more common attributes
-* Add together rows from different data sets
-* Combine attributes from different data sets
+- Combine data sets by one or more common attributes
+- Add together rows from different data sets
+- Combine attributes from different data sets
 
 ## Combine data sets by one or more common attributes
 
@@ -20,13 +20,13 @@ And of the following brands:
 
 @@ code=combine_data/combine_data.02.js @@
 
-As you can see, in each article, `brand_id` points to a particular brand, whose details are saved in another data set - which can be considered a *lookup table* in this case. This is often how separate data schemes are stored in a server-side database. Also note that the last article in the list has a `brand_id` for which no brand is stored in `brands`.
+As you can see, in each article, `brand_id` points to a particular brand, whose details are saved in another data set - which can be considered a _lookup table_ in this case. This is often how separate data schemes are stored in a server-side database. Also note that the last article in the list has a `brand_id` for which no brand is stored in `brands`.
 
 What we want to do now is to combine both datasets, so we can reference the brand's `name` directly from an article. There are several ways to achieve this.
 
 ### Using native `Array` functions
 
-We can implement a simple join (*left outer join* in database terms) using native, i.e., already existing `Array` functions as follows. The method presented here modifies the `articles` array *in place* by adding a new key-value-pair for `brand`.
+We can implement a simple join (_left outer join_ in database terms) using native, i.e., already existing `Array` functions as follows. The method presented here modifies the `articles` array _in place_ by adding a new key-value-pair for `brand`.
 
 @@ code=combine_data/combine_data.03.js @@
 
@@ -40,8 +40,10 @@ If we want to join by more than one attribute, we can modify the filter function
 
 ```js
 innerArray.filter(function(innerArrayItem) {
-    return innerArrayItem.idA === outerArrayItem.idA &&
-        innerArrayItem.idB === outerArrayItem.idB;
+  return (
+    innerArrayItem.idA === outerArrayItem.idA &&
+    innerArrayItem.idB === outerArrayItem.idB
+  );
 });
 ```
 
@@ -57,11 +59,11 @@ Because above defined function creates an index for the `lookupTable` (in our ca
 
 @@ code=combine_data/combine_data.05.out @@
 
-Note that we don't modify `articles` *in place* but create a new array.
+Note that we don't modify `articles` _in place_ but create a new array.
 
 ## Add together rows from different data sets
 
-Let's say we want to load a huge data set from the server, but because of network performance reasons, we load it in three chunks and reassemble it on the client side. Using Queue.js, as illustrated in [reading in data](read_data.html), we get the data and immediately combine it. For this, we can use D3's `merge` to combine the single arrays one after another. In database terms, this operation is called "union".
+Let's say we want to load a huge data set from the server, but because of network performance reasons, we load it in three chunks and reassemble it on the client side. With D3v5 and later, we can use [Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) to run many requests concurrently, combining them after they have finished downloading using [d3.merge()](https://github.com/d3/d3-array/blob/master/README.md#merge). Note that `Promise.all()` takes an array of Promises, in this case supplied by calls to `d3.csv()`.
 
 @@ code=combine_data/combine_data.06.js @@
 
@@ -77,11 +79,12 @@ In the last case, we have two or more data sets that contain attributes describi
 
 @@ code=combine_data/combine_data.07a.js @@
 
-So in both data sets we essentially have separate information about the same conceptual entities, thus it makes sense to "merge" them, for which we can use  lodash's `merge` function:
+So in both data sets we essentially have separate information about the same conceptual entities, thus it makes sense to "merge" them, for which we can use lodash's `merge` function:
 
 @@ code=combine_data/combine_data.07b.js @@
 
 @@ code=combine_data/combine_data.07.out @@
+
 <div class="aside">This code is using lodash</div>
 
 ## Next Task

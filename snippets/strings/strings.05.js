@@ -1,4 +1,4 @@
-d3.csv("data/cities_spaced.csv", function(data) {
+d3.csv("data/cities_spaced.csv").then(function(data) {
   var clean = data.map(function(d) {
     var cleanD = {};
     d3.keys(d).forEach(function(k) {
