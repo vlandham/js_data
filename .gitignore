@@ -3,3 +3,4 @@ build/*
 public/*
 .grunt/*
 npm-debug.log
+.DS_Store
