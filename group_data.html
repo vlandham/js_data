@@ -63,12 +63,14 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
   {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34.10</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/04/2016"</span>},
   {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">44.80</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/05/2016"</span>}
 ];
+
 </code></pre>
 <p>And now we want to slice up this data in different ways.</p>
 <p>First, let&#39;s use nest to group by <code>name</code>:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> expensesByName = d3.nest()
   .key(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.name; })
   .entries(expenses);
+
 </code></pre>
 <div class="aside">This code is using d3.js</div>
 
@@ -87,6 +89,7 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
     {<span class="hljs-string">"name"</span>:<span class="hljs-string">"stacy"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">44.80</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"01/05/2016"</span>}
   ]}
 ];
+
 </code></pre>
 <p><code>expensesByName</code> is an array of objects. Each object has a <code>key</code> property - which is what we used as the grouping value using the <code>key</code> function. Here, we used the values associated with the <code>name</code> property as the key.</p>
 <p>The <code>values</code> property of these entries is an array containing all the original data objects that had that key.</p>
@@ -99,8 +102,11 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
   .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> v.length; })
   .entries(expenses);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesCount));
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> [{<span class="hljs-string">"key"</span><span class="hljs-symbol">:<span class="hljs-string">"jim"</span></span>,<span class="hljs-string">"values"</span><span class="hljs-symbol">:</span><span class="hljs-number">2</span>},{<span class="hljs-string">"key"</span><span class="hljs-symbol">:<span class="hljs-string">"carl"</span></span>,<span class="hljs-string">"values"</span><span class="hljs-symbol">:</span><span class="hljs-number">1</span>},{<span class="hljs-string">"key"</span><span class="hljs-symbol">:<span class="hljs-string">"stacy"</span></span>,<span class="hljs-string">"values"</span><span class="hljs-symbol">:</span><span class="hljs-number">3</span>}]
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>The individual records are gone (for better or worse) and in their place are the values returned by our rollup function. The naming stays the same (<em>key</em> and <em>values</em>) but the content is yours to specify. Note that the value passed into the <code>rollup</code> callback is the array of values for that key.</p>
@@ -110,8 +116,11 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
   .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.mean(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
   .entries(expenses);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesAvgAmount));
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> [{<span class="hljs-string">"key"</span><span class="hljs-symbol">:<span class="hljs-string">"jim"</span></span>,<span class="hljs-string">"values"</span><span class="hljs-symbol">:</span><span class="hljs-number">39.5</span>},{<span class="hljs-string">"key"</span><span class="hljs-symbol">:<span class="hljs-string">"carl"</span></span>,<span class="hljs-string">"values"</span><span class="hljs-symbol">:</span><span class="hljs-number">120.11</span>},{<span class="hljs-string">"key"</span><span class="hljs-symbol">:<span class="hljs-string">"stacy"</span></span>,<span class="hljs-string">"values"</span><span class="hljs-symbol">:</span><span class="hljs-number">30.3</span>}]
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>Pretty cool right? Any roll-up function you can think of, you can make happen. And you don&#39;t need to stop at just one. <code>rollup</code> can return an object, so you can easily produce multiple metrics on your groups.</p>
@@ -124,10 +133,13 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
   }; })
   .entries(expenses);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expenseMetrics));
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> [{<span class="hljs-string">"key"</span><span class="hljs-symbol">:<span class="hljs-string">"jim"</span></span>,<span class="hljs-string">"values"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"count"</span><span class="hljs-symbol">:</span><span class="hljs-number">2</span>,<span class="hljs-string">"total"</span><span class="hljs-symbol">:</span><span class="hljs-number">79</span>,<span class="hljs-string">"avg"</span><span class="hljs-symbol">:</span><span class="hljs-number">39.5</span>}},
  {<span class="hljs-string">"key"</span><span class="hljs-symbol">:<span class="hljs-string">"carl"</span></span>,<span class="hljs-string">"values"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"count"</span><span class="hljs-symbol">:</span><span class="hljs-number">1</span>,<span class="hljs-string">"total"</span><span class="hljs-symbol">:</span><span class="hljs-number">120.11</span>,<span class="hljs-string">"avg"</span><span class="hljs-symbol">:</span><span class="hljs-number">120.11</span>}},
  {<span class="hljs-string">"key"</span><span class="hljs-symbol">:<span class="hljs-string">"stacy"</span></span>,<span class="hljs-string">"values"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"count"</span><span class="hljs-symbol">:</span><span class="hljs-number">3</span>,<span class="hljs-string">"total"</span><span class="hljs-symbol">:</span><span class="hljs-number">90.9</span>,<span class="hljs-string">"avg"</span><span class="hljs-symbol">:</span><span class="hljs-number">30.3</span>}}]
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <h2 id="object-output">Object Output</h2>
@@ -137,8 +149,11 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
   .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
   .object(expenses);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesTotal));
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"jim"</span><span class="hljs-symbol">:</span><span class="hljs-number">79</span>,<span class="hljs-string">"carl"</span><span class="hljs-symbol">:</span><span class="hljs-number">120.11</span>,<span class="hljs-string">"stacy"</span><span class="hljs-symbol">:</span><span class="hljs-number">90.9</span>}
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>And if you want to get real fancy, take a look at <a href="https://github.com/d3/d3-collection#nest_map">nest.map</a> for getting a <a href="https://github.com/d3/d3-collection#map">d3.map</a> instance back.</p>
@@ -151,10 +166,13 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
   .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
   .object(expenses);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesTotalByDay));
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"jim"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"11/12/2015"</span><span class="hljs-symbol">:</span><span class="hljs-number">34</span>,<span class="hljs-string">"12/01/2015"</span><span class="hljs-symbol">:</span><span class="hljs-number">45</span>},
  <span class="hljs-string">"carl"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"11/12/2015"</span><span class="hljs-symbol">:</span><span class="hljs-number">120.11</span>},
  <span class="hljs-string">"stacy"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"01/04/2016"</span><span class="hljs-symbol">:</span><span class="hljs-number">46.1</span>,<span class="hljs-string">"01/05/2016"</span><span class="hljs-symbol">:</span><span class="hljs-number">44.8</span>}}
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>Now the <code>rollup</code> callback is called for each of our smaller subgroups.</p>
@@ -165,11 +183,14 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
   .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
   .object(expenses);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesTotalByDay));
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"11/12/2015"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"jim"</span><span class="hljs-symbol">:</span><span class="hljs-number">34</span>,<span class="hljs-string">"carl"</span><span class="hljs-symbol">:</span><span class="hljs-number">120.11</span>},
  <span class="hljs-string">"12/01/2015"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"jim"</span><span class="hljs-symbol">:</span><span class="hljs-number">45</span>},
  <span class="hljs-string">"01/04/2016"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"stacy"</span><span class="hljs-symbol">:</span><span class="hljs-number">46.1</span>},
  <span class="hljs-string">"01/05/2016"</span><span class="hljs-symbol">:</span>{<span class="hljs-string">"stacy"</span><span class="hljs-symbol">:</span><span class="hljs-number">44.8</span>}}
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>Here the values are the same, but the mapping might be more convenient, depending on the questions you are trying to answer.</p>
@@ -181,8 +202,11 @@ stacy,<span class="hljs-number">44.80</span>,<span class="hljs-number">01</span>
   .rollup(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(v)</span> </span>{ <span class="hljs-keyword">return</span> d3.sum(v, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.amount; }); })
   .object(expenses);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(expensesByYear));
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"2015"</span><span class="hljs-symbol">:</span><span class="hljs-number">199.11</span>,<span class="hljs-string">"2016"</span><span class="hljs-symbol">:</span><span class="hljs-number">90.9</span>}
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>All this flexibility provides for a powerful toolkit for exploring your data.</p>

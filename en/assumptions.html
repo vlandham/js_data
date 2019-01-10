@@ -57,6 +57,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
   }
   <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 }
+
 </code></pre>
 <p>This will output a given message if the input is not true. Typically assertions <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw">throw</a> errors, but we can just log it for explaining purposes.</p>
 <h2 id="data-content-assumptions">Data Content Assumptions</h2>
@@ -70,6 +71,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
               <span class="hljs-string">"age"</span>:<span class="hljs-literal">NaN</span>,
               <span class="hljs-string">"superhuman"</span>:<span class="hljs-string">"TRUE"</span>}
 ];
+
 </code></pre>
 <p>Our first entry looks ok, where our second entry has some problems. The age parsing for the immortal <a href="http://en.wikipedia.org/wiki/Sleepwalker_%28comics%29">Sleepwalker</a> has left him with no age. Also, bad input data has left us with a string in <code>superhuman</code>, where we expect a boolean.</p>
 <p>A simple assumption checking function that could be run on this data could look something like this:</p>
@@ -84,9 +86,12 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 }
 
 checkDataContent(data);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-string">"name"</span><span class="hljs-symbol">:<span class="hljs-string">"Sleepwalker"</span></span>,<span class="hljs-string">"age"</span><span class="hljs-symbol">:null</span>,<span class="hljs-string">"superhuman"</span><span class="hljs-symbol">:<span class="hljs-string">"TRUE"</span></span>} has a bad age - should not be <span class="hljs-constant">NaN</span>
 {<span class="hljs-string">"name"</span><span class="hljs-symbol">:<span class="hljs-string">"Sleepwalker"</span></span>,<span class="hljs-string">"age"</span><span class="hljs-symbol">:null</span>,<span class="hljs-string">"superhuman"</span><span class="hljs-symbol">:<span class="hljs-string">"TRUE"</span></span>} has a bad superhuman - should be boolean
+
+
 </code></pre><div class="aside">This code is using lodash</div>
 
 
@@ -103,19 +108,24 @@ checkDataContent(data);
 }
 
 checkDataShape(data);
+
 </code></pre>
 <pre><code>=&gt; <span class="hljs-typedef"><span class="hljs-keyword">data</span> is too small</span>
 <span class="hljs-title">wrong</span> number <span class="hljs-keyword">of</span> columns
+
+
 </code></pre><p>The two assumption functions could easily be combined into one, but it&#39;s important to look at both aspects of your data.</p>
 <h2 id="data-equality-assumptions">Data Equality Assumptions</h2>
 <p>Finally, its often useful to check assumptions about data objects being equal. Lodash comes to the rescue again with the <a href="https://lodash.com/docs/4.17.4#isEqual">isEqual</a> function:</p>
 <pre><code class="lang-javascript"><span class="hljs-built_in">console</span>.log(_.isEqual({ tea: <span class="hljs-string">'green'</span> }, { tea: <span class="hljs-string">'green'</span> }));
 
 <span class="hljs-built_in">console</span>.log(_.isEqual({ tea: <span class="hljs-string">'earl'</span> }, { tea: <span class="hljs-string">'green'</span> }));
+
 </code></pre>
 <pre><code>=&gt; <span class="hljs-keyword">true</span>
 
 <span class="hljs-keyword">false</span>
+
 </code></pre><h2 id="more-assertions">More Assertions</h2>
 <p>If this is an approach that appeals to you, it might be worth exploring more powerful assertion libraries.</p>
 <p>One such tool is <a href="http://chaijs.com/api/assert/">Chai</a> which comes with a great

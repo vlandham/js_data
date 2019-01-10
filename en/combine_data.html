@@ -78,6 +78,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
     <span class="hljs-string">"price"</span>: <span class="hljs-number">899.9</span>,
     <span class="hljs-string">"brand_id"</span>: <span class="hljs-number">3</span>
 }];
+
 </code></pre>
 <p>And of the following brands:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> brands = [{
@@ -87,6 +88,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
     <span class="hljs-string">"id"</span>: <span class="hljs-number">2</span>,
     <span class="hljs-string">"name"</span>: <span class="hljs-string">"HomeSweetHome"</span>
 }];
+
 </code></pre>
 <p>As you can see, in each article, <code>brand_id</code> points to a particular brand, whose details are saved in another data set - which can be considered a <em>lookup table</em> in this case. This is often how separate data schemes are stored in a server-side database. Also note that the last article in the list has a <code>brand_id</code> for which no brand is stored in <code>brands</code>.</p>
 <p>What we want to do now is to combine both datasets, so we can reference the brand&#39;s <code>name</code> directly from an article. There are several ways to achieve this.</p>
@@ -100,6 +102,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
     article.brand = (result[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span>) ? result[<span class="hljs-number">0</span>].name : <span class="hljs-literal">null</span>;
 });
 <span class="hljs-built_in">console</span>.log(articles);
+
 </code></pre>
 <pre><code>=&gt; [{
     <span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>,
@@ -126,6 +129,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
     <span class="hljs-string">"price"</span>: <span class="hljs-number">899.9</span>,
     <span class="hljs-string">"brand"</span>: <span class="hljs-keyword">null</span>
 }];
+
 </code></pre><p>First, we loop over each <code>article</code>, where we take its <code>brand_id</code> to look up the corresponding <code>brand</code> using the native <code>filter</code> function. Note that this function returns an array and we expect it to have only one element. In case there is no corresponding <code>brand</code>, <code>result[0]</code> will be <code>undefined</code>, and in order to prevent an error (something like <code>result[0] is undefined</code>), we use the ternary operator.</p>
 <p>Also, as we no longer need <code>brand_id</code> after the lookup has been done, we can safely delete it.</p>
 <p>If we want to join by more than one attribute, we can modify the filter function to achieve this. Hypothetically, this might look something like:</p>
@@ -152,6 +156,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
     }
     <span class="hljs-keyword">return</span> output;
 };
+
 </code></pre>
 <p>Because above defined function creates an index for the <code>lookupTable</code> (in our case <code>brands</code>) in the first iteration, it runs considerably faster than the previously shown method. Also, via a callback, it allows us to directly define which keys (or &quot;attributes&quot;) we want to retain in the resulting, joined array (<code>output</code>). It is used like so:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> result = join(brands, articles, <span class="hljs-string">"id"</span>, <span class="hljs-string">"brand_id"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(article, brand)</span> </span>{
@@ -190,6 +195,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
     <span class="hljs-string">"price"</span>: <span class="hljs-number">899.9</span>,
     <span class="hljs-string">"brand"</span>: <span class="hljs-keyword">null</span>
 }];
+
 </code></pre><p>Note that we don&#39;t modify <code>articles</code> <em>in place</em> but create a new array.</p>
 <h2 id="add-together-rows-from-different-data-sets">Add together rows from different data sets</h2>
 <p>Let&#39;s say we want to load a huge data set from the server, but because of network performance reasons, we load it in three chunks and reassemble it on the client side. Using Queue.js, as illustrated in <a href="read_data.html">reading in data</a>, we get the data and immediately combine it. For this, we can use D3&#39;s <code>merge</code> to combine the single arrays one after another. In database terms, this operation is called &quot;union&quot;.</p>
@@ -205,6 +211,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
     }
     <span class="hljs-built_in">console</span>.log(d3.merge([big_data_1, big_data_2, big_data_3]));
 }
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> [{<span class="hljs-string">"a"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"1"</span>, <span class="hljs-string">"b"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"2"</span>},{<span class="hljs-string">"a"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"3"</span>, <span class="hljs-string">"b"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"4"</span>},{<span class="hljs-string">"a"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"5"</span>, <span class="hljs-string">"b"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"6"</span>}]
 </code></pre><div class="aside">This code is using d3.js</div>

@@ -49,9 +49,11 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <p>D3 has <a href="https://github.com/d3/d3-time-format#timeParse">d3.timeParse</a> which provides a way to do this parsing. It was a little confusing for me the first time I tried it. You use this function to create a string parser, and then use the parser to actually convert the string.</p>
 <p>In our <a href="group_data.html">nesting example</a>, we saw data that had dates as strings:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> expense = {<span class="hljs-string">"name"</span>:<span class="hljs-string">"jim"</span>,<span class="hljs-string">"amount"</span>:<span class="hljs-number">34</span>,<span class="hljs-string">"date"</span>:<span class="hljs-string">"11/12/2015"</span>};
+
 </code></pre>
 <p>To convert this date string to a Date object, we would need a parser that looks like:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> parser = d3.timeParse(<span class="hljs-string">"%m/%d/%Y"</span>);
+
 </code></pre>
 <div class="aside">This code is using d3.js</div>
 
@@ -60,8 +62,11 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <p>Next we use the parser to parse our string.</p>
 <pre><code class="lang-javascript">expense.date = parser(expense.date);
 <span class="hljs-built_in">console</span>.log(expense);
+
 </code></pre>
 <pre><code>=&gt; {<span class="hljs-string">name:</span> <span class="hljs-string">"jim"</span>, <span class="hljs-string">amount:</span> <span class="hljs-number">34</span>, <span class="hljs-string">date:</span> Thu Nov <span class="hljs-number">12</span> <span class="hljs-number">2015</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT-<span class="hljs-number">0500</span> (EST)}
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>Note that the returned value of the <code>d3.timeParse</code> function is itself a function, so we can just pass our date string to this function directly.</p>
@@ -71,36 +76,51 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <p>Just the date:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> date = d3.timeParse(<span class="hljs-string">"%A, %B %-d, %Y"</span>)(<span class="hljs-string">"Wednesday, November 12, 2014"</span>);
 <span class="hljs-built_in">console</span>.log(date);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-constant">Wed</span> <span class="hljs-constant">Nov</span> <span class="hljs-number">12</span> <span class="hljs-number">2014</span> <span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span> <span class="hljs-constant">GMT</span>-<span class="hljs-number">0500</span> (<span class="hljs-constant">EST</span>)
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>The little dash in front of the <code>d</code> is to remove the 0-padding)</p>
 <pre><code class="lang-javascript">date = d3.timeParse(<span class="hljs-string">"%m/%y"</span>)(<span class="hljs-string">"12/14"</span>);
 <span class="hljs-built_in">console</span>.log(date);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-constant">Mon</span> <span class="hljs-constant">Dec</span> <span class="hljs-number">01</span> <span class="hljs-number">2014</span> <span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span> <span class="hljs-constant">GMT</span>-<span class="hljs-number">0500</span> (<span class="hljs-constant">EST</span>)
+
+
 </code></pre><p>You can see it defaults to the first day of the month.</p>
 <p>Just the time:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> time = d3.timeParse(<span class="hljs-string">"%I:%M%p"</span>)(<span class="hljs-string">"12:34pm"</span>);
 <span class="hljs-built_in">console</span>.log(time);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-constant">Mon</span> <span class="hljs-constant">Jan</span> <span class="hljs-number">01</span> <span class="hljs-number">1900</span> <span class="hljs-number">12</span><span class="hljs-symbol">:</span><span class="hljs-number">34</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span> <span class="hljs-constant">GMT</span>-<span class="hljs-number">0500</span> (<span class="hljs-constant">EST</span>)
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>Gives you a somewhat strange default date.</p>
 <p>Date and time:</p>
 <pre><code class="lang-javascript">time = d3.timeParse(<span class="hljs-string">"%m/%d/%Y %H:%M:%S %p"</span>)(<span class="hljs-string">"1/2/2014 8:22:05 AM"</span>);
 <span class="hljs-built_in">console</span>.log(time);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-constant">Thu</span> <span class="hljs-constant">Jan</span> <span class="hljs-number">02</span> <span class="hljs-number">2014</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">22</span><span class="hljs-symbol">:</span><span class="hljs-number">05</span> <span class="hljs-constant">GMT</span>-<span class="hljs-number">0500</span> (<span class="hljs-constant">EST</span>)
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>This could also be done using some built in short-hands:</p>
 <pre><code class="lang-javascript">time = d3.timeParse(<span class="hljs-string">"%x %X"</span>)(<span class="hljs-string">"1/2/2014 8:22:05 AM"</span>);
 <span class="hljs-built_in">console</span>.log(time);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-constant">Thu</span> <span class="hljs-constant">Jan</span> <span class="hljs-number">02</span> <span class="hljs-number">2014</span> 08<span class="hljs-symbol">:</span><span class="hljs-number">22</span><span class="hljs-symbol">:</span><span class="hljs-number">05</span> <span class="hljs-constant">GMT</span>-<span class="hljs-number">0500</span> (<span class="hljs-constant">EST</span>)
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>You can see that <code>d3.timeParse</code> gives you a lot of flexibility about what your time string will look like.</p>
@@ -113,15 +133,21 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <span class="hljs-keyword">var</span> time = hourParser(<span class="hljs-string">"10:34pm"</span>);
 <span class="hljs-keyword">var</span> hour = d3.timeHour.round(time);
 <span class="hljs-built_in">console</span>.log(hour);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-constant">Mon</span> <span class="hljs-constant">Jan</span> <span class="hljs-number">01</span> <span class="hljs-number">1900</span> <span class="hljs-number">23</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span> <span class="hljs-constant">GMT</span>-<span class="hljs-number">0500</span>
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>It returns a date object that just contains the nearest hour (11:00pm). We can display this by using a <a href="https://github.com/d3/d3-time-format#timeFormat">d3.timeFormat</a> to format the date object into a string.</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> hourFormater = d3.timeFormat(<span class="hljs-string">"%I:%M%p"</span>)
 <span class="hljs-built_in">console</span>.log(hourFormater(hour));
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">11</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span>PM
+
+
 </code></pre><h2 id="moment-js">Moment.js</h2>
 <p><a href="http://momentjs.com/">Moment.js</a> is another JavaScript library that could be better suited to your needs, if you happen to be doing a lot of time manipulations. Its syntax and capabilities seem a bit more intuitive for certain <a href="http://momentjs.com/docs/#/manipulating/">time manipulations</a>.</p>
 <p>Check it out if you need more time control power!</p>

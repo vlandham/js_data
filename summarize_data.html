@@ -51,26 +51,36 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
   {<span class="hljs-string">"city"</span>:<span class="hljs-string">"boston"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"MA"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">645966</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">48.3</span>},
   {<span class="hljs-string">"city"</span>:<span class="hljs-string">"kansas city"</span>, <span class="hljs-string">"state"</span>:<span class="hljs-string">"MO"</span>, <span class="hljs-string">"population"</span>:<span class="hljs-number">467007</span>, <span class="hljs-string">"land_area"</span>:<span class="hljs-number">315</span>}
 ];
+
 </code></pre>
 <h2 id="min-max">Min &amp; Max</h2>
 <p>As it turns out, D3 comes to the rescue again, with <a href="https://github.com/d3/d3-array#min">d3.min</a> and <a href="https://github.com/d3/d3-array#max">d3.max</a>. Use the callback function to indicate which property (or computed value based on the properties) to access.</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> minLand = d3.min(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
 <span class="hljs-built_in">console</span>.log(minLand);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">48.3</span>
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> maxLand = d3.max(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
 <span class="hljs-built_in">console</span>.log(maxLand);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">315</span>
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>If you want both of them at the same time, you can use <a href="https://github.com/d3/d3-array#extent">d3.extent</a></p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> landExtent = d3.extent(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
 <span class="hljs-built_in">console</span>.log(landExtent);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-number">48.3</span>, <span class="hljs-number">315</span>]
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p>This returns an array with the first element the minimum value and the second element the maximum.</p>
@@ -79,22 +89,31 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
 <p><a href="https://github.com/d3/d3-array#mean">d3.mean</a></p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> landAvg = d3.mean(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
 <span class="hljs-built_in">console</span>.log(landAvg);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">187.45</span>
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p><a href="https://github.com/d3/d3-array#median">d3.median</a></p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> landMed = d3.median(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
 <span class="hljs-built_in">console</span>.log(landMed);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">193.25</span>
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p><a href="https://github.com/d3/d3-array#deviation">d3.deviation</a> - for standard deviation</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> landSD = d3.deviation(data, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.land_area; });
 <span class="hljs-built_in">console</span>.log(landSD);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">140.96553952414519</span>
+
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <h2 id="next-task">Next Task</h2>

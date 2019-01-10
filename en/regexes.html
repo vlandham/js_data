@@ -50,18 +50,21 @@ addresses.</p>
 <h2 id="finding-strings">Finding Strings</h2>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">"how much wood would a woodchuck chuck if a woodchuck could chuck wood"</span>;
 <span class="hljs-keyword">var</span> regex = <span class="hljs-regexp">/wood/</span>;
+
 </code></pre>
 <p>If we want to know whether the string &quot;wood&quot; appears in our larger string <code>str</code> we
 could do the following</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">if</span> (regex.test(str)) {
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"we found 'wood' in the string!"</span>);
 }
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-string">"we found 'wood' in the string!"</span>
 </code></pre><p>To see the actual matches we found in the string, we can use the <code>match</code> method
 to find all matches available:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> matches = str.match(regex);
 <span class="hljs-built_in">console</span>.log(matches);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-string">"wood"</span>]
 </code></pre><p>Note that this only returned one match, even though the word &quot;wood&quot; appears several
@@ -69,6 +72,7 @@ times in our original string. In order to find all individual instances of wood,
 to add the global flag, which we can do by adding a <code>g</code> to the end of our expression:</p>
 <pre><code class="lang-javascript">regex = <span class="hljs-regexp">/wood/g</span>;
 <span class="hljs-built_in">console</span>.log(str.match(regex));
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-string">"wood"</span>, <span class="hljs-string">"wood"</span>, <span class="hljs-string">"wood"</span>, <span class="hljs-string">"wood"</span>]
 </code></pre><p>Now, note that two of those matches actually belonged to the word &quot;woodchuck&quot;, which
@@ -76,6 +80,7 @@ was not a part of our results. If we wanted to extend our regular expression to 
 we could do so in a few ways:</p>
 <pre><code class="lang-javascript">regex = <span class="hljs-regexp">/wood.*?\b/g</span>;
 <span class="hljs-built_in">console</span>.log(str.match(regex));
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-string">"wood"</span>, <span class="hljs-string">"woodchuck"</span>, <span class="hljs-string">"woodchuck"</span>, <span class="hljs-string">"wood"</span>]
 </code></pre><p>In this regular expression we are matching everything that starts with the string &quot;wood&quot;
@@ -83,6 +88,7 @@ followed by 0 or more characters (<code>.*?</code>) until a word break (<code>\b
 Alternatively, we could also just search for both words:</p>
 <pre><code class="lang-javascript">regex = <span class="hljs-regexp">/woodchuck|wood/g</span>;
 <span class="hljs-built_in">console</span>.log(str.match(regex));
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> [<span class="hljs-string">"wood"</span>, <span class="hljs-string">"woodchuck"</span>, <span class="hljs-string">"woodchuck"</span>, <span class="hljs-string">"wood"</span>]
 </code></pre><p>Note the order in which we did the last search. We used the word &quot;woodchuch&quot; before
@@ -95,6 +101,7 @@ end up with <code>[&quot;wood&quot;, &quot;wood&quot;, &quot;wood&quot;, &quot;w
 <pre><code class="lang-javascript">regex = <span class="hljs-regexp">/wood/g</span>;
 <span class="hljs-keyword">var</span> newstr = str.replace(regex, <span class="hljs-string">"nun"</span>);
 <span class="hljs-built_in">console</span>.log(newstr);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-string">"how much nun would a nunchuck chuck if a nunchuck could chuck nun"</span>
 </code></pre><p>Probably not what you&#39;d be going for, but you get our drift.</p>
@@ -106,10 +113,12 @@ For example, if we wanted to extract the total amount of money spent
 on groceries from this message:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> message = <span class="hljs-string">"I bought a loaf of bread for $3.99, some milk for $2.49 and"</span> +
   <span class="hljs-string">"a box of chocolate cookies for $6.95"</span>;
+
 </code></pre>
 <p>we could define a regular expression that looks for dollar amounts by defining a
 pattern like so.</p>
 <pre><code class="lang-javascript">regex = <span class="hljs-regexp">/\$([0-9\.]+)\b/g</span>;
+
 </code></pre>
 <p>this pattern looks for:</p>
 <ul>
@@ -120,6 +129,7 @@ pattern like so.</p>
 <p>If we wanted to find all the matches, we could use our string <code>match</code> function like so:</p>
 <pre><code class="lang-javascript">matches = message.match(regex);
 <span class="hljs-built_in">console</span>.log(matches);
+
 </code></pre>
 <pre><code>=&gt; [<span class="hljs-string">"<span class="hljs-variable">$3</span>.99"</span>, <span class="hljs-string">"<span class="hljs-variable">$2</span>.49"</span>, <span class="hljs-string">"<span class="hljs-variable">$6</span>.95"</span>]
 </code></pre><p>This is great! We have all our dollar amounts. While this gets us 90% there, we
@@ -128,6 +138,7 @@ can&#39;t really add them with those <code>$</code> signs. To remove them, we ca
 <pre><code class="lang-javascript">matches.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(sum, value)</span> </span>{
   <span class="hljs-keyword">return</span> sum + <span class="hljs-built_in">Number</span>(value.slice(<span class="hljs-number">1</span>));
 }, <span class="hljs-number">0</span>);
+
 </code></pre>
 <pre><code><span class="hljs-status">=&gt;</span> <span class="hljs-number">13.43</span>
 </code></pre><h2 id="useful-special-characters">Useful special characters</h2>

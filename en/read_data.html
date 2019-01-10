@@ -45,7 +45,7 @@ Specifically, demonstrating tasks that are geared around preparing data for furt
     <h1 id="reading-in-data">Reading in Data</h1>
 <p>The first step in any data processing is getting the data! Here is how to parse in and prepare common input formats using D3.js</p>
 <h2 id="parsing-csv-files">Parsing CSV Files</h2>
-<p><a href="https://github.com/d3/d3/blob/master/API.md#requests-d3-request">D3 has a bunch</a> of filetypes it can support when loading data, and one of the most common is probably plain old CSV (comma separated values).</p>
+<p><a href="https://github.com/d3/d3/blob/master/API.md#fetches-d3-fetch">D3 has a bunch</a> of filetypes it can support when loading data, and one of the most common is probably plain old CSV (comma separated values).</p>
 <p>Let&#39;s say you had a csv file with some city data in it:</p>
 <pre><code class="lang-bash">cities.csv:
 
@@ -55,10 +55,11 @@ new york,NY,<span class="hljs-number">8405837</span>,<span class="hljs-number">3
 boston,MA,<span class="hljs-number">645966</span>,<span class="hljs-number">48.3</span>
 kansas city,MO,<span class="hljs-number">467007</span>,<span class="hljs-number">315.0</span>
 </code></pre>
-<p>Use <a href="https://github.com/d3/d3-request/blob/master/README.md#csv">d3.csv</a> to convert it into an array of objects</p>
-<pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"/data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+<p>Use <a href="https://github.com/d3/d3-fetch/blob/master/README.md#csv">d3.csv</a> to convert it into an array of objects</p>
+<pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"/data/cities.csv"</span>).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
   <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
 });
+
 </code></pre>
 <pre><code>=&gt; {<span class="hljs-string">city:</span> <span class="hljs-string">"seattle"</span>, <span class="hljs-string">state:</span> <span class="hljs-string">"WA"</span>, <span class="hljs-string">population:</span> <span class="hljs-string">"652405"</span>, land <span class="hljs-string">area:</span> <span class="hljs-string">"83.9"</span>}
 </code></pre><div class="aside">This code is using d3.js</div>
@@ -66,19 +67,20 @@ kansas city,MO,<span class="hljs-number">467007</span>,<span class="hljs-number"
 <p>You can see that the headers of the original CSV have been used as the property names for the data objects. Using <code>d3.csv</code> in this manner requires that your CSV file has a header row.</p>
 <p>If you look closely, you can also see that the values associated with these properties are all strings. This is probably <em>not what you want</em> in the case of numbers. When loading CSVs and other flat files, you have to do the type conversion.</p>
 <p>We will see more of this in other tasks, but a simple way to do this is to use the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus">+</a> operator (unary plus). <code>forEach</code> can be used to iterate over the data array.</p>
-<pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"/data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+<pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"/data/cities.csv"</span>).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
   data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
     d.population = +d.population;
     d[<span class="hljs-string">"land area"</span>] = +d[<span class="hljs-string">"land area"</span>];
   });
   <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
 });
+
 </code></pre>
 <pre><code>=&gt; {<span class="hljs-string">city:</span> <span class="hljs-string">"seattle"</span>, <span class="hljs-string">state:</span> <span class="hljs-string">"WA"</span>, <span class="hljs-string">population:</span> <span class="hljs-number">652405</span>, land <span class="hljs-string">area:</span> <span class="hljs-number">83.9</span>}
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">Dot notation</a> is a useful way to access the properties of these data objects. However, if your headers have spaces in them, then you will need to use bracket notation as shown.</p>
-<p>This can also be done during the loading of the data, by <code>d3.csv</code> directly. This is done by providing an accessor function to <code>d3.csv</code>, who&#39;s return value will be the individual data objects in our data array.</p>
+<p>This can also be done during the loading of the data, by <code>d3.csv</code> directly. This is done by providing an accessor function to <code>d3.csv</code>, whose return value will be the individual data objects in our data array.</p>
 <pre><code class="lang-javascript">d3.csv(<span class="hljs-string">"/data/cities.csv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> </span>{
   <span class="hljs-keyword">return</span> {
     city : d.city,
@@ -86,9 +88,10 @@ kansas city,MO,<span class="hljs-number">467007</span>,<span class="hljs-number"
     population : +d.population,
     land_area : +d[<span class="hljs-string">"land area"</span>]
   };
-}, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
   <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
 });
+
 </code></pre>
 <pre><code>=&gt; {<span class="hljs-string">city:</span> <span class="hljs-string">"seattle"</span>, <span class="hljs-string">state:</span> <span class="hljs-string">"WA"</span>, <span class="hljs-string">population:</span> <span class="hljs-number">652405</span>, <span class="hljs-string">land_area:</span> <span class="hljs-number">83.9</span>}
 </code></pre><div class="aside">This code is using d3.js</div>
@@ -98,54 +101,41 @@ kansas city,MO,<span class="hljs-number">467007</span>,<span class="hljs-number"
 <h2 id="reading-tsv-files">Reading TSV Files</h2>
 <p>CSV is probably the most common flat file format, but in no way the only one.</p>
 <p>I often like to use TSV (tab separated files) - to get around the issues of numbers and strings often having commas in them.</p>
-<p>D3 can parse TSV&#39;s with <a href="https://github.com/d3/d3-request/blob/master/README.md#tsv">d3.tsv</a>.</p>
+<p>D3 can parse TSV&#39;s with <a href="https://github.com/d3/d3-fetch/blob/master/README.md#tsv">d3.tsv</a>.</p>
 <p>Here is <code>animals.tsv</code>, as an example:</p>
 <pre><code>name    <span class="hljs-class"><span class="hljs-keyword">type</span>    <span class="hljs-title">avg_weight</span></span>
 tiger    mammal    <span class="hljs-number">260</span>
 hippo    mammal    <span class="hljs-number">3400</span>
 komodo dragon    reptile    <span class="hljs-number">150</span>
 </code></pre><p>Loading animals.tsv with <code>d3.tsv</code>:</p>
-<pre><code class="lang-javascript">d3.tsv(<span class="hljs-string">"/data/animals.tsv"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+<pre><code class="lang-javascript">d3.tsv(<span class="hljs-string">"/data/animals.tsv"</span>).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
   <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
 });
+
 </code></pre>
 <pre><code>=&gt; {<span class="hljs-string">name:</span> <span class="hljs-string">"tiger"</span>, <span class="hljs-string">type:</span> <span class="hljs-string">"mammal"</span>, <span class="hljs-string">avg_weight:</span> <span class="hljs-string">"260"</span>}
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <h2 id="reading-other-flat-files">Reading Other Flat Files</h2>
-<p>In fact, <code>d3.csv</code> and <code>d3.tsv</code> are only the tip of the iceberg. If you have a non-standard delimited flat file, you can parse them too with D3!</p>
-<p>The process takes a few more steps. First we need to use the <a href="https://github.com/d3/d3-dsv#dsvFormat">d3.dsvFormat</a> function to create a new parser that knows how to read our strangely delimited file type.</p>
-<p>For example, if we had a pipe-delimited file called <code>animals_piped.txt</code> that looked like this:</p>
+<p>In fact, <code>d3.csv</code> and <code>d3.tsv</code> are only the tip of the iceberg. If you have a non-standard delimited flat file, you can parse them too using <a href="https://github.com/d3/d3-fetch/blob/master/README.md#dsv">d3.dsv</a>!</p>
+<p>For example, here is a pipe-delimited file called <code>animals_piped.txt</code>:</p>
 <pre><code>name<span class="hljs-localvars">|type|avg_weight
 tiger|mammal|</span><span class="hljs-number">260</span>
 hippo<span class="hljs-localvars">|mammal|</span><span class="hljs-number">3400</span>
 komodo dragon<span class="hljs-localvars">|reptile|</span><span class="hljs-number">150</span>
-</code></pre><p>We could create a pipe separated values (PSV) parser using <code>d3.dsvFormat</code>:</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> psv = d3.dsvFormat(<span class="hljs-string">"|"</span>);
+</code></pre><p>We first provide <code>d3.dsv</code> with the delimiter, in this case, a pipe (<code>|</code>), then read in our file:</p>
+<pre><code class="lang-javascript">d3.dsv(<span class="hljs-string">"|"</span>, <span class="hljs-string">"/data/animals.txt"</span>).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span></span>{
+  <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">1</span>]);
+});
 
-<span class="hljs-comment">// This parser can parse pipe-delimited text:</span>
-<span class="hljs-keyword">var</span> output = psv.parse(<span class="hljs-string">"first|last\nabe|lincoln"</span>)
-<span class="hljs-built_in">console</span>.log(output[<span class="hljs-number">0</span>])
 </code></pre>
-<pre><code><span class="hljs-status">=&gt;</span> {<span class="hljs-symbol">first:</span> <span class="hljs-string">"abe"</span>, <span class="hljs-symbol">last:</span> <span class="hljs-string">"lincoln"</span>}
-</code></pre><p>Note that this handles the parsing of the text, once we have the text.</p>
-<p>The next step is to use this custom parser to build a <a href="https://github.com/d3/d3-request/blob/master/README.md#request">d3.request</a> that can read in our pipe-delimited file and parse it:</p>
-<p>And then use this to parse this pipe-delimited file.</p>
-<pre><code class="lang-javascript">d3.request(<span class="hljs-string">"/data/animals_piped.txt"</span>)
-  .mimeType(<span class="hljs-string">"text/plain"</span>)
-  .response(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(xhr)</span> </span>{ <span class="hljs-keyword">return</span> psv.parse(xhr.responseText) })
-  .get(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"pipe-delimited data:"</span>)
-    <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">1</span>]);
-  });
-</code></pre>
-<pre><code>=&gt; pipe-delimited <span class="hljs-string">data:</span>
-{<span class="hljs-string">name:</span> <span class="hljs-string">"hippo"</span>, <span class="hljs-string">type:</span> <span class="hljs-string">"mammal"</span>, <span class="hljs-string">avg_weight:</span> <span class="hljs-string">"3400"</span>}
+<pre><code>=&gt; {<span class="hljs-string">name:</span> <span class="hljs-string">"hippo"</span>, <span class="hljs-string">type:</span> <span class="hljs-string">"mammal"</span>, <span class="hljs-string">avg_weight:</span> <span class="hljs-string">"3400"</span>}
+
 </code></pre><div class="aside">This code is using d3.js</div>
 
 <h2 id="reading-json-files">Reading JSON Files</h2>
 <p>For nested data, or for passing around data where you don&#39;t want to mess with data typing, its hard to beat <a href="http://json.org/">JSON</a>.</p>
-<p>JSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with <a href="https://github.com/d3/d3-request/blob/master/README.md#json">d3.json</a> - you too can harness its power.</p>
+<p>JSON has become the language of the internet for good reason. Its easy to understand, write, and parse. And with <a href="https://github.com/d3/d3-fetch/blob/master/README.md#json">d3.json</a> - you too can harness its power.</p>
 <p>Here is an example JSON file called <code>employees.json</code>:</p>
 <pre><code>[
  {"<span class="hljs-attribute">name</span>":<span class="hljs-value"><span class="hljs-string">"Andy Hunt"</span></span>,
@@ -160,9 +150,10 @@ komodo dragon<span class="hljs-localvars">|reptile|</span><span class="hljs-numb
  </span>}
 ]
 </code></pre><p>Loading <code>employees.json</code> with <code>d3.json</code>:</p>
-<pre><code class="lang-javascript">d3.json(<span class="hljs-string">"/data/employees.json"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+<pre><code class="lang-javascript">d3.json(<span class="hljs-string">"/data/employees.json"</span>).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
   <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
 });
+
 </code></pre>
 <pre><code>=&gt; {<span class="hljs-string">name:</span> <span class="hljs-string">"Andy Hunt"</span>, <span class="hljs-string">title:</span> <span class="hljs-string">"Big Boss"</span>, <span class="hljs-string">age:</span> <span class="hljs-number">68</span>, <span class="hljs-string">bonus:</span> <span class="hljs-literal">true</span>}
 </code></pre><div class="aside">This code is using d3.js</div>
@@ -170,33 +161,28 @@ komodo dragon<span class="hljs-localvars">|reptile|</span><span class="hljs-numb
 <p>We can see that, unlike our flat file parsing, numeric types stay numeric. Indeed, a JSON value can be a string, a number, a boolean value, an array, or another object. This allows nested data to be dealt with easily.</p>
 <h2 id="loading-multiple-files">Loading Multiple Files</h2>
 <p>D3&#39;s basic loading mechanism is fine for one file, but starts to get messy as we nest multiple callbacks.</p>
-<p>For loading multiple files, we can use <a href="https://github.com/d3/d3-queue">d3.queue</a> to wait for multiple data sources to be loaded.</p>
-<pre><code class="lang-javascript">d3.queue()
-  .defer(d3.csv, <span class="hljs-string">"/data/cities.csv"</span>)
-  .defer(d3.tsv, <span class="hljs-string">"/data/animals.tsv"</span>)
-  .await(analyze);
+<p>For loading multiple files, we can use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a> to wait for multiple data sources to be loaded.</p>
+<pre><code class="lang-javascript">Promise.all([
+  d3.csv(<span class="hljs-string">"/data/cities.csv"</span>),
+  d3.tsv(<span class="hljs-string">"/data/animals.tsv"</span>)
+]).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> </span>{
+  <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>])  <span class="hljs-comment">// first row of cities</span>
+  <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>])  <span class="hljs-comment">// first row of animals</span>
+});
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">analyze</span><span class="hljs-params">(error, cities, animals)</span> </span>{
-  <span class="hljs-keyword">if</span>(error) { <span class="hljs-built_in">console</span>.log(error); }
-
-  <span class="hljs-built_in">console</span>.log(cities[<span class="hljs-number">0</span>]);
-  <span class="hljs-built_in">console</span>.log(animals[<span class="hljs-number">0</span>]);
-}
 </code></pre>
 <pre><code>=&gt; {<span class="hljs-string">city:</span> <span class="hljs-string">"seattle"</span>, <span class="hljs-string">state:</span> <span class="hljs-string">"WA"</span>, <span class="hljs-string">population:</span> <span class="hljs-string">"652405"</span>, land <span class="hljs-string">area:</span> <span class="hljs-string">"83.9"</span>}
 {<span class="hljs-string">name:</span> <span class="hljs-string">"tiger"</span>, <span class="hljs-string">type:</span> <span class="hljs-string">"mammal"</span>, <span class="hljs-string">avg_weight:</span> <span class="hljs-string">"260"</span>}
 </code></pre><div class="aside">This code is using d3.js</div>
 
-<p>Note that we <code>defer</code> the loading of two types of files - using two different loading functions - so this is an easy way to mix and match file types.</p>
-<p>The callback function passed into <code>await</code> gets each dataset as a parameter, with the first parameter being populated if an error has occurred in loading the data.</p>
-<p>It can be useful to output the error, if it is defined, so you catch data loading problems quickly.</p>
-<p>To add another data file, simply add another defer and extend the input parameters for your callback!</p>
+<p>Note that inside the <code>all</code> method we load two types of files - using two different loading functions - so this is an easy way to mix and match file types.</p>
+<p>The method returns an array of our data sources. The first item returns our cities; the second, our animals.</p>
 <h2 id="next-task">Next Task</h2>
 <p><a href="combine_data.html">Combining Data</a></p>
 <h2 id="see-also">See Also</h2>
 <ul>
-<li><a href="https://github.com/d3/d3-request">D3 documentation</a></li>
-<li><a href="https://github.com/d3/d3-request#xml">Loading XML with D3</a></li>
+<li><a href="https://github.com/d3/d3-fetch">D3 documentation</a></li>
+<li><a href="https://github.com/d3/d3-fetch#xml">Loading XML with D3</a></li>
 <li><a href="http://bl.ocks.org/mbostock/1014829">Loading External SVG with D3</a> - SVG is just XML!</li>
 </ul>
 
