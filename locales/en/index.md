@@ -27,7 +27,9 @@ It assumes you already have some basic knowledge of JavaScript.
 
 ## News
 
-**01/10/2018**: We've updated the guide to use [D3v5](https://github.com/d3/d3/blob/master/CHANGES.md#changes-in-d3-50). The new changes mostly impact the "Reading in Data" section of the guide. A very special thank you goes out to [Erin Brown](https://github.com/erinbrown) who contributed the PR to make this happen! We really appreciate the help!
+**01/11/2019**: We also have an amazing [Observable version of the guide](https://beta.observablehq.com/@dakoop/learn-js-data) provided by the very talented [@dakoop](https://beta.observablehq.com/@dakoop). Observable is a great, interactive way to try out JavaScript. Give it a try now!
+
+**01/10/2019**: We've updated the guide to use [D3v5](https://github.com/d3/d3/blob/master/CHANGES.md#changes-in-d3-50). The new changes mostly impact the "Reading in Data" section of the guide. A very special thank you goes out to [Erin Brown](https://github.com/erinbrown) who contributed the PR to make this happen! We really appreciate the help!
 
 **03/20/2017**: We've updated the guide to use **D3v4**!! Thanks very much to [Kanit Ham Wong](https://twitter.com/kanitw) and others at the [UW Interactive Data Lab](https://idl.cs.washington.edu/) for support, suggestions, and motivation for this process. Thanks to [Adam Pearce](https://twitter.com/adamrpearce) for doing most of the converting!
 
